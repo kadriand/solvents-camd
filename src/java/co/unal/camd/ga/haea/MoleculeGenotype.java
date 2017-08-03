@@ -1,8 +1,10 @@
-package co.unal.camd.core;
+package co.unal.camd.ga.haea;
 
 import java.util.ArrayList;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.properties.estimation.Molecules;
+import co.unal.camd.properties.estimation.Node;
 import unalcol.evolution.*;
 
 public class MoleculeGenotype extends Genotype<Molecules> {

@@ -1,4 +1,4 @@
-package co.unal.camd.core;
+package co.unal.camd.properties.estimation;
 
 import java.util.Vector;
 
@@ -6,21 +6,23 @@ import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
 
-public class cutAndClose extends GeneticOperator {
 
+public class ChangeByCH2 extends GeneticOperator {
 
-    public cutAndClose(Environment _environment) {
+    public ChangeByCH2(Environment _environment) {
         super(_environment);
     }
 
     public Vector<Molecules> apply(Molecules genome) {
-        //System.out.println("cutAndClose");
+        //System.out.println("changeByCh2");
         Molecules clone_genome = genome.clone(); // @TODO: clonar objeto
-
-        Node newGroup = new Node(1);
-
+        // TODO: Mutacion
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, true, ((MoleculesEnviroment) environment).aGC);
+
+        Node newCH2 = new Node(2);
+
+        newCH2.addGroup(clone_genome.getGroupAt(num));
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true, ((MoleculesEnviroment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();
         v.add(clone_genome);
         return v;

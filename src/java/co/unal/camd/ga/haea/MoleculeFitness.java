@@ -1,6 +1,16 @@
-package co.unal.camd.core;
+package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.properties.estimation.BoilingTemp;
+import co.unal.camd.properties.estimation.Density;
+import co.unal.camd.properties.estimation.DielectricConstant;
+import co.unal.camd.properties.estimation.GibbsEnergy;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.MeltingTemp;
+import co.unal.camd.properties.estimation.Methods;
+import co.unal.camd.properties.estimation.Molecules;
+import co.unal.camd.properties.estimation.PM;
+import co.unal.camd.properties.estimation.Unifac;
 import other.SolventLoss;
 import unalcol.evolution.Fitness;
 

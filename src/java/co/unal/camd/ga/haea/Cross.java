@@ -1,8 +1,15 @@
-package co.unal.camd.core;
+package co.unal.camd.ga.haea;
+
+import co.unal.camd.properties.estimation.GeneticOperator;
+import co.unal.camd.properties.estimation.Molecules;
+import co.unal.camd.properties.estimation.MoleculesEnviroment;
+import co.unal.camd.properties.estimation.Node;
+import unalcol.evolution.Environment;
+import unalcol.evolution.Individual;
+import unalcol.evolution.Population;
+import unalcol.evolution.Selection;
 
 import java.util.Vector;
-
-import unalcol.evolution.*;
 
 public class Cross extends GeneticOperator {
     protected Selection selection;
@@ -26,8 +33,7 @@ public class Cross extends GeneticOperator {
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, ((MoleculesEnviroment) environment).aGC);
         searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, ((MoleculesEnviroment) environment).aGC);
 
-
-        Vector<Molecules> v = new Vector<Molecules>();
+        Vector<Molecules> v = new Vector<>();
         v.add(clone_genome);
         v.add(clone_genome2);
         return v;

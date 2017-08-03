@@ -4,20 +4,21 @@
 package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.core.BoilingTemp;
-import co.unal.camd.core.Density;
-import co.unal.camd.core.DielectricConstant;
-import co.unal.camd.core.GibbsEnergy;
-import co.unal.camd.core.GroupArray;
-import co.unal.camd.core.MeltingTemp;
-import co.unal.camd.core.MoleculeEvolution;
-import co.unal.camd.core.MoleculeFitness;
-import co.unal.camd.core.Molecules;
-import co.unal.camd.core.Node;
+import co.unal.camd.properties.estimation.BoilingTemp;
+import co.unal.camd.properties.estimation.Density;
+import co.unal.camd.properties.estimation.DielectricConstant;
+import co.unal.camd.properties.estimation.GibbsEnergy;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.MeltingTemp;
+import co.unal.camd.ga.haea.MoleculeEvolution;
+import co.unal.camd.ga.haea.MoleculeFitness;
+import co.unal.camd.properties.estimation.Molecules;
+import co.unal.camd.properties.estimation.Node;
 import unalcol.evolution.Environment;
 import unalcol.evolution.GenomeLimits;
 import unalcol.evolution.Population;
 import unalcol.evolution.algorithms.haea.HaeaOperators;
+import unalcol.evolution.selections.Elitism;
 import unalcol.util.ConsoleTracer;
 
 import javax.swing.*;
@@ -27,16 +28,16 @@ import java.util.ArrayList;
 /**
  * @author Kevin Adrián Rodríguez Ruiz
  */
-public class CamdRun extends JFrame {
+public class CamdRunner extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
     protected JTabbedPane tab;
-    protected int parents;
+    protected int parentSize;
     protected int maxGroups;
     protected ContributionParametersManager parametersManager;
     protected double temperature;
-    protected int iterations;
+    protected int maxIterations;
     protected ArrayList<GroupArray> moleculesUser;
     private ArrayList<Molecules> molecules;
 
@@ -59,9 +60,9 @@ public class CamdRun extends JFrame {
 
     public void createMolec() {
         tab.removeAll();
-        System.out.println("iterat" + iterations);
+        System.out.println("iterat" + maxIterations);
         double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d,mt, sl
-        System.out.println("pesos (ge, bt, d, mt, sl)" + "(0.2, 0.2, 0.2, 0.2, 0.2)");
+        System.out.println("pesos (ge, bt, d, mt, sl)" + weight);
         double[][] lim = new double[3][5];
 
         lim[0][0] = 15;  //this is all the B
@@ -83,9 +84,11 @@ public class CamdRun extends JFrame {
         lim[2][4] = 0.05;
 
         Environment env = MoleculeEvolution.getEnvironment(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, lim, parametersManager, maxGroups);
-        HaeaOperators opers = MoleculeEvolution.getOperators(env);
+        HaeaOperators operators = MoleculeEvolution.getOperators(env);
         GenomeLimits limits;
-        Population population = MoleculeEvolution.evolve(parents, env, iterations, opers, new ConsoleTracer());
+
+
+        Population population = MoleculeEvolution.evolve(parentSize, env, maxIterations, operators, new Elitism(env, 1, false, 1.0, 0.0), new ConsoleTracer());
 
         double best = population.statistics().best;
         double avg = population.statistics().avg;
@@ -94,7 +97,7 @@ public class CamdRun extends JFrame {
         System.out.println("avg: " + avg);
         System.out.println("worst: " + worst);
         JTree jTree;
-        for (int i = 0; i < parents; i++) {
+        for (int i = 0; i < parentSize; i++) {
             Molecules solvent = (Molecules) population.get(i).getThing();
             Node node = solvent.getMoleculeByRootGroup();
             String name = parametersManager.getName(node.getRootNode());

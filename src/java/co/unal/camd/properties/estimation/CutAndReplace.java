@@ -1,26 +1,41 @@
-package co.unal.camd.core;
+package co.unal.camd.properties.estimation;
 
+import java.util.Vector;
+
+import co.unal.camd.ga.haea.MoleculeGenotype;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
 
-import java.util.*;
+public class CutAndReplace extends GeneticOperator {
 
-/**
- */
-public class MoleculeMutation extends GeneticOperator {
-
-    public MoleculeMutation(Environment _environment) {
+    public CutAndReplace(Environment _environment) {
         super(_environment);
     }
 
     public Vector<Molecules> apply(Molecules genome) {
-        //System.out.println("Mutation");
+        //System.out.println("CutAndReplace");
         Molecules clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
+        int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
 
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups() - 1));
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, false, ((MoleculesEnviroment) environment).aGC);
+        int valence = (int) (Math.random() * 3) + 2;
+        boolean functional = false;
+
+        Node aGroupMut = clone_genome.getGroupAt(num);
+        if (aGroupMut.getRootNode() > 4) {
+            functional = true;
+        }
+        int refCode = MoleculeGenotype.getNewRefCode(valence, ((MoleculesEnviroment) environment).aGC, functional);
+        Node newGroup = new Node(refCode);
+
+        if (valence == 3) {
+            newGroup.addGroup(new Node(1));
+        } else if (valence == 4) {
+            newGroup.addGroup(new Node(1));
+            newGroup.addGroup(new Node(1));
+        }
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((MoleculesEnviroment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();
         v.add(clone_genome);
         return v;
@@ -55,5 +70,6 @@ public class MoleculeMutation extends GeneticOperator {
     public int getArity() {
         return 1;
     }
+
 
 }

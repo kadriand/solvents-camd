@@ -4,8 +4,8 @@
 package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.core.GroupArray;
-import co.unal.camd.core.Node;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.Node;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * @author FAMILIA MORENO
  */
-public class CamdSetupWindow extends CamdRun implements ActionListener {
+public class CamdSetupWindow extends CamdRunner implements ActionListener {
 
     private JTextField textFieldParents;
     private JTextField textFieldMaxMolecules;
@@ -43,17 +43,17 @@ public class CamdSetupWindow extends CamdRun implements ActionListener {
     private void initialize() {
         moleculesUser = new ArrayList<>();
         temperature = 298.15;
-        iterations = 50;
+        maxIterations = 50;
         this.setSize(600, 600);
         this.setTitle("CAMD");
         JLabel labelParents = new JLabel("Número de padres para la primera generación");
         textFieldParents = new JTextField();
         textFieldParents.setEnabled(false);
-        parents = 1;
+        parentSize = 1;
 
         textFieldParents.addActionListener(evt -> {
-            parents = Integer.parseInt(textFieldParents.getText());
-            System.out.println("Molecules init :" + parents);
+            parentSize = Integer.parseInt(textFieldParents.getText());
+            System.out.println("Molecules init :" + parentSize);
 
             //				HERE THE ALGORITHM STARTS
             createMolec();
@@ -86,7 +86,7 @@ public class CamdSetupWindow extends CamdRun implements ActionListener {
     }
 
     public void setIterations(int iterations) {
-        this.iterations = iterations;
+        this.maxIterations = iterations;
     }
 
     public DefaultMutableTreeNode moleculeToJtree(Node molec, DefaultMutableTreeNode node) {

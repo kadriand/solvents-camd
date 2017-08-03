@@ -1,4 +1,4 @@
-package co.unal.camd.core;
+package co.unal.camd.properties.estimation;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 

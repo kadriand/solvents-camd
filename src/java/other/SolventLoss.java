@@ -3,10 +3,10 @@ package other;
 import java.util.ArrayList;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.core.GroupArray;
-import co.unal.camd.core.Methods;
-import co.unal.camd.core.PM;
-import co.unal.camd.core.Unifac;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.Methods;
+import co.unal.camd.properties.estimation.PM;
+import co.unal.camd.properties.estimation.Unifac;
 
 
 public class SolventLoss {

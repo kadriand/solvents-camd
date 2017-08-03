@@ -1,4 +1,4 @@
-package co.unal.camd.core;
+package co.unal.camd.properties.estimation;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import unalcol.evolution.Environment;
@@ -22,5 +22,5 @@ public class MoleculesEnviroment extends Environment<Molecules, Molecules> {
         aGC = _aGC;
     }
 
-    protected ContributionParametersManager aGC;
+    public ContributionParametersManager aGC;
 }

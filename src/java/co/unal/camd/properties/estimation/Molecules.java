@@ -1,10 +1,10 @@
-package co.unal.camd.core;
-
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.event.TreeModelListener;
+package co.unal.camd.properties.estimation;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+
+import javax.swing.event.TreeModelListener;
+import java.util.ArrayList;
+import java.util.Vector;
 
 
 /**

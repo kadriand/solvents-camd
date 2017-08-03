@@ -1,6 +1,7 @@
-package co.unal.camd.core;
+package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.properties.estimation.Node;
 
 import java.util.ArrayList;
 

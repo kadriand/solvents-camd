@@ -1,6 +1,11 @@
-package co.unal.camd.core;
+package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.properties.estimation.ChangeByCH2;
+import co.unal.camd.properties.estimation.CutAndReplace;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.MoleculesEnviroment;
+import co.unal.camd.properties.estimation.cutAndClose;
 import unalcol.core.Tracer;
 import unalcol.evolution.Environment;
 import unalcol.evolution.EvolutionaryAlgorithm;
@@ -66,34 +71,16 @@ public class MoleculeEvolution {
                 getCondition(MAX_ITER));
     }
 
-    public static EvolutionaryAlgorithm getHAEA(int POP_SIZE, Environment env,
-                                                int MAX_ITER, HaeaOperators operators,
-                                                Selection selection) {
-        return new EvolutionaryAlgorithm(new Population(env, POP_SIZE),
-                getTransformation(operators, selection),
-                getCondition(MAX_ITER));
-    }
-
-    public static Population evolve(int POP_SIZE, Environment env,
-                                    int MAX_ITER, HaeaOperators operators,
-                                    Selection selection) {
-        return evolve(POP_SIZE, env, MAX_ITER, operators, selection, null);
-    }
-
-    public static Population evolve(int POP_SIZE, Environment env,
-                                    int MAX_ITER, HaeaOperators operators,
-                                    Tracer tracer) {
-        return evolve(POP_SIZE, env, MAX_ITER, operators,
-                new Elitism(env, 1, false, 1.0, 0.0), tracer);
-    }
-
     public static Population evolve(int POP_SIZE, Environment env,
                                     int MAX_ITER, HaeaOperators operators,
                                     Selection selection,
                                     Tracer tracer) {
         Population p = null;
-        EvolutionaryAlgorithm ea = getHAEA(POP_SIZE, env, MAX_ITER,
-                operators, selection);
+        EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm(new Population(env, POP_SIZE),
+                getTransformation(operators, selection),
+                getCondition(MAX_ITER));
+
+
         ea.addTracer(tracer);
         ea.init();
 //	    if( gui != null ) {

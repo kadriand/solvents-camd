@@ -1,7 +1,7 @@
 package co.unal.camd.view;
 
-import co.unal.camd.core.GroupArray;
-import co.unal.camd.core.Unifac;
+import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.Unifac;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
