@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="Groups-i" id="functionality" metadata="uml2-1.0" initialized="true" tag="10" key="32303036313232312043414D44">
+  <children xsi:type="editmodel:ClassEditModel" name="Groups" location="70,20" size="163,943" id="functionality/Groups" runTimeClassModel="addGroup(Lfunctionality.Groups;),removeGroup(I),getG(),getControlCode(),setR(I),principalGroupCode,setGroupAt(ILfunctionality.Groups;),Groups(),toString(),getValence(),getName(),setControlCode(I),amount,preGroup,getDensityConstants(),getGroupAt(I),name,Groups(Ljava.lang.String;Lfunctionality.Operators;),Groups(ILfunctionality.Operators;Z),refCode,aBC,pM,setValence(I),getCodeOfRow(),constantPTeb,getQ(),getPrincipalGroupCode(),getR(),g,controlCode,getIndexOfGroup(Lfunctionality.Groups;),getGroupsCount(),Groups(Lfunctionality.Operators;I),setName(Ljava.lang.String;),getRefCode(),codeOfRow,setAmount(),getAmount(),setRefCode(I),getConstantPTeb(),operator,setQ(I),getPreGroups(),r,q,getRoot(),valence,getPM()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="131,270">
+      <children xsi:type="editmodel:AttributeEditModel" name="amount" id="functionality/Groups#amount"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="codeOfRow" id="functionality/Groups#codeOfRow"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="controlCode" id="functionality/Groups#controlCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="functionality/Groups#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="operator" location="14,146" id="functionality/Groups#operator"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="preGroup" id="functionality/Groups#preGroup"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="principalGroupCode" id="functionality/Groups#principalGroupCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="q" id="functionality/Groups#q"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="r" id="functionality/Groups#r"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="refCode" id="functionality/Groups#refCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="valence" id="functionality/Groups#valence"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="g" id="functionality/Groups#g"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="aBC" id="functionality/Groups#aBC"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="pM" id="functionality/Groups#pM"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="constantPTeb" id="functionality/Groups#constantPTeb"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="140,594">
+      <children xsi:type="editmodel:MethodEditModel" name="Groups" id="functionality/Groups#Groups(Ljava.lang.String;Lfunctionality.Operators;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Groups" id="functionality/Groups#Groups(ILfunctionality.Operators;Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Groups" id="functionality/Groups#Groups(Lfunctionality.Operators;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addGroup" id="functionality/Groups#addGroup(Lfunctionality.Groups;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAmount" id="functionality/Groups#getAmount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getCodeOfRow" id="functionality/Groups#getCodeOfRow()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getControlCode" id="functionality/Groups#getControlCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGroupAt" id="functionality/Groups#getGroupAt(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getGroupsCount" id="functionality/Groups#getGroupsCount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getIndexOfGroup" id="functionality/Groups#getIndexOfGroup(Lfunctionality.Groups;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getName" id="functionality/Groups#getName()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPreGroups" id="functionality/Groups#getPreGroups()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPrincipalGroupCode" id="functionality/Groups#getPrincipalGroupCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getQ" id="functionality/Groups#getQ()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getR" id="functionality/Groups#getR()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getRefCode" id="functionality/Groups#getRefCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getRoot" id="functionality/Groups#getRoot()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getValence" id="functionality/Groups#getValence()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removeGroup" id="functionality/Groups#removeGroup(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setAmount" id="functionality/Groups#setAmount()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setControlCode" id="functionality/Groups#setControlCode(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setName" id="functionality/Groups#setName(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setQ" id="functionality/Groups#setQ(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setR" id="functionality/Groups#setR(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setRefCode" id="functionality/Groups#setRefCode(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setValence" id="functionality/Groups#setValence(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="functionality/Groups#toString()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getG" id="functionality/Groups#getG()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Groups" id="functionality/Groups#Groups()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPM" id="functionality/Groups#getPM()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setGroupAt" id="functionality/Groups#setGroupAt(ILfunctionality.Groups;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getConstantPTeb" id="functionality/Groups#getConstantPTeb()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDensityConstants" id="functionality/Groups#getDensityConstants()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" properties="open=functionality/Groups;wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true"/>
+</editmodel:ClassDiagramEditModel>
