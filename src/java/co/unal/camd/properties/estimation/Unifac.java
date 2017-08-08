@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Unifac extends Methods {
     private double temperature;
-    ContributionParametersManager aGC;
+    ContributionParametersManager parametersManager;
 
 ////////////////////////////////////////////////UNIFAC///////////////////////////////////////////////////////
 
@@ -25,7 +25,7 @@ public class Unifac extends Methods {
      */
     private double solve(ArrayList<GroupArray> molecules, int principal, double temp, ContributionParametersManager aGC) {
         temperature = temp;
-        this.aGC = aGC;
+        this.parametersManager = aGC;
         double gamma = getGamma(principal, molecules);
         getTotalGroupsAndNumber(molecules);
         double GAMMA_RES = getGammaResidual(molecules, principal);
@@ -48,13 +48,13 @@ public class Unifac extends Methods {
         GroupArray g;
         for (GroupArray aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * g.getq(aGC);
-            //System.out.println("Qi"+g.getq(aGC));
+            sum += g.getComposition() * g.getq(parametersManager);
+            //System.out.println("Qi"+g.getq(parametersManager));
         }
         g = molecule.get(principal);
-        //System.out.println("Qiprin"+g.getq(aGC));
-        // System.out.println("Fi"+g.getq(aGC)/sum);
-        return g.getq(aGC) / sum;
+        //System.out.println("Qiprin"+g.getq(parametersManager));
+        // System.out.println("Fi"+g.getq(parametersManager)/sum);
+        return g.getq(parametersManager) / sum;
     }
 
     ///////////V//////////
@@ -63,11 +63,11 @@ public class Unifac extends Methods {
         GroupArray g;
         for (GroupArray aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * g.getr(aGC);
+            sum += g.getComposition() * g.getr(parametersManager);
         }
         g = molecule.get(principal);
-        // System.out.println("V"+g.getr(aGC)/sum);
-        return g.getr(aGC) / sum;
+        // System.out.println("V"+g.getr(parametersManager)/sum);
+        return g.getr(parametersManager) / sum;
     }
 
     ///////V'///////////////////
@@ -76,27 +76,27 @@ public class Unifac extends Methods {
         GroupArray g;
         for (GroupArray aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * Math.pow(g.getr(aGC), 0.75);
+            sum += g.getComposition() * Math.pow(g.getr(parametersManager), 0.75);
             //System.out.println("comVp:"+g.getComposition());
-            //System.out.println("r3vp:"+Math.pow(g.getr(aGC), 0.75));
+            //System.out.println("r3vp:"+Math.pow(g.getr(parametersManager), 0.75));
             //	System.out.println("vpsum:"+sum);
         }
         g = molecule.get(principal);
         // System.out.println("comPrin:"+g.getComposition());
-        //System.out.println("r3Prin:"+Math.pow(g.getr(aGC), 0.75));
+        //System.out.println("r3Prin:"+Math.pow(g.getr(parametersManager), 0.75));
 
-        //System.out.println("Vp: "+Math.pow(g.getr(aGC),0.75)/sum);
-        return Math.pow(g.getr(aGC), 0.75) / sum;
+        //System.out.println("Vp: "+Math.pow(g.getr(parametersManager),0.75)/sum);
+        return Math.pow(g.getr(parametersManager), 0.75) / sum;
     }
 
     /////////gamma i combinat/////////
     private double getGamma(int principal, ArrayList<GroupArray> molecules) {
         GroupArray g = molecules.get(principal);
         // System.out.println("Gamma comb: "+(1-getVprima(principal, molecules)+2.30258509*Math.log10(getVprima(principal, molecules))
-        //	-5*g.getq(aGC)*(1-(getV(principal,molecules)/getF(principal,molecules))
+        //	-5*g.getq(parametersManager)*(1-(getV(principal,molecules)/getF(principal,molecules))
         //	+2.30258509*Math.log10(getV(principal,molecules)/getF(principal,molecules)))));
         return 1 - getVprima(principal, molecules) + 2.30258509 * Math.log10(getVprima(principal, molecules))
-                - 5 * g.getq(aGC) * (1 - (getV(principal, molecules) / getF(principal, molecules))
+                - 5 * g.getq(parametersManager) * (1 - (getV(principal, molecules) / getF(principal, molecules))
                 + 2.30258509 * Math.log10(getV(principal, molecules) / getF(principal, molecules)));
     }
 
@@ -164,14 +164,14 @@ public class Unifac extends Methods {
             g = molecules.get(i);
             for (int j = 0; j < g.size(); j++) {
                 aux = g.getGroupCode(j);
-                sum = sum + getX(molecules, i, j) * aGC.getQ(g.getGroupCode(j));
+                sum = sum + getX(molecules, i, j) * parametersManager.getQ(g.getGroupCode(j));
                 //    System.out.println("esta es la suma de teta :"+sum);
             }
         }
         //System.out.println("esta es la suma de teta :"+sum);
         aux = g2.getGroupCode(group);
-        //System.out.println("teta: "+getX(molecules,principal,group)*aGC.getQ(aux)/sum);
-        return getX(molecules, principal, group) * aGC.getQ(aux) / sum;
+        //System.out.println("teta: "+getX(molecules,principal,group)*parametersManager.getQ(aux)/sum);
+        return getX(molecules, principal, group) * parametersManager.getQ(aux) / sum;
     }
 
     ////////////Y///////////
@@ -180,13 +180,13 @@ public class Unifac extends Methods {
         m = m - 1;
         double show2 = 10;
         for (int i = 0; can_be_done && i < 3; i++) {
-            can_be_done = (aGC.getParamij()[i][n][m] != null &&
-                    aGC.getParamij()[i][n][m].compareTo("**") != 0);
+            can_be_done = (parametersManager.getParamij()[i][n][m] != null &&
+                    parametersManager.getParamij()[i][n][m].compareTo("**") != 0);
         }
         if (can_be_done) {
-            double a = Double.parseDouble(aGC.getParamij()[0][n][m]);
-            double b = Double.parseDouble(aGC.getParamij()[1][n][m]);
-            double c = Double.parseDouble(aGC.getParamij()[2][n][m]);
+            double a = Double.parseDouble(parametersManager.getParamij()[0][n][m]);
+            double b = Double.parseDouble(parametersManager.getParamij()[1][n][m]);
+            double c = Double.parseDouble(parametersManager.getParamij()[2][n][m]);
             //System.out.println(" a: "+a+" b: "+b+" c: "+c);
             show2 = Math.exp(-(a + b * T + c * T * T) / T);
             //System.out.println(Math.exp(-(a+b*T+c*T*T)/T));
@@ -205,8 +205,8 @@ public class Unifac extends Methods {
             g = molecules.get(i);
             /////no usar el molecules.get(i).getTotalGroups porq hay porblemas de limites
             for (int j = 0; can_be_done && j < g.size(); j++) {//iterator by each group of molec i
-                int m = aGC.getPrincipalGroupCode(g.getGroupCode(j));
-                int k = aGC.getPrincipalGroupCode(g2.getGroupCode(group));
+                int m = parametersManager.getPrincipalGroupCode(g.getGroupCode(j));
+                int k = parametersManager.getPrincipalGroupCode(g2.getGroupCode(group));
 
                 double y = getY(m, k, temperature);
                 if (can_be_done) {
@@ -218,7 +218,7 @@ public class Unifac extends Methods {
                 for (int l = 0; can_be_done && l < molecules.size(); l++) {
                     g3 = molecules.get(l);
                     for (int f = 0; f < molecules.get(l).size(); f++) {
-                        int n = aGC.getPrincipalGroupCode(g3.getGroupCode(f));
+                        int n = parametersManager.getPrincipalGroupCode(g3.getGroupCode(f));
                         if (getY(n, m, temperature) == 1000000) {
                             //	System.out.println("no estan todos los parametros de interacci�n");
                         }
@@ -238,9 +238,9 @@ public class Unifac extends Methods {
         //	System.out.println("esta es la suma 2 :"+sum2);
         //	System.out.println("esta es la suma 3.. :"+sum3);
         if (can_be_done) {
-            double p = aGC.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
+            double p = parametersManager.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
             //System.out.println("F"+group+": "+p);
-            return aGC.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
+            return parametersManager.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
         } else {
             return 0.0001;
         }
