@@ -4,33 +4,33 @@ import co.unal.camd.control.parameters.ContributionParametersManager;
 
 import java.util.Vector;
 
-public class Node {
+public class FunctionalGroupNode {
 
     private int rootNode; //identification of each group by refCode
-    private Vector<Node> subGroups;
-    //private GenotypeChemistry aGC;
+    private Vector<FunctionalGroupNode> subGroups;
+    //private GenotypeChemistry parametersManager;
 
-    public Node(Node aNode) {
-        rootNode = aNode.getRootNode();
-        subGroups = new Vector<Node>();
-        int n = aNode.getGroupsCount();
+    public FunctionalGroupNode(FunctionalGroupNode aFunctionalGroupNode) {
+        rootNode = aFunctionalGroupNode.getRootNode();
+        subGroups = new Vector<FunctionalGroupNode>();
+        int n = aFunctionalGroupNode.getGroupsCount();
         for (int i = 0; i < n; i++) {
-            subGroups.add(aNode.subGroups.get(i).clone());
+            subGroups.add(aFunctionalGroupNode.subGroups.get(i).clone());
         }
     }
 
-    public Node clone() {
-        return new Node(this);
+    public FunctionalGroupNode clone() {
+        return new FunctionalGroupNode(this);
     }
 
-    public Node(int refCode) {
+    public FunctionalGroupNode(int refCode) {
         rootNode = refCode;
-        subGroups = new Vector<Node>();
+        subGroups = new Vector<FunctionalGroupNode>();
     }
 
-    public Node(String name, ContributionParametersManager aGenotypeChemistry) {
+    public FunctionalGroupNode(String name, ContributionParametersManager aGenotypeChemistry) {
         rootNode = aGenotypeChemistry.getRefCode(name);
-        subGroups = new Vector<Node>();
+        subGroups = new Vector<FunctionalGroupNode>();
     }
 
     /**
@@ -38,7 +38,7 @@ public class Node {
      *
      * @param G
      */
-    public void addGroup(Node subG) {
+    public void addGroup(FunctionalGroupNode subG) {
         subGroups.addElement(subG);
     }
 
@@ -59,7 +59,7 @@ public class Node {
         return subGroups.size();
     }
 
-    public int getIndexOfGroup(Node aG) {
+    public int getIndexOfGroup(FunctionalGroupNode aG) {
         return subGroups.indexOf(aG);
     }
 
@@ -71,7 +71,7 @@ public class Node {
         }
     }
 
-    public Node getGroupAt(int i) {
+    public FunctionalGroupNode getGroupAt(int i) {
         if (subGroups.size() < i + 1) {
             return null;
         } else {
@@ -79,7 +79,7 @@ public class Node {
         }
     }
 
-    public void setGroupAt(int i, Node aGr) {
+    public void setGroupAt(int i, FunctionalGroupNode aGr) {
         subGroups.set(i, aGr);
     }
 
@@ -95,13 +95,13 @@ public class Node {
         rootNode = num;
     }
 
-    public Vector<Node> getSubGroups() {
+    public Vector<FunctionalGroupNode> getSubGroups() {
         return subGroups;
     }
 
     public String toString() {
         return Integer.toString(rootNode);
-        //return aGC.getName(rootNode);
+        //return parametersManager.getName(rootNode);
     }
 
 }

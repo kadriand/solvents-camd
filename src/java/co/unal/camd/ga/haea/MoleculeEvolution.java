@@ -19,14 +19,12 @@ import unalcol.evolution.Transformation;
 import unalcol.evolution.algorithms.haea.HAEA;
 import unalcol.evolution.algorithms.haea.HaeaOperators;
 import unalcol.evolution.algorithms.haea.SimpleHaeaOperators;
-import unalcol.evolution.selections.Elitism;
 import unalcol.evolution.selections.Tournament;
 import unalcol.util.ForLoopCondition;
-import unalcol.util.Predicate;
 
 public class MoleculeEvolution {
-    public static Environment getEnvironment(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager aGC, int maxNmGroups) {
-        //@TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry aGC
+    public static Environment buildEnvironment(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager aGC, int maxNmGroups) {
+        //@TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry parametersManager
         Fitness f = new MoleculeFitness(temperature, solute, solventUser, weight, limits, aGC);
         //@TODO: Set the genotype parameters: int _maxNmGroups, GenotypeChemistry _aGC
         Genotype g = new MoleculeGenotype(maxNmGroups, aGC);
@@ -36,7 +34,7 @@ public class MoleculeEvolution {
         return new MoleculesEnviroment(g, p, f, aGC);
     }
 
-    public static HaeaOperators getOperators(Environment env) {
+    public static HaeaOperators buildOperators(Environment env) {
         Operator[] opers;
         MoleculeMutation mutation = new MoleculeMutation(env);
         Cross xover = new Cross(env, new Tournament(env, 2, true, 4));
@@ -59,27 +57,12 @@ public class MoleculeEvolution {
         return new HAEA(operators, selection);
     }
 
-    public static Predicate getCondition(int MAX_ITER) {
-        return new ForLoopCondition(MAX_ITER);
-    }
-
-    public static EvolutionaryAlgorithm getHAEA(int POP_SIZE, Environment env,
-                                                int MAX_ITER, HaeaOperators operators) {
-        return new EvolutionaryAlgorithm(new Population(env, POP_SIZE),
-                getTransformation(operators,
-                        new Elitism(env, 1, false, 1.0, 0.0)),
-                getCondition(MAX_ITER));
-    }
-
     public static Population evolve(int POP_SIZE, Environment env,
                                     int MAX_ITER, HaeaOperators operators,
                                     Selection selection,
                                     Tracer tracer) {
         Population p = null;
-        EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm(new Population(env, POP_SIZE),
-                getTransformation(operators, selection),
-                getCondition(MAX_ITER));
-
+        EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm(new Population(env, POP_SIZE), getTransformation(operators, selection), new ForLoopCondition(MAX_ITER));
 
         ea.addTracer(tracer);
         ea.init();
@@ -110,8 +93,8 @@ public class MoleculeEvolution {
     }
 
     public static void main(String[] argv) {
-//	    Environment env = getEnvironment();
-//	    HaeaOperators opers = getOperators(env);
+//	    Environment env = buildEnvironment();
+//	    HaeaOperators opers = buildOperators(env);
         // GenomeLimits limits;
 //	    Population p = evolve( 50, env, 100, opers, new ConsoleTracer() );
     }

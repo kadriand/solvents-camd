@@ -1,11 +1,11 @@
 package co.unal.camd.properties.estimation;
 
-import java.util.Vector;
-
 import co.unal.camd.ga.haea.MoleculeGenotype;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
+
+import java.util.Vector;
 
 public class CutAndReplace extends GeneticOperator {
 
@@ -22,18 +22,18 @@ public class CutAndReplace extends GeneticOperator {
         int valence = (int) (Math.random() * 3) + 2;
         boolean functional = false;
 
-        Node aGroupMut = clone_genome.getGroupAt(num);
+        FunctionalGroupNode aGroupMut = clone_genome.getGroupAt(num);
         if (aGroupMut.getRootNode() > 4) {
             functional = true;
         }
         int refCode = MoleculeGenotype.getNewRefCode(valence, ((MoleculesEnviroment) environment).aGC, functional);
-        Node newGroup = new Node(refCode);
+        FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
 
         if (valence == 3) {
-            newGroup.addGroup(new Node(1));
+            newGroup.addGroup(new FunctionalGroupNode(1));
         } else if (valence == 4) {
-            newGroup.addGroup(new Node(1));
-            newGroup.addGroup(new Node(1));
+            newGroup.addGroup(new FunctionalGroupNode(1));
+            newGroup.addGroup(new FunctionalGroupNode(1));
         }
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((MoleculesEnviroment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();

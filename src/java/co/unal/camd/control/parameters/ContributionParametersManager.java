@@ -51,7 +51,7 @@ public class ContributionParametersManager {
         return secondOrderGroups;
     }
 
-    private void getValenceAndCodeofRowByName(String aName) {
+    private void getValenceAndCodeOfRowByName(String aName) {
         for (int j = 0; j <= 6; j++) {
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
                 if (aName == allGroups[j][i][2]) {
@@ -62,7 +62,7 @@ public class ContributionParametersManager {
         }
     }
 
-    private void getValenceAndCodeofRowByRefCode(int refCode) {
+    private void getValenceAndCodeOfRowByRefCode(int refCode) {
         int a = (int) (Double.parseDouble(allGroups[1][1][3]));
         for (int j = 0; j <= 6; j++) {
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
@@ -79,10 +79,10 @@ public class ContributionParametersManager {
     public void getCodeOfRowBNameOrRefCode(Object toSearch) {
         if (toSearch instanceof String) {
             String name = (String) toSearch;
-            getValenceAndCodeofRowByName(name);
+            getValenceAndCodeOfRowByName(name);
         } else if (toSearch instanceof Integer) {
             int refCode = (Integer) toSearch;
-            getValenceAndCodeofRowByRefCode(refCode);
+            getValenceAndCodeOfRowByRefCode(refCode);
         }
     }
 
@@ -176,7 +176,7 @@ public class ContributionParametersManager {
     }
 
     public int getRefCode(String aName) {
-        getValenceAndCodeofRowByName(aName);
+        getValenceAndCodeOfRowByName(aName);
         return (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][3]));
     }
 

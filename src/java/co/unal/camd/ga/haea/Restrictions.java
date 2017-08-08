@@ -1,7 +1,7 @@
 package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.properties.estimation.Node;
+import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
 import java.util.ArrayList;
 
@@ -15,12 +15,12 @@ public class Restrictions {
      *
      * @return
      */
-    public static boolean canBeFunctional(ArrayList<Node> root, ContributionParametersManager aGC) {
+    public static boolean canBeFunctional(ArrayList<FunctionalGroupNode> root, ContributionParametersManager aGC) {
         boolean answer = true;
         typeFunctional = 0;
         // if the code Row of the group is grater than 1 the group is functional, so the counter increase in one.
         for (int j = 0; j < root.size(); j++) {
-            Node n = root.get(j);
+            FunctionalGroupNode n = root.get(j);
             aGC.getCodeOfRowBNameOrRefCode(n.getRootNode());
             if (aGC.getCodeOfRow() > 1) {
                 typeFunctional = typeFunctional + 1;
@@ -33,10 +33,10 @@ public class Restrictions {
         return answer;
     }
 
-    public static void count(Node aNode, ContributionParametersManager aGC) {
+    public static void count(FunctionalGroupNode aFunctionalGroupNode, ContributionParametersManager aGC) {
 
-        for (int i = 0; i < aNode.getSubGroups().size(); i++) {
-            Node n = aNode.getGroupAt(i);
+        for (int i = 0; i < aFunctionalGroupNode.getSubGroups().size(); i++) {
+            FunctionalGroupNode n = aFunctionalGroupNode.getGroupAt(i);
             aGC.getCodeOfRowBNameOrRefCode(n.getRootNode());
             if (aGC.getCodeOfRow() > 1) {
                 typeFunctional = typeFunctional + 1;
@@ -55,9 +55,9 @@ public class Restrictions {
      * @param canBeChangeNewGr
      */
 
-    public static void mayBeFuncFuncOrOH(Node aG1, Node newGr, boolean canBeChangeNewGr, ContributionParametersManager aGC) {
-        Node gr;
-        Node gr2 = aG1;
+    public static void mayBeFuncFuncOrOH(FunctionalGroupNode aG1, FunctionalGroupNode newGr, boolean canBeChangeNewGr, ContributionParametersManager aGC) {
+        FunctionalGroupNode gr;
+        FunctionalGroupNode gr2 = aG1;
         int aValence = 0;
         gr = newGr;
 
@@ -67,20 +67,20 @@ public class Restrictions {
 
                 if (aGC.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
                     //System.out.println("cambio por OHp");
-                    aG1 = new Node("OHP", aGC);
+                    aG1 = new FunctionalGroupNode("OHP", aGC);
                 }
             }
             case 3: {
                 if (aGC.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
                     //System.out.println("cambio por OHs");
-                    aG1 = new Node("OHS", aGC);
+                    aG1 = new FunctionalGroupNode("OHS", aGC);
                 }
             }
             case 4: {
                 //System.out.println(aGroups.getGroupAt(i).getName());
                 if (aGC.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
                     //System.out.println("cambio por OHt");
-                    aG1 = new Node("OHT", aGC);
+                    aG1 = new FunctionalGroupNode("OHT", aGC);
                 }
             }
             default: {
@@ -96,7 +96,7 @@ public class Restrictions {
                 while (a > 1 && b > 1) {
                     //System.out.println("entra a while_restric");
                     if (canBeChangeNewGr == true) {
-                        newGr = new Node(MoleculeGenotype.getNewRefCode(aValence, aGC, false));
+                        newGr = new FunctionalGroupNode(MoleculeGenotype.getNewRefCode(aValence, aGC, false));
                         if (gr.getGroupsCount() > 0) {
                             for (int i = 0; i < gr.getGroupsCount(); i++) {
                                 //aValence=gr.getTemporalValence();
@@ -105,7 +105,7 @@ public class Restrictions {
                             }
                         }
                     } else {
-                        aG1 = new Node(MoleculeGenotype.getNewRefCode(1, aGC, false));
+                        aG1 = new FunctionalGroupNode(MoleculeGenotype.getNewRefCode(1, aGC, false));
                     }
                     aGC.getCodeOfRowBNameOrRefCode(aG1.getRootNode());
                     a = aGC.getCodeOfRow();

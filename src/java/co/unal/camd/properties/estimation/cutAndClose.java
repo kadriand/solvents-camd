@@ -17,7 +17,7 @@ public class cutAndClose extends GeneticOperator {
         //System.out.println("cutAndClose");
         Molecules clone_genome = genome.clone(); // @TODO: clonar objeto
 
-        Node newGroup = new Node(1);
+        FunctionalGroupNode newGroup = new FunctionalGroupNode(1);
 
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, true, ((MoleculesEnviroment) environment).aGC);

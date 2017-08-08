@@ -1,10 +1,10 @@
 package co.unal.camd.properties.estimation;
 
-import java.util.Vector;
-
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
+
+import java.util.Vector;
 
 
 public class ChangeByCH2 extends GeneticOperator {
@@ -19,7 +19,7 @@ public class ChangeByCH2 extends GeneticOperator {
         // TODO: Mutacion
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
 
-        Node newCH2 = new Node(2);
+        FunctionalGroupNode newCH2 = new FunctionalGroupNode(2);
 
         newCH2.addGroup(clone_genome.getGroupAt(num));
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true, ((MoleculesEnviroment) environment).aGC);

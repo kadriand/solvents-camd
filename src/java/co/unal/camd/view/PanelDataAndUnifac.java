@@ -64,12 +64,9 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
     private JButton buttonSaveProblem = null;
     private JButton buttonRunEvolution = null;
     private JPanel jPanel2 = null;
-    private ArrayList<JCheckBox> jcheck = new ArrayList<JCheckBox>();  //  @jve:decl-index=0:
-    private JCheckBox jCheckBox1 = null;
+    private ArrayList<JCheckBox> jcheck = new ArrayList<>();  //  @jve:decl-index=0:
 
-    private JList jList = null;
     private JScrollPane jScrollPane = null;
-    private JLabel labelWorkGroups = null;
 
     private void initialize() {
         GridBagConstraints gridBagConstraints25 = new GridBagConstraints();
@@ -77,7 +74,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
         gridBagConstraints25.fill = GridBagConstraints.NONE;
         gridBagConstraints25.anchor = GridBagConstraints.SOUTH;
         gridBagConstraints25.gridy = 0;
-        labelWorkGroups = new JLabel();
+        JLabel labelWorkGroups = new JLabel();
         labelWorkGroups.setText("Grupos a trabajar");
         GridBagConstraints gridBagConstraints24 = new GridBagConstraints();
         gridBagConstraints24.fill = GridBagConstraints.BOTH;
@@ -605,11 +602,9 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
         if (textFieldIterations == null) {
             textFieldIterations = new JTextField();
             textFieldIterations.setText("50");
-            textFieldIterations.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    int num = Integer.parseInt(textFieldIterations.getText());
-                    setupWindow.setIterations(num);
-                }
+            textFieldIterations.addActionListener(evt -> {
+                int num = Integer.parseInt(textFieldIterations.getText());
+                setupWindow.setIterations(num);
             });
         }
         return textFieldIterations;

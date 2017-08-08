@@ -18,22 +18,22 @@ import java.util.ArrayList;
 
 public class MoleculeFitness extends Fitness<Molecules> {
 
-    Methods allMethods;
-    double temperature;
-    GroupArray solventUser;
-    GroupArray solute;
-    ContributionParametersManager aGC;
-    double ab;
-    double _D = 0.001;
-    double _C = 0.999;
-    double pm;
+    private Methods allMethods;
+    private double temperature;
+    private GroupArray solventUser;
+    private GroupArray solute;
+    private ContributionParametersManager aGC;
+    private double ab;
+    private double pm;
+    private static final double _D = 0.001;
+    private static final double _C = 0.999;
 
-    double[] w;
-    double[] B;
-    double[] inc;
-    double[] Po;
+    private double[] w;
+    private double[] B;
+    private double[] unc;
+    private double[] Po;
 
-    public MoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] lim, ContributionParametersManager aGC) {
+    public MoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager aGC) {
         super();
         this.solute = solute;
         this.solventUser = solventUser;
@@ -56,11 +56,11 @@ public class MoleculeFitness extends Fitness<Molecules> {
         pm = pma / pmb;
 
         w = weight;
-        B = lim[0];
-        Po = lim[1];
-        inc = lim[2];
-        //       		System.out.println("5___"+PM.getMethodResult(solute,aGC));
-//        		System.out.println("6___"+PM.getMethodResult(solventUser,aGC));
+        B = limits[0];
+        Po = limits[1];
+        unc = limits[2];
+        //       		System.out.println("5___"+PM.getMethodResult(solute,parametersManager));
+//        		System.out.println("6___"+PM.getMethodResult(solventUser,parametersManager));
     }
 
 
@@ -104,11 +104,11 @@ public class MoleculeFitness extends Fitness<Molecules> {
         double sl = SL.getMethodResult();
         //double dc = DC.getDielectricConstant();
 
-        double r1 = normalizeRestriction(2, B[0], ge, Po[0], inc[0]);
-        double r2 = normalizeRestriction(2, B[1], bt, Po[1], inc[1]);
-        double r3 = normalizeRestriction(3, B[2], d, Po[2], inc[2]);
-        double r4 = normalizeRestriction(1, B[3], mt, Po[3], inc[3]);
-        double r5 = normalizeRestriction(2, B[4], sl, Po[4], inc[4]);
+        double r1 = normalizeRestriction(2, B[0], ge, Po[0], unc[0]);
+        double r2 = normalizeRestriction(2, B[1], bt, Po[1], unc[1]);
+        double r3 = normalizeRestriction(3, B[2], d, Po[2], unc[2]);
+        double r4 = normalizeRestriction(1, B[3], mt, Po[3], unc[3]);
+        double r5 = normalizeRestriction(2, B[4], sl, Po[4], unc[4]);
         double ks = getKS(solvent);
 
         //System.out.println("s___"+solvent.getArray().size());
@@ -155,8 +155,8 @@ public class MoleculeFitness extends Fitness<Molecules> {
         double bs = allMethods.getMethodResult(BS, 0, temperature, aGC);
         ks = (ab * bs) / (as * as) * (pm);
 
-        //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,aGC));
-        //	System.out.println("3___"+allMethods.getMethodResult(AS,0,temperature,aGC));
+        //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,parametersManager));
+        //	System.out.println("3___"+allMethods.getMethodResult(AS,0,temperature,parametersManager));
 
         if (!allMethods.can_be_done) {
             allMethods.can_be_done = true;

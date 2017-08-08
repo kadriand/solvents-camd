@@ -1,30 +1,20 @@
 package co.unal.camd.properties.estimation;
 
-import java.util.Vector;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import java.util.Vector;
 
 
 public class MoleculesModel implements TreeModel {
 
-
-    private Node rootGroup;
+    private FunctionalGroupNode rootGroup;
     private Vector<TreeModelListener> treeModelListeners =
-            new Vector<TreeModelListener>();
+            new Vector<>();
 
-    public MoleculesModel(Node aGroup) {
+    public MoleculesModel(FunctionalGroupNode aGroup) {
         rootGroup = aGroup;
     }
-
-    /**
-     * The only event raised by this model is TreeStructureChanged with the
-     * root as path, i.e. the whole tree has changed.
-     */
-    protected void fireTreeStructureChanged(Node oldRoot) {
-
-    }
-
 
     /**
      * Adds a listener for the TreeModelEvent posted after the tree changes.
@@ -37,7 +27,7 @@ public class MoleculesModel implements TreeModel {
      * Returns the child of parent at index index in the parent's child array.
      */
     public Object getChild(Object parent, int index) {
-        Node g = (Node) parent;
+        FunctionalGroupNode g = (FunctionalGroupNode) parent;
         return g.getGroupAt(index);
     }
 
@@ -45,7 +35,7 @@ public class MoleculesModel implements TreeModel {
      * Returns the number of child of parent.
      */
     public int getChildCount(Object parent) {
-        Node g = (Node) parent;
+        FunctionalGroupNode g = (FunctionalGroupNode) parent;
         return g.getGroupsCount();
     }
 
@@ -53,8 +43,8 @@ public class MoleculesModel implements TreeModel {
      * Returns the index of child in parent.
      */
     public int getIndexOfChild(Object parent, Object child) {
-        Node g = (Node) parent;
-        return g.getIndexOfGroup((Node) child);
+        FunctionalGroupNode g = (FunctionalGroupNode) parent;
+        return g.getIndexOfGroup((FunctionalGroupNode) child);
     }
 
     /**
@@ -68,7 +58,7 @@ public class MoleculesModel implements TreeModel {
      * Returns true if node is a leaf.
      */
     public boolean isLeaf(Object node) {
-        Node g = (Node) node;
+        FunctionalGroupNode g = (FunctionalGroupNode) node;
         return g.getGroupsCount() == 0;
     }
 

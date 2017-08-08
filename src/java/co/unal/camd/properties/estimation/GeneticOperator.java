@@ -7,16 +7,16 @@ import unalcol.evolution.*;
 
 public abstract class GeneticOperator extends Operator {
 
-    public Node genotype1;
-    public Node genotype2;
+    public FunctionalGroupNode genotype1;
+    public FunctionalGroupNode genotype2;
 
     public GeneticOperator(Environment _environment) {
         super(_environment);
     }
 
 
-    public void searchAndReplace(Node genotype, int codeToCut, Node aGrToReplace, boolean replaceAll, ContributionParametersManager aGC) {
-        Node aGroup = new Node(0);
+    public void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionParametersManager aGC) {
+        FunctionalGroupNode aGroup = new FunctionalGroupNode(0);
         //System.out.println("CCoperator");
         //	System.out.println("c:"+genotype.getGroupsCount());
         //	System.out.println("code:"+codeToCut);
@@ -24,7 +24,7 @@ public abstract class GeneticOperator extends Operator {
         if (codeToCut == 0) {
             if (replaceAll == false) {
                 for (int j = 0; j < genotype.getGroupsCount(); j++) {
-                    Node subG = genotype.getGroupAt(j);
+                    FunctionalGroupNode subG = genotype.getGroupAt(j);
                     aGrToReplace.addGroup(subG);
                 }
             }
@@ -50,7 +50,7 @@ public abstract class GeneticOperator extends Operator {
          aGroup=genotype.getGroupAt(i);
          if(replaceAll==false){
          for(int j=0;j<genotype.getGroupAt(i).getGroupsCount();j++){
-         Node subG=genotype.getGroupAt(i).getGroupAt(j);
+         FunctionalGroupNode subG=genotype.getGroupAt(i).getGroupAt(j);
          aGrToReplace.addGroup(subG);
          }
          }
@@ -58,13 +58,13 @@ public abstract class GeneticOperator extends Operator {
          genotype.setGroupAt(i, aGrToReplace);
          //System.out.println("nnnn"+genotype.getGroupAt(i).toString());
          }
-         searchAndReplace(genotype.getGroupAt(i),codeToCut,aGrToReplace,replaceAll,aGC);
+         searchAndReplace(genotype.getGroupAt(i),codeToCut,aGrToReplace,replaceAll,parametersManager);
          }
          }
          */
     }
 
-    public void searchAndReplace(Node genotype, int codeToCut, boolean replaceAll, ContributionParametersManager aGC) {
+    public void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionParametersManager aGC) {
         if (codeToCut == 0) {
             int valence = aGC.getValence((genotype.getRootNode()));
             aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());
@@ -83,7 +83,7 @@ public abstract class GeneticOperator extends Operator {
             //				code=code+1;
             //			if(code==codeToCut){
 //					}
-            //searchAndReplace(genotype.getGroupAt(i),codeToCut, replaceAll, aGC);
+            //searchAndReplace(genotype.getGroupAt(i),codeToCut, replaceAll, parametersManager);
 //				}
         }
     }

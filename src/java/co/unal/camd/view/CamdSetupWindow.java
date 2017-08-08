@@ -5,7 +5,7 @@ package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.properties.estimation.GroupArray;
-import co.unal.camd.properties.estimation.Node;
+import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -21,7 +21,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
 
     private JTextField textFieldParents;
     private JTextField textFieldMaxMolecules;
-    private PanelDataAndUnifac aPanel;
+    private PanelDataAndUnifac unifacAndDataPanel;
 
     /**
      * This is the default constructor
@@ -56,7 +56,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
             System.out.println("Molecules init :" + parentSize);
 
             //				HERE THE ALGORITHM STARTS
-            createMolec();
+            designSuitableMolecules();
             textFieldParents.setEnabled(false);
             textFieldMaxMolecules.setEnabled(true);
         });
@@ -70,7 +70,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
             textFieldParents.setEnabled(true);
             textFieldMaxMolecules.setEnabled(false);
         });
-        aPanel = new PanelDataAndUnifac(this);
+        unifacAndDataPanel = new PanelDataAndUnifac(this);
 
         JPanel options = new JPanel();
         options.setLayout(new GridLayout(2, 2));
@@ -79,7 +79,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
         options.add(labelMaxMolecules);
         options.add(textFieldMaxMolecules);
         add(options, BorderLayout.SOUTH);
-        add(aPanel, BorderLayout.EAST);
+        add(unifacAndDataPanel, BorderLayout.EAST);
         tab = new JTabbedPane();
         JScrollPane scroll = new JScrollPane(tab);
         add(scroll);
@@ -89,7 +89,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
         this.maxIterations = iterations;
     }
 
-    public DefaultMutableTreeNode moleculeToJtree(Node molec, DefaultMutableTreeNode node) {
+    public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.getGroupsCount(); i++) {
             String n = parametersManager.getName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);

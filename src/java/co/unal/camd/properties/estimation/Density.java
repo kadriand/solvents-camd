@@ -78,7 +78,7 @@ public class Density {
         return PM.getMethodResult(gr, aGC) / sum;
     }
 
-    public static boolean isBond(Node aGroup, int rootGroup, int leafGroup) {
+    public static boolean isBond(FunctionalGroupNode aGroup, int rootGroup, int leafGroup) {
         boolean show = false;
 
         if (aGroup.getRootNode() == rootGroup && aGroup.getGroupAt(0) != null) {
