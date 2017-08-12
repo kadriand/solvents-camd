@@ -14,11 +14,8 @@ import co.unal.camd.properties.estimation.GibbsEnergy;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.MeltingTemp;
 import co.unal.camd.properties.estimation.Molecules;
-import unalcol.evolution.Environment;
 import unalcol.evolution.GenomeLimits;
 import unalcol.evolution.Population;
-import unalcol.evolution.algorithms.haea.HaeaOperators;
-import unalcol.evolution.selections.Elitism;
 import unalcol.util.ConsoleTracer;
 
 import javax.swing.*;
@@ -34,11 +31,16 @@ public class CamdRunner extends JFrame {
 
     JTabbedPane tab;
     int parentSize;
+
     int maxGroups;
+
     ContributionParametersManager parametersManager;
     protected double temperature;
     int maxIterations;
+
     ArrayList<GroupArray> moleculesUser;
+    private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
+    private double[][] constraintsLimits = new double[3][5];
     private ArrayList<Molecules> molecules;
 
     /**
@@ -61,9 +63,7 @@ public class CamdRunner extends JFrame {
     public void designSuitableMolecules() {
         tab.removeAll();
         System.out.println("iterat " + maxIterations);
-        double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
         System.out.println("pesos (ge, bt, d, mt, sl)" + weight);
-        double[][] constraintsLimits = new double[3][5];
 
         constraintsLimits[0][0] = 15;  //this is all the B
         constraintsLimits[0][1] = 15;
@@ -84,11 +84,10 @@ public class CamdRunner extends JFrame {
         constraintsLimits[2][3] = 0.0723;
         constraintsLimits[2][4] = 0.05;
 
-        Environment environment = MoleculeEvolution.buildEnvironment(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager, maxGroups);
-        HaeaOperators operators = MoleculeEvolution.buildOperators(environment);
+
+        MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
+        Population population = moleculeEvolution.evolve(parentSize, maxIterations, new ConsoleTracer());
         GenomeLimits limits;
-        Elitism elitistSelection = new Elitism(environment, 1, false, 1.0, 0.0);
-        Population population = MoleculeEvolution.evolve(parentSize, environment, maxIterations, operators, elitistSelection, new ConsoleTracer());
 
         double best = population.statistics().best;
         double avg = population.statistics().avg;
@@ -157,5 +156,29 @@ public class CamdRunner extends JFrame {
 
     public void setTemperature(double temperature) {
         this.temperature = temperature;
+    }
+
+    public ArrayList<GroupArray> getMoleculesUser() {
+        return moleculesUser;
+    }
+
+    public double[] getWeight() {
+        return weight;
+    }
+
+    public double[][] getConstraintsLimits() {
+        return constraintsLimits;
+    }
+
+    public ArrayList<Molecules> getMolecules() {
+        return molecules;
+    }
+
+    public ContributionParametersManager getParametersManager() {
+        return parametersManager;
+    }
+
+    public int getMaxGroups() {
+        return maxGroups;
     }
 }

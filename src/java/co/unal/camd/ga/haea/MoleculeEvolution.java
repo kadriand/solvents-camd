@@ -1,46 +1,56 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.properties.estimation.ChangeByCH2;
 import co.unal.camd.properties.estimation.CutAndReplace;
 import co.unal.camd.properties.estimation.GroupArray;
-import co.unal.camd.properties.estimation.MoleculesEnviroment;
+import co.unal.camd.properties.estimation.MoleculesEnvironment;
 import co.unal.camd.properties.estimation.cutAndClose;
+import co.unal.camd.view.CamdRunner;
 import unalcol.core.Tracer;
-import unalcol.evolution.Environment;
 import unalcol.evolution.EvolutionaryAlgorithm;
 import unalcol.evolution.Fitness;
 import unalcol.evolution.Genotype;
 import unalcol.evolution.Operator;
 import unalcol.evolution.Phenotype;
 import unalcol.evolution.Population;
-import unalcol.evolution.Selection;
-import unalcol.evolution.Transformation;
 import unalcol.evolution.algorithms.haea.HAEA;
 import unalcol.evolution.algorithms.haea.HaeaOperators;
 import unalcol.evolution.algorithms.haea.SimpleHaeaOperators;
+import unalcol.evolution.selections.Elitism;
 import unalcol.evolution.selections.Tournament;
 import unalcol.util.ForLoopCondition;
 
 public class MoleculeEvolution {
-    public static Environment buildEnvironment(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager aGC, int maxNmGroups) {
-        //@TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry parametersManager
-        Fitness f = new MoleculeFitness(temperature, solute, solventUser, weight, limits, aGC);
-        //@TODO: Set the genotype parameters: int _maxNmGroups, GenotypeChemistry _aGC
-        Genotype g = new MoleculeGenotype(maxNmGroups, aGC);
 
+    private HAEA algorithm;
+    private MoleculesEnvironment environment;
+
+    public MoleculeEvolution(CamdRunner camdRunner) {
+        // TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry parametersManager
+        GroupArray solute = camdRunner.getMoleculesUser().get(0);
+        GroupArray solvent = camdRunner.getMoleculesUser().get(1);
+
+        Fitness fitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), camdRunner.getParametersManager());
+
+        // TODO: Set the genotype parameters: int _maxNmGroups, GenotypeChemistry _aGC
+        Genotype genotype = new MoleculeGenotype(camdRunner.getMaxGroups(), camdRunner.getParametersManager());
         //Genotype g = new VariableLengthBinaryGenotype(10,100,10);
-        Phenotype p = new Phenotype();
-        return new MoleculesEnviroment(g, p, f, aGC);
+        Phenotype phenotype = new Phenotype();
+
+        environment = new MoleculesEnvironment(genotype, phenotype, fitness, camdRunner.getParametersManager());
+        HaeaOperators operators = buildOperators();
+        Elitism selection = new Elitism(environment, 1, false, 1.0, 0.0);
+
+        algorithm = new HAEA(operators, selection);
     }
 
-    public static HaeaOperators buildOperators(Environment env) {
+    public HaeaOperators buildOperators() {
         Operator[] opers;
-        MoleculeMutation mutation = new MoleculeMutation(env);
-        Cross xover = new Cross(env, new Tournament(env, 2, true, 4));
-        cutAndClose cAndC = new cutAndClose(env);
-        CutAndReplace cAndR = new CutAndReplace(env);
-        ChangeByCH2 changeBy = new ChangeByCH2(env);
+        MoleculeMutation mutation = new MoleculeMutation(environment);
+        Cross xover = new Cross(environment, new Tournament(environment, 2, true, 4));
+        cutAndClose cAndC = new cutAndClose(environment);
+        CutAndReplace cAndR = new CutAndReplace(environment);
+        ChangeByCH2 changeBy = new ChangeByCH2(environment);
         opers = new Operator[5];
         opers[0] = mutation;
         opers[1] = xover;
@@ -52,23 +62,13 @@ public class MoleculeEvolution {
         return new SimpleHaeaOperators(opers);
     }
 
-    public static Transformation getTransformation(HaeaOperators operators,
-                                                   Selection selection) {
-        return new HAEA(operators, selection);
-    }
-
-    public static Population evolve(int POP_SIZE, Environment env,
-                                    int MAX_ITER, HaeaOperators operators,
-                                    Selection selection,
-                                    Tracer tracer) {
+    public Population evolve(int popSize, int maxIter, Tracer tracer) {
         Population p = null;
-        EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm(new Population(env, POP_SIZE), getTransformation(operators, selection), new ForLoopCondition(MAX_ITER));
-
+        Population population = new Population(environment, popSize);
+        EvolutionaryAlgorithm ea = new EvolutionaryAlgorithm(population, algorithm, new ForLoopCondition(maxIter));
         ea.addTracer(tracer);
         ea.init();
-//	    if( gui != null ) {
-//	      ea.start();
-//	    }else{
+
         /**
          p = ea.getPopulation();
          p.sort();
@@ -88,15 +88,7 @@ public class MoleculeEvolution {
         ea.run();
         p = ea.getPopulation();
         p.sort();
-//	    }
         return p;
-    }
-
-    public static void main(String[] argv) {
-//	    Environment env = buildEnvironment();
-//	    HaeaOperators opers = buildOperators(env);
-        // GenomeLimits limits;
-//	    Population p = evolve( 50, env, 100, opers, new ConsoleTracer() );
     }
 
 }

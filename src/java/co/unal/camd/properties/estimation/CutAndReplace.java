@@ -26,7 +26,7 @@ public class CutAndReplace extends GeneticOperator {
         if (aGroupMut.getRootNode() > 4) {
             functional = true;
         }
-        int refCode = MoleculeGenotype.getNewRefCode(valence, ((MoleculesEnviroment) environment).aGC, functional);
+        int refCode = MoleculeGenotype.getNewRefCode(valence, ((MoleculesEnvironment) environment).aGC, functional);
         FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
 
         if (valence == 3) {
@@ -35,7 +35,7 @@ public class CutAndReplace extends GeneticOperator {
             newGroup.addGroup(new FunctionalGroupNode(1));
             newGroup.addGroup(new FunctionalGroupNode(1));
         }
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((MoleculesEnviroment) environment).aGC);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((MoleculesEnvironment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();
         v.add(clone_genome);
         return v;

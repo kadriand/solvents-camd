@@ -2,7 +2,7 @@ package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecules;
-import co.unal.camd.properties.estimation.MoleculesEnviroment;
+import co.unal.camd.properties.estimation.MoleculesEnvironment;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
@@ -30,8 +30,8 @@ public class Cross extends GeneticOperator {
         FunctionalGroupNode aGroup1 = one.getGroupAt(num);
         FunctionalGroupNode aGroup2 = two.getGroupAt(num2);
 
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, ((MoleculesEnviroment) environment).aGC);
-        searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, ((MoleculesEnviroment) environment).aGC);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, ((MoleculesEnvironment) environment).aGC);
+        searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, ((MoleculesEnvironment) environment).aGC);
 
         Vector<Molecules> v = new Vector<>();
         v.add(clone_genome);

@@ -6,7 +6,7 @@ import unalcol.evolution.Fitness;
 import unalcol.evolution.Genotype;
 import unalcol.evolution.Phenotype;
 
-public class MoleculesEnviroment extends Environment<Molecules, Molecules> {
+public class MoleculesEnvironment extends Environment<Molecules, Molecules> {
 
     /**
      * Creates a Enviroment with the given genotype, phenotype  and fitness
@@ -15,9 +15,9 @@ public class MoleculesEnviroment extends Environment<Molecules, Molecules> {
      * @param phenotype The phenotype of the Enviroment
      * @param fitness   The fitness of the Enviroment
      */
-    public MoleculesEnviroment(Genotype<Molecules> genotype,
-                               Phenotype<Molecules, Molecules> phenotype,
-                               Fitness<Molecules> fitness, ContributionParametersManager _aGC) {
+    public MoleculesEnvironment(Genotype<Molecules> genotype,
+                                Phenotype<Molecules, Molecules> phenotype,
+                                Fitness<Molecules> fitness, ContributionParametersManager _aGC) {
         super(genotype, phenotype, fitness);
         aGC = _aGC;
     }

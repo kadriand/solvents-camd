@@ -22,7 +22,7 @@ public class ChangeByCH2 extends GeneticOperator {
         FunctionalGroupNode newCH2 = new FunctionalGroupNode(2);
 
         newCH2.addGroup(clone_genome.getGroupAt(num));
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true, ((MoleculesEnviroment) environment).aGC);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true, ((MoleculesEnvironment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();
         v.add(clone_genome);
         return v;

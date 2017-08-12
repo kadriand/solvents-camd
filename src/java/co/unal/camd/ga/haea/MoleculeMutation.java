@@ -2,7 +2,7 @@ package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecules;
-import co.unal.camd.properties.estimation.MoleculesEnviroment;
+import co.unal.camd.properties.estimation.MoleculesEnvironment;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
@@ -23,7 +23,7 @@ public class MoleculeMutation extends GeneticOperator {
         // TODO: Mutacion
 
         int num = (int) (Math.random() * (clone_genome.getTotalGroups() - 1));
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, false, ((MoleculesEnviroment) environment).aGC);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, false, ((MoleculesEnvironment) environment).aGC);
         Vector<Molecules> v = new Vector<Molecules>();
         v.add(clone_genome);
         return v;
