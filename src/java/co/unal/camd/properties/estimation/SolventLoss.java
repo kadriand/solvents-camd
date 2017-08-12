@@ -1,12 +1,8 @@
-package other;
-
-import java.util.ArrayList;
+package co.unal.camd.properties.estimation;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.properties.estimation.GroupArray;
-import co.unal.camd.properties.estimation.Methods;
-import co.unal.camd.properties.estimation.PM;
-import co.unal.camd.properties.estimation.Unifac;
+
+import java.util.ArrayList;
 
 
 public class SolventLoss {

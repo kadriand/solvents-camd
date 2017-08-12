@@ -153,23 +153,21 @@ public class Unifac extends Methods {
         return sum2 / sum;
     }
 
-    ///////////////////TETA////////////////////////////////////
-    public double getTeta(ArrayList<GroupArray> molecules, int principal, int group) {
+    ///////////////////THETA////////////////////////////////////
+    public double getTheta(ArrayList<GroupArray> molecules, int principal, int group) {
         double sum = 0;
         GroupArray g;
         GroupArray g2 = molecules.get(principal);
-        int aux = g2.getGroupCode(group);
 
         for (int i = 0; i < molecules.size(); i++) {
             g = molecules.get(i);
             for (int j = 0; j < g.size(); j++) {
-                aux = g.getGroupCode(j);
                 sum = sum + getX(molecules, i, j) * parametersManager.getQ(g.getGroupCode(j));
                 //    System.out.println("esta es la suma de teta :"+sum);
             }
         }
         //System.out.println("esta es la suma de teta :"+sum);
-        aux = g2.getGroupCode(group);
+        int aux = g2.getGroupCode(group);
         //System.out.println("teta: "+getX(molecules,principal,group)*parametersManager.getQ(aux)/sum);
         return getX(molecules, principal, group) * parametersManager.getQ(aux) / sum;
     }
@@ -210,7 +208,7 @@ public class Unifac extends Methods {
 
                 double y = getY(m, k, temperature);
                 if (can_be_done) {
-                    sum1 = sum1 + getTeta(molecules, i, j) * getY(m, k, temperature);
+                    sum1 = sum1 + getTheta(molecules, i, j) * getY(m, k, temperature);
                 }
                 ////////////////suma3////////////////////7
                 sum3 = 0;
@@ -222,13 +220,13 @@ public class Unifac extends Methods {
                         if (getY(n, m, temperature) == 1000000) {
                             //	System.out.println("no estan todos los parametros de interacci�n");
                         }
-                        sum3 = sum3 + getTeta(molecules, l, f) * getY(n, m, temperature);
+                        sum3 = sum3 + getTheta(molecules, l, f) * getY(n, m, temperature);
                     }
                 }
                 /////////////////////////////////suma2///////////////////////////
                 y = getY(k, m, temperature);
                 if (can_be_done) {
-                    sum2 = sum2 + (getTeta(molecules, i, j) * getY(k, m, temperature) / sum3);
+                    sum2 = sum2 + (getTheta(molecules, i, j) * getY(k, m, temperature) / sum3);
                 }
             }
 

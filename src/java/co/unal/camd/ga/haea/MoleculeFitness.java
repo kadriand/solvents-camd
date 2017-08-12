@@ -11,7 +11,7 @@ import co.unal.camd.properties.estimation.Methods;
 import co.unal.camd.properties.estimation.Molecules;
 import co.unal.camd.properties.estimation.PM;
 import co.unal.camd.properties.estimation.Unifac;
-import other.SolventLoss;
+import co.unal.camd.properties.estimation.SolventLoss;
 import unalcol.evolution.Fitness;
 
 import java.util.ArrayList;
