@@ -1,29 +1,29 @@
-package co.unal.camd.properties.estimation;
+package co.unal.camd.ga.haea.old;
 
+import co.unal.camd.properties.estimation.GeneticOperator;
+import co.unal.camd.properties.estimation.Molecule;
 import co.unal.camd.properties.estimation.old.OldMoleculesEnvironment;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
 
-import java.util.Vector;
+import java.util.*;
 
+/**
+ */
+public class OldMoleculeMutation extends GeneticOperator {
 
-public class ChangeByCH2 extends GeneticOperator {
-
-    public ChangeByCH2(Environment _environment) {
+    public OldMoleculeMutation(Environment _environment) {
         super(_environment);
     }
 
     public Vector<Molecule> apply(Molecule genome) {
-        //System.out.println("changeByCh2");
+        //System.out.println("Mutation");
         Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
 
-        FunctionalGroupNode newCH2 = new FunctionalGroupNode(2);
-
-        newCH2.addGroup(clone_genome.getGroupAt(num));
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true, ((OldMoleculesEnvironment) environment).aGC);
+        int num = (int) (Math.random() * (clone_genome.getTotalGroups() - 1));
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, false, ((OldMoleculesEnvironment) environment).aGC);
         Vector<Molecule> v = new Vector<Molecule>();
         v.add(clone_genome);
         return v;

@@ -1,6 +1,7 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.ga.haea.MoleculeGenotype;
+import co.unal.camd.ga.haea.old.OldMoleculeGenotype;
+import co.unal.camd.properties.estimation.old.OldMoleculesEnvironment;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
 import unalcol.evolution.Population;
@@ -13,9 +14,9 @@ public class CutAndReplace extends GeneticOperator {
         super(_environment);
     }
 
-    public Vector<Molecules> apply(Molecules genome) {
+    public Vector<Molecule> apply(Molecule genome) {
         //System.out.println("CutAndReplace");
-        Molecules clone_genome = genome.clone(); // @TODO: clonar objeto
+        Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
 
@@ -26,7 +27,7 @@ public class CutAndReplace extends GeneticOperator {
         if (aGroupMut.getRootNode() > 4) {
             functional = true;
         }
-        int refCode = MoleculeGenotype.getNewRefCode(valence, ((MoleculesEnvironment) environment).aGC, functional);
+        int refCode = OldMoleculeGenotype.getNewRefCode(valence, ((OldMoleculesEnvironment) environment).aGC, functional);
         FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
 
         if (valence == 3) {
@@ -35,8 +36,8 @@ public class CutAndReplace extends GeneticOperator {
             newGroup.addGroup(new FunctionalGroupNode(1));
             newGroup.addGroup(new FunctionalGroupNode(1));
         }
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((MoleculesEnvironment) environment).aGC);
-        Vector<Molecules> v = new Vector<Molecules>();
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, ((OldMoleculesEnvironment) environment).aGC);
+        Vector<Molecule> v = new Vector<Molecule>();
         v.add(clone_genome);
         return v;
     }
@@ -52,8 +53,8 @@ public class CutAndReplace extends GeneticOperator {
         Vector<Individual> v = null;
         if (population != null) {
             v = new Vector<Individual>();
-            Molecules genome = (Molecules) population.get(x).getGenome();
-            Vector<Molecules> genomes = apply(genome);
+            Molecule genome = (Molecule) population.get(x).getGenome();
+            Vector<Molecule> genomes = apply(genome);
             int n = genomes.size();
             for (int i = 0; i < n; i++) {
                 v.add(new Individual(genomes.get(i)));

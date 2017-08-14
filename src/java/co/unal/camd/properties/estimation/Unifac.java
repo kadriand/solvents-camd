@@ -265,13 +265,13 @@ public class Unifac extends Methods {
 
 
     @Override
-    public double getMethodResult(Molecules molecules) {
+    public double getMethodResult(Molecule molecules) {
         // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public double getMethodResult(Molecules molecules, double temp) {
+    public double getMethodResult(Molecule molecules, double temp) {
         // TODO Auto-generated method stub
         return 0;
     }

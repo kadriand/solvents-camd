@@ -9,8 +9,8 @@ public abstract class Methods {
 
     public abstract double getMethodResult(ArrayList<GroupArray> molecules, int principal, double temp, ContributionParametersManager aGC);
 
-    public abstract double getMethodResult(Molecules molecules);
+    public abstract double getMethodResult(Molecule molecules);
 
-    public abstract double getMethodResult(Molecules molecules, double temp);
+    public abstract double getMethodResult(Molecule molecules, double temp);
 }
 

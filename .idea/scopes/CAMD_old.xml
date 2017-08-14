@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="CAMD-old" pattern="file[CAMD-Idea]:*/" />
+</component>

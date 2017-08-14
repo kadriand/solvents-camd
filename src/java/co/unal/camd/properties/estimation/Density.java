@@ -8,10 +8,10 @@ public class Density {
 //////////////////////////////////Density//////////////////////////////////////////
 
     private ContributionParametersManager aGC;
-    private Molecules aMolecule;
+    private Molecule aMolecule;
     private double temperature;
 
-    public Density(Molecules solvent, double temp, ContributionParametersManager aGC) {
+    public Density(Molecule solvent, double temp, ContributionParametersManager aGC) {
         this.aGC = aGC;
         temperature = temp;
         aMolecule = solvent;

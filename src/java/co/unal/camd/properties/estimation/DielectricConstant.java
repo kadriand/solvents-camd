@@ -32,7 +32,7 @@ public class DielectricConstant {
     private boolean isConditionG2;
 
 
-    public DielectricConstant(Molecules solvent, ArrayList<Integer> secOrder, double Temperature, ContributionParametersManager aGC) {
+    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature, ContributionParametersManager aGC) {
         this.aGC = aGC;
         temperature = Temperature;
         secondOrderCode = secOrder;

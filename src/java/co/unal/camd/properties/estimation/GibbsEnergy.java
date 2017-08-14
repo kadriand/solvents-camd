@@ -12,7 +12,7 @@ public class GibbsEnergy {
     private GroupArray aMolecule;
     private ArrayList<Integer> secondOrderCode;
 
-    public GibbsEnergy(Molecules solvent, ArrayList<Integer> SOG, ContributionParametersManager aGC) {
+    public GibbsEnergy(Molecule solvent, ArrayList<Integer> SOG, ContributionParametersManager aGC) {
         this.aGC = aGC;
         secondOrderCode = SOG;
         aMolecule = solvent.getGroupArray();

@@ -1,19 +1,29 @@
-package co.unal.camd.properties.estimation;
+package co.unal.camd.properties.estimation.old;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.ga.haea.old.OldMoleculeGenotype;
+import co.unal.camd.properties.estimation.FunctionalGroupNode;
+import unalcol.agents.simulate.Environment;
 
 
-public class GeneticOperator {
+public abstract class OldGeneticOperator extends Operator {
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionParametersManager aGC) {
+    public FunctionalGroupNode genotype1;
+    public FunctionalGroupNode genotype2;
+
+    public OldGeneticOperator(Environment _environment) {
+        super(_environment);
+    }
+
+
+    public void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionParametersManager aGC) {
         FunctionalGroupNode aGroup = new FunctionalGroupNode(0);
         //System.out.println("CCoperator");
         //	System.out.println("c:"+genotype.getGroupsCount());
         //	System.out.println("code:"+codeToCut);
 
         if (codeToCut == 0) {
-            if (!replaceAll) {
+            if (replaceAll == false) {
                 for (int j = 0; j < genotype.getGroupsCount(); j++) {
                     FunctionalGroupNode subG = genotype.getGroupAt(j);
                     aGrToReplace.addGroup(subG);
@@ -55,7 +65,7 @@ public class GeneticOperator {
          */
     }
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionParametersManager aGC) {
+    public void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionParametersManager aGC) {
         if (codeToCut == 0) {
             int valence = aGC.getValence((genotype.getRootNode()));
             aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());

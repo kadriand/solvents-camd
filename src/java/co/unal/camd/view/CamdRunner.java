@@ -5,7 +5,7 @@ package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.ga.haea.MoleculeFitness;
+import co.unal.camd.ga.haea.old.OldMoleculeFitness;
 import co.unal.camd.properties.estimation.BoilingTemp;
 import co.unal.camd.properties.estimation.Density;
 import co.unal.camd.properties.estimation.DielectricConstant;
@@ -13,10 +13,9 @@ import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GibbsEnergy;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.MeltingTemp;
-import co.unal.camd.properties.estimation.Molecules;
-import unalcol.evolution.GenomeLimits;
-import unalcol.evolution.Population;
-import unalcol.util.ConsoleTracer;
+import co.unal.camd.properties.estimation.Molecule;
+import unalcol.search.population.Population;
+import unalcol.tracer.ConsoleTracer;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -28,12 +27,9 @@ import java.util.ArrayList;
 public class CamdRunner extends JFrame {
 
     private static final long serialVersionUID = 1L;
-
     JTabbedPane tab;
     int parentSize;
-
     int maxGroups;
-
     ContributionParametersManager parametersManager;
     protected double temperature;
     int maxIterations;
@@ -41,7 +37,7 @@ public class CamdRunner extends JFrame {
     ArrayList<GroupArray> moleculesUser;
     private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
     private double[][] constraintsLimits = new double[3][5];
-    private ArrayList<Molecules> molecules;
+    private ArrayList<Molecule> molecules;
 
     /**
      * Despliega un JFileChooser y retorna la ruta absoluta del archivo
@@ -87,6 +83,7 @@ public class CamdRunner extends JFrame {
 
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
         Population population = moleculeEvolution.evolve(parentSize, maxIterations, new ConsoleTracer());
+
         GenomeLimits limits;
 
         double best = population.statistics().best;
@@ -99,7 +96,7 @@ public class CamdRunner extends JFrame {
 
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
-            Molecules solvent = (Molecules) population.get(i).getThing();
+            Molecule solvent = (Molecule) population.get(i).getThing();
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
             String name = parametersManager.getName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
@@ -114,7 +111,7 @@ public class CamdRunner extends JFrame {
             Density D = new Density(solvent, temperature, parametersManager);
             MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, parametersManager);
             DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, parametersManager);
-            MoleculeFitness KS = new MoleculeFitness(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager);
+            OldMoleculeFitness KS = new OldMoleculeFitness(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager);
 
             // TODO Auto-generated method stub
             double ge = GE.getMethodResult();
@@ -170,7 +167,7 @@ public class CamdRunner extends JFrame {
         return constraintsLimits;
     }
 
-    public ArrayList<Molecules> getMolecules() {
+    public ArrayList<Molecule> getMolecules() {
         return molecules;
     }
 

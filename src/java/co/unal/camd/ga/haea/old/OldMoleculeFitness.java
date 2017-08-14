@@ -1,4 +1,4 @@
-package co.unal.camd.ga.haea;
+package co.unal.camd.ga.haea.old;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.properties.estimation.BoilingTemp;
@@ -10,19 +10,19 @@ import co.unal.camd.properties.estimation.MeltingTemp;
 import co.unal.camd.properties.estimation.Methods;
 import co.unal.camd.properties.estimation.Molecule;
 import co.unal.camd.properties.estimation.PM;
-import co.unal.camd.properties.estimation.SolventLoss;
 import co.unal.camd.properties.estimation.Unifac;
-import unalcol.optimization.OptimizationFunction;
+import co.unal.camd.properties.estimation.SolventLoss;
+import unalcol.evolution.Fitness;
 
 import java.util.ArrayList;
 
-public class MoleculeFitness extends OptimizationFunction<Molecule> {
+public class OldMoleculeFitness extends Fitness<Molecule> {
 
     private Methods allMethods;
     private double temperature;
     private GroupArray solventUser;
     private GroupArray solute;
-    private ContributionParametersManager parametersManager;
+    private ContributionParametersManager aGC;
     private double ab;
     private double pm;
     private static final double _D = 0.001;
@@ -33,11 +33,11 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
     private double[] unc;
     private double[] Po;
 
-    public MoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager parametersManager) {
+    public OldMoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager aGC) {
         super();
         this.solute = solute;
         this.solventUser = solventUser;
-        this.parametersManager = parametersManager;
+        this.aGC = aGC;
         this.temperature = temperature;
         allMethods = new Unifac();
         ArrayList<GroupArray> AB = new ArrayList<GroupArray>();
@@ -48,11 +48,11 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         AB.add(a0);
         AB.add(b0);
         allMethods.can_be_done = true;
-        ab = allMethods.getMethodResult(AB, 0, temperature, parametersManager);
+        ab = allMethods.getMethodResult(AB, 0, temperature, aGC);
         //	System.out.println("1___"+ab);
 
-        double pmb = PM.getMethodResult(solventUser, parametersManager);
-        double pma = PM.getMethodResult(solute, parametersManager);
+        double pmb = PM.getMethodResult(solventUser, aGC);
+        double pma = PM.getMethodResult(solute, aGC);
         pm = pma / pmb;
 
         w = weight;
@@ -74,13 +74,13 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
      */
 
     @Override
-    public Double apply(Molecule solvent) {
+    public double evaluate(Molecule solvent) {
 
-        ArrayList<Integer> secOrderCodes = solvent.get2OrderGroupArray(parametersManager);
-        GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes, parametersManager);
-        BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes, parametersManager);
-        Density D = new Density(solvent, temperature, parametersManager);
-        MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, parametersManager);
+        ArrayList<Integer> secOrderCodes = solvent.get2OrderGroupArray(aGC);
+        GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes, aGC);
+        BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes, aGC);
+        Density D = new Density(solvent, temperature, aGC);
+        MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, aGC);
 
         ArrayList<GroupArray> SB = new ArrayList<GroupArray>();
         GroupArray s3 = solvent.getGroupArray();
@@ -92,9 +92,9 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solvent"+SB.get(0).getMoleculeByRootGroup());
         //System.out.println("solventuser"+SB.get(1).getMoleculeByRootGroup());
 
-        SolventLoss SL = new SolventLoss(temperature, parametersManager, SB);
+        SolventLoss SL = new SolventLoss(temperature, aGC, SB);
 
-        DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, parametersManager);
+        DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, aGC);
         // TODO Auto-generated method stub
 
         double ge = GE.getMethodResult();
@@ -109,7 +109,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         double r3 = normalizeRestriction(3, B[2], d, Po[2], unc[2]);
         double r4 = normalizeRestriction(1, B[3], mt, Po[3], unc[3]);
         double r5 = normalizeRestriction(2, B[4], sl, Po[4], unc[4]);
-        double ks = computeKS(solvent);
+        double ks = getKS(solvent);
 
         //System.out.println("s___"+solvent.getArray().size());
         //System.out.println("a___"+solute.getArray().size());
@@ -120,7 +120,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         return ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
     }
 
-    public double computeKS(Molecule solvent) {
+    public double getKS(Molecule solvent) {
 
         double ks = 0;
 
@@ -151,8 +151,8 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
 //		UNIFAC aUNIFAC=(UNIFAC)allMethods;
         allMethods.can_be_done = true;
-        double as = allMethods.getMethodResult(AS, 0, temperature, parametersManager);
-        double bs = allMethods.getMethodResult(BS, 0, temperature, parametersManager);
+        double as = allMethods.getMethodResult(AS, 0, temperature, aGC);
+        double bs = allMethods.getMethodResult(BS, 0, temperature, aGC);
         ks = (ab * bs) / (as * as) * (pm);
 
         //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,parametersManager));

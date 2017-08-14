@@ -11,7 +11,7 @@ public class MeltingTemp {
     private GroupArray aMolecule;
     private ArrayList<Integer> secondOrderCode;
 
-    public MeltingTemp(Molecules solvent, ArrayList<Integer> secOrderCode, ContributionParametersManager aGC) {
+    public MeltingTemp(Molecule solvent, ArrayList<Integer> secOrderCode, ContributionParametersManager aGC) {
         this.aGC = aGC;
         secondOrderCode = secOrderCode;
         aMolecule = solvent.getGroupArray();
