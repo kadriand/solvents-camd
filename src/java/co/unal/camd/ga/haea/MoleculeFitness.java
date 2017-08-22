@@ -117,7 +117,9 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
         //	r6 = normalizeRestriction(1, B, Pi, Pm, Pm2, 999999999, Pmin);
         //System.out.println("ks: "+ks);
-        return ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
+        double fitness = ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
+        solvent.setObjectiveFunction(fitness);
+        return fitness;
     }
 
     public double computeKS(Molecule solvent) {

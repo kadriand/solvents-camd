@@ -15,7 +15,6 @@ import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.MeltingTemp;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.population.Population;
-import unalcol.tracer.ConsoleTracer;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -82,28 +81,25 @@ public class CamdRunner extends JFrame {
 
 
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
-        Population population = moleculeEvolution.evolve(parentSize, maxIterations, new ConsoleTracer());
+        Population<Molecule> population = moleculeEvolution.evolve(parentSize, maxIterations);
 
-        GenomeLimits limits;
-
-        double best = population.statistics().best;
-        double avg = population.statistics().avg;
-        double worst = population.statistics().worst;
-
-        System.out.println("best: " + best);
-        System.out.println("avg: " + avg);
-        System.out.println("worst: " + worst);
+//        double best = population.statistics().best;
+//        double avg = population.statistics().avg;
+//        double worst = population.statistics().worst;
+//        System.out.println("best: " + best);
+//        System.out.println("avg: " + avg);
+//        System.out.println("worst: " + worst);
 
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
-            Molecule solvent = (Molecule) population.get(i).getThing();
+            Molecule solvent = population.get(i).object();
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
             String name = parametersManager.getName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
 //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
 
-            int fitness = (int) population.get(i).getFitness();
+            int fitness = (int) population.get(i).object().getObjectiveFuntion();
 
             ArrayList<Integer> secOrderCodes = solvent.get2OrderGroupArray(parametersManager);
             GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes, parametersManager);
@@ -177,5 +173,13 @@ public class CamdRunner extends JFrame {
 
     public int getMaxGroups() {
         return maxGroups;
+    }
+
+    public int getMaxIterations() {
+        return maxIterations;
+    }
+
+    public int getParentSize() {
+        return parentSize;
     }
 }

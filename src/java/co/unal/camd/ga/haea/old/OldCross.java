@@ -1,25 +1,22 @@
 package co.unal.camd.ga.haea.old;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
-import co.unal.camd.properties.estimation.old.OldMoleculesEnvironment;
-import unalcol.agents.simulate.Environment;
-import unalcol.search.selection.Selection;
-import unalcol.search.variation.Variation_2_2;
-import unalcol.types.collection.bitarray.BitArray;
+import co.unal.camd.properties.estimation.MoleculesEnvironment;
+import co.unal.camd.properties.estimation.FunctionalGroupNode;
+import unalcol.evolution.Environment;
+import unalcol.evolution.Individual;
+import unalcol.evolution.Population;
+import unalcol.evolution.Selection;
 
 import java.util.Vector;
 
-public class OldCross extends Variation_2_2<Molecule> {
-
-    ContributionParametersManager parametersManager;
-
+public class OldCross extends GeneticOperator {
     protected Selection selection;
 
-    public OldCross(ContributionParametersManager parametersManager) {
-        this.parametersManager = parametersManager;
+    public OldCross(Environment _environment, Selection _selection) {
+        super(_environment);
+        selection = _selection;
     }
 
     public Vector<Molecule> apply(Molecule one, Molecule two) {
@@ -33,8 +30,8 @@ public class OldCross extends Variation_2_2<Molecule> {
         FunctionalGroupNode aGroup1 = one.getGroupAt(num);
         FunctionalGroupNode aGroup2 = two.getGroupAt(num2);
 
-        GeneticOperator.searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, parametersManager);
-        GeneticOperator.searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, parametersManager);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, ((MoleculesEnvironment) environment).aGC);
+        searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, ((MoleculesEnvironment) environment).aGC);
 
         Vector<Molecule> v = new Vector<>();
         v.add(clone_genome);

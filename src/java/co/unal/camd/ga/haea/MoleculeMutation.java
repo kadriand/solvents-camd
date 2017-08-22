@@ -9,10 +9,7 @@ import unalcol.search.variation.Variation_1_1;
  */
 public class MoleculeMutation extends Variation_1_1<Molecule> {
 
-    ContributionParametersManager parametersManager;
-
-    public MoleculeMutation() {
-    }
+    private ContributionParametersManager parametersManager;
 
     public MoleculeMutation(ContributionParametersManager parametersManager) {
         this.parametersManager = parametersManager;

@@ -1,8 +1,9 @@
 package co.unal.camd.ga.haea.old;
 
-import co.unal.camd.properties.estimation.ChangeByCH2;
-import co.unal.camd.properties.estimation.CutAndClose;
-import co.unal.camd.properties.estimation.CutAndReplace;
+import co.unal.camd.ga.haea.MoleculeOperations;
+import co.unal.camd.ga.haea.ChangeByCH2;
+import co.unal.camd.ga.haea.CutAndClose;
+import co.unal.camd.ga.haea.CutAndReplace;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.old.OldMoleculesEnvironment;
 import co.unal.camd.view.CamdRunner;
@@ -51,7 +52,7 @@ public class OldMoleculeEvolution {
         Fitness fitness = new OldMoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), camdRunner.getParametersManager());
 
         // TODO: Set the genotype parameters: int _maxNmGroups, GenotypeChemistry _aGC
-        Genotype genotype = new OldMoleculeGenotype(camdRunner.getMaxGroups(), camdRunner.getParametersManager());
+        Genotype genotype = new MoleculeOperations(camdRunner.getMaxGroups(), camdRunner.getParametersManager());
         //Genotype g = new VariableLengthBinaryGenotype(10,100,10);
         Phenotype phenotype = new Phenotype();
 

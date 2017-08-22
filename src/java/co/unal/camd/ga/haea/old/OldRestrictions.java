@@ -1,6 +1,7 @@
 package co.unal.camd.ga.haea.old;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.ga.haea.MoleculeOperations;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class OldRestrictions {
                 while (a > 1 && b > 1) {
                     //System.out.println("entra a while_restric");
                     if (canBeChangeNewGr == true) {
-                        newGr = new FunctionalGroupNode(OldMoleculeGenotype.getNewRefCode(aValence, aGC, false));
+                        newGr = new FunctionalGroupNode(MoleculeOperations.findNewRefCode(aValence, aGC, false));
                         if (gr.getGroupsCount() > 0) {
                             for (int i = 0; i < gr.getGroupsCount(); i++) {
                                 //aValence=gr.getTemporalValence();
@@ -105,7 +106,7 @@ public class OldRestrictions {
                             }
                         }
                     } else {
-                        aG1 = new FunctionalGroupNode(OldMoleculeGenotype.getNewRefCode(1, aGC, false));
+                        aG1 = new FunctionalGroupNode(MoleculeOperations.findNewRefCode(1, aGC, false));
                     }
                     aGC.getCodeOfRowBNameOrRefCode(aG1.getRootNode());
                     a = aGC.getCodeOfRow();

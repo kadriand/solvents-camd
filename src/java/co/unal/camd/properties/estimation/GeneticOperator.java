@@ -1,7 +1,7 @@
 package co.unal.camd.properties.estimation;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.ga.haea.old.OldMoleculeGenotype;
+import co.unal.camd.ga.haea.MoleculeOperations;
 
 
 public class GeneticOperator {
@@ -59,7 +59,7 @@ public class GeneticOperator {
         if (codeToCut == 0) {
             int valence = aGC.getValence((genotype.getRootNode()));
             aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());
-            int new_code = OldMoleculeGenotype.getNewRefCode(valence, aGC, (aGC.getCodeOfRow() > 1));
+            int new_code = MoleculeOperations.findNewRefCode(valence, aGC, (aGC.getCodeOfRow() > 1));
             genotype.setRootNode(new_code);
 
         } else {

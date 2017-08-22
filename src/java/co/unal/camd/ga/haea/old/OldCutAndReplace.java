@@ -1,6 +1,9 @@
-package co.unal.camd.properties.estimation;
+package co.unal.camd.ga.haea.old;
 
-import co.unal.camd.ga.haea.old.OldMoleculeGenotype;
+import co.unal.camd.ga.haea.MoleculeOperations;
+import co.unal.camd.properties.estimation.FunctionalGroupNode;
+import co.unal.camd.properties.estimation.GeneticOperator;
+import co.unal.camd.properties.estimation.Molecule;
 import co.unal.camd.properties.estimation.old.OldMoleculesEnvironment;
 import unalcol.evolution.Environment;
 import unalcol.evolution.Individual;
@@ -8,9 +11,9 @@ import unalcol.evolution.Population;
 
 import java.util.Vector;
 
-public class CutAndReplace extends GeneticOperator {
+public class OldCutAndReplace extends GeneticOperator {
 
-    public CutAndReplace(Environment _environment) {
+    public OldCutAndReplace(Environment _environment) {
         super(_environment);
     }
 
@@ -27,7 +30,7 @@ public class CutAndReplace extends GeneticOperator {
         if (aGroupMut.getRootNode() > 4) {
             functional = true;
         }
-        int refCode = OldMoleculeGenotype.getNewRefCode(valence, ((OldMoleculesEnvironment) environment).aGC, functional);
+        int refCode = MoleculeOperations.findNewRefCode(valence, ((OldMoleculesEnvironment) environment).aGC, functional);
         FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
 
         if (valence == 3) {
