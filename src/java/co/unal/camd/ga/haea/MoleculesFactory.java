@@ -1,4 +1,4 @@
-package co.unal.camd.ga.haea.old;
+package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
@@ -71,7 +71,7 @@ public class MoleculesFactory {
     public boolean probabilityFunction(ArrayList<FunctionalGroupNode> root, double aProba) {
         boolean show = false;
         double random = Math.random();
-        if (random <= aProba && OldRestrictions.canBeFunctional(root, parametersManager)) {
+        if (random <= aProba && Restrictions.canBeFunctional(root, parametersManager)) {
             show = true;
         } else {
             show = false;
@@ -92,7 +92,7 @@ public class MoleculesFactory {
                 //System.out.println("tama�o: "+leaves.size());
                 FunctionalGroupNode temporal = leaves.get(0);
                 //	System.out.println("Grupo: "+gr.getRootNode());
-                OldRestrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
+                Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
                 leaves.remove(0);
                 if (leaves.size() == 0) {
                     next = false; //
@@ -103,7 +103,7 @@ public class MoleculesFactory {
                 for (int i = 0; i < parametersManager.getValence(gr.getRootNode()) - m; i++) {  // en esta parte se corrigi� el error de la valencia incompleta
                     FunctionalGroupNode aG = new FunctionalGroupNode(findNewRefCode(1, parametersManager, probabilityFunction(leaves, 0.4)));
                     //	System.out.println("SUb: "+aG.getRootNode());
-                    OldRestrictions.mayBeFuncFuncOrOH(aG, gr, false, parametersManager);
+                    Restrictions.mayBeFuncFuncOrOH(aG, gr, false, parametersManager);
                     dim = dim + 1;
                 }
             }
@@ -115,7 +115,7 @@ public class MoleculesFactory {
             while (next == true) {
                 if (leaves.size() > 0) {
                     FunctionalGroupNode temporal = leaves.get(0);
-                    OldRestrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
+                    Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
                     leaves.remove(0);
 
                     //System.out.println("Valencia hojas: "+(parametersManager.getValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));

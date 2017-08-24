@@ -119,6 +119,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("ks: "+ks);
         double fitness = ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
         solvent.setObjectiveFunction(fitness);
+//        System.out.println("evalfit: " + fitness);
         return fitness;
     }
 
@@ -195,16 +196,5 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         }
         return v;
     }
-/**
- *
- *
- *
- public void calculateObjFunction(ArrayList<Molecules> molecules, ArrayList<Molecules> moleculesUser){
- for(int i=0; i<=molecules.size();i++){
- molecules.get(i).setObjectiveFunction(objFunction(moleculesUser.get(0), moleculesUser.get(1), molecules.get(i)));
- }
- }
- */
-
 
 }

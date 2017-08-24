@@ -1,12 +1,11 @@
-package co.unal.camd.ga.haea.old;
+package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.ga.haea.MoleculeOperations;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
 import java.util.ArrayList;
 
-public class OldRestrictions {
+public class Restrictions {
 
     private static int counter;
     private static int typeFunctional;

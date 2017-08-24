@@ -20,6 +20,7 @@ import unalcol.search.population.Population;
 import unalcol.search.population.PopulationDescriptors;
 import unalcol.search.population.PopulationSearch;
 import unalcol.search.selection.Elitism;
+import unalcol.search.solution.Solution;
 import unalcol.search.space.Space;
 import unalcol.tracer.ConsoleTracer;
 import unalcol.tracer.Tracer;
@@ -47,10 +48,10 @@ public class MoleculeEvolution {
         moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), parametersManager);
         goal = new OptimizationGoal<>(moleculeFitness, false); // maximizing, remove the parameter false if minimizing
 
-        operators = buildOperators();
+        buildOperators();
     }
 
-    public HaeaOperators buildOperators() {
+    public void buildOperators() {
         MoleculeMutation mutation = new MoleculeMutation(parametersManager);
         Cross xover = new Cross(parametersManager);
         CutAndClose cutAndClose = new CutAndClose(parametersManager);
@@ -63,7 +64,8 @@ public class MoleculeEvolution {
                 , cutAndReplace
                 , changeByCH2
         );
-        return operators;
+
+        this.operators = operators;
     }
 
     public Population evolve(int parentSize, int maxIterations) {
@@ -89,16 +91,17 @@ public class MoleculeEvolution {
         Tracer.addTracer(search, tracer); // Uncomment if you want to trace the hill-climbing algorithm
 
         // Apply the search method
-        Population<Molecule> solutionPopulation = search.init(space, goal);
-//        Solution<Molecule> solution = search.solve(space, goal);
+//        Population<Molecule> solutionPopulation = search.init(space, goal);
+        Solution<Molecule> solution = search.solve(space, goal);
 
         System.out.println("SIZE");
-        System.out.println(solutionPopulation.size());
+//        System.out.println(solutionPopulation.size());
 
         System.out.println("FITNESS");
-        Double fitness = moleculeFitness.apply(solutionPopulation.get(0).object());
+        Double fitness = solution.object().getObjectiveFuntion();
+//        Double fitness = moleculeFitness.apply(solutionPopulation.get(0).object());
         System.out.println(fitness);
-        return solutionPopulation;
+        return null;
     }
 
 

@@ -1,11 +1,8 @@
-/**
- *
- */
 package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.ga.haea.old.OldMoleculeFitness;
+import co.unal.camd.ga.haea.MoleculeFitness;
 import co.unal.camd.properties.estimation.BoilingTemp;
 import co.unal.camd.properties.estimation.Density;
 import co.unal.camd.properties.estimation.DielectricConstant;
@@ -83,6 +80,8 @@ public class CamdRunner extends JFrame {
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
         Population<Molecule> population = moleculeEvolution.evolve(parentSize, maxIterations);
 
+        if (1 < 2)
+            return;
 //        double best = population.statistics().best;
 //        double avg = population.statistics().avg;
 //        double worst = population.statistics().worst;
@@ -107,7 +106,7 @@ public class CamdRunner extends JFrame {
             Density D = new Density(solvent, temperature, parametersManager);
             MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, parametersManager);
             DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, parametersManager);
-            OldMoleculeFitness KS = new OldMoleculeFitness(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager);
+            MoleculeFitness KS = new MoleculeFitness(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager);
 
             // TODO Auto-generated method stub
             double ge = GE.getMethodResult();
@@ -115,7 +114,7 @@ public class CamdRunner extends JFrame {
             double den = D.getMethodResult();
             double mt = MT.getMethodResult();
             double dc = DC.getDielectricConstant();
-            double ks = KS.getKS(solvent);
+            double ks = KS.apply(solvent);
 
             System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
             System.out.println("Ge: " + ge);
@@ -129,7 +128,6 @@ public class CamdRunner extends JFrame {
             // TODO IS THIS NECESARY?
             tab.addTab("F " + fitness, null, jTree, "molecule number");
         }
-
     }
 
     public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {

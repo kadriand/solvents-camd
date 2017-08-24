@@ -1,7 +1,6 @@
 package co.unal.camd.ga.haea;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
-import co.unal.camd.ga.haea.old.MoleculesFactory;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.space.Space;
 
@@ -16,8 +15,8 @@ public class MoleculeSpace extends Space<Molecule> {
     }
 
     @Override
-    public boolean feasible(Molecule molecule) {
-        return molecule.getTotalGroups() > maxGroups;
+//    public boolean feasible(Molecule molecule) {
+        return molecule.getTotalGroups()<=maxGroups;
     }
 
     @Override
@@ -26,8 +25,9 @@ public class MoleculeSpace extends Space<Molecule> {
     }
 
     @Override
-    public Molecule repair(Molecule x) {
-        return null;
+    public Molecule repair(Molecule molecule) {
+//        TODO repair
+        return molecule;
     }
 
     @Override
