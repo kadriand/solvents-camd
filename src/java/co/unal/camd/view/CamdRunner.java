@@ -2,16 +2,11 @@ package co.unal.camd.view;
 
 import co.unal.camd.control.parameters.ContributionParametersManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.ga.haea.MoleculeFitness;
-import co.unal.camd.properties.estimation.BoilingTemp;
-import co.unal.camd.properties.estimation.Density;
-import co.unal.camd.properties.estimation.DielectricConstant;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.GibbsEnergy;
 import co.unal.camd.properties.estimation.GroupArray;
-import co.unal.camd.properties.estimation.MeltingTemp;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.population.Population;
+import unalcol.search.solution.Solution;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -78,50 +73,48 @@ public class CamdRunner extends JFrame {
 
 
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
+        System.out.println("parent size" + parentSize);
+        System.out.println(" max iter :" + maxIterations);
         Population<Molecule> population = moleculeEvolution.evolve(parentSize, maxIterations);
 
-        if (1 < 2)
-            return;
-//        double best = population.statistics().best;
-//        double avg = population.statistics().avg;
-//        double worst = population.statistics().worst;
-//        System.out.println("best: " + best);
-//        System.out.println("avg: " + avg);
-//        System.out.println("worst: " + worst);
+        //        double best = population.statistics().best;
+        //        double avg = population.statistics().avg;
+        //        double worst = population.statistics().worst;
+        //        System.out.println("best: " + best);
+        //        System.out.println("avg: " + avg);
+        //        System.out.println("worst: " + worst);
+
+
+        System.out.println("BEST FITNESS");
+        Solution<Molecule> bestSolution = moleculeEvolution.getBestSolution();
+        Double bestFitness = bestSolution.object().getFitness();
+        System.out.println(bestFitness);
 
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = population.get(i).object();
+
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
             String name = parametersManager.getName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
-//            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
-
-            int fitness = (int) population.get(i).object().getObjectiveFuntion();
-
-            ArrayList<Integer> secOrderCodes = solvent.get2OrderGroupArray(parametersManager);
-            GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes, parametersManager);
-            BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes, parametersManager);
-            Density D = new Density(solvent, temperature, parametersManager);
-            MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, parametersManager);
-            DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, parametersManager);
-            MoleculeFitness KS = new MoleculeFitness(temperature, moleculesUser.get(0), moleculesUser.get(1), weight, constraintsLimits, parametersManager);
+            //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
 
             // TODO Auto-generated method stub
-            double ge = GE.getMethodResult();
-            double bt = BT.getMethodResult();
-            double den = D.getMethodResult();
-            double mt = MT.getMethodResult();
-            double dc = DC.getDielectricConstant();
-            double ks = KS.apply(solvent);
+            double ge = solvent.getGe();
+            double bt = solvent.getBt();
+            double den = solvent.getD();
+            double mt = solvent.getMt();
+            //            double dc = solvent.getDc();
+            double ks = solvent.getKs();
+            double fitness = solvent.getFitness();
 
             System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
             System.out.println("Ge: " + ge);
             System.out.println("BT: " + bt);
             System.out.println("Den: " + den);
             System.out.println("MT: " + mt);
-            System.out.println("DC: " + dc);
+            //            System.out.println("DC: " + dc);
             System.out.println("KS: " + ks);
             System.out.println("//////////////////////////////////////////////////////////////");
 

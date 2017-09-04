@@ -19,7 +19,7 @@ import unalcol.search.Goal;
 import unalcol.search.population.Population;
 import unalcol.search.population.PopulationDescriptors;
 import unalcol.search.population.PopulationSearch;
-import unalcol.search.selection.Elitism;
+import unalcol.search.selection.Uniform;
 import unalcol.search.solution.Solution;
 import unalcol.search.space.Space;
 import unalcol.tracer.ConsoleTracer;
@@ -34,6 +34,7 @@ public class MoleculeEvolution {
     private Space<Molecule> space;
 
     private OptimizationFunction<Molecule> moleculeFitness;
+    private Solution<Molecule> bestSolution;
 
     public MoleculeEvolution(CamdRunner camdRunner) {
         this.parametersManager = camdRunner.getParametersManager();
@@ -46,6 +47,7 @@ public class MoleculeEvolution {
         // Optimization Function
 
         moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), parametersManager);
+
         goal = new OptimizationGoal<>(moleculeFitness, false); // maximizing, remove the parameter false if minimizing
 
         buildOperators();
@@ -70,8 +72,8 @@ public class MoleculeEvolution {
 
     public Population evolve(int parentSize, int maxIterations) {
 
-        Elitism<Molecule> elitism = new Elitism(1.0, 0.0);
-
+        //        Elitism<Molecule> elitism = new Elitism(1.0, 0.0);
+        Uniform<Molecule> elitism = new Uniform<>();
         // Search method
         int POPSIZE = parentSize;
         int MAXITERS = maxIterations;
@@ -91,21 +93,17 @@ public class MoleculeEvolution {
         Tracer.addTracer(search, tracer); // Uncomment if you want to trace the hill-climbing algorithm
 
         // Apply the search method
-//        Population<Molecule> solutionPopulation = search.init(space, goal);
-        Solution<Molecule> solution = search.solve(space, goal);
+        Population<Molecule> solutionPopulation = search.init(space, goal);
+        solutionPopulation = search.apply(solutionPopulation, space);
+        //        Solution<Molecule> solution = search.solve(space, goal);
 
-        System.out.println("SIZE");
-//        System.out.println(solutionPopulation.size());
+        bestSolution = search.pick(solutionPopulation);
 
-        System.out.println("FITNESS");
-        Double fitness = solution.object().getObjectiveFuntion();
-//        Double fitness = moleculeFitness.apply(solutionPopulation.get(0).object());
-        System.out.println(fitness);
-        return null;
+        return solutionPopulation;
     }
 
-
-    public OptimizationFunction<Molecule> getMoleculeFitness() {
-        return moleculeFitness;
+    public Solution<Molecule> getBestSolution() {
+        return bestSolution;
     }
+
 }

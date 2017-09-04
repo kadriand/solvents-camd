@@ -19,7 +19,15 @@ public class Molecule {
     private int size;
 
     private double x; //composici�n
-    private double objectiveFunction;
+    private double fitness;
+
+    private double ge;
+    private double bt;
+    private double d;
+    private double mt;
+    private double sl;
+    private double ks;
+
     private Vector<TreeModelListener> treeModelListeners =
             new Vector<TreeModelListener>();
 
@@ -32,7 +40,7 @@ public class Molecule {
         genotype = aMolecule.genotype.clone();
         size = aMolecule.size;
         x = aMolecule.x;
-        objectiveFunction = aMolecule.objectiveFunction;
+        fitness = aMolecule.fitness;
     }
 
     public Molecule(FunctionalGroupNode root) {
@@ -103,12 +111,12 @@ public class Molecule {
         return getArray().get(i);
     }
 
-    public void setObjectiveFunction(double aValue) {
-        objectiveFunction = aValue;
+    public void setFitness(double aValue) {
+        fitness = aValue;
     }
 
-    public double getObjectiveFuntion() {
-        return objectiveFunction;
+    public double getFitness() {
+        return fitness;
     }
 
     private ArrayList<FunctionalGroupNode> getArray() {
@@ -283,4 +291,59 @@ public class Molecule {
      Gc.getSecondOrderGroupCase(4);
      }
      */
-}	
+    public double getGe() {
+        return ge;
+    }
+
+    public Molecule setGe(double ge) {
+        this.ge = ge;
+        return this;
+    }
+
+    public double getBt() {
+        return bt;
+    }
+
+    public Molecule setBt(double bt) {
+        this.bt = bt;
+        return this;
+    }
+
+    public double getD() {
+        return d;
+    }
+
+    public Molecule setD(double d) {
+        this.d = d;
+        return this;
+    }
+
+    public double getMt() {
+        return mt;
+    }
+
+    public Molecule setMt(double mt) {
+        this.mt = mt;
+        return this;
+    }
+
+    public double getSl() {
+        return sl;
+    }
+
+    public Molecule setSl(double sl) {
+        this.sl = sl;
+        return this;
+    }
+
+    public double getKs() {
+        return ks;
+    }
+
+    public Molecule setKs(double ks) {
+        this.ks = ks;
+        return this;
+    }
+
+
+}

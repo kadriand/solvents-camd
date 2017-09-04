@@ -15,7 +15,7 @@ public class MoleculeSpace extends Space<Molecule> {
     }
 
     @Override
-//    public boolean feasible(Molecule molecule) {
+    public boolean feasible(Molecule molecule) {
         return molecule.getTotalGroups()<=maxGroups;
     }
 
