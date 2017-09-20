@@ -48,12 +48,7 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-.idea/CAMD-nuHAEA.iml
-.idea/inspectionProfiles/
-.idea/kotlinc.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
+.idea/**
 CAMD-nuHAEA.iml
 bin/
 classes/
