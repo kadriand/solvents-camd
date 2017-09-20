@@ -1,9 +1,10 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.Molecule;
 import co.unal.camd.view.CamdRunner;
+import lombok.Getter;
 import unalcol.descriptors.Descriptors;
 import unalcol.descriptors.WriteDescriptors;
 import unalcol.evolution.EAFactory;
@@ -28,24 +29,25 @@ import unalcol.types.real.array.DoubleArrayPlainWrite;
 
 public class MoleculeEvolution {
 
-    private ContributionParametersManager parametersManager;
+    private ContributionGroupsManager parametersManager;
     private HaeaOperators operators;
     private Goal<Molecule, Double> goal;
     private Space<Molecule> space;
 
     private OptimizationFunction<Molecule> moleculeFitness;
+
+    @Getter
     private Solution<Molecule> bestSolution;
 
     public MoleculeEvolution(CamdRunner camdRunner) {
-        this.parametersManager = camdRunner.getParametersManager();
+        this.parametersManager = camdRunner.getContributionGroups();
         this.space = new MoleculeSpace(camdRunner.getMaxGroups(), parametersManager);
 
-        // TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry parametersManager
+        // TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry contributionGroups
         GroupArray solute = camdRunner.getMoleculesUser().get(0);
         GroupArray solvent = camdRunner.getMoleculesUser().get(1);
 
         // Optimization Function
-
         moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), parametersManager);
 
         goal = new OptimizationGoal<>(moleculeFitness, false); // maximizing, remove the parameter false if minimizing
@@ -60,17 +62,18 @@ public class MoleculeEvolution {
         CutAndReplace cutAndReplace = new CutAndReplace(parametersManager);
         ChangeByCH2 changeByCH2 = new ChangeByCH2(parametersManager);
 
-        HaeaOperators<Molecule> operators = new SimpleHaeaOperators<>(mutation
-                , xover
-                , cutAndClose
-                , cutAndReplace
-                , changeByCH2
+        HaeaOperators<Molecule> operators = new SimpleHaeaOperators<>(
+                mutation,
+                xover,
+                cutAndClose,
+                cutAndReplace,
+                changeByCH2
         );
 
         this.operators = operators;
     }
 
-    public Population evolve(int parentSize, int maxIterations) {
+    public Population<Molecule> evolve(int parentSize, int maxIterations) {
 
         //        Elitism<Molecule> elitism = new Elitism(1.0, 0.0);
         Uniform<Molecule> elitism = new Uniform<>();
@@ -95,15 +98,9 @@ public class MoleculeEvolution {
         // Apply the search method
         Population<Molecule> solutionPopulation = search.init(space, goal);
         solutionPopulation = search.apply(solutionPopulation, space);
-        //        Solution<Molecule> solution = search.solve(space, goal);
 
         bestSolution = search.pick(solutionPopulation);
 
         return solutionPopulation;
     }
-
-    public Solution<Molecule> getBestSolution() {
-        return bestSolution;
-    }
-
 }

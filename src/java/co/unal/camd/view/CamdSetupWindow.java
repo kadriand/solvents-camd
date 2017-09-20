@@ -3,7 +3,7 @@
  */
 package co.unal.camd.view;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
@@ -29,9 +29,8 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
     public CamdSetupWindow() {
         super();
         this.setResizable(true);
-
         // Unifac parameters manager
-        parametersManager = new ContributionParametersManager();
+        contributionGroups = new ContributionGroupsManager();
         initialize();
     }
 
@@ -91,7 +90,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
 
     public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = parametersManager.getName(molec.getGroupAt(i).getRootNode());
+            String n = contributionGroups.getName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);
@@ -100,25 +99,13 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
         return node;
     }
 
-    public ContributionParametersManager getGC() {
-        return parametersManager;
-    }
-
-    public void addMoleculesUser(GroupArray aMolecUser) {
-        moleculesUser.add(aMolecUser);
+    public void addMoleculesUser(GroupArray userGroupArray) {
+        moleculesUser.add(userGroupArray);
     }
 
     public String getMoleculesUser(int i) {
         String show = moleculesUser.get(i).toString();
         return show;
-    }
-
-    public ArrayList<GroupArray> getMolecUser() {
-        return moleculesUser;
-    }
-
-    public ContributionParametersManager getGenChemistry() {
-        return parametersManager;
     }
 
     public void actionPerformed(ActionEvent arg0) {

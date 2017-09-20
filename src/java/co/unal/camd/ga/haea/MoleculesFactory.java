@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.Molecule;
 
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class MoleculesFactory {
     protected int maxGroupsSize;
-    protected ContributionParametersManager parametersManager;
+    protected ContributionGroupsManager parametersManager;
 
-    public MoleculesFactory(int maxGroupsSize, ContributionParametersManager contributionParametersManager) {
+    public MoleculesFactory(int maxGroupsSize, ContributionGroupsManager contributionParametersManager) {
         this.maxGroupsSize = maxGroupsSize;
         this.parametersManager = contributionParametersManager;
     }
@@ -30,10 +30,10 @@ public class MoleculesFactory {
         for (int i = 0; i < random(min) + 1; i++) {
             refCode = findNewRefCode(1, parametersManager, opt);
             functionalGroupNodes.add(new FunctionalGroupNode(refCode));
-            //System.out.println("Se agrego: "+parametersManager.getName(auxiliar.get(i).getRootNode())+" "+parametersManager.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
+            //System.out.println("Se agrego: "+contributionGroups.getName(auxiliar.get(i).getRootNode())+" "+contributionGroups.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
             if (probabilityFunction(functionalGroupNodes, aProba) == true) {
                 parametersManager.getCodeOfRowBNameOrRefCode(refCode);
-//                opt=parametersManager.getCodeOfRow() <= 1;
+                //                opt=contributionGroups.getCodeOfRow() <= 1;
                 if (parametersManager.getCodeOfRow() > 1) {
                     opt = false;
                 } else {
@@ -47,7 +47,7 @@ public class MoleculesFactory {
         return moleculeFromGroups(functionalGroupNodes, dim);
     }
 
-    private static int findNewRefCode(int valence, ContributionParametersManager aGC, boolean functional) {
+    private static int findNewRefCode(int valence, ContributionGroupsManager aGC, boolean functional) {
         int codeOfRow = 0;
         int refCode = 0;
         if (functional) {
@@ -83,7 +83,7 @@ public class MoleculesFactory {
     public Molecule moleculeFromGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
         FunctionalGroupNode gr;
         gr = createRandomGroups(leaves.size() + 1, dim, leaves);
-        //System.out.println("GroupNew: "+parametersManager.getName(gr.getRootNode()));
+        //System.out.println("GroupNew: "+contributionGroups.getName(gr.getRootNode()));
         boolean next = false;
 
         if (leaves.size() <= parametersManager.getValence(gr.getRootNode())) { // if is the last group
@@ -110,7 +110,7 @@ public class MoleculesFactory {
             leaves.add(gr);
             dim = dim + 1;
         } else if (leaves.size() > parametersManager.getValence(gr.getRootNode())) {
-            //System.out.println("valence New"+parametersManager.getValence(gr.getRootNode()));
+            //System.out.println("valence New"+contributionGroups.getValence(gr.getRootNode()));
             next = true;
             while (next == true) {
                 if (leaves.size() > 0) {
@@ -118,7 +118,7 @@ public class MoleculesFactory {
                     Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
                     leaves.remove(0);
 
-                    //System.out.println("Valencia hojas: "+(parametersManager.getValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));
+                    //System.out.println("Valencia hojas: "+(contributionGroups.getValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));
                     if (parametersManager.getValence(gr.getRootNode()) - 1 == gr.getGroupsCount()) {
                         next = false; //
                     }
@@ -136,7 +136,7 @@ public class MoleculesFactory {
                 moleculeFromGroups(leaves, dim);
             }
         }
-        //if(leaves.size()==1 && parametersManager.getValence(leaves.get(0))-leaves.get(0).getGroupsCount()==0){
+        //if(leaves.size()==1 && contributionGroups.getValence(leaves.get(0))-leaves.get(0).getGroupsCount()==0){
         //return new Molecules(leaves.get(0));
         //}
         return new Molecule(leaves.get(0));

@@ -1,31 +1,41 @@
 package co.unal.camd.view;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.Molecule;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
 import unalcol.search.population.Population;
 import unalcol.search.solution.Solution;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Kevin Adrián Rodríguez Ruiz
  */
+@Data
 public class CamdRunner extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    JTabbedPane tab;
-    int parentSize;
-    int maxGroups;
-    ContributionParametersManager parametersManager;
-    protected double temperature;
-    int maxIterations;
 
-    ArrayList<GroupArray> moleculesUser;
+    @Setter(AccessLevel.NONE)
+    protected JTabbedPane tab;
+    protected int parentSize;
+    protected int maxGroups;
+    protected ContributionGroupsManager contributionGroups;
+    protected double temperature;
+    protected int maxIterations;
+    protected ArrayList<GroupArray> moleculesUser;
+
     private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
     private double[][] constraintsLimits = new double[3][5];
     private ArrayList<Molecule> molecules;
@@ -36,15 +46,15 @@ public class CamdRunner extends JFrame {
      *
      * @return Ruta absoluta del archivo seleccionado
      */
-    public String readRootFile() {
-        JFileChooser fc = new JFileChooser("./data/Molecules");
-        fc.setDialogTitle("Seleccione una molécula");
-        int resultado = fc.showOpenDialog(this);
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            String selected = fc.getSelectedFile().getAbsolutePath();
-            return selected;
-        }
-        return null;
+    public String selectFile() {
+        JFileChooser fileChooser = new JFileChooser("./data/Molecules");
+        fileChooser.setDialogTitle("Seleccione una molécula");
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result != JFileChooser.APPROVE_OPTION)
+            return null;
+        String selected = fileChooser.getSelectedFile().getAbsolutePath();
+        return selected;
     }
 
     public void designSuitableMolecules() {
@@ -84,18 +94,18 @@ public class CamdRunner extends JFrame {
         //        System.out.println("avg: " + avg);
         //        System.out.println("worst: " + worst);
 
-
         System.out.println("BEST FITNESS");
         Solution<Molecule> bestSolution = moleculeEvolution.getBestSolution();
         Double bestFitness = bestSolution.object().getFitness();
         System.out.println(bestFitness);
 
+        List<Solution<Molecule>> sortedSolution = Arrays.asList(population.object()).stream().sorted(Comparator.comparingDouble(o -> o.object().getFitness())).collect(Collectors.toList());
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = population.get(i).object();
 
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = parametersManager.getName(functionalGroupNode.getRootNode());
+            String name = contributionGroups.getName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
             //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
@@ -125,52 +135,12 @@ public class CamdRunner extends JFrame {
 
     public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = parametersManager.getName(molec.getGroupAt(i).getRootNode());
+            String n = contributionGroups.getName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);
             node.add(aNode);
         }
         return node;
-    }
-
-    public double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public ArrayList<GroupArray> getMoleculesUser() {
-        return moleculesUser;
-    }
-
-    public double[] getWeight() {
-        return weight;
-    }
-
-    public double[][] getConstraintsLimits() {
-        return constraintsLimits;
-    }
-
-    public ArrayList<Molecule> getMolecules() {
-        return molecules;
-    }
-
-    public ContributionParametersManager getParametersManager() {
-        return parametersManager;
-    }
-
-    public int getMaxGroups() {
-        return maxGroups;
-    }
-
-    public int getMaxIterations() {
-        return maxIterations;
-    }
-
-    public int getParentSize() {
-        return parentSize;
     }
 }

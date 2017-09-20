@@ -1,6 +1,6 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 public class GroupArray {
     int[] groups;
@@ -56,7 +56,7 @@ public class GroupArray {
     }
 
     ////q///
-    public double getq(ContributionParametersManager aGC) {
+    public double getq(ContributionGroupsManager aGC) {
         double qi = 0;
         for (int i = 0; i < groups.length; i++) {
             qi = qi + aGC.getQ(groups[i]);
@@ -66,7 +66,7 @@ public class GroupArray {
     }
 
     ////////r///////
-    public double getr(ContributionParametersManager aGC) {
+    public double getr(ContributionGroupsManager aGC) {
         double ri = 0;
         for (int i = 0; i < groups.length; i++) {
             ri = ri + aGC.getR(groups[i]);
@@ -83,7 +83,7 @@ public class GroupArray {
         composition = _D;
     }
 
-    public String toString(ContributionParametersManager aGC) {
+    public String toString(ContributionGroupsManager aGC) {
         //optimize();
         String show = "";
         for (int i = 0; i < groups.length; i++) {

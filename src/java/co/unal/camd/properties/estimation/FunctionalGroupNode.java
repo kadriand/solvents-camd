@@ -1,21 +1,23 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
+import lombok.Data;
 
 import java.util.Vector;
 
+@Data
 public class FunctionalGroupNode {
 
     private int rootNode; //identification of each group by refCode
     private Vector<FunctionalGroupNode> subGroups;
-    //private GenotypeChemistry parametersManager;
+    //    private ContributionParametersManager contributionGroups;
 
-    public FunctionalGroupNode(FunctionalGroupNode aFunctionalGroupNode) {
-        rootNode = aFunctionalGroupNode.getRootNode();
-        subGroups = new Vector<FunctionalGroupNode>();
-        int n = aFunctionalGroupNode.getGroupsCount();
+    public FunctionalGroupNode(FunctionalGroupNode functionalGroupNode) {
+        rootNode = functionalGroupNode.getRootNode();
+        subGroups = new Vector<>();
+        int n = functionalGroupNode.getGroupsCount();
         for (int i = 0; i < n; i++) {
-            subGroups.add(aFunctionalGroupNode.subGroups.get(i).clone());
+            subGroups.add(functionalGroupNode.subGroups.get(i).clone());
         }
     }
 
@@ -25,18 +27,17 @@ public class FunctionalGroupNode {
 
     public FunctionalGroupNode(int refCode) {
         rootNode = refCode;
-        subGroups = new Vector<FunctionalGroupNode>();
+        subGroups = new Vector<>();
     }
 
-    public FunctionalGroupNode(String name, ContributionParametersManager aGenotypeChemistry) {
-        rootNode = aGenotypeChemistry.getRefCode(name);
-        subGroups = new Vector<FunctionalGroupNode>();
+    public FunctionalGroupNode(String name, ContributionGroupsManager parametersManager) {
+        rootNode = parametersManager.getRefCode(name);
+        subGroups = new Vector<>();
     }
 
     /**
      * add a group to this group and count the valence to waranty the 0 valence and octete law in the molecule
      *
-     * @param G
      */
     public void addGroup(FunctionalGroupNode subG) {
         subGroups.addElement(subG);
@@ -87,21 +88,13 @@ public class FunctionalGroupNode {
         subGroups.removeElementAt(i);
     }
 
-    public int getRootNode() {
-        return rootNode;
-    }
-
-    public void setRootNode(int num) {
-        rootNode = num;
-    }
-
     public Vector<FunctionalGroupNode> getSubGroups() {
         return subGroups;
     }
 
     public String toString() {
         return Integer.toString(rootNode);
-        //return parametersManager.getName(rootNode);
+        //        return contributionGroups.getName(rootNode);
     }
 
 }

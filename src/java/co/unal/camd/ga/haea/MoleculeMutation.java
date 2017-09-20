@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_1_1;
@@ -9,9 +9,9 @@ import unalcol.search.variation.Variation_1_1;
  */
 public class MoleculeMutation extends Variation_1_1<Molecule> {
 
-    private ContributionParametersManager parametersManager;
+    private ContributionGroupsManager parametersManager;
 
-    public MoleculeMutation(ContributionParametersManager parametersManager) {
+    public MoleculeMutation(ContributionGroupsManager parametersManager) {
         this.parametersManager = parametersManager;
     }
 

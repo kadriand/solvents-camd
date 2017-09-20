@@ -1,13 +1,13 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 import java.util.ArrayList;
 
 public class DielectricConstant {
 
     private double sum = 0;
-    private ContributionParametersManager aGC;
+    private ContributionGroupsManager aGC;
     private GroupArray aMolecule;
 
     private double temperature;
@@ -32,7 +32,7 @@ public class DielectricConstant {
     private boolean isConditionG2;
 
 
-    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature, ContributionParametersManager aGC) {
+    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature, ContributionGroupsManager aGC) {
         this.aGC = aGC;
         temperature = Temperature;
         secondOrderCode = secOrder;

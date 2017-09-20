@@ -1,6 +1,6 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 import java.util.ArrayList;
 
@@ -10,10 +10,10 @@ public class SolventLoss {
     private Methods aMethods;
     private double temp;
     private ArrayList<GroupArray> solventUandD;
-    private ContributionParametersManager aGC;
+    private ContributionGroupsManager aGC;
 
     ////////////////////////////////////////Solvent loss/////////////////////////////////////////////////////////
-    public SolventLoss(double _temp, ContributionParametersManager _aGC, ArrayList<GroupArray> solventObjectAndSolventOfUser) {
+    public SolventLoss(double _temp, ContributionGroupsManager _aGC, ArrayList<GroupArray> solventObjectAndSolventOfUser) {
         solventUandD = new ArrayList<GroupArray>(solventObjectAndSolventOfUser);
         temp = _temp;
         aGC = _aGC;

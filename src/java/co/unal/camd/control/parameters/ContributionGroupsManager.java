@@ -1,16 +1,19 @@
 package co.unal.camd.control.parameters;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 
 
 /**
  * Finds the parameters used for the computing of chemical properties
  */
-public class ContributionParametersManager {
+public class ContributionGroupsManager {
 
-    private UnifacParameters unifacParameters;
     private String[][][] allGroups;
-    private String[][][] Paramij;
+    @Getter
+    private String[][][] ijParameters;
+    @Getter
     private String[][][] secondOrderGroups;
     private String[][] probabilities;
     private int codeOfRow;
@@ -19,17 +22,17 @@ public class ContributionParametersManager {
     /**
      * Manager of the parameters used by the unifac based methods
      */
-    public ContributionParametersManager() {
+    public ContributionGroupsManager() {
         allGroups = new String[8][50][50];
-        unifacParameters = new UnifacParameters();
+        UnifacParameters unifacParameters = new UnifacParameters();
         unifacParameters.loadUnifac();
         unifacParameters.loadInfoGroups();
         unifacParameters.loadSecondOrderParameters();
         unifacParameters.loadProbabilities();
-        Paramij = unifacParameters.getParamij();
+        ijParameters = unifacParameters.getIjParams();
         allGroups = unifacParameters.getAllGroups();
         secondOrderGroups = unifacParameters.getSecondOrderParameters();
-        probabilities = unifacParameters.getProbabilities();
+        probabilities = unifacParameters.getMainGroupProbabilities();
     }
 
     /**
@@ -43,37 +46,30 @@ public class ContributionParametersManager {
      * }
      */
 
-    public String[][][] getParamij() {
-        return Paramij;
-    }
-
-    public String[][][] getSecondOrderParam() {
-        return secondOrderGroups;
-    }
-
     private void getValenceAndCodeOfRowByName(String aName) {
-        for (int j = 0; j <= 6; j++) {
+        for (int j = 0; j <= 6; j++)
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
-                if (aName == allGroups[j][i][2]) {
-                    codeOfRow = i;
-                    valence = j + 1;////////////revisar
-                }
+                if (aName != allGroups[j][i][2])
+                    continue;
+                codeOfRow = i;
+                valence = j + 1;
+                //                System.out.println("ocurrency for " + aName);
+                return;
             }
-        }
     }
 
     private void getValenceAndCodeOfRowByRefCode(int refCode) {
-        int a = (int) (Double.parseDouble(allGroups[1][1][3]));
-        for (int j = 0; j <= 6; j++) {
+        int a;
+        for (int j = 0; j <= 6; j++)
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
                 a = (int) (Double.parseDouble(allGroups[j][i][3]));
-                if (refCode == a) {
-                    valence = j + 1;
-                    codeOfRow = i;
-                }
+                if (refCode != a)
+                    continue;
+                valence = j + 1;
+                codeOfRow = i;
+                //                System.out.println("ocurrency for " + a);
+                return;
             }
-
-        }
     }
 
     public void getCodeOfRowBNameOrRefCode(Object toSearch) {
@@ -256,7 +252,6 @@ public class ContributionParametersManager {
     }
 
     public int getTotalNumberOfGroupOfValence(int valence) {
-
         return (int) (Double.parseDouble(allGroups[valence - 1][0][0]));
     }
 
@@ -309,11 +304,4 @@ public class ContributionParametersManager {
         }
         return caseNum;
     }
-    /**
-     public static void main(String[] args) {
-     // TODO Auto-generated method stub
-     GenotypeChemistry Gc= new GenotypeChemistry();
-     Gc.getSecondOrderGroupCase(4);
-     }
-     */
 }

@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
@@ -8,9 +8,9 @@ import unalcol.search.variation.Variation_2_2;
 
 public class Cross extends Variation_2_2<Molecule> {
 
-    private ContributionParametersManager parametersManager;
+    private ContributionGroupsManager parametersManager;
 
-    public Cross(ContributionParametersManager parametersManager) {
+    public Cross(ContributionGroupsManager parametersManager) {
         this.parametersManager = parametersManager;
     }
 

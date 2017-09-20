@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_1_1;
@@ -9,9 +9,9 @@ import static co.unal.camd.properties.estimation.GeneticOperator.searchAndReplac
 
 public class CutAndClose extends Variation_1_1<Molecule> {
 
-    private ContributionParametersManager parametersManager;
+    private ContributionGroupsManager parametersManager;
 
-    public CutAndClose(ContributionParametersManager parametersManager) {
+    public CutAndClose(ContributionGroupsManager parametersManager) {
         this.parametersManager = parametersManager;
     }
 

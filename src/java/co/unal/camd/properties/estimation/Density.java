@@ -1,17 +1,17 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 public class Density {
 
 
 //////////////////////////////////Density//////////////////////////////////////////
 
-    private ContributionParametersManager aGC;
+    private ContributionGroupsManager aGC;
     private Molecule aMolecule;
     private double temperature;
 
-    public Density(Molecule solvent, double temp, ContributionParametersManager aGC) {
+    public Density(Molecule solvent, double temp, ContributionGroupsManager aGC) {
         this.aGC = aGC;
         temperature = temp;
         aMolecule = solvent;

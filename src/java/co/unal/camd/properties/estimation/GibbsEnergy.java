@@ -1,6 +1,6 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,11 @@ public class GibbsEnergy {
 /////////////////////////////G/////////////////////////////////////////////
 
     private double sum;
-    private ContributionParametersManager aGC;
+    private ContributionGroupsManager aGC;
     private GroupArray aMolecule;
     private ArrayList<Integer> secondOrderCode;
 
-    public GibbsEnergy(Molecule solvent, ArrayList<Integer> SOG, ContributionParametersManager aGC) {
+    public GibbsEnergy(Molecule solvent, ArrayList<Integer> SOG, ContributionGroupsManager aGC) {
         this.aGC = aGC;
         secondOrderCode = SOG;
         aMolecule = solvent.getGroupArray();

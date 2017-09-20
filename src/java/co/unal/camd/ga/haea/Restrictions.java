@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Restrictions {
      *
      * @return
      */
-    public static boolean canBeFunctional(ArrayList<FunctionalGroupNode> root, ContributionParametersManager aGC) {
+    public static boolean canBeFunctional(ArrayList<FunctionalGroupNode> root, ContributionGroupsManager aGC) {
         boolean answer = true;
         typeFunctional = 0;
         // if the code Row of the group is grater than 1 the group is functional, so the counter increase in one.
@@ -33,7 +33,7 @@ public class Restrictions {
         return answer;
     }
 
-    public static void count(FunctionalGroupNode aFunctionalGroupNode, ContributionParametersManager aGC) {
+    public static void count(FunctionalGroupNode aFunctionalGroupNode, ContributionGroupsManager aGC) {
 
         for (int i = 0; i < aFunctionalGroupNode.getSubGroups().size(); i++) {
             FunctionalGroupNode n = aFunctionalGroupNode.getGroupAt(i);
@@ -55,7 +55,7 @@ public class Restrictions {
      * @param canBeChangeNewGr
      */
 
-    public static void mayBeFuncFuncOrOH(FunctionalGroupNode aG1, FunctionalGroupNode newGr, boolean canBeChangeNewGr, ContributionParametersManager aGC) {
+    public static void mayBeFuncFuncOrOH(FunctionalGroupNode aG1, FunctionalGroupNode newGr, boolean canBeChangeNewGr, ContributionGroupsManager aGC) {
         FunctionalGroupNode gr;
         FunctionalGroupNode gr2 = aG1;
         int aValence = 0;

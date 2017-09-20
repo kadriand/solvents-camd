@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.BoilingTemp;
 import co.unal.camd.properties.estimation.Density;
 import co.unal.camd.properties.estimation.GibbsEnergy;
@@ -21,7 +21,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
     private double temperature;
     private GroupArray solventUser;
     private GroupArray solute;
-    private ContributionParametersManager parametersManager;
+    private ContributionGroupsManager parametersManager;
     private double ab;
     private double pm;
     private static final double _D = 0.001;
@@ -32,7 +32,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
     private double[] unc;
     private double[] Po;
 
-    public MoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionParametersManager parametersManager) {
+    public MoleculeFitness(double temperature, GroupArray solute, GroupArray solventUser, double[] weight, double[][] limits, ContributionGroupsManager parametersManager) {
         super();
         this.solute = solute;
         this.solventUser = solventUser;
@@ -46,7 +46,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         b0.setComposition(_C);
         AB.add(a0);
         AB.add(b0);
-        allMethods.can_be_done = true;
+        allMethods.canBeDone = true;
         ab = allMethods.getMethodResult(AB, 0, temperature, parametersManager);
         //	System.out.println("1___"+ab);
 
@@ -58,8 +58,8 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         B = limits[0];
         Po = limits[1];
         unc = limits[2];
-        //       		System.out.println("5___"+PM.getMethodResult(solute,parametersManager));
-        //        		System.out.println("6___"+PM.getMethodResult(solventUser,parametersManager));
+        //       		System.out.println("5___"+PM.getMethodResult(solute,contributionGroups));
+        //        		System.out.println("6___"+PM.getMethodResult(solventUser,contributionGroups));
     }
 
 
@@ -92,7 +92,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         Density D = new Density(solvent, temperature, parametersManager);
         MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes, parametersManager);
         SolventLoss SL = new SolventLoss(temperature, parametersManager, SB);
-        //        DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, parametersManager);
+        //        DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature, contributionGroups);
 
         double ge = GE.getMethodResult();
         double bt = BT.getMethodResult();
@@ -155,16 +155,16 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solvent: "+AS.get(1).getMoleculeByRootGroup());
 
         //		UNIFAC aUNIFAC=(UNIFAC)allMethods;
-        allMethods.can_be_done = true;
+        allMethods.canBeDone = true;
         double as = allMethods.getMethodResult(AS, 0, temperature, parametersManager);
         double bs = allMethods.getMethodResult(BS, 0, temperature, parametersManager);
         ks = (ab * bs) / (as * as) * (pm);
 
-        //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,parametersManager));
-        //	System.out.println("3___"+allMethods.getMethodResult(AS,0,temperature,parametersManager));
+        //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,contributionGroups));
+        //	System.out.println("3___"+allMethods.getMethodResult(AS,0,temperature,contributionGroups));
 
-        if (!allMethods.can_be_done) {
-            allMethods.can_be_done = true;
+        if (!allMethods.canBeDone) {
+            allMethods.canBeDone = true;
             ks = -100000.0;
         }
 

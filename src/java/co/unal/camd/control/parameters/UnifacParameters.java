@@ -1,6 +1,7 @@
 package co.unal.camd.control.parameters;
 
 
+import lombok.Getter;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -20,25 +21,19 @@ public class UnifacParameters {
     /**
      * Unifac parameters file path in resources directory (/src/resources/)
      */
-    public static String _PARAMETERS_PATH = "/ParametrosUnifac.xls";
-
-    public static byte _SHEETS_SIZE;
-
+    private static String PARAMETERS_PATH = "/ParametrosUnifac.xls";
+    private byte SHEETS_SIZE;
     private HSSFWorkbook book;
 
-    private HSSFSheet[] sheets;
-
     //UNIFAC Interaction Parameters Matrix and variables
-    private String[][][] Paramij = new String[3][1000][1000];
-
+    @Getter
+    private String[][][] ijParams = new String[3][1000][1000];
+    @Getter
     private String[][][] allGroups = new String[8][50][50];
-
+    @Getter
     private String[][][] secondOrderParameters = new String[2][210][7];
-
-    private String[][] principalGroupProbabilities = new String[100][3];
-    private double GAMMA;
-
-    private double temperature;
+    @Getter
+    private String[][] mainGroupProbabilities = new String[100][3];
 
     /**
      * constructors for load the info
@@ -46,26 +41,27 @@ public class UnifacParameters {
     public UnifacParameters() {
         try {
             System.out.println("Loading UNIFAC parameters file");
-            POIFSFileSystem fs = new POIFSFileSystem(UnifacParameters.class.getResourceAsStream(_PARAMETERS_PATH));
+            POIFSFileSystem fs = new POIFSFileSystem(UnifacParameters.class.getResourceAsStream(PARAMETERS_PATH));
             book = new HSSFWorkbook(fs);
-            _SHEETS_SIZE = (byte) book.getNumberOfSheets();
+            SHEETS_SIZE = (byte) book.getNumberOfSheets();
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        this.sheets = new HSSFSheet[_SHEETS_SIZE];
+        //        this.sheets = new HSSFSheet[SHEETS_SIZE];
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public void procesar() {
-        for (byte i = 0; i < _SHEETS_SIZE; i++) {
-            sheets[i] = book.getSheetAt(i);
+        for (byte i = 0; i < SHEETS_SIZE; i++) {
+            HSSFSheet sheet = book.getSheetAt(i);
             System.out.println("Hoja: " + book.getSheetName(i));
-            Iterator iteratorFilas = sheets[i].rowIterator();
-            while (iteratorFilas.hasNext()) {
-                HSSFRow fila = (HSSFRow) iteratorFilas.next();
-                Iterator iteratorCeldas = fila.cellIterator();
-                while (iteratorCeldas.hasNext()) {
-                    HSSFCell celda = (HSSFCell) iteratorCeldas.next();
-                    System.out.print("\t" + celda.toString());
+            Iterator rowIterator = sheet.rowIterator();
+            while (rowIterator.hasNext()) {
+                HSSFRow fila = (HSSFRow) rowIterator.next();
+                Iterator cellIterator = fila.cellIterator();
+                while (cellIterator.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cellIterator.next();
+                    System.out.print("\t" + cell.toString());
                     // Imprime el contenido de la celda (valores o formulas)
                 }
                 System.out.println();
@@ -73,23 +69,28 @@ public class UnifacParameters {
         }
     }
 
-    ///////////////////////////////////////////////load UNIFAC///////////////////////////////////////////////////
+    /**
+     * Read of sheets:
+     * Parámetros interacción aij
+     * Parámetros bij
+     * Parámetros interacción cij
+     */
     public void loadUnifac() {
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
         for (byte i = 0; i < 3; i++) {
-            sheets[i] = book.getSheetAt(i);
-            //System.out.println("Hoja: " + book.getSheetName(i));
-            Iterator iteratorFilas = sheets[i].rowIterator();
+            HSSFSheet sheet = book.getSheetAt(i);
+            System.out.println("Hoja: " + book.getSheetName(i));
+            Iterator rowIterator = sheet.rowIterator();
             row = 0;
-            while (iteratorFilas.hasNext()) {
-                HSSFRow fila = (HSSFRow) iteratorFilas.next();
-                Iterator iteratorCeldas = fila.cellIterator();
+            while (rowIterator.hasNext()) {
+                HSSFRow fila = (HSSFRow) rowIterator.next();
+                Iterator cellIterator = fila.cellIterator();
                 col = 0;
-                while (iteratorCeldas.hasNext()) {
-                    HSSFCell celda = (HSSFCell) iteratorCeldas.next();
-                    Paramij[i][row][col] = celda.toString();
-                    //System.out.print("\t" + celda.toString());
+                while (cellIterator.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cellIterator.next();
+                    ijParams[i][row][col] = cell.toString();
+                    // System.out.print("\t" + celda.toString());
                     // Imprime el contenido de la celda (valores o formulas)
                     col = col + 1;
                 }
@@ -99,71 +100,49 @@ public class UnifacParameters {
         }
     }
 
-    // get the paramaeter aij, bij and cij matrix
-    public String[][][] getParamij() {
-        return Paramij;
-    }
-
-    public String[][][] getAllGroups() {
-        return allGroups;
-    }
-
-    public String[][][] getSecondOrderParameters() {
-        return secondOrderParameters;
-    }
-
-    public String[][] getProbabilities() {
-        return principalGroupProbabilities;
-    }
-
-    public HSSFWorkbook getBook() {
-        return book;
-    }
-
     ///////////////////////////////////////////////load info//////////////////////////////////////////////////////////////////////////
 
     /**
-     * load the information of all groups, call the excel document, sice the sheet 3 at 9
-     * for the tree valences 1-4 ar cy and 0
+     * load the information of all groups, call the excel document, from the sheet 3 up to the 9
+     *
+     * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
+     *
      */
     public void loadInfoGroups() {
-
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
 
         for (byte i = 0; i < 7; i++) {
-            sheets[i + 3] = book.getSheetAt(i + 3);
+            HSSFSheet sheet = book.getSheetAt(i + 3);
             System.out.println("Hoja: " + book.getSheetName(i + 3));
-            Iterator iteratorFilas = sheets[i + 3].rowIterator();
+            Iterator rowIterator = sheet.rowIterator();
             row = 0;
-            while (iteratorFilas.hasNext()) {
-                HSSFRow fila = (HSSFRow) iteratorFilas.next();
-                Iterator iteratorCeldas = fila.cellIterator();
+            while (rowIterator.hasNext()) {
+                HSSFRow fila = (HSSFRow) rowIterator.next();
+                Iterator cellIterator = fila.cellIterator();
                 col = 0;
-                while (iteratorCeldas.hasNext()) {
-                    HSSFCell celda = (HSSFCell) iteratorCeldas.next();
-                    allGroups[i][row][col] = celda.toString();
-                    // Imprime el contenido de la celda (valores o formulas)
-                    col = col + 1;
+                while (cellIterator.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cellIterator.next();
+                    allGroups[i][row][col] = cell.toString();
+                    col++;
                 }
-
-                row = row + 1;
+                row++;
             }
         }
     }
 
     public void loadSecondOrderParameters() {
 
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
 
         for (byte i = 0; i < 2; i++) {
-            sheets[i + 11] = book.getSheetAt(i + 11);
+            HSSFSheet sheet = book.getSheetAt(i + 11);
             System.out.println("Hoja: " + book.getSheetName(i + 11));
-            Iterator iteratorFilas = sheets[i + 11].rowIterator();
+            Iterator iteratorSheets = sheet.rowIterator();
             row = 0;
-            while (iteratorFilas.hasNext()) {
-                HSSFRow fila = (HSSFRow) iteratorFilas.next();
+            while (iteratorSheets.hasNext()) {
+                HSSFRow fila = (HSSFRow) iteratorSheets.next();
                 Iterator iteratorCeldas = fila.cellIterator();
                 col = 0;
                 while (iteratorCeldas.hasNext()) {
@@ -180,20 +159,19 @@ public class UnifacParameters {
     }
 
     public void loadProbabilities() {
-
-        int row = 0;
-        int col = 0;
-        sheets[13] = book.getSheetAt(13);
+        int row;
+        int col;
+        HSSFSheet sheet = book.getSheetAt(13);
         System.out.println("Hoja: " + book.getSheetName(13));
-        Iterator iteratorFilas = sheets[13].rowIterator();
+        Iterator iteratorSheets = sheet.rowIterator();
         row = 0;
-        while (iteratorFilas.hasNext()) {
-            HSSFRow fila = (HSSFRow) iteratorFilas.next();
+        while (iteratorSheets.hasNext()) {
+            HSSFRow fila = (HSSFRow) iteratorSheets.next();
             Iterator iteratorCeldas = fila.cellIterator();
             col = 0;
             while (iteratorCeldas.hasNext()) {
                 HSSFCell celda = (HSSFCell) iteratorCeldas.next();
-                principalGroupProbabilities[row][col] = celda.toString();
+                mainGroupProbabilities[row][col] = celda.toString();
                 //System.out.print("\t" + celda.toString());
                 // Imprime el contenido de la celda (valores o formulas)
                 col = col + 1;

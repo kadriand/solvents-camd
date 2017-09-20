@@ -1,10 +1,10 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 
 public final class MoleculeOperations {
 
-    public static int findNewRefCode(int valence, ContributionParametersManager contributionParametersManager, boolean functional) {
+    public static int findNewRefCode(int valence, ContributionGroupsManager contributionParametersManager, boolean functional) {
         int codeOfRow = 0;
         int refCode = 0;
         if (functional) {
@@ -25,7 +25,7 @@ public final class MoleculeOperations {
         return refCode;
     }
 
-    public static int findNewRefCode(int type, ContributionParametersManager aGC) {
+    public static int findNewRefCode(int type, ContributionGroupsManager aGC) {
         int codeOfRow = 0;
         int refCode = 0;
 

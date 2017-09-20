@@ -1,12 +1,12 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionParametersManager;
+import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeOperations;
 
 
 public class GeneticOperator {
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionParametersManager aGC) {
+    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionGroupsManager aGC) {
         FunctionalGroupNode aGroup = new FunctionalGroupNode(0);
         //System.out.println("CCoperator");
         //	System.out.println("c:"+genotype.getGroupsCount());
@@ -49,13 +49,13 @@ public class GeneticOperator {
          genotype.setGroupAt(i, aGrToReplace);
          //System.out.println("nnnn"+genotype.getGroupAt(i).toString());
          }
-         searchAndReplace(genotype.getGroupAt(i),codeToCut,aGrToReplace,replaceAll,parametersManager);
+         searchAndReplace(genotype.getGroupAt(i),codeToCut,aGrToReplace,replaceAll,contributionGroups);
          }
          }
          */
     }
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionParametersManager aGC) {
+    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionGroupsManager aGC) {
         if (codeToCut == 0) {
             int valence = aGC.getValence((genotype.getRootNode()));
             aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());
@@ -74,7 +74,7 @@ public class GeneticOperator {
             //				code=code+1;
             //			if(code==codeToCut){
 //					}
-            //searchAndReplace(genotype.getGroupAt(i),codeToCut, replaceAll, parametersManager);
+            //searchAndReplace(genotype.getGroupAt(i),codeToCut, replaceAll, contributionGroups);
 //				}
         }
     }
