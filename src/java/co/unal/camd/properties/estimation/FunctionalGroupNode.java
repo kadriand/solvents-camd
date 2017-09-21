@@ -94,7 +94,7 @@ public class FunctionalGroupNode {
 
     public String toString() {
         return Integer.toString(rootNode);
-        //        return contributionGroups.getName(rootNode);
+        //        return contributionGroups.getGroupName(rootNode);
     }
 
 }

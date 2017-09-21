@@ -105,7 +105,7 @@ public class CamdRunner extends JFrame {
             Molecule solvent = population.get(i).object();
 
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = contributionGroups.getName(functionalGroupNode.getRootNode());
+            String name = contributionGroups.getGroupName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
             //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
@@ -135,7 +135,7 @@ public class CamdRunner extends JFrame {
 
     public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = contributionGroups.getName(molec.getGroupAt(i).getRootNode());
+            String n = contributionGroups.getGroupName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);

@@ -105,7 +105,7 @@ public class Molecule {
         String show = "";
         ArrayList<FunctionalGroupNode> a = getArray();
         for (int i = 0; i < a.size(); i++) {
-            show += parametersManager.getName(a.get(i).getRootNode()) + "-";
+            show += parametersManager.getGroupName(a.get(i).getRootNode()) + "-";
         }
         return show;
     }

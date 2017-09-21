@@ -1,49 +1,33 @@
 package co.unal.camd.view;
 
-import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.Unifac;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class PanelDataAndUnifac extends JPanel implements ActionListener {
+public abstract class ContributionGroupsPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+
     private JLabel labelTemperature = null;
     private JTextField textFieldTemperature = null;
 
-    private int co;
-    private JList listGroups = null;  //  @jve:decl-index=0:visual-constraint="749,-70"
-    private DefaultListModel listG = new DefaultListModel();
-
+    JComboBox<String> comboBoxMolecules = null;
     private JButton jButton = null;
     private JButton buttonFixMolecule = null;
     private JButton newMoleculeBtn = null;
     private JButton ButtonSolveUNIFAC = null;
-    private JComboBox<String> comboBoxMolecules = null;
     private JLabel labelValence = null;
     private JLabel labelGroups = null;
 
-    private CamdSetupWindow setupWindow;
-    private int valence;
-    private String[][] allGroups;
-    private ArrayList<String> aMolec;
-    private int principal;
-
-    private int count; //is the number of molecules creates by the user
     private JButton loadMoleculeBtn = null;
     private JButton buttonSaveMolecule = null;
-    private JComboBox comboBoxValence = null;
-    private JComboBox comboBoxGroups = null;
+    private JComboBox<String> comboBoxValence = null;
+    private JComboBox<String> comboBoxGroups = null;
     private JPanel jPanel = null;
     private JLabel labelIterations = null;
     private JTextField textFieldIterations = null;
@@ -51,12 +35,26 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
     private JButton buttonLoadProblem = null;
     private JButton buttonSaveProblem = null;
     private JButton buttonRunEvolution = null;
-    private JPanel jPanel2 = null;
-    private ArrayList<JCheckBox> jcheck = new ArrayList<>();  //  @jve:decl-index=0:
-
+    private JPanel scrollPanel = null;
+    private ArrayList<JCheckBox> jcheck = new ArrayList<>();
     private JScrollPane jScrollPane = null;
 
-    private void initialize() {
+    private int co;
+    private int valence;
+    JList listGroups = null;
+    DefaultListModel<String> listG = new DefaultListModel<>();
+    CamdSetupWindow camdSetupWindow;
+    String[][] allGroups;
+    ArrayList<String> aMolec = new ArrayList<>();
+    int principal;
+
+    public abstract void fixMolecule();
+
+    public abstract void saveMolecule(String rutaArchivo);
+
+    public abstract void loadMolecule();
+
+    protected void initialize() {
         GridBagConstraints gridBagConstraints25 = new GridBagConstraints();
         gridBagConstraints25.gridx = 5;
         gridBagConstraints25.fill = GridBagConstraints.NONE;
@@ -193,19 +191,6 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
 
     }
 
-    public PanelDataAndUnifac(CamdSetupWindow setupWindow) {
-        aMolec = new ArrayList<>();
-        this.setupWindow = setupWindow;
-        count = 1;
-
-        allGroups = new String[8][28];
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 27; j++)
-                allGroups[i][j] = (this.setupWindow.getContributionGroups().getAllGroups()[i][j + 1][2]);
-
-        initialize();
-    }
-
     /**
      * This method initializes ButtonSolveUNIFAC
      *
@@ -218,10 +203,10 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             ButtonSolveUNIFAC.setText("gamma");
             ButtonSolveUNIFAC.addActionListener(evt -> {
                 Unifac unifac = new Unifac();
-                double Gamma = unifac.getMethodResult(setupWindow.getMoleculesUser(), principal, setupWindow.getTemperature(), setupWindow.getContributionGroups());
+                double Gamma = unifac.getMethodResult(camdSetupWindow.getMoleculesUser(), principal, camdSetupWindow.getTemperature(), camdSetupWindow.getContributionGroups());
                 System.out.println("El GAMMAi es: " + Gamma);
                 //TODO implement as it should be
-                //                setupWindow.setGamma(Gamma);
+                //                camdSetupWindow.setGamma(Gamma);
             });
         }
         return ButtonSolveUNIFAC;
@@ -253,7 +238,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
 
             textFieldTemperature.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    setupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText())));
+                    camdSetupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText())));
                 }
             });
         }
@@ -302,7 +287,6 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
      * @return javax.swing.JButton
      */
     private JButton getButtonFixMolecule() {
-
         if (buttonFixMolecule == null) {
             buttonFixMolecule = new JButton(">>");
             buttonFixMolecule.setToolTipText("Establecer la molecula de usuario");
@@ -312,30 +296,6 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
         return buttonFixMolecule;
     }
 
-    public void fixMolecule() {
-        int n = aMolec.size();
-        //System.out.println("n "+n);
-        int[] aMolecule = new int[n];
-        for (int i = 0; i < n; i++) {
-            String gr = aMolec.get(i);
-            //System.out.println(gr+setupWindow.getContributionGroups().getRefCode(gr)+" bvb");
-            aMolecule[i] = setupWindow.getContributionGroups().getRefCode(gr);
-        }
-
-        GroupArray aGroupArray = new GroupArray(aMolecule, 0.01);//(Double.parseDouble(
-        //JOptionPane.showInputDialog("Ingrese la Composici�n"))));
-
-        setupWindow.addMoleculesUser(aGroupArray);
-        String show = count + ". " + aGroupArray.toString(setupWindow.getContributionGroups());
-        comboBoxMolecules.addItem(show);
-        comboBoxMolecules.setSelectedIndex(0);
-        principal = comboBoxMolecules.getSelectedIndex();
-        count = count + 1;
-        listG.clear();
-        listGroups.removeAll();
-        for (int i = 0; i < aMolec.size(); i++)
-            aMolec = new ArrayList<>();
-    }
 
     /**
      * This method initializes newMoleculeBtn
@@ -356,36 +316,17 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
         return newMoleculeBtn;
     }
 
-    /**
-     * This method initializes this
-     *
-     * @return void
-     */
-
-
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("comboBoxChanged")) {
-            setValence(comboBoxValence.getSelectedIndex());
+            valence = comboBoxValence.getSelectedIndex();
             comboBoxGroups.removeAllItems();
-            for (int i = 0; i < 28; i++) {
-                comboBoxGroups.addItem(allGroups[getValence()][i]);
-            }
+            for (int i = 0; i < 28; i++)
+                comboBoxGroups.addItem(allGroups[valence][i]);
         }
-        for (int i = 0; i < jcheck.size(); i++) {
-            if (jcheck.get(i).isSelected() == false) {
-                setupWindow.getContributionGroups().setProbability(i, 0);
-            }
-            //	System.out.println("aa");
-        }
-
-    }
-
-    public int getValence() {
-        return valence;
-    }
-
-    public void setValence(int val) {
-        valence = val;
+        for (int i = 0; i < jcheck.size(); i++)
+            if (!jcheck.get(i).isSelected())
+                camdSetupWindow.getContributionGroups().setProbability(i, 0);
+        //	System.out.println("aa");
     }
 
     /**
@@ -397,55 +338,9 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
         if (loadMoleculeBtn == null) {
             loadMoleculeBtn = new JButton("Load");
             loadMoleculeBtn.setText("Load");
-            loadMoleculeBtn.addActionListener(evt -> {
-                String fileName = setupWindow.selectFile();
-                aMolec = new ArrayList<>();
-                loadMoleculeGroupsFile(fileName);
-                fixMolecule();
-            });
+            loadMoleculeBtn.addActionListener(evt -> loadMolecule());
         }
         return loadMoleculeBtn;
-    }
-
-    /**
-     * Lee los datos del archivo
-     *
-     * @param filePath Ruta del archivo
-     * @return Datos leidos del archivo
-     */
-    public void loadMoleculeGroupsFile(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String newLine = br.readLine();
-            while (newLine != null) {
-                int num = Integer.parseInt(newLine.trim());
-                String line = setupWindow.getContributionGroups().getName(num);
-                aMolec.add(line);
-                //System.out.println("linea"+linea);
-                //System.out.println("num"+num);
-                newLine = br.readLine();
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Guarda datos en el archivo
-     *
-     * @param rutaArchivo Ruta del archivo
-     */
-    public void saveMolecule(String rutaArchivo) {
-        File file = new File(rutaArchivo);
-        try (PrintWriter out = new PrintWriter(file)) {
-            for (int i = 0; i < aMolec.size(); i++) {
-                String groupName = Integer.toString(setupWindow.getContributionGroups().getRefCode(aMolec.get(i)));
-                out.println(groupName);
-            }
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -459,7 +354,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             buttonSaveMolecule.setText("Save");
             buttonSaveMolecule.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    String fileName = setupWindow.selectFile();
+                    String fileName = camdSetupWindow.selectFile();
                     saveMolecule(fileName);
                 }
             });
@@ -474,12 +369,11 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
      */
     private JComboBox getComboBoxValence() {
         if (comboBoxValence == null) {
-            comboBoxValence = new JComboBox();
-
-            String valences[] = {"1", "2", "3", "4", "Arom�ticos", "Ciclos", "0"};
-            comboBoxValence = new JComboBox(valences);
+            comboBoxValence = new JComboBox<>();
+            String valences[] = {"1", "2", "3", "4", "Aromáticos", "Ciclos", "0"};
+            comboBoxValence = new JComboBox<>(valences);
             comboBoxValence.setSelectedIndex(0);
-            setValence(comboBoxValence.getSelectedIndex());
+            valence = comboBoxValence.getSelectedIndex();
             comboBoxValence.addActionListener(this);
         }
         return comboBoxValence;
@@ -492,18 +386,14 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
      */
     private JComboBox getComboBoxGroups() {
         if (comboBoxGroups == null) {
-            comboBoxGroups = new JComboBox();
-
-            comboBoxGroups = new JComboBox(allGroups[getValence()]);
-
-            comboBoxGroups.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    String group = (String) comboBoxGroups.getSelectedItem();
-                    if (group != null) {//se genera un null cada vez q hay cambio en valencia
-                        listG.addElement(group);
-                        aMolec.add(group);
-                        System.out.println(group);
-                    }
+            comboBoxGroups = new JComboBox<>();
+            comboBoxGroups = new JComboBox<>(allGroups[valence]);
+            comboBoxGroups.addActionListener(evt -> {
+                String group = (String) comboBoxGroups.getSelectedItem();
+                if (group != null) {//se genera un null cada vez q hay cambio en valencia
+                    listG.addElement(group);
+                    aMolec.add(group);
+                    System.out.println(group);
                 }
             });
 
@@ -561,7 +451,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             textFieldIterations.setText("50");
             textFieldIterations.addActionListener(evt -> {
                 int num = Integer.parseInt(textFieldIterations.getText());
-                setupWindow.setIterations(num);
+                camdSetupWindow.setIterations(num);
             });
         }
         return textFieldIterations;
@@ -624,7 +514,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             buttonLoadProblem.setText("Load Problem");
             buttonLoadProblem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    String fileName = setupWindow.selectFile();
+                    String fileName = camdSetupWindow.selectFile();
                     //	loadProblem(fileName);
                 }
             });
@@ -643,7 +533,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             buttonSaveProblem.setText("Save Problem");
             buttonSaveProblem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    String fileName = setupWindow.selectFile();
+                    String fileName = camdSetupWindow.selectFile();
                     //		saveProblem(fileName);
                 }
             });
@@ -662,7 +552,7 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
             buttonRunEvolution.setText("Run");
             buttonRunEvolution.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    String fileName = setupWindow.selectFile();
+                    String fileName = camdSetupWindow.selectFile();
                     //runEvolution(fileName);
                 }
             });
@@ -671,29 +561,29 @@ public class PanelDataAndUnifac extends JPanel implements ActionListener {
     }
 
     /**
-     * This method initializes jPanel2
+     * This method initializes scrollPanel
      *
      * @return javax.swing.JPanel
      */
     private JPanel getJPanel2() {
-        if (jPanel2 == null) {
-            jPanel2 = new JPanel();
-            jPanel2.setLayout(new BoxLayout(getJPanel2(), BoxLayout.Y_AXIS));
+        if (scrollPanel == null) {
+            scrollPanel = new JPanel();
+            scrollPanel.setLayout(new BoxLayout(getJPanel2(), BoxLayout.Y_AXIS));
             co = 0;
             for (int i = 0; i < 23; i++) {
-                jPanel2.add(getJCheck(), null);
+                scrollPanel.add(getJCheck(), null);
                 co = co + 1;
             }
 
         }
-        return jPanel2;
+        return scrollPanel;
     }
 
 
     private JCheckBox getJCheck() {
-        String name = setupWindow.getContributionGroups().getGlobalGroupName(co + 1);
+        String name = camdSetupWindow.getContributionGroups().getGlobalGroupName(co + 1);
         JCheckBox j = new JCheckBox(name);
-        j.setToolTipText(setupWindow.getContributionGroups().getPrincipalGroupNames(co + 1));
+        j.setToolTipText(camdSetupWindow.getContributionGroups().getPrincipalGroupNames(co + 1));
         jcheck.add(j);
         jcheck.get(co).setSelected(true);
         return jcheck.get(co);

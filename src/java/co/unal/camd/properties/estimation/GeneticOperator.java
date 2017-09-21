@@ -57,7 +57,7 @@ public class GeneticOperator {
 
     public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionGroupsManager aGC) {
         if (codeToCut == 0) {
-            int valence = aGC.getValence((genotype.getRootNode()));
+            int valence = aGC.getGroupValence((genotype.getRootNode()));
             aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());
             int new_code = MoleculeOperations.findNewRefCode(valence, aGC, (aGC.getCodeOfRow() > 1));
             genotype.setRootNode(new_code);

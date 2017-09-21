@@ -30,7 +30,7 @@ public class MoleculesFactory {
         for (int i = 0; i < random(min) + 1; i++) {
             refCode = findNewRefCode(1, parametersManager, opt);
             functionalGroupNodes.add(new FunctionalGroupNode(refCode));
-            //System.out.println("Se agrego: "+contributionGroups.getName(auxiliar.get(i).getRootNode())+" "+contributionGroups.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
+            //System.out.println("Se agrego: "+contributionGroups.getGroupName(auxiliar.get(i).getRootNode())+" "+contributionGroups.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
             if (probabilityFunction(functionalGroupNodes, aProba) == true) {
                 parametersManager.getCodeOfRowBNameOrRefCode(refCode);
                 //                opt=contributionGroups.getCodeOfRow() <= 1;
@@ -83,10 +83,10 @@ public class MoleculesFactory {
     public Molecule moleculeFromGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
         FunctionalGroupNode gr;
         gr = createRandomGroups(leaves.size() + 1, dim, leaves);
-        //System.out.println("GroupNew: "+contributionGroups.getName(gr.getRootNode()));
+        //System.out.println("GroupNew: "+contributionGroups.getGroupName(gr.getRootNode()));
         boolean next = false;
 
-        if (leaves.size() <= parametersManager.getValence(gr.getRootNode())) { // if is the last group
+        if (leaves.size() <= parametersManager.getGroupValence(gr.getRootNode())) { // if is the last group
             next = true;
             while (next == true) {
                 //System.out.println("tama�o: "+leaves.size());
@@ -98,9 +98,9 @@ public class MoleculesFactory {
                     next = false; //
                 }
             }
-            if (parametersManager.getValence(gr.getRootNode()) > gr.getGroupsCount()) {
+            if (parametersManager.getGroupValence(gr.getRootNode()) > gr.getGroupsCount()) {
                 int m = gr.getGroupsCount();
-                for (int i = 0; i < parametersManager.getValence(gr.getRootNode()) - m; i++) {  // en esta parte se corrigi� el error de la valencia incompleta
+                for (int i = 0; i < parametersManager.getGroupValence(gr.getRootNode()) - m; i++) {  // en esta parte se corrigi� el error de la valencia incompleta
                     FunctionalGroupNode aG = new FunctionalGroupNode(findNewRefCode(1, parametersManager, probabilityFunction(leaves, 0.4)));
                     //	System.out.println("SUb: "+aG.getRootNode());
                     Restrictions.mayBeFuncFuncOrOH(aG, gr, false, parametersManager);
@@ -109,8 +109,8 @@ public class MoleculesFactory {
             }
             leaves.add(gr);
             dim = dim + 1;
-        } else if (leaves.size() > parametersManager.getValence(gr.getRootNode())) {
-            //System.out.println("valence New"+contributionGroups.getValence(gr.getRootNode()));
+        } else if (leaves.size() > parametersManager.getGroupValence(gr.getRootNode())) {
+            //System.out.println("valence New"+contributionGroups.getGroupValence(gr.getRootNode()));
             next = true;
             while (next == true) {
                 if (leaves.size() > 0) {
@@ -118,8 +118,8 @@ public class MoleculesFactory {
                     Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
                     leaves.remove(0);
 
-                    //System.out.println("Valencia hojas: "+(contributionGroups.getValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));
-                    if (parametersManager.getValence(gr.getRootNode()) - 1 == gr.getGroupsCount()) {
+                    //System.out.println("Valencia hojas: "+(contributionGroups.getGroupValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));
+                    if (parametersManager.getGroupValence(gr.getRootNode()) - 1 == gr.getGroupsCount()) {
                         next = false; //
                     }
 
@@ -128,7 +128,7 @@ public class MoleculesFactory {
                 }
 
             }
-            int val = gr.getGroupsCount() - parametersManager.getValence(gr.getRootNode());
+            int val = gr.getGroupsCount() - parametersManager.getGroupValence(gr.getRootNode());
             //System.out.println("resta: "+val);
             leaves.add(gr);
             dim = dim + 1;
@@ -136,7 +136,7 @@ public class MoleculesFactory {
                 moleculeFromGroups(leaves, dim);
             }
         }
-        //if(leaves.size()==1 && contributionGroups.getValence(leaves.get(0))-leaves.get(0).getGroupsCount()==0){
+        //if(leaves.size()==1 && contributionGroups.getGroupValence(leaves.get(0))-leaves.get(0).getGroupsCount()==0){
         //return new Molecules(leaves.get(0));
         //}
         return new Molecule(leaves.get(0));

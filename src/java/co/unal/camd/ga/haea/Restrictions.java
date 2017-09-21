@@ -77,7 +77,7 @@ public class Restrictions {
                 }
             }
             case 4: {
-                //System.out.println(aGroups.getGroupAt(i).getName());
+                //System.out.println(aGroups.getGroupAt(i).getGroupName());
                 if (aGC.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
                     //System.out.println("cambio por OHt");
                     aG1 = new FunctionalGroupNode("OHT", aGC);
@@ -85,7 +85,7 @@ public class Restrictions {
             }
             default: {
 
-                aValence = aGC.getValence(newGr.getRootNode());
+                aValence = aGC.getGroupValence(newGr.getRootNode());
                 //System.out.println("avalence"+aValence);
 
                 aGC.getCodeOfRowBNameOrRefCode(aG1.getRootNode());
@@ -137,7 +137,7 @@ public class Restrictions {
 
 
      } else  if(aGroups.getRefCode()==4){
-     //System.out.println(aGroups.getGroupAt(i).getName());
+     //System.out.println(aGroups.getGroupAt(i).getGroupName());
      if(aGroups.getGroupAt(i).getPrincipalGroupCode()==5){
      System.out.println("cambio por oh3");
      aGroups.setGroupAt(i, new Groups("OH3",operator));

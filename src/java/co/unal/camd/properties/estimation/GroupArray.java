@@ -89,7 +89,7 @@ public class GroupArray {
         for (int i = 0; i < groups.length; i++) {
             int n = groups[i];
             if (n > 0) {
-                show += aGC.getName(n) + "-";
+                show += aGC.getGroupName(n) + "-";
             }
         }
         return show;

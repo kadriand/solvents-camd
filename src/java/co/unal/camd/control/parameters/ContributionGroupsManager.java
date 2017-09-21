@@ -180,12 +180,12 @@ public class ContributionGroupsManager {
         return (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][3]));
     }
 
-    public String getName(Object toSearch) {
+    public String getGroupName(Object toSearch) {
         getCodeOfRowBNameOrRefCode(toSearch);
         return allGroups[valence - 1][codeOfRow][2];
     }
 
-    public int getValence(Object toSearch) {
+    public int getGroupValence(Object toSearch) {
         getCodeOfRowBNameOrRefCode(toSearch);
         //System.out.println("valence"+valence);
         return valence;

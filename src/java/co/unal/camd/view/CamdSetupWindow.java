@@ -21,7 +21,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
 
     private JTextField textFieldParents;
     private JTextField textFieldMaxMolecules;
-    private PanelDataAndUnifac unifacAndDataPanel;
+    private ContributionGroupsPanel unifacAndDataPanel;
 
     /**
      * This is the default constructor
@@ -69,7 +69,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
             textFieldParents.setEnabled(true);
             textFieldMaxMolecules.setEnabled(false);
         });
-        unifacAndDataPanel = new PanelDataAndUnifac(this);
+        unifacAndDataPanel = new UnifacGroupSelector(this);
 
         JPanel options = new JPanel();
         options.setLayout(new GridLayout(2, 2));
@@ -90,7 +90,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
 
     public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = contributionGroups.getName(molec.getGroupAt(i).getRootNode());
+            String n = contributionGroups.getGroupName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);
