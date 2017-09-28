@@ -1,14 +1,13 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
+import co.unal.camd.view.CamdRunner;
 
 import java.util.ArrayList;
 
 public class DielectricConstant {
 
     private double sum = 0;
-    private ContributionGroupsManager aGC;
-    private GroupArray aMolecule;
+    private MoleculeGroups aMolecule;
 
     private double temperature;
     private double vapHeat;
@@ -32,8 +31,7 @@ public class DielectricConstant {
     private boolean isConditionG2;
 
 
-    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature, ContributionGroupsManager aGC) {
-        this.aGC = aGC;
+    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature) {
         temperature = Temperature;
         secondOrderCode = secOrder;
         aMolecule = solvent.getGroupArray();
@@ -52,7 +50,7 @@ public class DielectricConstant {
         double c = 6.829;
         for (int i = 0; i < aMolecule.size(); i++) {
             int n = aMolecule.amount[i];
-            double hi = aGC.getHi(aMolecule.getGroupCode(i));
+            double hi = CamdRunner.CONTRIBUTION_GROUPS.getHi(aMolecule.getGroupCode(i));
             c = c + n * hi;
         }
         //System.out.println("c:" +c);
@@ -66,7 +64,7 @@ public class DielectricConstant {
             int n = aMolecule.amount[i];
             //	System.out.println("c"+c);
 
-            double mvi = aGC.getMV(aMolecule.getGroupCode(i));
+            double mvi = CamdRunner.CONTRIBUTION_GROUPS.getMV(aMolecule.getGroupCode(i));
             //System.out.println("c"+mvi);
             //System.out.println("n"+n);
             c = c + n * mvi;
@@ -75,7 +73,7 @@ public class DielectricConstant {
         //System.out.println("MVC1:" +c);
         for (int j = 0; j < secondOrderCode.size(); j++) {
             int caseNum = secondOrderCode.get(j);
-            c += aGC.getMVolumeSecondOrderParameter(caseNum);
+            c += CamdRunner.CONTRIBUTION_GROUPS.getMVolumeSecondOrderParameter(caseNum);
         }
         //System.out.println("MVC2:" +c);
         return (c + d) * 1000;
@@ -115,7 +113,7 @@ public class DielectricConstant {
             double c = 0;
             for (int i = 0; i < aMolecule.size(); i++) {
                 int n = aMolecule.amount[i];
-                double dmi = aGC.getDM(aMolecule.getGroupCode(i));
+                double dmi = CamdRunner.CONTRIBUTION_GROUPS.getDM(aMolecule.getGroupCode(i));
                 //	System.out.println("DMi"+dmi);
                 c = c + n * dmi;
             }

@@ -1,6 +1,5 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
@@ -8,11 +7,6 @@ import unalcol.search.variation.Variation_2_2;
 
 public class Cross extends Variation_2_2<Molecule> {
 
-    private ContributionGroupsManager parametersManager;
-
-    public Cross(ContributionGroupsManager parametersManager) {
-        this.parametersManager = parametersManager;
-    }
 
     public Molecule[] apply(Molecule one, Molecule two) {
         // System.out.println("Cross");
@@ -25,8 +19,8 @@ public class Cross extends Variation_2_2<Molecule> {
         FunctionalGroupNode aGroup1 = one.getGroupAt(num);
         FunctionalGroupNode aGroup2 = two.getGroupAt(num2);
 
-        GeneticOperator.searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true, parametersManager);
-        GeneticOperator.searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true, parametersManager);
+        GeneticOperator.searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true);
+        GeneticOperator.searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true);
 
         return new Molecule[]{clone_genome, clone_genome2};
     }

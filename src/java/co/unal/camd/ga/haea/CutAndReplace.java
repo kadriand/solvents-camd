@@ -1,6 +1,5 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_1_1;
@@ -8,12 +7,6 @@ import unalcol.search.variation.Variation_1_1;
 import static co.unal.camd.properties.estimation.GeneticOperator.searchAndReplace;
 
 public class CutAndReplace extends Variation_1_1<Molecule> {
-
-    private ContributionGroupsManager parametersManager;
-
-    public CutAndReplace(ContributionGroupsManager parametersManager) {
-        this.parametersManager = parametersManager;
-    }
 
     @Override
     public Molecule apply(Molecule genome) {
@@ -29,7 +22,7 @@ public class CutAndReplace extends Variation_1_1<Molecule> {
         if (aGroupMut.getRootNode() > 4) {
             functional = true;
         }
-        int refCode = MoleculeOperations.findNewRefCode(valence, parametersManager, functional);
+        int refCode = MoleculeOperations.findNewRefCode(valence, functional);
         FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
 
         if (valence == 3) {
@@ -38,7 +31,7 @@ public class CutAndReplace extends Variation_1_1<Molecule> {
             newGroup.addGroup(new FunctionalGroupNode(1));
             newGroup.addGroup(new FunctionalGroupNode(1));
         }
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false, parametersManager);
+        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false);
         return clone_genome;
     }
 

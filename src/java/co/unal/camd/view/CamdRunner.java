@@ -3,10 +3,11 @@ package co.unal.camd.view;
 import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.GroupArray;
+import co.unal.camd.properties.estimation.MoleculeGroups;
 import co.unal.camd.properties.estimation.Molecule;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import unalcol.search.population.Population;
 import unalcol.search.solution.Solution;
@@ -26,15 +27,16 @@ import java.util.stream.Collectors;
 public class CamdRunner extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    public static final ContributionGroupsManager CONTRIBUTION_GROUPS = new ContributionGroupsManager();
 
     @Setter(AccessLevel.NONE)
     protected JTabbedPane tab;
     protected int parentSize;
     protected int maxGroups;
-    protected ContributionGroupsManager contributionGroups;
     protected double temperature;
     protected int maxIterations;
-    protected ArrayList<GroupArray> moleculesUser;
+    @Getter
+    protected ArrayList<MoleculeGroups> userMolecules;
 
     private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
     private double[][] constraintsLimits = new double[3][5];
@@ -85,6 +87,8 @@ public class CamdRunner extends JFrame {
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
         System.out.println("parent size" + parentSize);
         System.out.println(" max iter :" + maxIterations);
+
+        // EVOLUTION TIME
         Population<Molecule> population = moleculeEvolution.evolve(parentSize, maxIterations);
 
         //        double best = population.statistics().best;
@@ -99,13 +103,16 @@ public class CamdRunner extends JFrame {
         Double bestFitness = bestSolution.object().getFitness();
         System.out.println(bestFitness);
 
-        List<Solution<Molecule>> sortedSolution = Arrays.asList(population.object()).stream().sorted(Comparator.comparingDouble(o -> o.object().getFitness())).collect(Collectors.toList());
+        List<Solution<Molecule>> sortedSolution = Arrays.stream(population.object())
+                .sorted(Comparator.comparingDouble(o -> o.object().getFitness()))
+                .collect(Collectors.toList());
+
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
-            Molecule solvent = population.get(i).object();
+            Molecule solvent = sortedSolution.get(i).object();
 
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = contributionGroups.getGroupName(functionalGroupNode.getRootNode());
+            String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getRootNode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
             //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
@@ -115,7 +122,7 @@ public class CamdRunner extends JFrame {
             double bt = solvent.getBt();
             double den = solvent.getD();
             double mt = solvent.getMt();
-            //            double dc = solvent.getDc();
+            double dc = solvent.getDc();
             double ks = solvent.getKs();
             double fitness = solvent.getFitness();
 
@@ -124,18 +131,18 @@ public class CamdRunner extends JFrame {
             System.out.println("BT: " + bt);
             System.out.println("Den: " + den);
             System.out.println("MT: " + mt);
-            //            System.out.println("DC: " + dc);
+            System.out.println("DC: " + dc);
             System.out.println("KS: " + ks);
             System.out.println("//////////////////////////////////////////////////////////////");
 
-            // TODO IS THIS NECESARY?
+            // TODO IS THIS NECESSARY?
             tab.addTab("F " + fitness, null, jTree, "molecule number");
         }
     }
 
-    public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
-        for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = contributionGroups.getGroupName(molec.getGroupAt(i).getRootNode());
+    private DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
+        for (int i = 0; i < molec.countSubgroups(); i++) {
+            String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getRootNode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);

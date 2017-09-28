@@ -41,20 +41,20 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
 
     private int co;
     private int valence;
-    JList listGroups = null;
-    DefaultListModel<String> listG = new DefaultListModel<>();
     CamdSetupWindow camdSetupWindow;
     String[][] allGroups;
-    ArrayList<String> aMolec = new ArrayList<>();
+    JList groupsList = null;
+    DefaultListModel<String> groupsListModel = new DefaultListModel<>();
+    ArrayList<String> userMoleculeGroups = new ArrayList<>();
     int principal;
 
-    public abstract void fixMolecule();
+    public abstract void addMolecule();
 
-    public abstract void saveMolecule(String rutaArchivo);
+    public abstract void saveMolecule(String filePath);
 
     public abstract void loadMolecule();
 
-    protected void initialize() {
+    void initialize() {
         GridBagConstraints gridBagConstraints25 = new GridBagConstraints();
         gridBagConstraints25.gridx = 5;
         gridBagConstraints25.fill = GridBagConstraints.NONE;
@@ -172,10 +172,10 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         labelTemperature.setText("Temperature (K)");
         this.setSize(498, 261);
         this.setLayout(new GridBagLayout());
-        this.add(getListGroups(), gridBagConstraints4);
-        this.add(getJButton(), gridBagConstraints5);
-        this.add(getButtonFixMolecule(), gridBagConstraints6);
-        this.add(getNewMoleculeBtn(), gridBagConstraints7);
+        this.add(buildGroupsList(), gridBagConstraints4);
+        this.add(buildJButton(), gridBagConstraints5);
+        this.add(buildButtonFixMolecule(), gridBagConstraints6);
+        this.add(buildNewMoleculeBtn(), gridBagConstraints7);
         this.add(getButtonSolveUnifac(), gridBagConstraints21);
         this.add(getComboBoxMolecules(), gridBagConstraints51);
         this.add(getJButton1(), gridBagConstraints13);
@@ -187,8 +187,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         this.add(getButtonRunEvolution(), gridBagConstraints23);
         this.add(getJScrollPane(), gridBagConstraints24);
         this.add(labelWorkGroups, gridBagConstraints25);
-
-
     }
 
     /**
@@ -199,11 +197,10 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private JButton getButtonSolveUnifac() {
         if (ButtonSolveUNIFAC == null) {
             ButtonSolveUNIFAC = new JButton("Calcular GAMMAi");
-
             ButtonSolveUNIFAC.setText("gamma");
             ButtonSolveUNIFAC.addActionListener(evt -> {
                 Unifac unifac = new Unifac();
-                double Gamma = unifac.getMethodResult(camdSetupWindow.getMoleculesUser(), principal, camdSetupWindow.getTemperature(), camdSetupWindow.getContributionGroups());
+                double Gamma = unifac.getMethodResult(camdSetupWindow.getUserMolecules(), principal, camdSetupWindow.getTemperature());
                 System.out.println("El GAMMAi es: " + Gamma);
                 //TODO implement as it should be
                 //                camdSetupWindow.setGamma(Gamma);
@@ -219,7 +216,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      */
     private JComboBox getComboBoxMolecules() {
         if (comboBoxMolecules == null) {
-            comboBoxMolecules = new JComboBox();
+            comboBoxMolecules = new JComboBox<>();
             comboBoxMolecules.addActionListener(evt -> principal = comboBoxMolecules.getSelectedIndex());
         }
         comboBoxMolecules.addActionListener(this);
@@ -236,27 +233,22 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         if (textFieldTemperature == null) {
             textFieldTemperature = new JTextField("298.15");
 
-            textFieldTemperature.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    camdSetupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText())));
-                }
-            });
+            textFieldTemperature.addActionListener(evt -> camdSetupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText()))));
         }
 
         return textFieldTemperature;
     }
 
-
     /**
-     * This method initializes listGroups
+     * This method initializes groupsList
      *
      * @return javax.swing.JList
      */
-    private JScrollPane getListGroups() {
+    private JScrollPane buildGroupsList() {
         JScrollPane scroll = new JScrollPane();
-        if (listGroups == null) {
-            listGroups = new JList(listG);
-            scroll = new JScrollPane(listGroups);
+        if (groupsList == null) {
+            groupsList = new JList<>(groupsListModel);
+            scroll = new JScrollPane(groupsList);
         }
         return scroll;
     }
@@ -266,15 +258,14 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      *
      * @return javax.swing.JButton
      */
-    private JButton getJButton() {
+    private JButton buildJButton() {
         if (jButton == null) {
             jButton = new JButton("Remover Grupo");
-
             jButton.setText("Remove Group");
             jButton.addActionListener(evt -> {
-                int group = listGroups.getSelectedIndex();
-                listG.removeElementAt(group);
-                aMolec.remove(group);
+                int group = groupsList.getSelectedIndex();
+                groupsListModel.removeElementAt(group);
+                userMoleculeGroups.remove(group);
             });
 
         }
@@ -286,12 +277,12 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      *
      * @return javax.swing.JButton
      */
-    private JButton getButtonFixMolecule() {
+    private JButton buildButtonFixMolecule() {
         if (buttonFixMolecule == null) {
             buttonFixMolecule = new JButton(">>");
             buttonFixMolecule.setToolTipText("Establecer la molecula de usuario");
             buttonFixMolecule.setText(">>");
-            buttonFixMolecule.addActionListener(evt -> fixMolecule());
+            buttonFixMolecule.addActionListener(evt -> addMolecule());
         }
         return buttonFixMolecule;
     }
@@ -302,14 +293,14 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      *
      * @return javax.swing.JButton
      */
-    private JButton getNewMoleculeBtn() {
+    private JButton buildNewMoleculeBtn() {
         if (newMoleculeBtn == null) {
             newMoleculeBtn = new JButton("Nueva Molecula");
             newMoleculeBtn.addActionListener(evt -> {
-                for (int i = 0; i < aMolec.size(); i++) {
-                    aMolec = new ArrayList<>();
-                    listG.clear();
-                    listGroups.removeAll();
+                for (int i = 0; i < userMoleculeGroups.size(); i++) {
+                    userMoleculeGroups = new ArrayList<>();
+                    groupsListModel.clear();
+                    groupsList.removeAll();
                 }
             });
         }
@@ -325,7 +316,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         }
         for (int i = 0; i < jcheck.size(); i++)
             if (!jcheck.get(i).isSelected())
-                camdSetupWindow.getContributionGroups().setProbability(i, 0);
+                CamdRunner.CONTRIBUTION_GROUPS.setProbability(i, 0);
         //	System.out.println("aa");
     }
 
@@ -352,11 +343,9 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         if (buttonSaveMolecule == null) {
             buttonSaveMolecule = new JButton();
             buttonSaveMolecule.setText("Save");
-            buttonSaveMolecule.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    String fileName = camdSetupWindow.selectFile();
-                    saveMolecule(fileName);
-                }
+            buttonSaveMolecule.addActionListener(evt -> {
+                String fileName = camdSetupWindow.selectFile();
+                saveMolecule(fileName);
             });
         }
         return buttonSaveMolecule;
@@ -384,15 +373,15 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      *
      * @return javax.swing.JComboBox
      */
-    private JComboBox getComboBoxGroups() {
+    private JComboBox buildComboBoxGroups() {
         if (comboBoxGroups == null) {
             comboBoxGroups = new JComboBox<>();
             comboBoxGroups = new JComboBox<>(allGroups[valence]);
             comboBoxGroups.addActionListener(evt -> {
                 String group = (String) comboBoxGroups.getSelectedItem();
                 if (group != null) {//se genera un null cada vez q hay cambio en valencia
-                    listG.addElement(group);
-                    aMolec.add(group);
+                    groupsListModel.addElement(group);
+                    userMoleculeGroups.add(group);
                     System.out.println(group);
                 }
             });
@@ -435,7 +424,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
             jPanel.add(labelValence, gridBagConstraints9);
             jPanel.add(getComboBoxValence(), gridBagConstraints10);
             jPanel.add(labelGroups, gridBagConstraints8);
-            jPanel.add(getComboBoxGroups(), gridBagConstraints11);
+            jPanel.add(buildComboBoxGroups(), gridBagConstraints11);
         }
         return jPanel;
     }
@@ -581,9 +570,9 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
 
 
     private JCheckBox getJCheck() {
-        String name = camdSetupWindow.getContributionGroups().getGlobalGroupName(co + 1);
+        String name = CamdRunner.CONTRIBUTION_GROUPS.getGlobalGroupName(co + 1);
         JCheckBox j = new JCheckBox(name);
-        j.setToolTipText(camdSetupWindow.getContributionGroups().getPrincipalGroupNames(co + 1));
+        j.setToolTipText(CamdRunner.CONTRIBUTION_GROUPS.getPrincipalGroupNames(co + 1));
         jcheck.add(j);
         jcheck.get(co).setSelected(true);
         return jcheck.get(co);

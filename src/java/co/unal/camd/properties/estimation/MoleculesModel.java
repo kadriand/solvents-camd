@@ -36,7 +36,7 @@ public class MoleculesModel implements TreeModel {
      */
     public int getChildCount(Object parent) {
         FunctionalGroupNode g = (FunctionalGroupNode) parent;
-        return g.getGroupsCount();
+        return g.countSubgroups();
     }
 
     /**
@@ -59,7 +59,7 @@ public class MoleculesModel implements TreeModel {
      */
     public boolean isLeaf(Object node) {
         FunctionalGroupNode g = (FunctionalGroupNode) node;
-        return g.getGroupsCount() == 0;
+        return g.countSubgroups() == 0;
     }
 
     /**

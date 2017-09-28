@@ -1,7 +1,5 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
-
 import java.util.ArrayList;
 
 
@@ -9,21 +7,19 @@ public class SolventLoss {
 
     private Methods aMethods;
     private double temp;
-    private ArrayList<GroupArray> solventUandD;
-    private ContributionGroupsManager aGC;
+    private ArrayList<MoleculeGroups> solventUandD;
 
     ////////////////////////////////////////Solvent loss/////////////////////////////////////////////////////////
-    public SolventLoss(double _temp, ContributionGroupsManager _aGC, ArrayList<GroupArray> solventObjectAndSolventOfUser) {
-        solventUandD = new ArrayList<GroupArray>(solventObjectAndSolventOfUser);
+    public SolventLoss(double _temp, ArrayList<MoleculeGroups> solventObjectAndSolventOfUser) {
+        solventUandD = new ArrayList<>(solventObjectAndSolventOfUser);
         temp = _temp;
-        aGC = _aGC;
     }
 
     public double getMethodResult() {
         aMethods = new Unifac();
-        double unifac = aMethods.getMethodResult(solventUandD, 0, temp, aGC);
-        double pmSolventUser = PM.getMethodResult((solventUandD.get(1)), aGC);
-        double pmSolventDesign = PM.getMethodResult((solventUandD.get(0)), aGC);
+        double unifac = aMethods.getMethodResult(solventUandD, 0, temp);
+        double pmSolventUser = PM.getMethodResult((solventUandD.get(1)));
+        double pmSolventDesign = PM.getMethodResult((solventUandD.get(0)));
         return 1 / unifac * pmSolventDesign / pmSolventUser;
     }
 

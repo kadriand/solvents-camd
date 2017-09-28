@@ -1,18 +1,17 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.view.CamdRunner;
 
 import java.util.ArrayList;
 
 public class MoleculesFactory {
-    protected int maxGroupsSize;
-    protected ContributionGroupsManager parametersManager;
 
-    public MoleculesFactory(int maxGroupsSize, ContributionGroupsManager contributionParametersManager) {
+    private int maxGroupsSize;
+
+    public MoleculesFactory(int maxGroupsSize) {
         this.maxGroupsSize = maxGroupsSize;
-        this.parametersManager = contributionParametersManager;
     }
 
     /**
@@ -21,24 +20,19 @@ public class MoleculesFactory {
      * @return Object The new genome
      */
     public Molecule buildNewMolecule() {
-        int dim = 0;
-        int refCode = 0;
-        ArrayList<FunctionalGroupNode> functionalGroupNodes = new ArrayList<FunctionalGroupNode>();
-        int min = (maxGroupsSize) / 2;
+        int dim;
+        int groupCode;
+        ArrayList<FunctionalGroupNode> functionalGroupNodes = new ArrayList<>();
+        int min = maxGroupsSize / 2;
         double aProba = 0.4;
         boolean opt = probabilityFunction(functionalGroupNodes, aProba);
-        for (int i = 0; i < random(min) + 1; i++) {
-            refCode = findNewRefCode(1, parametersManager, opt);
-            functionalGroupNodes.add(new FunctionalGroupNode(refCode));
-            //System.out.println("Se agrego: "+contributionGroups.getGroupName(auxiliar.get(i).getRootNode())+" "+contributionGroups.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
-            if (probabilityFunction(functionalGroupNodes, aProba) == true) {
-                parametersManager.getCodeOfRowBNameOrRefCode(refCode);
-                //                opt=contributionGroups.getCodeOfRow() <= 1;
-                if (parametersManager.getCodeOfRow() > 1) {
-                    opt = false;
-                } else {
-                    opt = true;
-                }
+        for (int i = 0; i <= random(min); i++) {
+            groupCode = findNewGroupCode(1, opt);
+            functionalGroupNodes.add(new FunctionalGroupNode(groupCode));
+            //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getRootNode())+" "+CONTRIBUTION_GROUPS.getPrincipalGroupCode(auxiliar.get(i).getRootNode()));
+            if (probabilityFunction(functionalGroupNodes, aProba)) {
+                CamdRunner.CONTRIBUTION_GROUPS.resolveValence(groupCode);
+                opt = CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() <= 1;
             } else {
                 opt = false;
             }
@@ -47,96 +41,93 @@ public class MoleculesFactory {
         return moleculeFromGroups(functionalGroupNodes, dim);
     }
 
-    private static int findNewRefCode(int valence, ContributionGroupsManager aGC, boolean functional) {
+    /**
+     * Creates a new genome of a given genotype
+     *
+     * @return Object The new genome
+     */
+    public Molecule buildMolecule(ArrayList<FunctionalGroupNode> functionalGroupNodes) {
+        int dim = functionalGroupNodes.size();
+        return moleculeFromGroups(functionalGroupNodes, dim);
+    }
+
+    private int findNewGroupCode(int valence, boolean functional) {
         int codeOfRow = 0;
         int refCode = 0;
         if (functional) {
             double proba = Math.random();
             double p = 0;
-            int n = aGC.getTotalNumberOfGroupOfValence(valence);
+            int n = CamdRunner.CONTRIBUTION_GROUPS.getTotalNumberOfGroupOfValence(valence);
             while (proba <= 1 - p) {
                 codeOfRow = (int) (Math.random() * n) + 1;//random row to choose the group
-                p = aGC.getProbability(valence, codeOfRow);
+                p = CamdRunner.CONTRIBUTION_GROUPS.getProbability(valence, codeOfRow);
                 //	System.out.println("pruebaaa");
             }
-//	/	System.out.println("pruebaa2");
-            refCode = aGC.getRefCode(valence, codeOfRow);
+            //	/	System.out.println("pruebaa2");
+            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
         } else {
             codeOfRow = 1;//the code of the firs group (Structural group)
-            refCode = aGC.getRefCode(valence, codeOfRow);
+            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
         }
         return refCode;
     }
 
-    public boolean probabilityFunction(ArrayList<FunctionalGroupNode> root, double aProba) {
-        boolean show = false;
+    private boolean probabilityFunction(ArrayList<FunctionalGroupNode> root, double aProba) {
         double random = Math.random();
-        if (random <= aProba && Restrictions.canBeFunctional(root, parametersManager)) {
-            show = true;
-        } else {
-            show = false;
-        }
-        return show;
+        /*TODO CHECK WHY THE 1ST PART*/
+        boolean isFunctional = Restrictions.canBeFunctional(root);
+        return random <= aProba && isFunctional;
     }
 
+    private Molecule moleculeFromGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
+        FunctionalGroupNode group = createRandomGroups(leaves.size() + 1, dim, leaves);
+        //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getRootNode()));
+        boolean next;
 
-    public Molecule moleculeFromGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
-        FunctionalGroupNode gr;
-        gr = createRandomGroups(leaves.size() + 1, dim, leaves);
-        //System.out.println("GroupNew: "+contributionGroups.getGroupName(gr.getRootNode()));
-        boolean next = false;
-
-        if (leaves.size() <= parametersManager.getGroupValence(gr.getRootNode())) { // if is the last group
+        if (leaves.size() <= CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getRootNode())) { // if is the last group
             next = true;
-            while (next == true) {
-                //System.out.println("tama�o: "+leaves.size());
+            while (next) {
+                //System.out.println("tamaño: "+leaves.size());
                 FunctionalGroupNode temporal = leaves.get(0);
                 //	System.out.println("Grupo: "+gr.getRootNode());
-                Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
+                Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                 leaves.remove(0);
-                if (leaves.size() == 0) {
-                    next = false; //
-                }
+                next = leaves.size() != 0;
             }
-            if (parametersManager.getGroupValence(gr.getRootNode()) > gr.getGroupsCount()) {
-                int m = gr.getGroupsCount();
-                for (int i = 0; i < parametersManager.getGroupValence(gr.getRootNode()) - m; i++) {  // en esta parte se corrigi� el error de la valencia incompleta
-                    FunctionalGroupNode aG = new FunctionalGroupNode(findNewRefCode(1, parametersManager, probabilityFunction(leaves, 0.4)));
+            if (CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getRootNode()) > group.countSubgroups()) {
+                int m = group.countSubgroups();
+                for (int i = 0; i < CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getRootNode()) - m; i++) {  // en esta parte se corrigió el error de la valencia incompleta
+                    FunctionalGroupNode aG = new FunctionalGroupNode(findNewGroupCode(1, probabilityFunction(leaves, 0.4)));
                     //	System.out.println("SUb: "+aG.getRootNode());
-                    Restrictions.mayBeFuncFuncOrOH(aG, gr, false, parametersManager);
+                    Restrictions.mayBeFuncFuncOrOH(aG, group, false);
                     dim = dim + 1;
                 }
             }
-            leaves.add(gr);
+            leaves.add(group);
             dim = dim + 1;
-        } else if (leaves.size() > parametersManager.getGroupValence(gr.getRootNode())) {
-            //System.out.println("valence New"+contributionGroups.getGroupValence(gr.getRootNode()));
+        } else if (leaves.size() > CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getRootNode())) {
+            //System.out.println("valence New"+contributionGroups.findGroupValence(gr.getRootNode()));
             next = true;
-            while (next == true) {
+            while (next) {
                 if (leaves.size() > 0) {
                     FunctionalGroupNode temporal = leaves.get(0);
-                    Restrictions.mayBeFuncFuncOrOH(temporal, gr, true, parametersManager);
+                    Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                     leaves.remove(0);
-
-                    //System.out.println("Valencia hojas: "+(contributionGroups.getGroupValence(gr.getRootNode())+" hijos: "+gr.getGroupsCount()));
-                    if (parametersManager.getGroupValence(gr.getRootNode()) - 1 == gr.getGroupsCount()) {
+                    //System.out.println("Valencia hojas: "+(contributionGroups.findGroupValence(gr.getRootNode())+" hijos: "+gr.countSubgroups()));
+                    if (CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getRootNode()) - 1 == group.countSubgroups())
                         next = false; //
-                    }
-
                 } else {
                     next = false;
                 }
 
             }
-            int val = gr.getGroupsCount() - parametersManager.getGroupValence(gr.getRootNode());
-            //System.out.println("resta: "+val);
-            leaves.add(gr);
+            leaves.add(group);
             dim = dim + 1;
-            if (leaves.size() >= 1) {
+
+            if (leaves.size() >= 1)
                 moleculeFromGroups(leaves, dim);
-            }
         }
-        //if(leaves.size()==1 && contributionGroups.getGroupValence(leaves.get(0))-leaves.get(0).getGroupsCount()==0){
+        //if(leaves.size()==1 && contributionGroups.findGroupValence(leaves.get(0))-leaves.get(0).countSubgroups()==0){
         //return new Molecules(leaves.get(0));
         //}
         return new Molecule(leaves.get(0));
@@ -148,9 +139,9 @@ public class MoleculesFactory {
      * @return
      */
     private FunctionalGroupNode createRandomGroups(int sizeAux, int dim, ArrayList<FunctionalGroupNode> leaves) {
-        int Valence = randomProbability(sizeAux, dim);
+        int valence = randomProbability(sizeAux, dim);
         //System.out.println("The valence was"+Valence);
-        FunctionalGroupNode newG = new FunctionalGroupNode(findNewRefCode(Valence, parametersManager, probabilityFunction(leaves, 0.4)));
+        FunctionalGroupNode newG = new FunctionalGroupNode(findNewGroupCode(valence, probabilityFunction(leaves, 0.4)));
         return newG;
     }
 
@@ -160,7 +151,7 @@ public class MoleculesFactory {
      *
      * @return
      */
-    public int randomProbability(int sizeAux, int dim) {
+    private int randomProbability(int sizeAux, int dim) {
         int valence = 0;
         int x = maxGroupsSize - dim; // groups to complete the molec
         int y = 2 * x + 2;

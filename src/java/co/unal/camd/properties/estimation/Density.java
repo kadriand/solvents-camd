@@ -1,18 +1,12 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
+import co.unal.camd.view.CamdRunner;
 
 public class Density {
-
-
-//////////////////////////////////Density//////////////////////////////////////////
-
-    private ContributionGroupsManager aGC;
     private Molecule aMolecule;
     private double temperature;
 
-    public Density(Molecule solvent, double temp, ContributionGroupsManager aGC) {
-        this.aGC = aGC;
+    public Density(Molecule solvent, double temp) {
         temperature = temp;
         aMolecule = solvent;
     }
@@ -60,9 +54,9 @@ public class Density {
             } else {
 
                 for (int j = 0; j <= 3; j++) {
-                    a = aGC.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][0];
-                    b = aGC.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][1];
-                    c = aGC.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][2];
+                    a = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][0];
+                    b = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][1];
+                    c = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][2];
                     sum = sum + (a + b * temperature + c * temperature * temperature);
                     //System.out.println("a "+a);
                     //System.out.println("b "+b);
@@ -72,17 +66,17 @@ public class Density {
             }
         }
         //System.out.println(sum);
-        GroupArray gr = aMolecule.getGroupArray();
+        MoleculeGroups gr = aMolecule.getGroupArray();
         gr.optimize();
         //System.out.println("SUmaD"+sum);
-        return PM.getMethodResult(gr, aGC) / sum;
+        return PM.getMethodResult(gr) / sum;
     }
 
     public static boolean isBond(FunctionalGroupNode aGroup, int rootGroup, int leafGroup) {
         boolean show = false;
 
         if (aGroup.getRootNode() == rootGroup && aGroup.getGroupAt(0) != null) {
-            for (int i = 0; i < aGroup.getGroupsCount(); i++) {
+            for (int i = 0; i < aGroup.countSubgroups(); i++) {
                 //System.out.println("grupo:"+aGroup.getRootNode());
                 //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getRootNode());
                 if (aGroup.getGroupAt(i).getRootNode() == leafGroup) {

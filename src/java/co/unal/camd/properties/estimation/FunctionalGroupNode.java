@@ -1,6 +1,6 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
+import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 
 import java.util.Vector;
@@ -10,12 +10,12 @@ public class FunctionalGroupNode {
 
     private int rootNode; //identification of each group by refCode
     private Vector<FunctionalGroupNode> subGroups;
-    //    private ContributionParametersManager contributionGroups;
+    //    private ContributionParametersManager CONTRIBUTION_GROUPS;
 
     public FunctionalGroupNode(FunctionalGroupNode functionalGroupNode) {
         rootNode = functionalGroupNode.getRootNode();
         subGroups = new Vector<>();
-        int n = functionalGroupNode.getGroupsCount();
+        int n = functionalGroupNode.countSubgroups();
         for (int i = 0; i < n; i++) {
             subGroups.add(functionalGroupNode.subGroups.get(i).clone());
         }
@@ -30,14 +30,13 @@ public class FunctionalGroupNode {
         subGroups = new Vector<>();
     }
 
-    public FunctionalGroupNode(String name, ContributionGroupsManager parametersManager) {
-        rootNode = parametersManager.getRefCode(name);
+    public FunctionalGroupNode(String name) {
+        rootNode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(name);
         subGroups = new Vector<>();
     }
 
     /**
      * add a group to this group and count the valence to waranty the 0 valence and octete law in the molecule
-     *
      */
     public void addGroup(FunctionalGroupNode subG) {
         subGroups.addElement(subG);
@@ -47,16 +46,14 @@ public class FunctionalGroupNode {
         subGroups.remove(i);
     }
 
-    public int getTotalGroupsCount() {
+    public int countTotalGroups() {
         int s = 1;
-
-        for (int i = 0; i < getGroupsCount(); i++) {
-            s += getGroupAt(i).getTotalGroupsCount();
-        }
+        for (int i = 0; i < subGroups.size(); i++)
+            s += getGroupAt(i).countTotalGroups();
         return s;
     }
 
-    public int getGroupsCount() {
+    public int countSubgroups() {
         return subGroups.size();
     }
 
@@ -65,19 +62,17 @@ public class FunctionalGroupNode {
     }
 
     public int getRefCodeGroupAt(int i) {
-        if (subGroups.size() < i + 1) {
+        if (subGroups.size() < i + 1)
             return 0;
-        } else {
+        else
             return subGroups.elementAt(i).getRootNode();
-        }
     }
 
     public FunctionalGroupNode getGroupAt(int i) {
-        if (subGroups.size() < i + 1) {
+        if (subGroups.size() < i + 1)
             return null;
-        } else {
+        else
             return subGroups.elementAt(i);
-        }
     }
 
     public void setGroupAt(int i, FunctionalGroupNode aGr) {
@@ -94,7 +89,7 @@ public class FunctionalGroupNode {
 
     public String toString() {
         return Integer.toString(rootNode);
-        //        return contributionGroups.getGroupName(rootNode);
+        //        return CONTRIBUTION_GROUPS.findGroupName(rootNode);
     }
 
 }

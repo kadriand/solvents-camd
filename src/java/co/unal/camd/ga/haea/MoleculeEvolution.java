@@ -1,8 +1,7 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
-import co.unal.camd.properties.estimation.GroupArray;
 import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.estimation.MoleculeGroups;
 import co.unal.camd.view.CamdRunner;
 import lombok.Getter;
 import unalcol.descriptors.Descriptors;
@@ -29,7 +28,6 @@ import unalcol.types.real.array.DoubleArrayPlainWrite;
 
 public class MoleculeEvolution {
 
-    private ContributionGroupsManager parametersManager;
     private HaeaOperators operators;
     private Goal<Molecule, Double> goal;
     private Space<Molecule> space;
@@ -40,15 +38,12 @@ public class MoleculeEvolution {
     private Solution<Molecule> bestSolution;
 
     public MoleculeEvolution(CamdRunner camdRunner) {
-        this.parametersManager = camdRunner.getContributionGroups();
-        this.space = new MoleculeSpace(camdRunner.getMaxGroups(), parametersManager);
-
-        // TODO: Set the fitness parameters: double temperature, Molecules solute, Molecules solventUser, GenotypeChemistry contributionGroups
-        GroupArray solute = camdRunner.getMoleculesUser().get(0);
-        GroupArray solvent = camdRunner.getMoleculesUser().get(1);
+        this.space = new MoleculeSpace(camdRunner.getMaxGroups());
+        MoleculeGroups solute = camdRunner.getUserMolecules().get(0);
+        MoleculeGroups solvent = camdRunner.getUserMolecules().get(1);
 
         // Optimization Function
-        moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits(), parametersManager);
+        moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits());
 
         goal = new OptimizationGoal<>(moleculeFitness, false); // maximizing, remove the parameter false if minimizing
 
@@ -56,11 +51,11 @@ public class MoleculeEvolution {
     }
 
     public void buildOperators() {
-        MoleculeMutation mutation = new MoleculeMutation(parametersManager);
-        Cross xover = new Cross(parametersManager);
-        CutAndClose cutAndClose = new CutAndClose(parametersManager);
-        CutAndReplace cutAndReplace = new CutAndReplace(parametersManager);
-        ChangeByCH2 changeByCH2 = new ChangeByCH2(parametersManager);
+        MoleculeMutation mutation = new MoleculeMutation();
+        Cross xover = new Cross();
+        CutAndClose cutAndClose = new CutAndClose();
+        CutAndReplace cutAndReplace = new CutAndReplace();
+        ChangeByCH2 changeByCH2 = new ChangeByCH2();
 
         HaeaOperators<Molecule> operators = new SimpleHaeaOperators<>(
                 mutation,

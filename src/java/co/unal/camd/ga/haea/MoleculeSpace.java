@@ -1,6 +1,5 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.space.Space;
 
@@ -9,9 +8,9 @@ public class MoleculeSpace extends Space<Molecule> {
     private int maxGroups;
     private MoleculesFactory moleculesFactory;
 
-    public MoleculeSpace(int maxGroups, ContributionGroupsManager parametersManager) {
+    public MoleculeSpace(int maxGroups) {
         this.maxGroups = maxGroups;
-        moleculesFactory = new MoleculesFactory(maxGroups, parametersManager);
+        moleculesFactory = new MoleculesFactory(maxGroups);
     }
 
     @Override

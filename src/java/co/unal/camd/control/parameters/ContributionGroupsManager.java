@@ -3,19 +3,22 @@ package co.unal.camd.control.parameters;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
  * Finds the parameters used for the computing of chemical properties
  */
-public class ContributionGroupsManager {
+public final class ContributionGroupsManager {
 
-    private String[][][] allGroups;
+    @Getter
+    private String[][][] groupsData;
     @Getter
     private String[][][] ijParameters;
     @Getter
     private String[][][] secondOrderGroups;
     private String[][] probabilities;
+    @Getter
     private int codeOfRow;
     private int valence;
 
@@ -23,14 +26,14 @@ public class ContributionGroupsManager {
      * Manager of the parameters used by the unifac based methods
      */
     public ContributionGroupsManager() {
-        allGroups = new String[8][50][50];
+        groupsData = new String[8][50][50];
         UnifacParameters unifacParameters = new UnifacParameters();
         unifacParameters.loadUnifac();
-        unifacParameters.loadInfoGroups();
+        unifacParameters.loadGroupsData();
         unifacParameters.loadSecondOrderParameters();
         unifacParameters.loadProbabilities();
         ijParameters = unifacParameters.getIjParams();
-        allGroups = unifacParameters.getAllGroups();
+        groupsData = unifacParameters.getGroupsData();
         secondOrderGroups = unifacParameters.getSecondOrderParameters();
         probabilities = unifacParameters.getMainGroupProbabilities();
     }
@@ -39,7 +42,7 @@ public class ContributionGroupsManager {
      * if(functional==true){
      * valence=aValence;
      * <p>
-     * int numGroupOfValence=(int)(Double.parseDouble(op.getAllGroups()[valence-1][0][0]));
+     * int numGroupOfValence=(int)(Double.parseDouble(op.getGroupsData()[valence-1][0][0]));
      * codeOfRow=(int)(Math.random()*numGroupOfValence)+1;//random row to choose the group
      * <p>
      * }
@@ -49,7 +52,7 @@ public class ContributionGroupsManager {
     private void getValenceAndCodeOfRowByName(String aName) {
         for (int j = 0; j <= 6; j++)
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
-                if (aName != allGroups[j][i][2])
+                if (!Objects.equals(aName, groupsData[j][i][2]))
                     continue;
                 codeOfRow = i;
                 valence = j + 1;
@@ -62,7 +65,7 @@ public class ContributionGroupsManager {
         int a;
         for (int j = 0; j <= 6; j++)
             for (int i = 1; i <= getTotalNumberOfGroupOfValence(j + 1); i++) {
-                a = (int) (Double.parseDouble(allGroups[j][i][3]));
+                a = (int) (Double.parseDouble(groupsData[j][i][3]));
                 if (refCode != a)
                     continue;
                 valence = j + 1;
@@ -72,7 +75,7 @@ public class ContributionGroupsManager {
             }
     }
 
-    public void getCodeOfRowBNameOrRefCode(Object toSearch) {
+    public final void resolveValence(Object toSearch) {
         if (toSearch instanceof String) {
             String name = (String) toSearch;
             getValenceAndCodeOfRowByName(name);
@@ -161,106 +164,94 @@ public class ContributionGroupsManager {
     }
 
     public double getProbability(int valence, int codeOfRow) {
-        int p = (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][1]));
+        int p = (int) (Double.parseDouble(groupsData[valence - 1][codeOfRow][1]));
         return getProbability(p);
     }
 
     public int getPrincipalGroupCode(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        int a = (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][1]));
+        resolveValence(toSearch);
+        int a = (int) (Double.parseDouble(groupsData[valence - 1][codeOfRow][1]));
         return a;
     }
 
-    public int getRefCode(String aName) {
+    public int findGroupCode(String aName) {
         getValenceAndCodeOfRowByName(aName);
-        return (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][3]));
+        return (int) (Double.parseDouble(groupsData[valence - 1][codeOfRow][3]));
     }
 
-    public int getRefCode(int valence, int codeOfRow) {
-        return (int) (Double.parseDouble(allGroups[valence - 1][codeOfRow][3]));
+    public int findGroupCode(int valence, int codeOfRow) {
+        return (int) (Double.parseDouble(groupsData[valence - 1][codeOfRow][3]));
     }
 
-    public String getGroupName(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return allGroups[valence - 1][codeOfRow][2];
+    public String findGroupName(Object toSearch) {
+        resolveValence(toSearch);
+        return groupsData[valence - 1][codeOfRow][2];
     }
 
-    public int getGroupValence(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
+    public int findGroupValence(Object toSearch) {
+        resolveValence(toSearch);
         //System.out.println("valence"+valence);
         return valence;
     }
 
-    public void setPseudoValenceIncreaseIn1() {
-        valence = valence + 1;
-    }
-
     public double getR(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][4]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][4]);
     }
 
     public double getQ(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][5]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][5]);
     }
 
     public double getPM(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][6]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][6]);
     }
 
     public double getConstantPTeb(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][7]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][7]);
     }
 
     public double getG(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][8]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][8]);
     }
 
     public double[][] getDensityConstants(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
+        resolveValence(toSearch);
         double[][] ABC = new double[4][4];
         for (int i = 0; i <= 3; i++) {
-            ABC[i][0] = Double.parseDouble(allGroups[valence - 1][codeOfRow][9 + i * 3]);
-            ABC[i][1] = Double.parseDouble(allGroups[valence - 1][codeOfRow][10 + i * 3]);
-            ABC[i][2] = Double.parseDouble(allGroups[valence - 1][codeOfRow][11 + i * 3]);
+            ABC[i][0] = Double.parseDouble(groupsData[valence - 1][codeOfRow][9 + i * 3]);
+            ABC[i][1] = Double.parseDouble(groupsData[valence - 1][codeOfRow][10 + i * 3]);
+            ABC[i][2] = Double.parseDouble(groupsData[valence - 1][codeOfRow][11 + i * 3]);
         }
         return ABC;
     }
 
     public double getMeltTemp(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][21]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][21]);
     }
 
     public double getDM(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][22]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][22]);
     }
 
     public double getMV(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][23]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][23]);
     }
 
     public double getHi(Object toSearch) {
-        getCodeOfRowBNameOrRefCode(toSearch);
-        return Double.parseDouble(allGroups[valence - 1][codeOfRow][24]);
+        resolveValence(toSearch);
+        return Double.parseDouble(groupsData[valence - 1][codeOfRow][24]);
     }
 
     public int getTotalNumberOfGroupOfValence(int valence) {
-        return (int) (Double.parseDouble(allGroups[valence - 1][0][0]));
-    }
-
-    public int getCodeOfRow() {
-        return codeOfRow;
-    }
-
-    public String[][][] getAllGroups() {
-        return allGroups;
+        return (int) (Double.parseDouble(groupsData[valence - 1][0][0]));
     }
 
     public double getTemperatureSecondOrderParameter(int caseNum) {

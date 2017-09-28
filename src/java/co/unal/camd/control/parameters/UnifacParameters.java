@@ -29,7 +29,7 @@ public class UnifacParameters {
     @Getter
     private String[][][] ijParams = new String[3][1000][1000];
     @Getter
-    private String[][][] allGroups = new String[8][50][50];
+    private String[][][] groupsData = new String[8][50][50];
     @Getter
     private String[][][] secondOrderParameters = new String[2][210][7];
     @Getter
@@ -90,7 +90,7 @@ public class UnifacParameters {
                 while (cellIterator.hasNext()) {
                     HSSFCell cell = (HSSFCell) cellIterator.next();
                     ijParams[i][row][col] = cell.toString();
-                    // System.out.print("\t" + celda.toString());
+                    // System.out.print("\t" + celda.readableString());
                     // Imprime el contenido de la celda (valores o formulas)
                     col = col + 1;
                 }
@@ -100,15 +100,12 @@ public class UnifacParameters {
         }
     }
 
-    ///////////////////////////////////////////////load info//////////////////////////////////////////////////////////////////////////
-
     /**
      * load the information of all groups, call the excel document, from the sheet 3 up to the 9
-     *
+     * <p>
      * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
-     *
      */
-    public void loadInfoGroups() {
+    public void loadGroupsData() {
         int row;
         int col;
 
@@ -123,7 +120,7 @@ public class UnifacParameters {
                 col = 0;
                 while (cellIterator.hasNext()) {
                     HSSFCell cell = (HSSFCell) cellIterator.next();
-                    allGroups[i][row][col] = cell.toString();
+                    groupsData[i][row][col] = cell.toString();
                     col++;
                 }
                 row++;
@@ -148,7 +145,7 @@ public class UnifacParameters {
                 while (iteratorCeldas.hasNext()) {
                     HSSFCell celda = (HSSFCell) iteratorCeldas.next();
                     secondOrderParameters[i][row][col] = celda.toString();
-                    //System.out.print("\t" + celda.toString());
+                    //System.out.print("\t" + celda.readableString());
                     // Imprime el contenido de la celda (valores o formulas)
                     col = col + 1;
                 }
@@ -172,7 +169,7 @@ public class UnifacParameters {
             while (iteratorCeldas.hasNext()) {
                 HSSFCell celda = (HSSFCell) iteratorCeldas.next();
                 mainGroupProbabilities[row][col] = celda.toString();
-                //System.out.print("\t" + celda.toString());
+                //System.out.print("\t" + celda.readableString());
                 // Imprime el contenido de la celda (valores o formulas)
                 col = col + 1;
             }

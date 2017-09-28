@@ -1,20 +1,20 @@
 package co.unal.camd.properties.estimation;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeOperations;
+import co.unal.camd.view.CamdRunner;
 
 
 public class GeneticOperator {
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll, ContributionGroupsManager aGC) {
+    public static final void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll) {
         FunctionalGroupNode aGroup = new FunctionalGroupNode(0);
         //System.out.println("CCoperator");
-        //	System.out.println("c:"+genotype.getGroupsCount());
+        //	System.out.println("c:"+genotype.countSubgroups());
         //	System.out.println("code:"+codeToCut);
 
         if (codeToCut == 0) {
             if (!replaceAll) {
-                for (int j = 0; j < genotype.getGroupsCount(); j++) {
+                for (int j = 0; j < genotype.countSubgroups(); j++) {
                     FunctionalGroupNode subG = genotype.getGroupAt(j);
                     aGrToReplace.addGroup(subG);
                 }
@@ -26,21 +26,21 @@ public class GeneticOperator {
         } else {
             codeToCut--;
             int i = 0;
-            while (codeToCut >= genotype.getGroupAt(i).getTotalGroupsCount()) {
-                codeToCut -= genotype.getGroupAt(i).getTotalGroupsCount();
+            while (codeToCut >= genotype.getGroupAt(i).countTotalGroups()) {
+                codeToCut -= genotype.getGroupAt(i).countTotalGroups();
                 i++;
             }
-            searchAndReplace(genotype.getGroupAt(i), codeToCut, replaceAll, aGC);
+            searchAndReplace(genotype.getGroupAt(i), codeToCut, replaceAll);
         }
         /**
-         if(genotype.getGroupsCount()>0){
+         if(genotype.countSubgroups()>0){
          //System.out.println("aaa");
-         for(int i=0;i<genotype.getGroupsCount();i++){
+         for(int i=0;i<genotype.countSubgroups();i++){
          codeToCut=codeToCut-1;
          if(codeToCut==0){
          aGroup=genotype.getGroupAt(i);
          if(replaceAll==false){
-         for(int j=0;j<genotype.getGroupAt(i).getGroupsCount();j++){
+         for(int j=0;j<genotype.getGroupAt(i).countSubgroups();j++){
          FunctionalGroupNode subG=genotype.getGroupAt(i).getGroupAt(j);
          aGrToReplace.addGroup(subG);
          }
@@ -55,27 +55,27 @@ public class GeneticOperator {
          */
     }
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll, ContributionGroupsManager aGC) {
+    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll) {
         if (codeToCut == 0) {
-            int valence = aGC.getGroupValence((genotype.getRootNode()));
-            aGC.getCodeOfRowBNameOrRefCode(genotype.getRootNode());
-            int new_code = MoleculeOperations.findNewRefCode(valence, aGC, (aGC.getCodeOfRow() > 1));
+            int valence = CamdRunner.CONTRIBUTION_GROUPS.findGroupValence((genotype.getRootNode()));
+            CamdRunner.CONTRIBUTION_GROUPS.resolveValence(genotype.getRootNode());
+            int new_code = MoleculeOperations.findNewRefCode(valence, CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() > 1);
             genotype.setRootNode(new_code);
 
         } else {
             codeToCut--;
             int i = 0;
-            while (codeToCut >= genotype.getGroupAt(i).getTotalGroupsCount()) {
-                codeToCut -= genotype.getGroupAt(i).getTotalGroupsCount();
+            while (codeToCut >= genotype.getGroupAt(i).countTotalGroups()) {
+                codeToCut -= genotype.getGroupAt(i).countTotalGroups();
                 i++;
             }
-            searchAndReplace(genotype.getGroupAt(i), codeToCut, replaceAll, aGC);
-//				for(int i=0; i<genotype.getGroupsCount();i++){
+            searchAndReplace(genotype.getGroupAt(i), codeToCut, replaceAll);
+            //				for(int i=0; i<genotype.countSubgroups();i++){
             //				code=code+1;
             //			if(code==codeToCut){
-//					}
+            //					}
             //searchAndReplace(genotype.getGroupAt(i),codeToCut, replaceAll, contributionGroups);
-//				}
+            //				}
         }
     }
 

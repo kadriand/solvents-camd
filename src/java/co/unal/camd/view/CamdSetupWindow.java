@@ -3,12 +3,7 @@
  */
 package co.unal.camd.view;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
-import co.unal.camd.properties.estimation.GroupArray;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +25,6 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
         super();
         this.setResizable(true);
         // Unifac parameters manager
-        contributionGroups = new ContributionGroupsManager();
         initialize();
     }
 
@@ -40,7 +34,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
      * @return void
      */
     private void initialize() {
-        moleculesUser = new ArrayList<>();
+        userMolecules = new ArrayList<>();
         temperature = 298.15;
         maxIterations = 50;
         this.setSize(600, 600);
@@ -88,28 +82,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
         this.maxIterations = iterations;
     }
 
-    public DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
-        for (int i = 0; i < molec.getGroupsCount(); i++) {
-            String n = contributionGroups.getGroupName(molec.getGroupAt(i).getRootNode());
-            DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
-
-            moleculeToJtree(molec.getGroupAt(i), aNode);
-            node.add(aNode);
-        }
-        return node;
-    }
-
-    public void addMoleculesUser(GroupArray userGroupArray) {
-        moleculesUser.add(userGroupArray);
-    }
-
-    public String getMoleculesUser(int i) {
-        String show = moleculesUser.get(i).toString();
-        return show;
-    }
-
     public void actionPerformed(ActionEvent arg0) {
         // TODO Auto-generated method stub
-
     }
 }
