@@ -10,8 +10,8 @@ public class SolventLoss {
     private ArrayList<MoleculeGroups> solventUandD;
 
     ////////////////////////////////////////Solvent loss/////////////////////////////////////////////////////////
-    public SolventLoss(double _temp, ArrayList<MoleculeGroups> solventObjectAndSolventOfUser) {
-        solventUandD = new ArrayList<>(solventObjectAndSolventOfUser);
+    public SolventLoss(double _temp, ArrayList<MoleculeGroups> targetAndDesignedSolvents) {
+        solventUandD = new ArrayList<>(targetAndDesignedSolvents);
         temp = _temp;
     }
 

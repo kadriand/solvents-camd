@@ -77,21 +77,21 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solvent"+SB.get(0).getMoleculeByRootGroup());
         //System.out.println("solventuser"+SB.get(1).getMoleculeByRootGroup());
 
-        ArrayList<MoleculeGroups> SB = new ArrayList<>();
-        MoleculeGroups s3 = solvent.getGroupArray();
+        ArrayList<MoleculeGroups> targetAndDesignedSolvents = new ArrayList<>();
+        MoleculeGroups s3 = solvent.getGroupsArray();
         MoleculeGroups b3 = solventUser;
         s3.setComposition(_D);
         b3.setComposition(_C);
-        SB.add(s3);
-        SB.add(b3);
+        targetAndDesignedSolvents.add(s3);
+        targetAndDesignedSolvents.add(b3);
 
-        ArrayList<Integer> secOrderCodes = solvent.get2OrderGroupArray();
+        ArrayList<Integer> secOrderCodes = solvent.find2OrderGroupArray();
         GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes);
         BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes);
         Density D = new Density(solvent, temperature);
         MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes);
-        SolventLoss SL = new SolventLoss(temperature, SB);
         DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature);
+        SolventLoss SL = new SolventLoss(temperature, targetAndDesignedSolvents);
 
         double ge = GE.getMethodResult();
         double bt = BT.getMethodResult();
@@ -137,7 +137,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solventuser"+AB.get(1).getMoleculeByRootGroup());
 
         MoleculeGroups b1 = solventUser;
-        MoleculeGroups s1 = solvent.getGroupArray();
+        MoleculeGroups s1 = solvent.getGroupsArray();
         b1.setComposition(_D);
         s1.setComposition(_C);
         BS.add(b1);
@@ -146,7 +146,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solvent"+BS.get(1).getMoleculeByRootGroup());
 
         MoleculeGroups a2 = solute;
-        MoleculeGroups s2 = solvent.getGroupArray();
+        MoleculeGroups s2 = solvent.getGroupsArray();
         a2.setComposition(_D);
         s2.setComposition(_C);
         AS.add(a2);

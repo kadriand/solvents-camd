@@ -9,11 +9,11 @@ public class GibbsEnergy {
 
     private double sum;
     private MoleculeGroups aMolecule;
-    private ArrayList<Integer> secondOrderCode;
+    private ArrayList<Integer> secondOrderCodes;
 
-    public GibbsEnergy(Molecule solvent, ArrayList<Integer> SOG) {
-        secondOrderCode = SOG;
-        aMolecule = solvent.getGroupArray();
+    public GibbsEnergy(Molecule molecule, ArrayList<Integer> SOG) {
+        secondOrderCodes = SOG;
+        aMolecule = molecule.getGroupsArray();
         aMolecule.optimize();
     }
 
@@ -24,14 +24,14 @@ public class GibbsEnergy {
             sum += aMolecule.getAmount(i) * g;
         }
         double g0 = -14.828;
-        return sum + (g0) + calculeSecOrderContribution();
+        return sum + (g0) + calculateSecOrderContribution();
     }
 
 
-    private double calculeSecOrderContribution() {
+    private double calculateSecOrderContribution() {
         double a = 0;
-        for (int i = 0; i < secondOrderCode.size(); i++) {
-            a += CamdRunner.CONTRIBUTION_GROUPS.getGibbsESecondOrderParameter(secondOrderCode.get(i));
+        for (int i = 0; i < secondOrderCodes.size(); i++) {
+            a += CamdRunner.CONTRIBUTION_GROUPS.getGibbsESecondOrderParameter(secondOrderCodes.get(i));
         }
         return a;
     }

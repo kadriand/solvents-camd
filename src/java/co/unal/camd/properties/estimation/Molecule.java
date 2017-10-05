@@ -93,11 +93,14 @@ public class Molecule {
         return size;
     }
 
+    @Override
     public String toString() {
         String show = "";
         ArrayList<FunctionalGroupNode> a = getArray();
         for (int i = 0; i < a.size(); i++) {
-            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getRootNode()) + "-";
+            if (i > 0)
+                show += "-";
+            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getRootNode());
         }
         return show;
     }
@@ -121,7 +124,7 @@ public class Molecule {
         return array;
     }
 
-    public MoleculeGroups getGroupArray() {
+    public MoleculeGroups getGroupsArray() {
         ArrayList<FunctionalGroupNode> groupsNodes = getArray();
         int n = groupsNodes.size();
         int[] groups = new int[n];
@@ -132,7 +135,7 @@ public class Molecule {
         return moleculeGroups;
     }
 
-    public ArrayList<Integer> get2OrderGroupArray() {
+    public ArrayList<Integer> find2OrderGroupArray() {
         ArrayList<Integer> secondOrderCode = new ArrayList<>();
         secOrderContribution(genotype, secondOrderCode);
         return secondOrderCode;

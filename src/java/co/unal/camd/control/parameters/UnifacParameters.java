@@ -75,7 +75,7 @@ public class UnifacParameters {
      * Parámetros bij
      * Parámetros interacción cij
      */
-    public void loadUnifac() {
+    public void loadInteractions() {
         int row;
         int col;
         for (byte i = 0; i < 3; i++) {
@@ -90,28 +90,26 @@ public class UnifacParameters {
                 while (cellIterator.hasNext()) {
                     HSSFCell cell = (HSSFCell) cellIterator.next();
                     ijParams[i][row][col] = cell.toString();
-                    // System.out.print("\t" + celda.readableString());
                     // Imprime el contenido de la celda (valores o formulas)
                     col = col + 1;
                 }
-                //System.out.println();
                 row = row + 1;
             }
         }
     }
 
     /**
-     * load the information of all groups, call the excel document, from the sheet 3 up to the 9
+     * load the information of all groups, call the excel document, from the sheet 4 up to the 10
      * <p>
      * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
      */
-    public void loadGroupsData() {
+    void loadGroupsData() {
         int row;
         int col;
 
         for (byte i = 0; i < 7; i++) {
             HSSFSheet sheet = book.getSheetAt(i + 3);
-            System.out.println("Hoja: " + book.getSheetName(i + 3));
+            System.out.println("FIRST ORDER GROUPS Hoja: " + book.getSheetName(i + 3));
             Iterator rowIterator = sheet.rowIterator();
             row = 0;
             while (rowIterator.hasNext()) {
@@ -128,14 +126,17 @@ public class UnifacParameters {
         }
     }
 
-    public void loadSecondOrderParameters() {
-
+    /**
+     * load the information of the second order groups, call the excel document, from the sheets 11 and 12
+     * <p>
+     * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
+     */
+    void loadSecondOrderParameters() {
         int row;
         int col;
-
         for (byte i = 0; i < 2; i++) {
             HSSFSheet sheet = book.getSheetAt(i + 11);
-            System.out.println("Hoja: " + book.getSheetName(i + 11));
+            System.out.println("SECOND ORDER PARAMETERS Hoja: " + book.getSheetName(i + 11));
             Iterator iteratorSheets = sheet.rowIterator();
             row = 0;
             while (iteratorSheets.hasNext()) {
@@ -145,11 +146,8 @@ public class UnifacParameters {
                 while (iteratorCeldas.hasNext()) {
                     HSSFCell celda = (HSSFCell) iteratorCeldas.next();
                     secondOrderParameters[i][row][col] = celda.toString();
-                    //System.out.print("\t" + celda.readableString());
-                    // Imprime el contenido de la celda (valores o formulas)
                     col = col + 1;
                 }
-                //System.out.println();
                 row = row + 1;
             }
         }
@@ -173,7 +171,6 @@ public class UnifacParameters {
                 // Imprime el contenido de la celda (valores o formulas)
                 col = col + 1;
             }
-            //System.out.println();
             row = row + 1;
         }
     }

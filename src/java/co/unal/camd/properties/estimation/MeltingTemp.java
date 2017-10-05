@@ -8,11 +8,11 @@ public class MeltingTemp {
 
     private double sum = 0;
     private MoleculeGroups aMolecule;
-    private ArrayList<Integer> secondOrderCode;
+    private ArrayList<Integer> secondOrderCodes;
 
-    public MeltingTemp(Molecule solvent, ArrayList<Integer> secOrderCode) {
-        secondOrderCode = secOrderCode;
-        aMolecule = solvent.getGroupArray();
+    public MeltingTemp(Molecule molecule, ArrayList<Integer> secOrderCode) {
+        secondOrderCodes = secOrderCode;
+        aMolecule = molecule.getGroupsArray();
         aMolecule.optimize();
     }
 
@@ -26,8 +26,8 @@ public class MeltingTemp {
 
     private double calculeSecOrderContribution() {
         double a = 0;
-        for (int i = 0; i < secondOrderCode.size(); i++) {
-            a += CamdRunner.CONTRIBUTION_GROUPS.getTfusSecondOrderParameter(secondOrderCode.get(i));
+        for (int i = 0; i < secondOrderCodes.size(); i++) {
+            a += CamdRunner.CONTRIBUTION_GROUPS.getTfusSecondOrderParameter(secondOrderCodes.get(i));
         }
         return a;
     }

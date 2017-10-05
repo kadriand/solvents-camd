@@ -28,7 +28,7 @@ public final class ContributionGroupsManager {
     public ContributionGroupsManager() {
         groupsData = new String[8][50][50];
         UnifacParameters unifacParameters = new UnifacParameters();
-        unifacParameters.loadUnifac();
+        unifacParameters.loadInteractions();
         unifacParameters.loadGroupsData();
         unifacParameters.loadSecondOrderParameters();
         unifacParameters.loadProbabilities();
@@ -37,17 +37,6 @@ public final class ContributionGroupsManager {
         secondOrderGroups = unifacParameters.getSecondOrderParameters();
         probabilities = unifacParameters.getMainGroupProbabilities();
     }
-
-    /**
-     * if(functional==true){
-     * valence=aValence;
-     * <p>
-     * int numGroupOfValence=(int)(Double.parseDouble(op.getGroupsData()[valence-1][0][0]));
-     * codeOfRow=(int)(Math.random()*numGroupOfValence)+1;//random row to choose the group
-     * <p>
-     * }
-     * }
-     */
 
     private void getValenceAndCodeOfRowByName(String aName) {
         for (int j = 0; j <= 6; j++)
@@ -279,17 +268,12 @@ public final class ContributionGroupsManager {
     }
 
     public ArrayList<String[]> getSecondOrderGroupCase(double root) {
-        ArrayList<String[]> caseNum = new ArrayList<String[]>();
+        ArrayList<String[]> caseNum = new ArrayList<>();
         double n = 0;
         int i = 0;
         while (n <= root) {
-            if (n == root) {
+            if (n == root)
                 caseNum.add(secondOrderGroups[0][i]);
-                //for(int j = 0 ; j<secondOrderGroups[0][i].length;j++){
-                //System.out.println("\t"+secondOrderGroups[0][i][j]);
-                //}
-                //System.out.println("\n");
-            }
             i++;
             n = Double.parseDouble(secondOrderGroups[0][i][1]);
         }

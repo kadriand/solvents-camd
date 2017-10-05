@@ -17,7 +17,7 @@ public class Density {
         double a = 0;
         double b = 0;
         double c = 0;
-        for (int i = 0; i < aMolecule.getGroupArray().size(); i++) {
+        for (int i = 0; i < aMolecule.getGroupsArray().size(); i++) {
             /**
              * this are 6 exceptions to create density groups between unifac groups
              */
@@ -66,7 +66,7 @@ public class Density {
             }
         }
         //System.out.println(sum);
-        MoleculeGroups gr = aMolecule.getGroupArray();
+        MoleculeGroups gr = aMolecule.getGroupsArray();
         gr.optimize();
         //System.out.println("SUmaD"+sum);
         return PM.getMethodResult(gr) / sum;

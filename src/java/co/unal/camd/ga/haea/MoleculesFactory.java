@@ -38,7 +38,7 @@ public class MoleculesFactory {
             }
         }
         dim = functionalGroupNodes.size();
-        return moleculeFromGroups(functionalGroupNodes, dim);
+        return newMoleculeFromBaseGroups(functionalGroupNodes, dim);
     }
 
     /**
@@ -48,7 +48,7 @@ public class MoleculesFactory {
      */
     public Molecule buildMolecule(ArrayList<FunctionalGroupNode> functionalGroupNodes) {
         int dim = functionalGroupNodes.size();
-        return moleculeFromGroups(functionalGroupNodes, dim);
+        return newMoleculeFromBaseGroups(functionalGroupNodes, dim);
     }
 
     private int findNewGroupCode(int valence, boolean functional) {
@@ -79,7 +79,14 @@ public class MoleculesFactory {
         return random <= aProba && isFunctional;
     }
 
-    private Molecule moleculeFromGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
+    /**
+     * Builds a new molecule from some pre-existent groups
+     *
+     * @param leaves
+     * @param dim
+     * @return
+     */
+    private Molecule newMoleculeFromBaseGroups(ArrayList<FunctionalGroupNode> leaves, int dim) {
         FunctionalGroupNode group = createRandomGroups(leaves.size() + 1, dim, leaves);
         //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getRootNode()));
         boolean next;
@@ -125,7 +132,7 @@ public class MoleculesFactory {
             dim = dim + 1;
 
             if (leaves.size() >= 1)
-                moleculeFromGroups(leaves, dim);
+                newMoleculeFromBaseGroups(leaves, dim);
         }
         //if(leaves.size()==1 && contributionGroups.findGroupValence(leaves.get(0))-leaves.get(0).countSubgroups()==0){
         //return new Molecules(leaves.get(0));

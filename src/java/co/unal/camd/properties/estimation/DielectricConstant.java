@@ -31,11 +31,11 @@ public class DielectricConstant {
     private boolean isConditionG2;
 
 
-    public DielectricConstant(Molecule solvent, ArrayList<Integer> secOrder, double Temperature) {
-        temperature = Temperature;
-        secondOrderCode = secOrder;
-        aMolecule = solvent.getGroupArray();
-        aMolecule.optimize();
+    public DielectricConstant(Molecule molecule, ArrayList<Integer> secOrder, double temperature) {
+        this.temperature = temperature;
+        this.secondOrderCode = secOrder;
+        this.aMolecule = molecule.getGroupsArray();
+        this.aMolecule.optimize();
 
         isConditionG1 = isConditionCase(conditionG1);
         isConditionGHC = isConditionCase(conditionGHC);
@@ -43,7 +43,6 @@ public class DielectricConstant {
         isConditionG3 = isConditionCase(conditionG3);
         isConditionGND = isConditionCase(conditionGND);
         isConditionG2 = isConditionCase(conditionG2);
-
     }
 
     public double getVapHeat() {
