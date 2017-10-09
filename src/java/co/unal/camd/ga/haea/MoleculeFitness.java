@@ -31,6 +31,9 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
     private double[] unc;
     private double[] Po;
 
+    // USE FOR DEBUGGING
+    // private static int eval = 0;
+
     public MoleculeFitness(double temperature, MoleculeGroups soluteGroups, MoleculeGroups solventGroupsUser, double[] weight, double[][] limits) {
         super();
         this.solute = soluteGroups;
@@ -123,11 +126,10 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
                 .setDc(dc)
                 .setKs(ks);
 
-        System.out.println("evalfit " + (++eval) + ": " + fitness);
+        //        System.out.println("Fitness evaluation " + (++eval) + ": " + fitness);
         return fitness;
     }
 
-    private static int eval = 0;
 
     private double computeKS(Molecule solvent) {
         double ks = 0;
