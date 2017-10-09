@@ -9,8 +9,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import unalcol.search.population.Population;
-import unalcol.search.solution.Solution;
+import unalcol.Tagged;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -89,7 +88,7 @@ public class CamdRunner extends JFrame {
         System.out.println(" max iter :" + maxIterations);
 
         // EVOLUTION TIME
-        Population<Molecule> population = moleculeEvolution.evolve(parentSize, maxIterations);
+        Tagged<Molecule>[] population = moleculeEvolution.evolve(parentSize, maxIterations);
 
         //        double best = population.statistics().best;
         //        double avg = population.statistics().avg;
@@ -99,17 +98,17 @@ public class CamdRunner extends JFrame {
         //        System.out.println("worst: " + worst);
 
         System.out.println("BEST FITNESS");
-        Solution<Molecule> bestSolution = moleculeEvolution.getBestSolution();
-        Double bestFitness = bestSolution.object().getFitness();
+        Tagged<Molecule> bestSolution = moleculeEvolution.getBestSolution();
+        Double bestFitness = bestSolution.unwrap().getFitness();
         System.out.println(bestFitness);
 
-        List<Solution<Molecule>> sortedSolution = Arrays.stream(population.object())
-                .sorted(Comparator.comparingDouble(o -> o.object().getFitness()))
+        List<Tagged<Molecule>> sortedSolution = Arrays.stream(population)
+                .sorted(Comparator.comparingDouble(o -> o.unwrap().getFitness()))
                 .collect(Collectors.toList());
 
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
-            Molecule solvent = sortedSolution.get(i).object();
+            Molecule solvent = sortedSolution.get(i).unwrap();
 
             FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
             String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getRootNode());

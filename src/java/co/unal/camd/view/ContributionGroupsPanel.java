@@ -382,7 +382,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
                 if (group != null) {//se genera un null cada vez q hay cambio en valencia
                     groupsListModel.addElement(group);
                     userMoleculeGroups.add(group);
-                    System.out.println(group);
                 }
             });
 

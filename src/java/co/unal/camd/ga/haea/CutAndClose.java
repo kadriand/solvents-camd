@@ -3,10 +3,11 @@ package co.unal.camd.ga.haea;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_1_1;
+import unalcol.services.MicroService;
 
 import static co.unal.camd.properties.estimation.GeneticOperator.searchAndReplace;
 
-public class CutAndClose extends Variation_1_1<Molecule> {
+public class CutAndClose extends MicroService<Molecule> implements Variation_1_1<Molecule> {
 
     @Override
     public Molecule apply(Molecule genome) {

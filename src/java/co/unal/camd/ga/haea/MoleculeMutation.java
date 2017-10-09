@@ -3,10 +3,11 @@ package co.unal.camd.ga.haea;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_1_1;
+import unalcol.services.MicroService;
 
 /**
  */
-public class MoleculeMutation extends Variation_1_1<Molecule> {
+public class MoleculeMutation extends MicroService<Molecule> implements Variation_1_1<Molecule> {
 
     public Molecule apply(Molecule genome) {
         //System.out.println("Mutation");

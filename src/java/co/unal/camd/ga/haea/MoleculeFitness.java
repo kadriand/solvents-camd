@@ -123,9 +123,11 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
                 .setDc(dc)
                 .setKs(ks);
 
-        System.out.println("evalfit: " + fitness);
+        System.out.println("evalfit " + (++eval) + ": " + fitness);
         return fitness;
     }
+
+    private static int eval = 0;
 
     private double computeKS(Molecule solvent) {
         double ks = 0;

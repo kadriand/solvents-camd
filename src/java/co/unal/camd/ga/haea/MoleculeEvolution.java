@@ -4,7 +4,8 @@ import co.unal.camd.properties.estimation.Molecule;
 import co.unal.camd.properties.estimation.MoleculeGroups;
 import co.unal.camd.view.CamdRunner;
 import lombok.Getter;
-import unalcol.descriptors.Descriptors;
+import unalcol.Tagged;
+import unalcol.clone.DefaultClone;
 import unalcol.descriptors.WriteDescriptors;
 import unalcol.evolution.EAFactory;
 import unalcol.evolution.haea.HaeaOperators;
@@ -12,16 +13,17 @@ import unalcol.evolution.haea.HaeaStep;
 import unalcol.evolution.haea.SimpleHaeaOperators;
 import unalcol.evolution.haea.SimpleHaeaOperatorsDescriptor;
 import unalcol.evolution.haea.WriteHaeaStep;
-import unalcol.io.Write;
 import unalcol.optimization.OptimizationFunction;
-import unalcol.optimization.OptimizationGoal;
-import unalcol.search.Goal;
-import unalcol.search.population.Population;
+import unalcol.random.raw.JavaGenerator;
+import unalcol.search.Search;
 import unalcol.search.population.PopulationDescriptors;
 import unalcol.search.population.PopulationSearch;
 import unalcol.search.selection.Uniform;
-import unalcol.search.solution.Solution;
+import unalcol.search.solution.SolutionDescriptors;
+import unalcol.search.solution.SolutionWrite;
 import unalcol.search.space.Space;
+import unalcol.services.Service;
+import unalcol.services.ServicePool;
 import unalcol.tracer.ConsoleTracer;
 import unalcol.tracer.Tracer;
 import unalcol.types.real.array.DoubleArrayPlainWrite;
@@ -29,13 +31,11 @@ import unalcol.types.real.array.DoubleArrayPlainWrite;
 public class MoleculeEvolution {
 
     private HaeaOperators operators;
-    private Goal<Molecule, Double> goal;
     private Space<Molecule> space;
-
     private OptimizationFunction<Molecule> moleculeFitness;
 
     @Getter
-    private Solution<Molecule> bestSolution;
+    private Tagged<Molecule> bestSolution;
 
     public MoleculeEvolution(CamdRunner camdRunner) {
         this.space = new MoleculeSpace(camdRunner.getMaxGroups());
@@ -44,9 +44,7 @@ public class MoleculeEvolution {
 
         // Optimization Function
         moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits());
-
-        goal = new OptimizationGoal<>(moleculeFitness, false); // maximizing, remove the parameter false if minimizing
-
+        moleculeFitness.minimize(false);
         buildOperators();
     }
 
@@ -68,7 +66,7 @@ public class MoleculeEvolution {
         this.operators = operators;
     }
 
-    public Population<Molecule> evolve(int parentSize, int maxIterations) {
+    public Tagged<Molecule>[] evolve(int parentSize, int maxIterations) {
 
         //        Elitism<Molecule> elitism = new Elitism(1.0, 0.0);
         Uniform<Molecule> elitism = new Uniform<>();
@@ -77,25 +75,48 @@ public class MoleculeEvolution {
         int MAXITERS = maxIterations;
         EAFactory<Molecule> factory = new EAFactory<>();
         PopulationSearch<Molecule, Double> search = factory.HAEA(POPSIZE, operators, elitism, MAXITERS);
+        search.setGoal(moleculeFitness);
 
         // Tracking the goal evaluations
-        WriteDescriptors write_desc = new WriteDescriptors();
-        Write.set(double[].class, new DoubleArrayPlainWrite(false));
-        Write.set(HaeaStep.class, new WriteHaeaStep<Molecule>());
-        Descriptors.set(Population.class, new PopulationDescriptors<Molecule>());
-        Descriptors.set(HaeaOperators.class, new SimpleHaeaOperatorsDescriptor<Molecule>());
-        Write.set(HaeaOperators.class, write_desc);
-
-        ConsoleTracer tracer = new ConsoleTracer();
-        //      Tracer.addTracer(goal, tracer);  // Uncomment if you want to trace the function evaluations
-        Tracer.addTracer(search, tracer); // Uncomment if you want to trace the hill-climbing algorithm
+        real_service(moleculeFitness, search);
+        population_service(moleculeFitness);
+        haea_service();
 
         // Apply the search method
-        Population<Molecule> solutionPopulation = search.init(space, goal);
+        Tagged<Molecule>[] solutionPopulation = search.init(space);
         solutionPopulation = search.apply(solutionPopulation, space);
 
         bestSolution = search.pick(solutionPopulation);
 
         return solutionPopulation;
     }
+
+    private void haea_service() {
+        ServicePool service = (ServicePool) Service.get();
+        service.register(new WriteHaeaStep(), HaeaStep.class);
+        service.register(new SimpleHaeaOperatorsDescriptor<Molecule>(), HaeaOperators.class);
+    }
+
+    public static void population_service(OptimizationFunction function) {
+        ServicePool service = (ServicePool) Service.get();
+        PopulationDescriptors pd = new PopulationDescriptors();
+        pd.setGoal(function);
+        service.register(pd, Tagged[].class);
+        service.register(new WriteDescriptors<Tagged[]>(), Tagged[].class);
+    }
+
+    public static void real_service(OptimizationFunction<Molecule> function, Search<Molecule, Double> search) {
+        // Tracking the goal evaluations
+        ServicePool service = new ServicePool();
+        service.register(new JavaGenerator(), Object.class);
+        service.register(new DefaultClone(), Object.class);
+        Tracer<Object> t = new ConsoleTracer<Object>();
+        t.start();
+        service.register(t, search);
+        service.register(new SolutionDescriptors<Molecule>(function), Tagged.class);
+        service.register(new DoubleArrayPlainWrite(',', false), double[].class);
+        service.register(new SolutionWrite<Molecule>(function, true), Tagged.class);
+        Service.set(service);
+    }
+
 }

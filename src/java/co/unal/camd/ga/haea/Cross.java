@@ -4,8 +4,9 @@ import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GeneticOperator;
 import co.unal.camd.properties.estimation.Molecule;
 import unalcol.search.variation.Variation_2_2;
+import unalcol.services.MicroService;
 
-public class Cross extends Variation_2_2<Molecule> {
+public class Cross extends MicroService<Molecule> implements Variation_2_2<Molecule> {
 
 
     public Molecule[] apply(Molecule one, Molecule two) {

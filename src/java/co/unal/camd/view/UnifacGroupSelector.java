@@ -61,28 +61,25 @@ public class UnifacGroupSelector extends ContributionGroupsPanel {
     @Override
     public void addMolecule() {
         int n = userMoleculeGroups.size();
-        //System.out.println("n "+n);
         int[] moleculeGroupsIds = new int[n];
         for (int i = 0; i < n; i++) {
             String gr = userMoleculeGroups.get(i);
             moleculeGroupsIds[i] = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(gr);
         }
 
-        System.out.println(Arrays.toString(moleculeGroupsIds));
         MoleculeGroups groupArray = new MoleculeGroups(moleculeGroupsIds, 0.01);
         //(Double.parseDouble(OptionPane.showInputDialog("Ingrese la Composición"))));
 
         camdSetupWindow.getUserMolecules().add(groupArray);
-
         String moleculeLabel = userMoleculesCount + ". " + groupArray.readableString();
+        System.out.println("New molecule: " + moleculeLabel + " " + Arrays.toString(moleculeGroupsIds));
         comboBoxMolecules.addItem(moleculeLabel);
         comboBoxMolecules.setSelectedIndex(0);
         principal = comboBoxMolecules.getSelectedIndex();
         userMoleculesCount++;
         groupsListModel.clear();
         groupsList.removeAll();
-        for (int i = 0; i < userMoleculeGroups.size(); i++)
-            userMoleculeGroups = new ArrayList<>();
+        userMoleculeGroups = new ArrayList<>();
     }
 
     /**
