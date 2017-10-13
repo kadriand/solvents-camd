@@ -17,7 +17,7 @@ public class MoleculeData {
 
     @Override
     public String toString() {
-        return "\n" + name + Arrays.toString(groups);
+        return "\n" + name + " " + Arrays.toString(groups);
     }
 
     @Data

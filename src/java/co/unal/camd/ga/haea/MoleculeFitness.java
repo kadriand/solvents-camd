@@ -66,7 +66,6 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //        		System.out.println("6___"+PM.getMethodResult(solventUser,CONTRIBUTION_GROUPS));
     }
 
-
     /**
      * the method to calculate the objective function,
      * A:soluto
@@ -110,10 +109,6 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         double r5 = normalizeRestriction(2, B[4], sl, Po[4], unc[4]);
         double ks = computeKS(solvent);
 
-        //System.out.println("s___"+solvent.getArray().size());
-        //System.out.println("a___"+solute.getArray().size());
-        //System.out.println("b___"+solventUser.getArray().size());
-
         //	r6 = normalizeRestriction(1, B, Pi, Pm, Pm2, 999999999, Pmin);
         //System.out.println("ks: "+ks);
         double fitness = ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
@@ -132,7 +127,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
 
     private double computeKS(Molecule solvent) {
-        double ks = 0;
+        double ks;
         ArrayList<MoleculeGroups> BS = new ArrayList<>();
         ArrayList<MoleculeGroups> AS = new ArrayList<>();
 

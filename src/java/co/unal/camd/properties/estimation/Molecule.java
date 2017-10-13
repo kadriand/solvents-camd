@@ -68,16 +68,6 @@ public class Molecule {
         }
     }
 
-    @Override
-    public Molecule clone() {
-        return new Molecule(this);
-    }
-
-    /**
-     * this method create the molec until valence =0 (first restriction) or
-     * the number of molecules is equal to maxNumof Groups allow
-     *
-     */
 
     /**
      * the molecule made
@@ -254,5 +244,14 @@ public class Molecule {
         for (int i = 0; i < dim; i++)
             a[i] = root.getGroupAt(i).getRootNode();
         return a;
+    }
+
+    /**
+     * this method create the molec until valence =0 (first restriction) or
+     * the number of molecules is equal to maxNumof Groups allow
+     */
+    @Override
+    public Molecule clone() {
+        return new Molecule(this);
     }
 }

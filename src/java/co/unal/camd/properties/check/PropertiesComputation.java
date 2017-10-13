@@ -61,6 +61,7 @@ public class PropertiesComputation {
         Molecule molecule = new Molecule(rootFunctionalGroupNode);
         double temperature = 298.15;
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
+        moleculeData.setName("Metil isobutil cetona");
         computeProperties(moleculeData, molecule, temperature);
         System.out.println(moleculeData);
         System.out.println(molecule);
