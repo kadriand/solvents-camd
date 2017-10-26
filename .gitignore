@@ -52,3 +52,6 @@ fabric.properties
 CAMD-nuHAEA.iml
 bin/
 classes/
+
+# MS Excel temporary files
+~$*

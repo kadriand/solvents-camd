@@ -49,10 +49,11 @@ public class PropertiesComputation {
     private static void evaluateSingleMolecule() {
         // Sample: *Metil isobutil cetona
         FunctionalGroupNode rootFunctionalGroupNode = new FunctionalGroupNode(18);
-        FunctionalGroupNode functionalGroupNode1 = new FunctionalGroupNode(2);
-        rootFunctionalGroupNode.addGroup(functionalGroupNode1);
+        //        FunctionalGroupNode functionalGroupNode1 = new FunctionalGroupNode(2);
+        //        rootFunctionalGroupNode.addGroup(functionalGroupNode1);
         FunctionalGroupNode functionalGroupNode2 = new FunctionalGroupNode(3);
-        functionalGroupNode1.addGroup(functionalGroupNode2);
+        rootFunctionalGroupNode.addGroup(functionalGroupNode2);
+        //        functionalGroupNode1.addGroup(functionalGroupNode2);
         FunctionalGroupNode functionalGroupNode3 = new FunctionalGroupNode(1);
         functionalGroupNode2.addGroup(functionalGroupNode3);
         FunctionalGroupNode functionalGroupNode4 = new FunctionalGroupNode(1);
@@ -61,7 +62,7 @@ public class PropertiesComputation {
         Molecule molecule = new Molecule(rootFunctionalGroupNode);
         double temperature = 298.15;
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
-        moleculeData.setName("Metil isobutil cetona");
+        moleculeData.setName("Metil isopropil cetona");
         computeProperties(moleculeData, molecule, temperature);
         System.out.println(moleculeData);
         System.out.println(molecule);
@@ -89,7 +90,7 @@ public class PropertiesComputation {
         ClassLoader classLoader = PropertiesComputation.class.getClassLoader();
         String moleculesPath = URLDecoder.decode(classLoader.getResource(fileName).getFile(), "UTF-8");
         File moleculesFile = new File(moleculesPath);
-        System.out.println("File Found : " + moleculesFile.getAbsolutePath());
+        System.out.println("\nFile Found : " + moleculesFile.getAbsolutePath());
         /*String content = new String(Files.readAllBytes(moleculesFile.toPath()));*/
         ObjectMapper mapper = new ObjectMapper();
         // Convert JSON string from file to Object

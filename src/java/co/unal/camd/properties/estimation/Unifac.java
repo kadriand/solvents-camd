@@ -202,9 +202,9 @@ public class Unifac extends Methods {
                 int k = CamdRunner.CONTRIBUTION_GROUPS.getPrincipalGroupCode(g2.getGroupCode(group));
 
                 double y = getY(m, k, temperature);
-                if (canBeDone) {
-                    sum1 = sum1 + getTheta(molecules, i, j) * getY(m, k, temperature);
-                }
+                if (canBeDone)
+                    sum1 = sum1 + getTheta(molecules, i, j) * y;
+
                 ////////////////suma3////////////////////7
                 sum3 = 0;
                 MoleculeGroups g3;
@@ -219,12 +219,9 @@ public class Unifac extends Methods {
                     }
                 }
                 /////////////////////////////////suma2///////////////////////////
-                y = getY(k, m, temperature);
-                if (canBeDone) {
+                if (canBeDone)
                     sum2 = sum2 + (getTheta(molecules, i, j) * getY(k, m, temperature) / sum3);
-                }
             }
-
         }
         //System.out.println(moleculesModif.get(principal).get(group).getQ()*(1-2.30258509*Math.log10(sum1)-sum2));
         //System.out.println("esta es la suma 1 :"+sum1);

@@ -52,7 +52,6 @@ public class Density {
                 c = 0;
                 sum = sum + (a + b * temperature + c * temperature * temperature);
             } else {
-
                 for (int j = 0; j <= 3; j++) {
                     a = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][0];
                     b = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][1];

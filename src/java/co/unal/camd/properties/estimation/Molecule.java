@@ -60,14 +60,12 @@ public class Molecule {
     }
 
     private void chemicalFormula(FunctionalGroupNode root, String show) {
-        if (root != null) {
-            show = show + root.toString() + " - ";
-            for (int i = 0; i < root.getSubGroups().size(); i++) {
-                chemicalFormula(root.getGroupAt(i), show);
-            }
-        }
+        if (root == null)
+            return;
+        show = show + root.toString() + " - ";
+        for (int i = 0; i < root.getSubGroups().size(); i++)
+            chemicalFormula(root.getGroupAt(i), show);
     }
-
 
     /**
      * the molecule made
