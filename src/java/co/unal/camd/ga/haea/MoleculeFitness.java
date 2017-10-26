@@ -32,7 +32,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
     private double[] Po;
 
     // USE FOR DEBUGGING
-    // private static int eval = 0;
+    //     private static int eval = 0;
 
     public MoleculeFitness(double temperature, MoleculeGroups soluteGroups, MoleculeGroups solventGroupsUser, double[] weight, double[][] limits) {
         super();
@@ -87,7 +87,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         targetAndDesignedSolvents.add(s3);
         targetAndDesignedSolvents.add(b3);
 
-        ArrayList<Integer> secOrderCodes = solvent.find2OrderGroupArray();
+        ArrayList<Integer> secOrderCodes = solvent.findSecondOrderGroupArray();
         GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes);
         BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes);
         Density D = new Density(solvent, temperature);

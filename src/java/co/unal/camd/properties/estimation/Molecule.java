@@ -125,7 +125,7 @@ public class Molecule {
         return moleculeGroups;
     }
 
-    public ArrayList<Integer> find2OrderGroupArray() {
+    public ArrayList<Integer> findSecondOrderGroupArray() {
         ArrayList<Integer> secondOrderCode = new ArrayList<>();
         secOrderContribution(genotype, secondOrderCode);
         return secondOrderCode;

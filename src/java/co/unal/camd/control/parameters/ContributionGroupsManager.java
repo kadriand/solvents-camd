@@ -15,8 +15,9 @@ public final class ContributionGroupsManager {
     private String[][][] groupsData;
     @Getter
     private String[][][] ijParameters;
-    @Getter
+
     private String[][][] secondOrderGroups;
+
     private String[][] probabilities;
     @Getter
     private int codeOfRow;
@@ -28,10 +29,6 @@ public final class ContributionGroupsManager {
     public ContributionGroupsManager() {
         groupsData = new String[8][50][50];
         UnifacParameters unifacParameters = new UnifacParameters();
-        unifacParameters.loadInteractions();
-        unifacParameters.loadGroupsData();
-        unifacParameters.loadSecondOrderParameters();
-        unifacParameters.loadProbabilities();
         ijParameters = unifacParameters.getIjParams();
         groupsData = unifacParameters.getGroupsData();
         secondOrderGroups = unifacParameters.getSecondOrderParameters();
@@ -243,28 +240,20 @@ public final class ContributionGroupsManager {
         return (int) (Double.parseDouble(groupsData[valence - 1][0][0]));
     }
 
-    public double getTemperatureSecondOrderParameter(int caseNum) {
-        double paramT = 0.0;
-        paramT = Double.parseDouble(secondOrderGroups[1][caseNum][0]);
-        return paramT;
+    public double getBoilingTempSecondOrderParameter(int caseNum) {
+        return Double.parseDouble(secondOrderGroups[1][caseNum][0]);
     }
 
     public double getGibbsESecondOrderParameter(int caseNum) {
-        double paramGE = 0.0;
-        paramGE = Double.parseDouble(secondOrderGroups[1][caseNum][1]);
-        return paramGE;
+        return Double.parseDouble(secondOrderGroups[1][caseNum][1]);
+    }
+
+    public double getFusionTempSecondOrderParameter(int caseNum) {
+        return Double.parseDouble(secondOrderGroups[1][caseNum][2]);
     }
 
     public double getMVolumeSecondOrderParameter(int caseNum) {
-        double paramMvolume = 0.0;
-        paramMvolume = Double.parseDouble(secondOrderGroups[1][caseNum][3]);
-        return paramMvolume;
-    }
-
-    public double getTfusSecondOrderParameter(int caseNum) {
-        double paramTfus = 0.0;
-        paramTfus = Double.parseDouble(secondOrderGroups[1][caseNum][2]);
-        return paramTfus;
+        return Double.parseDouble(secondOrderGroups[1][caseNum][3]);
     }
 
     public ArrayList<String[]> getSecondOrderGroupCase(double root) {

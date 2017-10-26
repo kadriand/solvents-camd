@@ -30,7 +30,7 @@ public class BoilingTemp {
         for (int i = 0; i < secondOrderCodes.size(); i++) {
             int so = secondOrderCodes.get(i);
             //System.out.println("so :"+so);
-            a += CamdRunner.CONTRIBUTION_GROUPS.getTemperatureSecondOrderParameter(so);
+            a += CamdRunner.CONTRIBUTION_GROUPS.getBoilingTempSecondOrderParameter(so);
 
             //System.out.println("sum :"+sum);
         }

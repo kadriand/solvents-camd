@@ -69,7 +69,7 @@ public class PropertiesComputation {
     }
 
     private static void computeProperties(MoleculeData moleculeData, Molecule molecule, double temperature) {
-        ArrayList<Integer> secOrderCodes = molecule.find2OrderGroupArray();
+        ArrayList<Integer> secOrderCodes = molecule.findSecondOrderGroupArray();
         GibbsEnergy GE = new GibbsEnergy(molecule, secOrderCodes);
         BoilingTemp BT = new BoilingTemp(molecule, secOrderCodes);
         Density D = new Density(molecule, temperature);

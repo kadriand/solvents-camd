@@ -20,14 +20,14 @@ public class MeltingTemp {
         for (int i = 0; i < aMolecule.size(); i++) {
             sum += aMolecule.getAmount(i) * CamdRunner.CONTRIBUTION_GROUPS.getMeltTemp((aMolecule.getGroupCode(i)));
         }
-        sum = sum + calculeSecOrderContribution();
+        sum = sum + calculateSecOrderContribution();
         return 102.425 * Math.log10(sum) * 2.30258509;
     }
 
-    private double calculeSecOrderContribution() {
+    private double calculateSecOrderContribution() {
         double a = 0;
         for (int i = 0; i < secondOrderCodes.size(); i++) {
-            a += CamdRunner.CONTRIBUTION_GROUPS.getTfusSecondOrderParameter(secondOrderCodes.get(i));
+            a += CamdRunner.CONTRIBUTION_GROUPS.getFusionTempSecondOrderParameter(secondOrderCodes.get(i));
         }
         return a;
     }

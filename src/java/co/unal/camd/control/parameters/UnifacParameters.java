@@ -8,6 +8,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import java.io.InputStream;
 import java.util.Iterator;
 
 /**
@@ -21,7 +22,7 @@ public class UnifacParameters {
     /**
      * Unifac parameters file path in resources directory (/src/resources/)
      */
-    private static String PARAMETERS_PATH = "/ParametrosUnifac.xls";
+    private static String PARAMETERS_WORKBOOK_PATH = "/ParametrosUnifac.xls";
     private byte SHEETS_SIZE;
     private HSSFWorkbook book;
 
@@ -39,11 +40,16 @@ public class UnifacParameters {
      * constructors for load the info
      */
     public UnifacParameters() {
-        try {
+        try (InputStream parametersWorkbookIS = UnifacParameters.class.getResourceAsStream(PARAMETERS_WORKBOOK_PATH)) {
             System.out.println("Loading UNIFAC parameters file");
-            POIFSFileSystem fs = new POIFSFileSystem(UnifacParameters.class.getResourceAsStream(PARAMETERS_PATH));
+            POIFSFileSystem fs = new POIFSFileSystem(parametersWorkbookIS);
             book = new HSSFWorkbook(fs);
             SHEETS_SIZE = (byte) book.getNumberOfSheets();
+            loadInteractions();
+            loadGroupsData();
+            loadSecondOrderParameters();
+            loadProbabilities();
+            parametersWorkbookIS.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -75,7 +81,7 @@ public class UnifacParameters {
      * Parámetros bij
      * Parámetros interacción cij
      */
-    public void loadInteractions() {
+    private void loadInteractions() {
         int row;
         int col;
         for (byte i = 0; i < 3; i++) {
@@ -103,7 +109,7 @@ public class UnifacParameters {
      * <p>
      * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
      */
-    void loadGroupsData() {
+    private void loadGroupsData() {
         int row;
         int col;
 
@@ -131,7 +137,7 @@ public class UnifacParameters {
      * <p>
      * The order of the sheets correspond to tree valences 1-4 and the ones for ar cy and 0
      */
-    void loadSecondOrderParameters() {
+    private void loadSecondOrderParameters() {
         int row;
         int col;
         for (byte i = 0; i < 2; i++) {
@@ -153,7 +159,7 @@ public class UnifacParameters {
         }
     }
 
-    public void loadProbabilities() {
+    private void loadProbabilities() {
         int row;
         int col;
         HSSFSheet sheet = book.getSheetAt(13);
