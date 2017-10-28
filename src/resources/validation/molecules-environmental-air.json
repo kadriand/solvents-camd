@@ -1,0 +1,678 @@
+[
+  {
+    "index": 1,
+    "name": "1,1,1-Trichloroethane",
+    "casNumber": "71-55-6",
+    "molecularWeight": 133.4,
+    "configuration": "1.51",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 1.75E-08,
+      "airERAc": 0.00E+00,
+      "airERAnc": 1.49E-08
+    }
+  },
+  {
+    "index": 2,
+    "name": "1,2-Dichloroethane",
+    "casNumber": "107-06-2",
+    "molecularWeight": 98.95,
+    "configuration": "44.44",
+    "experimental": {
+      "airEUAc": 5.14E-07,
+      "airEUAnc": null,
+      "airERAc": 1.70E-07,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 5,
+    "name": "Bromoethane",
+    "casNumber": "74-96-4",
+    "molecularWeight": 108.966,
+    "configuration": "64.2.1",
+    "experimental": {
+      "airEUAc": 2.77E-07,
+      "airEUAnc": null,
+      "airERAc": 9.01E-08,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 9,
+    "name": "1,1,2-Trichloroethane",
+    "casNumber": "79-00-5",
+    "molecularWeight": 133.4,
+    "configuration": "44.48",
+    "experimental": {
+      "airEUAc": 1.32E-06,
+      "airEUAnc": 4.12E-06,
+      "airERAc": 4.18E-07,
+      "airERAnc": 1.31E-06
+    }
+  },
+  {
+    "index": 12,
+    "name": "Allyl chloride",
+    "casNumber": "107-05-1",
+    "molecularWeight": 76.52,
+    "configuration": "5.44",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 2.22E-06,
+      "airERAc": 0.00E+00,
+      "airERAnc": 9.25E-08
+    }
+  },
+  {
+    "index": 14,
+    "name": "Acetone",
+    "casNumber": "67-64-1",
+    "molecularWeight": 58.08,
+    "configuration": "18.1",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 8.56E-09,
+      "airERAc": null,
+      "airERAnc": 1.72E-09
+    }
+  },
+  {
+    "index": 17,
+    "name": "Butanone",
+    "casNumber": "78-93-3",
+    "molecularWeight": 72.107,
+    "configuration": "1.19.1",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 1.16E-09,
+      "airERAc": null,
+      "airERAnc": 4.28E-10
+    }
+  },
+  {
+    "index": 22,
+    "name": "Methyl isobutyl ketone",
+    "casNumber": "108-10-1",
+    "molecularWeight": 100.161,
+    "configuration": "1.3(1).2.18",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 3.96E-09,
+      "airERAc": null,
+      "airERAnc": 1.98E-10
+    }
+  },
+  {
+    "index": 26,
+    "name": "Ethyl acetate",
+    "casNumber": "141-78-6",
+    "molecularWeight": 88.106,
+    "configuration": "21.2.1",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 8.07E-09,
+      "airERAc": null,
+      "airERAnc": 1.26E-09
+    }
+  },
+  {
+    "index": 37,
+    "name": "Chloroacetic acid",
+    "casNumber": "79-11-8",
+    "molecularWeight": 94.49,
+    "configuration": "44.42",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 47,
+    "name": "Trichloroacetic acid",
+    "casNumber": "76-03-9",
+    "molecularWeight": 163.38,
+    "configuration": "51.42",
+    "experimental": {
+      "airEUAc": 3.16E-07,
+      "airEUAnc": null,
+      "airERAc": 2.43E-07,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 55,
+    "name": "Triethylamine",
+    "casNumber": "121-44-8",
+    "molecularWeight": 101.193,
+    "configuration": "1.35(2.1).2.1",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 3.20E-07,
+      "airERAc": null,
+      "airERAnc": 7.55E-09
+    }
+  },
+  {
+    "index": 59,
+    "name": "N,N-Dimethylacetamide",
+    "casNumber": "127-19-5",
+    "molecularWeight": 87.122,
+    "configuration": "1.101",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 65,
+    "name": "n-Hexane",
+    "casNumber": "110-54-3",
+    "molecularWeight": 86.178,
+    "configuration": "1.2.2.2.2.1",
+    "experimental": {
+      "airEUAc": 1.76E-09,
+      "airEUAnc": 2.39E-07,
+      "airERAc": 1.57E-10,
+      "airERAnc": 2.14E-08
+    }
+  },
+  {
+    "index": 70,
+    "name": "1-Propene",
+    "casNumber": "115-07-1",
+    "molecularWeight": 42.081,
+    "configuration": "5.1",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 72,
+    "name": "Isoprene",
+    "casNumber": "78-79-5",
+    "molecularWeight": 68.119,
+    "configuration": "7(1).5",
+    "experimental": {
+      "airEUAc": 1.35E-07,
+      "airEUAnc": null,
+      "airERAc": 1.43E-09,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 75,
+    "name": "Diethyl ether",
+    "casNumber": "60-29-7",
+    "molecularWeight": 74.123,
+    "configuration": "1.25.2.1",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 1.24E-08,
+      "airERAc": null,
+      "airERAnc": 6.31E-10
+    }
+  },
+  {
+    "index": 76,
+    "name": "tert-Butyl alcohol",
+    "casNumber": "75-65-0",
+    "molecularWeight": 74.123,
+    "configuration": "24.2.2.1",
+    "experimental": {
+      "airEUAc": 5.37E-07,
+      "airEUAnc": null,
+      "airERAc": 1.09E-07,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 77,
+    "name": "Methyl tert-butyl ether",
+    "casNumber": "1634-04-4",
+    "molecularWeight": 88.15,
+    "configuration": "24.4(1)(1).1",
+    "experimental": {
+      "airEUAc": 1.06E-07,
+      "airEUAnc": 1.77E-08,
+      "airERAc": 1.33E-08,
+      "airERAnc": 2.24E-09
+    }
+  },
+  {
+    "index": 79,
+    "name": "Nitroethane",
+    "casNumber": "79-24-3",
+    "molecularWeight": 75.067,
+    "configuration": "1.55",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 81,
+    "name": "Acetaldehyde",
+    "casNumber": "75-07-0",
+    "molecularWeight": 44.053,
+    "configuration": "1.20",
+    "experimental": {
+      "airEUAc": 1.80E-07,
+      "airEUAnc": 9.26E-07,
+      "airERAc": 8.54E-09,
+      "airERAnc": 4.39E-08
+    }
+  },
+  {
+    "index": 90,
+    "name": "Allyl alcohol",
+    "casNumber": "107-18-6",
+    "molecularWeight": 58.08,
+    "configuration": "14.2.5",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 1.24E-06,
+      "airERAc": 0.00E+00,
+      "airERAnc": 6.98E-08
+    }
+  },
+  {
+    "index": 91,
+    "name": "1-Butanol",
+    "casNumber": "71-36-3",
+    "molecularWeight": 74.123,
+    "configuration": "1.2.2.2.14",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 5.26E-08,
+      "airERAc": null,
+      "airERAnc": 4.95E-09
+    }
+  },
+  {
+    "index": 93,
+    "name": "Diethylene glycol",
+    "casNumber": "111-46-6",
+    "molecularWeight": 106.121,
+    "configuration": "14.2.25.2.2.14",
+    "experimental": {
+      "airEUAc": 4.48E-08,
+      "airEUAnc": null,
+      "airERAc": 3.46E-08,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 95,
+    "name": "Ethanol",
+    "casNumber": "64-17-5",
+    "molecularWeight": 46.069,
+    "configuration": "1.2.14",
+    "experimental": {
+      "airEUAc": 3.59E-09,
+      "airEUAnc": null,
+      "airERAc": 5.89E-10,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 96,
+    "name": "Ethylene glycol",
+    "casNumber": "107-21-1",
+    "molecularWeight": 62.068,
+    "configuration": "14.2.2.14",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 2.67E-08,
+      "airERAc": 0.00E+00,
+      "airERAnc": 1.30E-08
+    }
+  },
+  {
+    "index": 97,
+    "name": "Glycerol",
+    "casNumber": "56-81-5",
+    "molecularWeight": 92.094,
+    "configuration": "14.2.3(81).2.14",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 100,
+    "name": "Isobutanol",
+    "casNumber": "78-83-1",
+    "molecularWeight": 74.123,
+    "configuration": "1.3(1).2.14",
+    "experimental": {
+      "airEUAc": null,
+      "airEUAnc": 2.13E-08,
+      "airERAc": null,
+      "airERAnc": 2.32E-09
+    }
+  },
+  {
+    "index": 102,
+    "name": "Isopropanol",
+    "casNumber": "67-63-0",
+    "molecularWeight": 60.096,
+    "configuration": "1.3(81).1",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": null,
+      "airERAc": 0.00E+00,
+      "airERAnc": null
+    }
+  },
+  {
+    "index": 109,
+    "name": "1,2-Dibromoethane",
+    "casNumber": "106-93-4",
+    "molecularWeight": 187.862,
+    "configuration": "33.2.2.33",
+    "experimental": {
+      "airEUAc": 2.48E-05,
+      "airEUAnc": 1.61E-07,
+      "airERAc": 7.23E-06,
+      "airERAnc": 4.68E-08
+    }
+  },
+  {
+    "index": 110,
+    "name": "1,3-Butadiene",
+    "casNumber": "106-99-0",
+    "molecularWeight": 54.092,
+    "configuration": "5.5",
+    "experimental": {
+      "airEUAc": 1.13E-06,
+      "airEUAnc": 1.68E-06,
+      "airERAc": 1.62E-08,
+      "airERAnc": 2.43E-08
+    }
+  },
+  {
+    "index": 111,
+    "name": "Acrolein",
+    "casNumber": "107-02-8",
+    "molecularWeight": 56.064,
+    "configuration": "5.20",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 1.40E-03,
+      "airERAc": 0.00E+00,
+      "airERAnc": 5.14E-05
+    }
+  },
+  {
+    "index": 112,
+    "name": "Vinyl acetate",
+    "casNumber": "108-05-4",
+    "molecularWeight": 86.09,
+    "configuration": "21.5",
+    "experimental": {
+      "airEUAc": 2.34E-08,
+      "airEUAnc": 7.69E-07,
+      "airERAc": 7.79E-10,
+      "airERAnc": 2.41E-08
+    }
+  },
+  {
+    "index": 113,
+    "name": "bis(2-Chloro-1-methylethyl) ether",
+    "casNumber": "108-60-1",
+    "molecularWeight": 171.06,
+    "configuration": "44.26(1).3(1).44",
+    "experimental": {
+      "airEUAc": 3.05E-07,
+      "airEUAnc": 1.80E-07,
+      "airERAc": 4.81E-08,
+      "airERAnc": 2.84E-08
+    }
+  },
+  {
+    "index": 114,
+    "name": "2-Butoxyethanol",
+    "casNumber": "111-76-2",
+    "molecularWeight": 118.176,
+    "configuration": "14.2.25.2.2.2.1",
+    "experimental": {
+      "airEUAc": 3.00E-08,
+      "airEUAnc": 2.10E-07,
+      "airERAc": 3.21E-09,
+      "airERAnc": 3.29E-08
+    }
+  },
+  {
+    "index": 115,
+    "name": "Chlorodibromomethane",
+    "casNumber": "124-48-1",
+    "molecularWeight": 208.28,
+    "configuration": "64.45.64",
+    "experimental": {
+      "airEUAc": 5.78E-07,
+      "airEUAnc": 4.67E-07,
+      "airERAc": 2.21E-07,
+      "airERAnc": 1.79E-07
+    }
+  },
+  {
+    "index": 116,
+    "name": "Chloral hydrate",
+    "casNumber": "302-17-0",
+    "molecularWeight": 165.39,
+    "configuration": "81.3(81).51",
+    "experimental": {
+      "airEUAc": 6.52E-07,
+      "airEUAnc": 7.41E-07,
+      "airERAc": 1.61E-07,
+      "airERAnc": 1.83E-07
+    }
+  },
+  {
+    "index": 117,
+    "name": "Tetrachloroethylene",
+    "casNumber": "127-18-4",
+    "molecularWeight": 165.82,
+    "configuration": "69.70(69)(69).69",
+    "experimental": {
+      "airEUAc": 3.84E-07,
+      "airEUAnc": 1.45E-06,
+      "airERAc": 1.78E-07,
+      "airERAnc": 6.68E-07
+    }
+  },
+  {
+    "index": 118,
+    "name": "1,3-Dichloropropene",
+    "casNumber": "542-75-6",
+    "molecularWeight": 110.97,
+    "configuration": "44.6.69",
+    "experimental": {
+      "airEUAc": 9.99E-07,
+      "airEUAnc": 2.54E-04,
+      "airERAc": 4.83E-08,
+      "airERAnc": 1.22E-05
+    }
+  },
+  {
+    "index": 119,
+    "name": "Vinyl bromide",
+    "casNumber": "593-60-2",
+    "molecularWeight": 106.95,
+    "configuration": "5.64",
+    "experimental": {
+      "airEUAc": 1.59E-06,
+      "airEUAnc": 2.23E-06,
+      "airERAc": 1.26E-07,
+      "airERAnc": 1.77E-07
+    }
+  },
+  {
+    "index": 120,
+    "name": "1,1,1,2-Tetrachloroethane",
+    "casNumber": "630-20-6",
+    "molecularWeight": 167.84,
+    "configuration": "51.44",
+    "experimental": {
+      "airEUAc": 6.78E-07,
+      "airEUAnc": 3.44E-07,
+      "airERAc": 4.06E-07,
+      "airERAnc": 2.06E-07
+    }
+  },
+  {
+    "index": 121,
+    "name": "N,N-Dimethylformamide",
+    "casNumber": "68-12-2",
+    "molecularWeight": 73.095,
+    "configuration": "1.34.20",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 2.91E-06,
+      "airERAc": 0.00E+00,
+      "airERAnc": 1.11E-06
+    }
+  },
+  {
+    "index": 122,
+    "name": "Methyl bromide",
+    "casNumber": "74-83-9",
+    "molecularWeight": 94.939,
+    "configuration": "1.64",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 1.02E-04,
+      "airERAc": 0.00E+00,
+      "airERAnc": 6.54E-05
+    }
+  },
+  {
+    "index": 123,
+    "name": "Chloroethane",
+    "casNumber": "75-00-3",
+    "molecularWeight": 64.51,
+    "configuration": "1.44",
+    "experimental": {
+      "airEUAc": 3.94E-08,
+      "airEUAnc": 1.46E-09,
+      "airERAc": 1.21E-08,
+      "airERAnc": 4.48E-10
+    }
+  },
+  {
+    "index": 124,
+    "name": "Vinyl chloride",
+    "casNumber": "75-01-4",
+    "molecularWeight": 62.5,
+    "configuration": "5.69",
+    "experimental": {
+      "airEUAc": 4.96E-06,
+      "airEUAnc": 1.72E-06,
+      "airERAc": 3.88E-07,
+      "airERAnc": 1.35E-07
+    }
+  },
+  {
+    "index": 126,
+    "name": "1,2-Dichloropropane",
+    "casNumber": "78-87-5",
+    "molecularWeight": 112.98,
+    "configuration": "44.45.1",
+    "experimental": {
+      "airEUAc": 2.51E-07,
+      "airEUAnc": 3.49E-05,
+      "airERAc": 7.18E-08,
+      "airERAnc": 9.99E-06
+    }
+  },
+  {
+    "index": 127,
+    "name": "Acrylamide",
+    "casNumber": "79-06-1",
+    "molecularWeight": 71.079,
+    "configuration": "91.5",
+    "experimental": {
+      "airEUAc": 3.06E-05,
+      "airEUAnc": 1.27E-04,
+      "airERAc": 2.57E-05,
+      "airERAnc": 1.07E-04
+    }
+  },
+  {
+    "index": 128,
+    "name": "Acrylic acid",
+    "casNumber": "79-10-7",
+    "molecularWeight": 72.063,
+    "configuration": "5.42",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 9.42E-05,
+      "airERAc": 0.00E+00,
+      "airERAnc": 3.49E-06
+    }
+  },
+  {
+    "index": 129,
+    "name": "Dichloroacetic acid",
+    "casNumber": "79-43-6",
+    "molecularWeight": 128.94,
+    "configuration": "48.42",
+    "experimental": {
+      "airEUAc": 7.99E-07,
+      "airEUAnc": 1.36E-06,
+      "airERAc": 4.15E-07,
+      "airERAnc": 7.07E-07
+    }
+  },
+  {
+    "index": 130,
+    "name": "Methyl methacrylate",
+    "casNumber": "80-62-6",
+    "molecularWeight": 100.117,
+    "configuration": "7(1).77.1",
+    "experimental": {
+      "airEUAc": 0.00E+00,
+      "airEUAnc": 1.86E-06,
+      "airERAc": 0.00E+00,
+      "airERAnc": 5.57E-08
+    }
+  },
+  {
+    "index": 131,
+    "name": "1,2-Dibromo-3-chloropropane",
+    "casNumber": "96-12-8",
+    "molecularWeight": 236.33,
+    "configuration": "44.3(64).2.64",
+    "experimental": {
+      "airEUAc": 2.37E-04,
+      "airEUAnc": 6.52E-05,
+      "airERAc": 5.21E-05,
+      "airERAnc": 1.75E-05
+    }
+  },
+  {
+    "index": 132,
+    "name": "1,2,3-Trichloropropane",
+    "casNumber": "96-18-4",
+    "molecularWeight": 147.42,
+    "configuration": "44.45.44",
+    "experimental": {
+      "airEUAc": 7.51E-05,
+      "airEUAnc": 1.43E-06,
+      "airERAc": 1.86E-05,
+      "airERAnc": 3.55E-07
+    }
+  }
+]

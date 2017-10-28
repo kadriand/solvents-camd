@@ -1,0 +1,1406 @@
+[
+  {
+    "index": 1,
+    "name": "1,1,1-Trichloroethane",
+    "casNumber": "71-55-6",
+    "molecularWeight": 133.4,
+    "configuration": "1.51",
+    "experimental": {
+      "meltingPoint": 242.8,
+      "boilingPoint": 347.15,
+      "density": 1.32,
+      "gibbsEnergy": -76.21
+    }
+  },
+  {
+    "index": 2,
+    "name": "1,2-Dichloroethane",
+    "casNumber": "107-06-2",
+    "molecularWeight": 98.95,
+    "configuration": "44.44",
+    "experimental": {
+      "meltingPoint": 237.5,
+      "boilingPoint": 356.66,
+      "density": 1.253,
+      "gibbsEnergy": -73.94
+    }
+  },
+  {
+    "index": 3,
+    "name": "2-Chloropropane",
+    "casNumber": "75-29-6",
+    "molecularWeight": 78.54,
+    "configuration": "1.45.1",
+    "experimental": {
+      "meltingPoint": 156,
+      "boilingPoint": 308.85,
+      "density": 1.103,
+      "gibbsEnergy": -61.36
+    }
+  },
+  {
+    "index": 4,
+    "name": "Allyl bromide",
+    "casNumber": "106-95-6",
+    "molecularWeight": 120.977,
+    "configuration": "64.2.5",
+    "experimental": {
+      "meltingPoint": 154.2,
+      "boilingPoint": 343.25,
+      "density": 1.398,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 5,
+    "name": "Bromoethane",
+    "casNumber": "74-96-4",
+    "molecularWeight": 108.966,
+    "configuration": "64.2.1",
+    "experimental": {
+      "meltingPoint": 154.6,
+      "boilingPoint": 311.5,
+      "density": 1.47,
+      "gibbsEnergy": -25.82
+    }
+  },
+  {
+    "index": 6,
+    "name": "Allyl iodide ",
+    "casNumber": "106-94-5",
+    "molecularWeight": 122.993,
+    "configuration": "1.2.2.64",
+    "experimental": {
+      "meltingPoint": 163.2,
+      "boilingPoint": 344.25,
+      "density": 1.353,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 7,
+    "name": "Perfluorooctane",
+    "casNumber": "307-34-6",
+    "molecularWeight": 438.059,
+    "configuration": "74.75.75.75.75.75.75.74",
+    "experimental": {
+      "meltingPoint": 231.15,
+      "boilingPoint": 379.05,
+      "density": 1.69,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 8,
+    "name": "Perflexane",
+    "casNumber": "355-42-0",
+    "molecularWeight": 338.044,
+    "configuration": "74.75.75.75.75.74",
+    "experimental": {
+      "meltingPoint": 186.1,
+      "boilingPoint": 329.75,
+      "density": 1.71,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 9,
+    "name": "1,1,2-Trichloroethane",
+    "casNumber": "79-00-5",
+    "molecularWeight": 133.4,
+    "configuration": "44.48",
+    "experimental": {
+      "meltingPoint": 236.6,
+      "boilingPoint": 386.95,
+      "density": 1.443,
+      "gibbsEnergy": -80.97
+    }
+  },
+  {
+    "index": 10,
+    "name": "1-Propene, 3-iodo-",
+    "casNumber": "556-56-9",
+    "molecularWeight": 167.977,
+    "configuration": "5.2.63",
+    "experimental": {
+      "meltingPoint": 173.9,
+      "boilingPoint": 376.15,
+      "density": 1.835,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 11,
+    "name": "Methyl iodide",
+    "casNumber": "74-88-4",
+    "molecularWeight": 141.939,
+    "configuration": "1.63",
+    "experimental": {
+      "meltingPoint": 206.8,
+      "boilingPoint": 315.58,
+      "density": 2.2789,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 12,
+    "name": "Allyl chloride",
+    "casNumber": "107-05-1",
+    "molecularWeight": 76.52,
+    "configuration": "5.44",
+    "experimental": {
+      "meltingPoint": 138.7,
+      "boilingPoint": 318.25,
+      "density": 0.94,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 13,
+    "name": "2,4-Pentanedione",
+    "casNumber": "123-54-6",
+    "molecularWeight": 100.117,
+    "configuration": "18.19.1",
+    "experimental": {
+      "meltingPoint": 250.2,
+      "boilingPoint": 411.15,
+      "density": 0.98,
+      "gibbsEnergy": -275
+    }
+  },
+  {
+    "index": 14,
+    "name": "Acetone",
+    "casNumber": "67-64-1",
+    "molecularWeight": 58.08,
+    "configuration": "18.1",
+    "experimental": {
+      "meltingPoint": 178.5,
+      "boilingPoint": 329.22,
+      "density": 0.79,
+      "gibbsEnergy": -151.3
+    }
+  },
+  {
+    "index": 15,
+    "name": "Pentanal",
+    "casNumber": "110-62-3",
+    "molecularWeight": 86.134,
+    "configuration": "1.2.2.2.20",
+    "experimental": {
+      "meltingPoint": 181.65,
+      "boilingPoint": 375.65,
+      "density": 0.8095,
+      "gibbsEnergy": -107.1
+    }
+  },
+  {
+    "index": 16,
+    "name": "4-Heptanone",
+    "casNumber": "123-19-3",
+    "molecularWeight": 114.188,
+    "configuration": "1.2.19.2.2.1",
+    "experimental": {
+      "meltingPoint": 240.2,
+      "boilingPoint": 417.15,
+      "density": 0.81,
+      "gibbsEnergy": -120.8
+    }
+  },
+  {
+    "index": 17,
+    "name": "Butanone",
+    "casNumber": "78-93-3",
+    "molecularWeight": 72.107,
+    "configuration": "1.19.1",
+    "experimental": {
+      "meltingPoint": 186.5,
+      "boilingPoint": 352.71,
+      "density": 0.805,
+      "gibbsEnergy": -147
+    }
+  },
+  {
+    "index": 18,
+    "name": "2-Undecanone",
+    "casNumber": "112-12-9",
+    "molecularWeight": 170.296,
+    "configuration": "18.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 288.2,
+      "boilingPoint": 504.65,
+      "density": 0.829,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 19,
+    "name": "1-Chloropropan-2-one",
+    "casNumber": "78-95-5",
+    "molecularWeight": 92.52,
+    "configuration": "18.44",
+    "experimental": {
+      "meltingPoint": 228.7,
+      "boilingPoint": 392.15,
+      "density": 1.162,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 20,
+    "name": "Methyl n-Amyl Ketone",
+    "casNumber": "110-43-0",
+    "molecularWeight": 114.188,
+    "configuration": "18.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 237.7,
+      "boilingPoint": 424.15,
+      "density": 0.8,
+      "gibbsEnergy": -121.8
+    }
+  },
+  {
+    "index": 21,
+    "name": "Methyl butyl ketone",
+    "casNumber": "591-78-6",
+    "molecularWeight": 100.161,
+    "configuration": "18.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 217.4,
+      "boilingPoint": 400.7,
+      "density": 0.818,
+      "gibbsEnergy": -130.1
+    }
+  },
+  {
+    "index": 22,
+    "name": "Methyl isobutyl ketone",
+    "casNumber": "108-10-1",
+    "molecularWeight": 100.161,
+    "configuration": "1.3(1).2.18",
+    "experimental": {
+      "meltingPoint": 189.2,
+      "boilingPoint": 389.15,
+      "density": 0.8,
+      "gibbsEnergy": -135
+    }
+  },
+  {
+    "index": 23,
+    "name": "3-Pentanone",
+    "casNumber": "96-22-0",
+    "molecularWeight": 86.134,
+    "configuration": "1.19.2.1",
+    "experimental": {
+      "meltingPoint": 234.2,
+      "boilingPoint": 375.14,
+      "density": 0.815,
+      "gibbsEnergy": -134.4
+    }
+  },
+  {
+    "index": 24,
+    "name": "Pentyl acetate",
+    "casNumber": "628-63-7",
+    "molecularWeight": 130.187,
+    "configuration": "21.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 202.4,
+      "boilingPoint": 422.35,
+      "density": 0.876,
+      "gibbsEnergy": -303.5
+    }
+  },
+  {
+    "index": 25,
+    "name": "Butyl acetate",
+    "casNumber": "123-86-4",
+    "molecularWeight": 116.16,
+    "configuration": "21.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 195.2,
+      "boilingPoint": 399.25,
+      "density": 0.88,
+      "gibbsEnergy": -312.6
+    }
+  },
+  {
+    "index": 26,
+    "name": "Ethyl acetate",
+    "casNumber": "141-78-6",
+    "molecularWeight": 88.106,
+    "configuration": "21.2.1",
+    "experimental": {
+      "meltingPoint": 189.6,
+      "boilingPoint": 350.25,
+      "density": 0.897,
+      "gibbsEnergy": -328
+    }
+  },
+  {
+    "index": 27,
+    "name": "Isobutyl acetate",
+    "casNumber": "110-19-0",
+    "molecularWeight": 116.16,
+    "configuration": "21.2.3(1).1",
+    "experimental": {
+      "meltingPoint": 174.3,
+      "boilingPoint": 389.72,
+      "density": 0.85,
+      "gibbsEnergy": -321.2
+    }
+  },
+  {
+    "index": 28,
+    "name": "Methyl acetate",
+    "casNumber": "79-20-9",
+    "molecularWeight": 74.079,
+    "configuration": "21.1",
+    "experimental": {
+      "meltingPoint": 175.2,
+      "boilingPoint": 330.09,
+      "density": 0.932,
+      "gibbsEnergy": -324.2
+    }
+  },
+  {
+    "index": 29,
+    "name": "Propyl acetate",
+    "casNumber": "109-60-4",
+    "molecularWeight": 102.133,
+    "configuration": "21.2.2.1",
+    "experimental": {
+      "meltingPoint": 178.2,
+      "boilingPoint": 374.65,
+      "density": 0.888,
+      "gibbsEnergy": -320.4
+    }
+  },
+  {
+    "index": 30,
+    "name": "Ethyl butyrate",
+    "casNumber": "105-54-4",
+    "molecularWeight": 116.16,
+    "configuration": "1.2.22.2.1",
+    "experimental": {
+      "meltingPoint": 180.2,
+      "boilingPoint": 394.69,
+      "density": 0.879,
+      "gibbsEnergy": -312.2
+    }
+  },
+  {
+    "index": 31,
+    "name": "Isovaleric acid",
+    "casNumber": "503-74-2",
+    "molecularWeight": 102.133,
+    "configuration": "42.2.3(1).1",
+    "experimental": {
+      "meltingPoint": 243.9,
+      "boilingPoint": 449.68,
+      "density": 0.925,
+      "gibbsEnergy": -367
+    }
+  },
+  {
+    "index": 32,
+    "name": "Acetic acid",
+    "casNumber": "64-19-7",
+    "molecularWeight": 60.052,
+    "configuration": "1.42",
+    "experimental": {
+      "meltingPoint": 289.6,
+      "boilingPoint": 391.2,
+      "density": 1.049,
+      "gibbsEnergy": -374.6
+    }
+  },
+  {
+    "index": 33,
+    "name": "Butanoic acid",
+    "casNumber": "107-92-6",
+    "molecularWeight": 88.106,
+    "configuration": "1.2.2.42",
+    "experimental": {
+      "meltingPoint": 268,
+      "boilingPoint": 436.87,
+      "density": 0.96,
+      "gibbsEnergy": -360
+    }
+  },
+  {
+    "index": 34,
+    "name": "Octanoic acid",
+    "casNumber": "124-07-2",
+    "molecularWeight": 144.214,
+    "configuration": "1.2.2.2.2.2.2.42",
+    "experimental": {
+      "meltingPoint": 289.5,
+      "boilingPoint": 512.15,
+      "density": 0.91,
+      "gibbsEnergy": -325
+    }
+  },
+  {
+    "index": 35,
+    "name": "Hexanoic acid",
+    "casNumber": "142-62-1",
+    "molecularWeight": 116.16,
+    "configuration": "1.2.2.2.2.42",
+    "experimental": {
+      "meltingPoint": 270.2,
+      "boilingPoint": 478.38,
+      "density": 0.92,
+      "gibbsEnergy": -338
+    }
+  },
+  {
+    "index": 36,
+    "name": "Cyanoacetic acid",
+    "casNumber": "372-09-8",
+    "molecularWeight": 85.062,
+    "configuration": "41.42",
+    "experimental": {
+      "meltingPoint": 339.2,
+      "boilingPoint": 381.2,
+      "density": 1.055,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 37,
+    "name": "Chloroacetic acid",
+    "casNumber": "79-11-8",
+    "molecularWeight": 94.49,
+    "configuration": "44.42",
+    "experimental": {
+      "meltingPoint": 336.2,
+      "boilingPoint": 462.45,
+      "density": 1.58,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 38,
+    "name": "Octadecanoic acid",
+    "casNumber": "57-11-4",
+    "molecularWeight": 284.484,
+    "configuration": "42.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 342,
+      "boilingPoint": 656.15,
+      "density": 0.847,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 39,
+    "name": "Heptanoic acid",
+    "casNumber": "111-14-8",
+    "molecularWeight": 130.187,
+    "configuration": "42.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 265.7,
+      "boilingPoint": 496.15,
+      "density": 0.91,
+      "gibbsEnergy": -334
+    }
+  },
+  {
+    "index": 40,
+    "name": "Lactic acid",
+    "casNumber": "50-21-5",
+    "molecularWeight": 90.078,
+    "configuration": "1.3(81).42",
+    "experimental": {
+      "meltingPoint": 289.95,
+      "boilingPoint": 500.711,
+      "density": 1.249,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 41,
+    "name": "Linoleic acid ",
+    "casNumber": "60-33-3",
+    "molecularWeight": 280.452,
+    "configuration": "42.2.2.2.2.2.2.2.6.2.6.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 268.4,
+      "boilingPoint": 633.702,
+      "density": 0.9,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 42,
+    "name": "Oxalic acid",
+    "casNumber": "144-62-7",
+    "molecularWeight": 90.034,
+    "configuration": "42.42",
+    "experimental": {
+      "meltingPoint": 378.7,
+      "boilingPoint": 638.249,
+      "density": 1.65,
+      "gibbsEnergy": -695.6
+    }
+  },
+  {
+    "index": 43,
+    "name": "Hexadecanoic acid",
+    "casNumber": "57-10-3",
+    "molecularWeight": 256.43,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.42",
+    "experimental": {
+      "meltingPoint": 335,
+      "boilingPoint": 624.65,
+      "density": 0.853,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 44,
+    "name": "Propionic acid",
+    "casNumber": "79-09-4",
+    "molecularWeight": 74.079,
+    "configuration": "1.2.42",
+    "experimental": {
+      "meltingPoint": 252.5,
+      "boilingPoint": 414.25,
+      "density": 0.99,
+      "gibbsEnergy": -366.7
+    }
+  },
+  {
+    "index": 45,
+    "name": "Succinic acid",
+    "casNumber": "110-15-6",
+    "molecularWeight": 118.088,
+    "configuration": "42.2.2.42",
+    "experimental": {
+      "meltingPoint": 461.2,
+      "boilingPoint": 508,
+      "density": 1.56,
+      "gibbsEnergy": -697.3
+    }
+  },
+  {
+    "index": 46,
+    "name": "dl-Tartaric acid",
+    "casNumber": "133-37-9",
+    "molecularWeight": 150.086,
+    "configuration": "42.3(81).3(81).42",
+    "experimental": {
+      "meltingPoint": 445.2,
+      "boilingPoint": 672.45,
+      "density": 1.886,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 47,
+    "name": "Trichloroacetic acid",
+    "casNumber": "76-03-9",
+    "molecularWeight": 163.38,
+    "configuration": "51.42",
+    "experimental": {
+      "meltingPoint": 330.7,
+      "boilingPoint": 469.65,
+      "density": 1.63,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 48,
+    "name": "Trifluoroacetic acid",
+    "casNumber": "76-05-1",
+    "molecularWeight": 114.023,
+    "configuration": "42.74",
+    "experimental": {
+      "meltingPoint": 257.8,
+      "boilingPoint": 345.55,
+      "density": 1.5351,
+      "gibbsEnergy": -946
+    }
+  },
+  {
+    "index": 49,
+    "name": "Valeric acid",
+    "casNumber": "109-52-4",
+    "molecularWeight": 102.133,
+    "configuration": "1.2.2.2.42",
+    "experimental": {
+      "meltingPoint": 239.5,
+      "boilingPoint": 459.31,
+      "density": 0.93,
+      "gibbsEnergy": -345.6
+    }
+  },
+  {
+    "index": 50,
+    "name": "Dimethylamine",
+    "casNumber": "124-40-3",
+    "molecularWeight": 45.085,
+    "configuration": "31.1",
+    "experimental": {
+      "meltingPoint": 181,
+      "boilingPoint": 280,
+      "density": 1.883,
+      "gibbsEnergy": 68.4
+    }
+  },
+  {
+    "index": 51,
+    "name": "Ethylenediamine",
+    "casNumber": "107-15-3",
+    "molecularWeight": 60.1,
+    "configuration": "29.29",
+    "experimental": {
+      "meltingPoint": 284.3,
+      "boilingPoint": 390.15,
+      "density": 0.899,
+      "gibbsEnergy": 103
+    }
+  },
+  {
+    "index": 52,
+    "name": "Diethylamine",
+    "casNumber": "109-89-7",
+    "molecularWeight": 73.139,
+    "configuration": "1.32.2.1",
+    "experimental": {
+      "meltingPoint": 223.4,
+      "boilingPoint": 328.6,
+      "density": 0.7074,
+      "gibbsEnergy": 73.08
+    }
+  },
+  {
+    "index": 53,
+    "name": "Butylamine",
+    "casNumber": "109-73-9",
+    "molecularWeight": 73.139,
+    "configuration": "1.2.2.29",
+    "experimental": {
+      "meltingPoint": 224.1,
+      "boilingPoint": 351.15,
+      "density": 0.74,
+      "gibbsEnergy": 49.3
+    }
+  },
+  {
+    "index": 54,
+    "name": "Propylamine",
+    "casNumber": "107-10-8",
+    "molecularWeight": 59.112,
+    "configuration": "1.2.29",
+    "experimental": {
+      "meltingPoint": 190.2,
+      "boilingPoint": 320.38,
+      "density": 0.719,
+      "gibbsEnergy": 41.7
+    }
+  },
+  {
+    "index": 55,
+    "name": "Triethylamine",
+    "casNumber": "121-44-8",
+    "molecularWeight": 101.193,
+    "configuration": "1.35(2.1).2.1",
+    "experimental": {
+      "meltingPoint": 158.5,
+      "boilingPoint": 362.15,
+      "density": 0.726,
+      "gibbsEnergy": 114.1
+    }
+  },
+  {
+    "index": 56,
+    "name": "Diethyl propanedioate",
+    "casNumber": "105-53-3",
+    "molecularWeight": 160.169,
+    "configuration": "77(2.1).22.2.1",
+    "experimental": {
+      "meltingPoint": 223.2,
+      "boilingPoint": 473.15,
+      "density": 1.05,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 57,
+    "name": "1,1-Diethoxyethane",
+    "casNumber": "105-57-7",
+    "molecularWeight": 118.176,
+    "configuration": "1.25.26(1).2.1",
+    "experimental": {
+      "meltingPoint": 173.2,
+      "boilingPoint": 375.35,
+      "density": 0.825,
+      "gibbsEnergy": -245
+    }
+  },
+  {
+    "index": 58,
+    "name": "Dimethoxyethane",
+    "casNumber": "110-71-4",
+    "molecularWeight": 90.122,
+    "configuration": "24.2.25.1",
+    "experimental": {
+      "meltingPoint": 215.2,
+      "boilingPoint": 358.15,
+      "density": 0.8683,
+      "gibbsEnergy": -198.2
+    }
+  },
+  {
+    "index": 59,
+    "name": "N,N-Dimethylacetamide",
+    "casNumber": "127-19-5",
+    "molecularWeight": 87.122,
+    "configuration": "1.101",
+    "experimental": {
+      "meltingPoint": 253.2,
+      "boilingPoint": 438.15,
+      "density": 0.94,
+      "gibbsEnergy": -88.5
+    }
+  },
+  {
+    "index": 60,
+    "name": "N-Methylacetamide",
+    "casNumber": "79-16-3",
+    "molecularWeight": 73.095,
+    "configuration": "1.92",
+    "experimental": {
+      "meltingPoint": 301.2,
+      "boilingPoint": 478.15,
+      "density": 0.94,
+      "gibbsEnergy": -135
+    }
+  },
+  {
+    "index": 61,
+    "name": "Ethanethiol",
+    "casNumber": "75-08-1",
+    "molecularWeight": 62.13,
+    "configuration": "1.60",
+    "experimental": {
+      "meltingPoint": 125.4,
+      "boilingPoint": 308.15,
+      "density": 0.8617,
+      "gibbsEnergy": -4.81
+    }
+  },
+  {
+    "index": 62,
+    "name": "Decane",
+    "casNumber": "124-18-5",
+    "molecularWeight": 142.286,
+    "configuration": "1.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 243.5,
+      "boilingPoint": 447.25,
+      "density": 0.73,
+      "gibbsEnergy": 33.18
+    }
+  },
+  {
+    "index": 63,
+    "name": "Heptane",
+    "casNumber": "142-82-5",
+    "molecularWeight": 100.205,
+    "configuration": "1.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 182.6,
+      "boilingPoint": 371.65,
+      "density": 0.684,
+      "gibbsEnergy": 8.16
+    }
+  },
+  {
+    "index": 64,
+    "name": "Isooctane ",
+    "casNumber": "540-84-1",
+    "molecularWeight": 114.232,
+    "configuration": "1.4(1)(1).2.3(1).1",
+    "experimental": {
+      "meltingPoint": 165.9,
+      "boilingPoint": 372.35,
+      "density": 0.688,
+      "gibbsEnergy": 13.94
+    }
+  },
+  {
+    "index": 65,
+    "name": "n-Hexane",
+    "casNumber": "110-54-3",
+    "molecularWeight": 86.178,
+    "configuration": "1.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 177.8,
+      "boilingPoint": 341.85,
+      "density": 0.6548,
+      "gibbsEnergy": -0.06
+    }
+  },
+  {
+    "index": 66,
+    "name": "Octane",
+    "casNumber": "111-65-9",
+    "molecularWeight": 114.232,
+    "configuration": "1.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 216.4,
+      "boilingPoint": 398.82,
+      "density": 0.703,
+      "gibbsEnergy": 16
+    }
+  },
+  {
+    "index": 67,
+    "name": "1,3-Pentadiene",
+    "casNumber": "504-60-9",
+    "molecularWeight": 68.119,
+    "configuration": "5.6.1",
+    "experimental": {
+      "meltingPoint": 185.2,
+      "boilingPoint": 315.15,
+      "density": 0.683,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 68,
+    "name": "Pentane",
+    "casNumber": "109-66-0",
+    "molecularWeight": 72.151,
+    "configuration": "1.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 143.4,
+      "boilingPoint": 309.22,
+      "density": 0.626,
+      "gibbsEnergy": -8.81
+    }
+  },
+  {
+    "index": 69,
+    "name": "Propane",
+    "casNumber": "74-98-6",
+    "molecularWeight": 44.097,
+    "configuration": "1.2.1",
+    "experimental": {
+      "meltingPoint": 85.47,
+      "boilingPoint": 231.02,
+      "density": 0.5077,
+      "gibbsEnergy": -24.39
+    }
+  },
+  {
+    "index": 70,
+    "name": "1-Propene",
+    "casNumber": "115-07-1",
+    "molecularWeight": 42.081,
+    "configuration": "5.1",
+    "experimental": {
+      "meltingPoint": 87.89,
+      "boilingPoint": 225.46,
+      "density": 0.609,
+      "gibbsEnergy": 62.15
+    }
+  },
+  {
+    "index": 71,
+    "name": "Undecane",
+    "casNumber": "1120-21-4",
+    "molecularWeight": 156.313,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 247.6,
+      "boilingPoint": 469.08,
+      "density": 0.74,
+      "gibbsEnergy": 41.16
+    }
+  },
+  {
+    "index": 72,
+    "name": "Isoprene",
+    "casNumber": "78-79-5",
+    "molecularWeight": 68.119,
+    "configuration": "7(1).5",
+    "experimental": {
+      "meltingPoint": 127.3,
+      "boilingPoint": 307.15,
+      "density": 0.68,
+      "gibbsEnergy": 145.9
+    }
+  },
+  {
+    "index": 73,
+    "name": "Isohexane",
+    "casNumber": "107-83-5",
+    "molecularWeight": 86.178,
+    "configuration": "1.3(1).2.2.1",
+    "experimental": {
+      "meltingPoint": 119.5,
+      "boilingPoint": 333.35,
+      "density": 0.66,
+      "gibbsEnergy": -5.33
+    }
+  },
+  {
+    "index": 74,
+    "name": "Diisopropyl ether",
+    "casNumber": "108-20-3",
+    "molecularWeight": 102.177,
+    "configuration": "1.26(1).3(1).1",
+    "experimental": {
+      "meltingPoint": 181.4,
+      "boilingPoint": 341.65,
+      "density": 0.725,
+      "gibbsEnergy": -124.8
+    }
+  },
+  {
+    "index": 75,
+    "name": "Diethyl ether",
+    "casNumber": "60-29-7",
+    "molecularWeight": 74.123,
+    "configuration": "1.25.2.1",
+    "experimental": {
+      "meltingPoint": 156.9,
+      "boilingPoint": 307.65,
+      "density": 0.7134,
+      "gibbsEnergy": -122.1
+    }
+  },
+  {
+    "index": 76,
+    "name": "tert-Butyl alcohol",
+    "casNumber": "75-65-0",
+    "molecularWeight": 74.123,
+    "configuration": "1.4(1)(1).82",
+    "experimental": {
+      "meltingPoint": 298.6,
+      "boilingPoint": 355.55,
+      "density": 0.7809,
+      "gibbsEnergy": -177.6
+    }
+  },
+  {
+    "index": 77,
+    "name": "Methyl tert-butyl ether",
+    "casNumber": "1634-04-4",
+    "molecularWeight": 88.15,
+    "configuration": "24.4(1)(1).1",
+    "experimental": {
+      "meltingPoint": 164.6,
+      "boilingPoint": 328.35,
+      "density": 0.7404,
+      "gibbsEnergy": -117.5
+    }
+  },
+  {
+    "index": 78,
+    "name": "Butanenitrile",
+    "casNumber": "109-74-0",
+    "molecularWeight": 69.107,
+    "configuration": "1.2.41",
+    "experimental": {
+      "meltingPoint": 161.3,
+      "boilingPoint": 390.75,
+      "density": 0.7954,
+      "gibbsEnergy": 108.66
+    }
+  },
+  {
+    "index": 79,
+    "name": "Nitroethane",
+    "casNumber": "79-24-3",
+    "molecularWeight": 75.067,
+    "configuration": "1.55",
+    "experimental": {
+      "meltingPoint": 183.7,
+      "boilingPoint": 387.15,
+      "density": 1.054,
+      "gibbsEnergy": -4.89
+    }
+  },
+  {
+    "index": 80,
+    "name": "Propionitrile",
+    "casNumber": "107-12-0",
+    "molecularWeight": 55.08,
+    "configuration": "1.41",
+    "experimental": {
+      "meltingPoint": 180.4,
+      "boilingPoint": 370.25,
+      "density": 0.782,
+      "gibbsEnergy": 97.49
+    }
+  },
+  {
+    "index": 81,
+    "name": "Acetaldehyde",
+    "casNumber": "75-07-0",
+    "molecularWeight": 44.053,
+    "configuration": "1.20",
+    "experimental": {
+      "meltingPoint": 150.2,
+      "boilingPoint": 293.25,
+      "density": 0.788,
+      "gibbsEnergy": -132.8
+    }
+  },
+  {
+    "index": 82,
+    "name": "Decanal",
+    "casNumber": "112-31-2",
+    "molecularWeight": 156.269,
+    "configuration": "1.2.2.2.2.2.2.2.2.20",
+    "experimental": {
+      "meltingPoint": 268.2,
+      "boilingPoint": 481.65,
+      "density": 0.83,
+      "gibbsEnergy": -67.39
+    }
+  },
+  {
+    "index": 83,
+    "name": "3-Methyl-2-butanone",
+    "casNumber": "563-80-4",
+    "molecularWeight": 86.134,
+    "configuration": "1.3(1).18",
+    "experimental": {
+      "meltingPoint": 181.2,
+      "boilingPoint": 367.55,
+      "density": 0.804,
+      "gibbsEnergy": -139
+    }
+  },
+  {
+    "index": 84,
+    "name": "Propanal",
+    "casNumber": "123-38-6",
+    "molecularWeight": 58.08,
+    "configuration": "1.2.20",
+    "experimental": {
+      "meltingPoint": 193.2,
+      "boilingPoint": 321.15,
+      "density": 0.807,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 85,
+    "name": "Butyraldehyde",
+    "casNumber": "123-72-8",
+    "molecularWeight": 72.107,
+    "configuration": "1.2.2.20",
+    "experimental": {
+      "meltingPoint": 174.2,
+      "boilingPoint": 347.95,
+      "density": 0.8,
+      "gibbsEnergy": -116.3
+    }
+  },
+  {
+    "index": 86,
+    "name": "2,3-Butanediol",
+    "casNumber": "513-85-9",
+    "molecularWeight": 90.122,
+    "configuration": "1.3(81).3(81).1",
+    "experimental": {
+      "meltingPoint": 298.2,
+      "boilingPoint": 455.15,
+      "density": 0.995,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 87,
+    "name": "1,4-Butanediol",
+    "casNumber": "110-63-4",
+    "molecularWeight": 90.122,
+    "configuration": "14.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 293.3,
+      "boilingPoint": 501.149,
+      "density": 1.01,
+      "gibbsEnergy": -278
+    }
+  },
+  {
+    "index": 88,
+    "name": "2-Methyl-2,4-pentanediol",
+    "casNumber": "107-41-5",
+    "molecularWeight": 118.176,
+    "configuration": "1.4(82)(1).2.3(81).1",
+    "experimental": {
+      "meltingPoint": 223.2,
+      "boilingPoint": 471.15,
+      "density": 0.92,
+      "gibbsEnergy": -312.7
+    }
+  },
+  {
+    "index": 89,
+    "name": "1,3-Propanediol",
+    "casNumber": "504-63-2",
+    "molecularWeight": 76.095,
+    "configuration": "14.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 246.5,
+      "boilingPoint": 487.55,
+      "density": 1.0597,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 90,
+    "name": "Allyl alcohol",
+    "casNumber": "107-18-6",
+    "molecularWeight": 58.08,
+    "configuration": "14.2.5",
+    "experimental": {
+      "meltingPoint": 144.2,
+      "boilingPoint": 370.23,
+      "density": 0.854,
+      "gibbsEnergy": -63.72
+    }
+  },
+  {
+    "index": 91,
+    "name": "1-Butanol",
+    "casNumber": "71-36-3",
+    "molecularWeight": 74.123,
+    "configuration": "1.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 183.4,
+      "boilingPoint": 390.85,
+      "density": 0.8098,
+      "gibbsEnergy": -150.3
+    }
+  },
+  {
+    "index": 92,
+    "name": "1-Decanol",
+    "casNumber": "112-30-1",
+    "molecularWeight": 158.285,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 280.1,
+      "boilingPoint": 504.25,
+      "density": 0.8297,
+      "gibbsEnergy": -98.79
+    }
+  },
+  {
+    "index": 93,
+    "name": "Diethylene glycol",
+    "casNumber": "111-46-6",
+    "molecularWeight": 106.121,
+    "configuration": "14.2.25.2.2.14",
+    "experimental": {
+      "meltingPoint": 262.8,
+      "boilingPoint": 518.95,
+      "density": 1.1184,
+      "gibbsEnergy": -409
+    }
+  },
+  {
+    "index": 94,
+    "name": "Diacetone alcohol",
+    "casNumber": "123-42-2",
+    "molecularWeight": 116.16,
+    "configuration": "18.2.4(1)(1).82",
+    "experimental": {
+      "meltingPoint": 229.2,
+      "boilingPoint": 441.05,
+      "density": 0.938,
+      "gibbsEnergy": -368.7
+    }
+  },
+  {
+    "index": 95,
+    "name": "Ethanol",
+    "casNumber": "64-17-5",
+    "molecularWeight": 46.069,
+    "configuration": "1.2.14",
+    "experimental": {
+      "meltingPoint": 159.1,
+      "boilingPoint": 351.35,
+      "density": 0.789,
+      "gibbsEnergy": -167.8
+    }
+  },
+  {
+    "index": 96,
+    "name": "Ethylene glycol",
+    "casNumber": "107-21-1",
+    "molecularWeight": 62.068,
+    "configuration": "14.2.2.14",
+    "experimental": {
+      "meltingPoint": 260.2,
+      "boilingPoint": 470.45,
+      "density": 1.11,
+      "gibbsEnergy": -302.6
+    }
+  },
+  {
+    "index": 97,
+    "name": "Glycerol",
+    "casNumber": "56-81-5",
+    "molecularWeight": 92.094,
+    "configuration": "14.2.3(81).2.14",
+    "experimental": {
+      "meltingPoint": 291.4,
+      "boilingPoint": 563.15,
+      "density": 1.261,
+      "gibbsEnergy": -448
+    }
+  },
+  {
+    "index": 98,
+    "name": "1-Heptanol",
+    "casNumber": "111-70-6",
+    "molecularWeight": 116.204,
+    "configuration": "1.2.2.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 239.2,
+      "boilingPoint": 449.81,
+      "density": 0.8187,
+      "gibbsEnergy": -125.3
+    }
+  },
+  {
+    "index": 99,
+    "name": "1-Hexanol",
+    "casNumber": "111-27-3",
+    "molecularWeight": 102.177,
+    "configuration": "1.2.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 221.2,
+      "boilingPoint": 431.303,
+      "density": 0.8136,
+      "gibbsEnergy": -134.4
+    }
+  },
+  {
+    "index": 100,
+    "name": "Isobutanol",
+    "casNumber": "78-83-1",
+    "molecularWeight": 74.123,
+    "configuration": "1.3(1).2.14",
+    "experimental": {
+      "meltingPoint": 165.2,
+      "boilingPoint": 380.95,
+      "density": 0.802,
+      "gibbsEnergy": -154.9
+    }
+  },
+  {
+    "index": 101,
+    "name": "1-Pentanol",
+    "casNumber": "71-41-0",
+    "molecularWeight": 88.15,
+    "configuration": "1.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 194.3,
+      "boilingPoint": 411.16,
+      "density": 0.8144,
+      "gibbsEnergy": -146
+    }
+  },
+  {
+    "index": 102,
+    "name": "Isopropanol",
+    "casNumber": "67-63-0",
+    "molecularWeight": 60.096,
+    "configuration": "1.3(81).1",
+    "experimental": {
+      "meltingPoint": 185.3,
+      "boilingPoint": 355.41,
+      "density": 0.786,
+      "gibbsEnergy": -173.5
+    }
+  },
+  {
+    "index": 103,
+    "name": "Mannitol",
+    "casNumber": "87-78-5",
+    "molecularWeight": 182.172,
+    "configuration": "14.2.3(81).3(81).3(81).3(81).2.14",
+    "experimental": {
+      "meltingPoint": 440.2,
+      "boilingPoint": 768.015,
+      "density": 1.52,
+      "gibbsEnergy": null
+    }
+  },
+  {
+    "index": 104,
+    "name": "1-Octanol",
+    "casNumber": "111-87-5",
+    "molecularWeight": 130.231,
+    "configuration": "1.2.2.2.2.2.2.2.14",
+    "experimental": {
+      "meltingPoint": 257.7,
+      "boilingPoint": 468.33,
+      "density": 0.824,
+      "gibbsEnergy": -115.5
+    }
+  },
+  {
+    "index": 105,
+    "name": "Isopentyl alcohol",
+    "casNumber": "123-51-3",
+    "molecularWeight": 88.15,
+    "configuration": "1.3(1).2.2.14",
+    "experimental": {
+      "meltingPoint": 156,
+      "boilingPoint": 403.69,
+      "density": 0.81,
+      "gibbsEnergy": -145
+    }
+  },
+  {
+    "index": 106,
+    "name": "1-Propanol",
+    "casNumber": "71-23-8",
+    "molecularWeight": 60.096,
+    "configuration": "1.2.2.14",
+    "experimental": {
+      "meltingPoint": 147.1,
+      "boilingPoint": 370.35,
+      "density": 0.8034,
+      "gibbsEnergy": -159.9
+    }
+  },
+  {
+    "index": 107,
+    "name": "Methyl propyl ether",
+    "casNumber": "557-17-5",
+    "molecularWeight": 74.123,
+    "configuration": "24.2.2.1",
+    "experimental": {
+      "meltingPoint": 134,
+      "boilingPoint": 312.25,
+      "density": 0.7356,
+      "gibbsEnergy": -111
+    }
+  },
+  {
+    "index": 108,
+    "name": "1-Tetradecanol",
+    "casNumber": "112-72-1",
+    "molecularWeight": 214.393,
+    "configuration": "14.2.2.2.2.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "meltingPoint": 312.7,
+      "boilingPoint": 569.04,
+      "density": 0.824,
+      "gibbsEnergy": -62.2
+    }
+  }
+]

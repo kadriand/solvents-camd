@@ -32,7 +32,7 @@ cmake-build-debug/
 ## Plugin-specific files:
 
 # IntelliJ
-out/
+output/**
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -55,3 +55,6 @@ classes/
 
 # MS Excel temporary files
 ~$*
+
+# Mongo files
+mongo/compounds-bank-db/**

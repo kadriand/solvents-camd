@@ -1,0 +1,1001 @@
+[
+  {
+    "index": 1,
+    "name": "Propane",
+    "configuration": "1.2.1",
+    "casNumber": "74-98-6",
+    "molecularWeight": 44.097,
+    "lnComputedActivity": 5.09807775,
+    "lnExperimentalActivity": 8.35
+  },
+  {
+    "index": 2,
+    "name": "Butane",
+    "configuration": "1.2.2.1",
+    "casNumber": "106-97-8",
+    "molecularWeight": 58.124,
+    "lnComputedActivity": 6.30668569,
+    "lnExperimentalActivity": 10.9
+  },
+  {
+    "index": 3,
+    "name": "Pentane",
+    "configuration": "1.2.2.2.1",
+    "casNumber": "109-66-0",
+    "molecularWeight": 72.151,
+    "lnComputedActivity": 7.52726827,
+    "lnExperimentalActivity": 11.5
+  },
+  {
+    "index": 4,
+    "name": "n-Hexane",
+    "configuration": "1.2.2.2.2.1",
+    "casNumber": "110-54-3",
+    "molecularWeight": 86.178,
+    "lnComputedActivity": 8.75150512,
+    "lnExperimentalActivity": 13.2
+  },
+  {
+    "index": 5,
+    "name": "Heptane",
+    "configuration": "1.2.2.2.2.2.1",
+    "casNumber": "142-82-5",
+    "molecularWeight": 100.205,
+    "lnComputedActivity": 9.97643093,
+    "lnExperimentalActivity": 14.5
+  },
+  {
+    "index": 6,
+    "name": "Octane",
+    "configuration": "1.2.2.2.2.2.2.1",
+    "casNumber": "111-65-9",
+    "molecularWeight": 114.232,
+    "lnComputedActivity": 11.2008653,
+    "lnExperimentalActivity": 16
+  },
+  {
+    "index": 7,
+    "name": "Nonane",
+    "configuration": "1.2.2.2.2.2.2.2.1",
+    "casNumber": "111-84-2",
+    "molecularWeight": 128.259,
+    "lnComputedActivity": 12.4243109,
+    "lnExperimentalActivity": 17.63
+  },
+  {
+    "index": 8,
+    "name": "Decane",
+    "configuration": "1.2.2.2.2.2.2.2.2.1",
+    "casNumber": "124-18-5",
+    "molecularWeight": 142.286,
+    "lnComputedActivity": 13.6465555,
+    "lnExperimentalActivity": 19.2
+  },
+  {
+    "index": 9,
+    "name": "Dodecane",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.1",
+    "casNumber": "112-40-3",
+    "molecularWeight": 170.34,
+    "lnComputedActivity": 16.0871499,
+    "lnExperimentalActivity": 21.71
+  },
+  {
+    "index": 10,
+    "name": "Isobutane",
+    "configuration": "1.3(1).1",
+    "casNumber": "75-28-5",
+    "molecularWeight": 58.124,
+    "lnComputedActivity": 6.30668569,
+    "lnExperimentalActivity": 11.1
+  },
+  {
+    "index": 11,
+    "name": "2-Methylbutane",
+    "configuration": "1.3(1).2.1",
+    "casNumber": "78-78-4",
+    "molecularWeight": 72.151,
+    "lnComputedActivity": 7.52726827,
+    "lnExperimentalActivity": 11.3
+  },
+  {
+    "index": 12,
+    "name": "2,3-Dimethylbutane",
+    "configuration": "1.3(1).3(1).1",
+    "casNumber": "79-29-8",
+    "molecularWeight": 86.178,
+    "lnComputedActivity": 8.74779742,
+    "lnExperimentalActivity": 12.4
+  },
+  {
+    "index": 13,
+    "name": "2-Methylpentane",
+    "configuration": "1.3(1).2.2.1",
+    "casNumber": "107-83-5",
+    "molecularWeight": 86.178,
+    "lnComputedActivity": 8.75150512,
+    "lnExperimentalActivity": 12.8
+  },
+  {
+    "index": 14,
+    "name": "1-Pentene",
+    "configuration": "5.2.2.1",
+    "casNumber": "109-67-1",
+    "molecularWeight": 70.135,
+    "lnComputedActivity": 5.39972858,
+    "lnExperimentalActivity": 10.2
+  },
+  {
+    "index": 15,
+    "name": "1-Hexene",
+    "configuration": "5.2.2.2.1",
+    "casNumber": "592-41-6",
+    "molecularWeight": 84.162,
+    "lnComputedActivity": 6.64186028,
+    "lnExperimentalActivity": 11.4
+  },
+  {
+    "index": 16,
+    "name": "1-Octene",
+    "configuration": "5.2.2.2.2.2.1",
+    "casNumber": "111-66-0",
+    "molecularWeight": 112.216,
+    "lnComputedActivity": 9.11469952,
+    "lnExperimentalActivity": 14.7
+  },
+  {
+    "index": 17,
+    "name": "2-Pentene",
+    "configuration": "1.6.2.1",
+    "casNumber": "109-68-2",
+    "molecularWeight": 70.135,
+    "lnComputedActivity": 5.80975052,
+    "lnExperimentalActivity": 9.86
+  },
+  {
+    "index": 18,
+    "name": "2-Heptene",
+    "configuration": "1.6.2.2.2.1",
+    "casNumber": "592-77-8",
+    "molecularWeight": 98.189,
+    "lnComputedActivity": 8.29376609,
+    "lnExperimentalActivity": 12.8
+  },
+  {
+    "index": 19,
+    "name": "1,5-Hexadiene",
+    "configuration": "5.2.2.5",
+    "casNumber": "592-42-7",
+    "molecularWeight": 82.146,
+    "lnComputedActivity": 4.64801913,
+    "lnExperimentalActivity": 10.2
+  },
+  {
+    "index": 20,
+    "name": "Isoprene",
+    "configuration": "7(1).5",
+    "casNumber": "78-79-5",
+    "molecularWeight": 68.119,
+    "lnComputedActivity": 3.79746368,
+    "lnExperimentalActivity": 8.68
+  },
+  {
+    "index": 21,
+    "name": "1,4-Pentadiene",
+    "configuration": "5.2.5",
+    "casNumber": "591-93-5",
+    "molecularWeight": 68.119,
+    "lnComputedActivity": 3.79746368,
+    "lnExperimentalActivity": 8.82
+  },
+  {
+    "index": 22,
+    "name": "Methanol",
+    "configuration": "1.14",
+    "casNumber": "67-56-1",
+    "molecularWeight": 32.042,
+    "lnComputedActivity": 0.6754054,
+    "lnExperimentalActivity": 0.457
+  },
+  {
+    "index": 23,
+    "name": "Ethanol",
+    "configuration": "1.2.14",
+    "casNumber": "64-17-5",
+    "molecularWeight": 46.069,
+    "lnComputedActivity": 1.56159562,
+    "lnExperimentalActivity": 1.32
+  },
+  {
+    "index": 24,
+    "name": "1-Propanol",
+    "configuration": "1.2.2.14",
+    "casNumber": "71-23-8",
+    "molecularWeight": 60.096,
+    "lnComputedActivity": 2.62361572,
+    "lnExperimentalActivity": 2.6
+  },
+  {
+    "index": 25,
+    "name": "1-Butanol",
+    "configuration": "1.2.2.2.14",
+    "casNumber": "71-36-3",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 3.7174242,
+    "lnExperimentalActivity": 3.92
+  },
+  {
+    "index": 26,
+    "name": "1-Pentanol",
+    "configuration": "1.2.2.2.2.14",
+    "casNumber": "71-41-0",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 4.8313975,
+    "lnExperimentalActivity": 5.29
+  },
+  {
+    "index": 27,
+    "name": "1-Hexanol",
+    "configuration": "1.2.2.2.2.2.14",
+    "casNumber": "111-27-3",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.9593431,
+    "lnExperimentalActivity": 6.68
+  },
+  {
+    "index": 28,
+    "name": "1-Heptanol",
+    "configuration": "1.2.2.2.2.2.2.14",
+    "casNumber": "111-70-6",
+    "molecularWeight": 116.204,
+    "lnComputedActivity": 7.09753283,
+    "lnExperimentalActivity": 8.09
+  },
+  {
+    "index": 29,
+    "name": "1-Octanol",
+    "configuration": "1.2.2.2.2.2.2.2.14",
+    "casNumber": "111-87-5",
+    "molecularWeight": 130.231,
+    "lnComputedActivity": 8.24352508,
+    "lnExperimentalActivity": 9.56
+  },
+  {
+    "index": 30,
+    "name": "1-Nonanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.14",
+    "casNumber": "143-08-8",
+    "molecularWeight": 144.258,
+    "lnComputedActivity": 9.39561969,
+    "lnExperimentalActivity": 11
+  },
+  {
+    "index": 31,
+    "name": "1-Decanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "112-30-1",
+    "molecularWeight": 158.285,
+    "lnComputedActivity": 10.5525765,
+    "lnExperimentalActivity": 12.4
+  },
+  {
+    "index": 32,
+    "name": "1-Dodecanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "112-53-8",
+    "molecularWeight": 186.339,
+    "lnComputedActivity": 12.8775324,
+    "lnExperimentalActivity": 15.3
+  },
+  {
+    "index": 33,
+    "name": "1-Tetradecanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "112-72-1",
+    "molecularWeight": 214.393,
+    "lnComputedActivity": 15.2130427,
+    "lnExperimentalActivity": 17.5
+  },
+  {
+    "index": 34,
+    "name": "1-Pentadecanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "629-76-5",
+    "molecularWeight": 228.42,
+    "lnComputedActivity": 16.3836131,
+    "lnExperimentalActivity": 18.8
+  },
+  {
+    "index": 35,
+    "name": "1-Hexadecanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "36653-82-4",
+    "molecularWeight": 242.447,
+    "lnComputedActivity": 17.5556014,
+    "lnExperimentalActivity": 19.8
+  },
+  {
+    "index": 36,
+    "name": "Heptadecan-1-ol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "1454-85-9",
+    "molecularWeight": 256.474,
+    "lnComputedActivity": 18.7287291,
+    "lnExperimentalActivity": 21.3
+  },
+  {
+    "index": 37,
+    "name": "1-Octadecanol",
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.14",
+    "casNumber": "112-92-5",
+    "molecularWeight": 270.501,
+    "lnComputedActivity": 19.9027572,
+    "lnExperimentalActivity": 23.3
+  },
+  {
+    "index": 38,
+    "name": "Isopropanol",
+    "configuration": "1.3(81).1",
+    "casNumber": "67-63-0",
+    "molecularWeight": 60.096,
+    "lnComputedActivity": 2.46642741,
+    "lnExperimentalActivity": 2.03
+  },
+  {
+    "index": 39,
+    "name": "2-Butanol",
+    "configuration": "1.3(81).2.1",
+    "casNumber": "78-92-2",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 3.57136923,
+    "lnExperimentalActivity": 3.27
+  },
+  {
+    "index": 40,
+    "name": "Pentan-2-ol",
+    "configuration": "1.3(81).2.2.1",
+    "casNumber": "6032-29-7",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 4.69364653,
+    "lnExperimentalActivity": 4.57
+  },
+  {
+    "index": 41,
+    "name": "2-Hexanol",
+    "configuration": "1.3(81).2.2.2.1",
+    "casNumber": "626-93-7",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.82810628,
+    "lnExperimentalActivity": 5.64
+  },
+  {
+    "index": 42,
+    "name": "2-Methyl-1-propanol",
+    "configuration": "1.3(1).2.14",
+    "casNumber": "78-83-1",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 3.7174242,
+    "lnExperimentalActivity": 3.89
+  },
+  {
+    "index": 43,
+    "name": "tert-Butyl alcohol",
+    "configuration": "1.4(1)(1).82",
+    "casNumber": "75-65-0",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 3.28792665,
+    "lnExperimentalActivity": 2.48
+  },
+  {
+    "index": 44,
+    "name": "Isopentyl alcohol",
+    "configuration": "1.3(1).2.2.14",
+    "casNumber": "123-51-3",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 4.8313975,
+    "lnExperimentalActivity": 5.34
+  },
+  {
+    "index": 45,
+    "name": "2-Methyl-1-butanol",
+    "configuration": "1.2.3(1).2.14",
+    "casNumber": "137-32-6",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 4.8313975,
+    "lnExperimentalActivity": 5.08
+  },
+  {
+    "index": 46,
+    "name": "2,2-Dimethylpropanol",
+    "configuration": "1.4(1)(1).2.14",
+    "casNumber": "75-84-3",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 4.83063888,
+    "lnExperimentalActivity": 4.91
+  },
+  {
+    "index": 47,
+    "name": "1-Hexen-3-ol",
+    "configuration": "5.3(81).2.2.1",
+    "casNumber": "4798-44-1",
+    "molecularWeight": 100.161,
+    "lnComputedActivity": 3.90757377,
+    "lnExperimentalActivity": 5.38
+  },
+  {
+    "index": 48,
+    "name": "Hex-4-en-1-ol",
+    "configuration": "1.6.2.2.2.14",
+    "casNumber": "6126-50-7",
+    "molecularWeight": 100.161,
+    "lnComputedActivity": 4.47370037,
+    "lnExperimentalActivity": 4.95
+  },
+  {
+    "index": 49,
+    "name": "4-Methylpent-1-en-3-ol",
+    "configuration": "1.3(1).3(81).5",
+    "casNumber": "4798-45-2",
+    "molecularWeight": 100.161,
+    "lnComputedActivity": 3.90757377,
+    "lnExperimentalActivity": 5.18
+  },
+  {
+    "index": 50,
+    "name": "2,2-Dimethylbutanol",
+    "configuration": "1.2.4(1)(1).2.14",
+    "casNumber": "1185-33-7",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.9584665,
+    "lnExperimentalActivity": 6.61
+  },
+  {
+    "index": 51,
+    "name": "2,3-Dimethylbutan-2-ol",
+    "configuration": "1.3(1).4(1)(1).82",
+    "casNumber": "594-60-5",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.53515381,
+    "lnExperimentalActivity": 4.88
+  },
+  {
+    "index": 52,
+    "name": "2-Butanol, 3,3-dimethyl-",
+    "configuration": "1.4(1)(1).3(1).81",
+    "casNumber": "464-07-3",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.82682767,
+    "lnExperimentalActivity": 5.43
+  },
+  {
+    "index": 53,
+    "name": "3-Hexanol",
+    "configuration": "1.2.3(81).2.2.1",
+    "casNumber": "623-37-0",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 5.82810628,
+    "lnExperimentalActivity": 5.85
+  },
+  {
+    "index": 54,
+    "name": "Acetaldehyde",
+    "configuration": "1.20",
+    "casNumber": "75-07-0",
+    "molecularWeight": 44.053,
+    "lnComputedActivity": 1.60836454,
+    "lnExperimentalActivity": 1.37
+  },
+  {
+    "index": 55,
+    "name": "Propanal",
+    "configuration": "1.2.20",
+    "casNumber": "123-38-6",
+    "molecularWeight": 58.08,
+    "lnComputedActivity": 2.6858979,
+    "lnExperimentalActivity": 2.57
+  },
+  {
+    "index": 56,
+    "name": "Butyraldehyde",
+    "configuration": "1.2.2.20",
+    "casNumber": "123-72-8",
+    "molecularWeight": 72.107,
+    "lnComputedActivity": 3.80753163,
+    "lnExperimentalActivity": 3.88
+  },
+  {
+    "index": 57,
+    "name": "Pentanal",
+    "configuration": "1.2.2.2.20",
+    "casNumber": "110-62-3",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 4.9523394,
+    "lnExperimentalActivity": 5.39
+  },
+  {
+    "index": 58,
+    "name": "Hexanal",
+    "configuration": "1.2.2.2.2.20",
+    "casNumber": "66-25-1",
+    "molecularWeight": 100.161,
+    "lnComputedActivity": 6.1114825,
+    "lnExperimentalActivity": 6.7
+  },
+  {
+    "index": 59,
+    "name": "Heptanal",
+    "configuration": "1.2.2.2.2.2.20",
+    "casNumber": "111-71-7",
+    "molecularWeight": 114.188,
+    "lnComputedActivity": 8.45611161,
+    "lnExperimentalActivity": 9.02
+  },
+  {
+    "index": 60,
+    "name": "Octanal",
+    "configuration": "1.2.2.2.2.2.2.20",
+    "casNumber": "124-13-0",
+    "molecularWeight": 128.215,
+    "lnComputedActivity": 7.28032916,
+    "lnExperimentalActivity": 8.34
+  },
+  {
+    "index": 61,
+    "name": "Nonanal",
+    "configuration": "1.2.2.2.2.2.2.2.20",
+    "casNumber": "124-19-6",
+    "molecularWeight": 142.242,
+    "lnComputedActivity": 9.63702396,
+    "lnExperimentalActivity": 11.2
+  },
+  {
+    "index": 62,
+    "name": "Acetone",
+    "configuration": "18.1",
+    "casNumber": "67-64-1",
+    "molecularWeight": 58.08,
+    "lnComputedActivity": 2.07813567,
+    "lnExperimentalActivity": 1.95
+  },
+  {
+    "index": 63,
+    "name": "Methyl ethyl ketone",
+    "configuration": "18.2.1",
+    "casNumber": "78-93-3",
+    "molecularWeight": 72.107,
+    "lnComputedActivity": 3.16815249,
+    "lnExperimentalActivity": 3.24
+  },
+  {
+    "index": 64,
+    "name": "2-Pentanone",
+    "configuration": "18.2.2.1",
+    "casNumber": "107-87-9",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 4.28394701,
+    "lnExperimentalActivity": 4.54
+  },
+  {
+    "index": 65,
+    "name": "2-Hexanone",
+    "configuration": "18.2.2.2.1",
+    "casNumber": "591-78-6",
+    "molecularWeight": 100.161,
+    "lnComputedActivity": 5.41821961,
+    "lnExperimentalActivity": 5.88
+  },
+  {
+    "index": 66,
+    "name": "2-Heptanone",
+    "configuration": "18.2.2.2.2.1",
+    "casNumber": "110-43-0",
+    "molecularWeight": 114.188,
+    "lnComputedActivity": 6.56610745,
+    "lnExperimentalActivity": 7.24
+  },
+  {
+    "index": 67,
+    "name": "2-Octanone",
+    "configuration": "18.2.2.2.2.2.1",
+    "casNumber": "111-13-7",
+    "molecularWeight": 128.215,
+    "lnComputedActivity": 7.72425605,
+    "lnExperimentalActivity": 8.8
+  },
+  {
+    "index": 68,
+    "name": "2-Nonanone",
+    "configuration": "18.2.2.2.2.2.2.1",
+    "casNumber": "821-55-6",
+    "molecularWeight": 142.242,
+    "lnComputedActivity": 8.89027356,
+    "lnExperimentalActivity": 9.7
+  },
+  {
+    "index": 69,
+    "name": "2-Undecanone",
+    "configuration": "18.2.2.2.2.2.2.2.2.1",
+    "casNumber": "112-12-9",
+    "molecularWeight": 170.296,
+    "lnComputedActivity": 11.2393264,
+    "lnExperimentalActivity": 13.48
+  },
+  {
+    "index": 70,
+    "name": "3-Pentanone",
+    "configuration": "1.19.2.1",
+    "casNumber": "96-22-0",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 4.63332967,
+    "lnExperimentalActivity": 4.67
+  },
+  {
+    "index": 71,
+    "name": "3-Pentanone",
+    "configuration": "1.19.2.1",
+    "casNumber": "96-22-0",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 5.7777718,
+    "lnExperimentalActivity": 6.02
+  },
+  {
+    "index": 72,
+    "name": "3-Pentanone",
+    "configuration": "1.19.2.1",
+    "casNumber": "96-22-0",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 4.28394701,
+    "lnExperimentalActivity": 4.43
+  },
+  {
+    "index": 73,
+    "name": "3-Methyl-2-butanone",
+    "configuration": "18.3(1).1",
+    "casNumber": "563-80-4",
+    "molecularWeight": 86.134,
+    "lnComputedActivity": 3.12996996,
+    "lnExperimentalActivity": 3.12
+  },
+  {
+    "index": 74,
+    "name": "Ethyl acetate",
+    "configuration": "21.2.1",
+    "casNumber": "141-78-6",
+    "molecularWeight": 88.106,
+    "lnComputedActivity": 4.1774025,
+    "lnExperimentalActivity": 4.18
+  },
+  {
+    "index": 75,
+    "name": "Propyl acetate",
+    "configuration": "21.2.2.1",
+    "casNumber": "109-60-4",
+    "molecularWeight": 102.133,
+    "lnComputedActivity": 5.27280458,
+    "lnExperimentalActivity": 5.49
+  },
+  {
+    "index": 76,
+    "name": "Butyl acetate",
+    "configuration": "21.2.2.2.1",
+    "casNumber": "123-86-4",
+    "molecularWeight": 116.16,
+    "lnComputedActivity": 6.39743258,
+    "lnExperimentalActivity": 6.7
+  },
+  {
+    "index": 77,
+    "name": "Pentyl acetate",
+    "configuration": "21.2.2.2.2.1",
+    "casNumber": "628-63-7",
+    "molecularWeight": 130.187,
+    "lnComputedActivity": 7.54137379,
+    "lnExperimentalActivity": 8.08
+  },
+  {
+    "index": 78,
+    "name": "Hexyl acetate",
+    "configuration": "21.2.2.2.2.2.1",
+    "casNumber": "142-92-7",
+    "molecularWeight": 144.214,
+    "lnComputedActivity": 8.69876354,
+    "lnExperimentalActivity": 9.43
+  },
+  {
+    "index": 79,
+    "name": "Methyl formate",
+    "configuration": "23.1",
+    "casNumber": "107-31-3",
+    "molecularWeight": 60.052,
+    "lnComputedActivity": 2.72541162,
+    "lnExperimentalActivity": 2.74
+  },
+  {
+    "index": 80,
+    "name": "Ethyl formate",
+    "configuration": "23.2.1",
+    "casNumber": "109-94-4",
+    "molecularWeight": 74.079,
+    "lnComputedActivity": 3.76545752,
+    "lnExperimentalActivity": 3.86
+  },
+  {
+    "index": 81,
+    "name": "Formic acid, propyl ester",
+    "configuration": "23.2.2.1",
+    "casNumber": "110-74-7",
+    "molecularWeight": 88.106,
+    "lnComputedActivity": 4.85754693,
+    "lnExperimentalActivity": 5.13
+  },
+  {
+    "index": 82,
+    "name": "Nitromethane",
+    "configuration": "54",
+    "casNumber": "75-52-5",
+    "molecularWeight": 61.04,
+    "lnComputedActivity": 3.4466999,
+    "lnExperimentalActivity": 3.45
+  },
+  {
+    "index": 83,
+    "name": "Nitroethane",
+    "configuration": "1.55",
+    "casNumber": "79-24-3",
+    "molecularWeight": 75.067,
+    "lnComputedActivity": 4.1799352,
+    "lnExperimentalActivity": 4.48
+  },
+  {
+    "index": 84,
+    "name": "1-Nitropropane",
+    "configuration": "1.2.55",
+    "casNumber": "108-03-2",
+    "molecularWeight": 89.094,
+    "lnComputedActivity": 5.24616675,
+    "lnExperimentalActivity": 5.7
+  },
+  {
+    "index": 85,
+    "name": "2-Nitropropane",
+    "configuration": "1.56.1",
+    "casNumber": "79-46-9",
+    "molecularWeight": 89.094,
+    "lnComputedActivity": 5.94152555,
+    "lnExperimentalActivity": 5.69
+  },
+  {
+    "index": 86,
+    "name": "Diethylamine",
+    "configuration": "1.32.2.1",
+    "casNumber": "109-89-7",
+    "molecularWeight": 73.139,
+    "lnComputedActivity": 2.00801661,
+    "lnExperimentalActivity": 1.69
+  },
+  {
+    "index": 87,
+    "name": "Triethylamine",
+    "configuration": "1.35(2.1).2.1",
+    "casNumber": "121-44-8",
+    "molecularWeight": 101.193,
+    "lnComputedActivity": 6.04824055,
+    "lnExperimentalActivity": 4.21
+  },
+  {
+    "index": 88,
+    "name": "N-Ethyl-N-butylamine",
+    "configuration": "1.32.2.2.2.1",
+    "casNumber": "13360-63-9",
+    "molecularWeight": 101.193,
+    "lnComputedActivity": 4.45141139,
+    "lnExperimentalActivity": 4.87
+  },
+  {
+    "index": 89,
+    "name": "Dipropylamine",
+    "configuration": "1.2.32.2.2.1",
+    "casNumber": "142-84-7",
+    "molecularWeight": 101.193,
+    "lnComputedActivity": 4.45141139,
+    "lnExperimentalActivity": 4.9
+  },
+  {
+    "index": 90,
+    "name": "N,N-Dimethylformamide",
+    "configuration": "72",
+    "casNumber": "68-12-2",
+    "molecularWeight": 73.095,
+    "lnComputedActivity": -0.68647075,
+    "lnExperimentalActivity": -0.186
+  },
+  {
+    "index": 91,
+    "name": "N,N-Dimethylacetamide",
+    "configuration": "1.101",
+    "casNumber": "127-19-5",
+    "molecularWeight": 87.122,
+    "lnComputedActivity": 4.46584999,
+    "lnExperimentalActivity": 0.0392
+  },
+  {
+    "index": 92,
+    "name": "Acetonitrile",
+    "configuration": "40",
+    "casNumber": "75-05-8",
+    "molecularWeight": 41.053,
+    "lnComputedActivity": 2.46607097,
+    "lnExperimentalActivity": 2.41
+  },
+  {
+    "index": 93,
+    "name": "Propionitrile",
+    "configuration": "1.41",
+    "casNumber": "107-12-0",
+    "molecularWeight": 55.08,
+    "lnComputedActivity": 3.57360631,
+    "lnExperimentalActivity": 3.56
+  },
+  {
+    "index": 94,
+    "name": "Butanenitrile",
+    "configuration": "1.2.41",
+    "casNumber": "109-74-0",
+    "molecularWeight": 69.107,
+    "lnComputedActivity": 4.67384812,
+    "lnExperimentalActivity": 4.77
+  },
+  {
+    "index": 95,
+    "name": "Valeronitrile",
+    "configuration": "1.2.2.41",
+    "casNumber": "110-59-8",
+    "molecularWeight": 83.134,
+    "lnComputedActivity": 5.79306227,
+    "lnExperimentalActivity": 6
+  },
+  {
+    "index": 96,
+    "name": "Hexanenitrile",
+    "configuration": "1.2.2.2.41",
+    "casNumber": "628-73-9",
+    "molecularWeight": 97.161,
+    "lnComputedActivity": 6.92658207,
+    "lnExperimentalActivity": 7.22
+  },
+  {
+    "index": 97,
+    "name": "Diethyl ether",
+    "configuration": "1.25.2.1",
+    "casNumber": "60-29-7",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 5.32660452,
+    "lnExperimentalActivity": 4.23
+  },
+  {
+    "index": 98,
+    "name": "Propyl ether",
+    "configuration": "1.2.25.2.2.1",
+    "casNumber": "111-43-3",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 7.74232037,
+    "lnExperimentalActivity": 7.75
+  },
+  {
+    "index": 99,
+    "name": "Butyl ether",
+    "configuration": "1.2.2.25.2.2.2.1",
+    "casNumber": "142-96-1",
+    "molecularWeight": 130.231,
+    "lnComputedActivity": 10.1711537,
+    "lnExperimentalActivity": 10.8
+  },
+  {
+    "index": 100,
+    "name": "Isopropyl ether",
+    "configuration": "1.26(1).3(1).1",
+    "casNumber": "108-20-3",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 8.26881322,
+    "lnExperimentalActivity": 6.44
+  },
+  {
+    "index": 101,
+    "name": "Methyl tert-butyl ether",
+    "configuration": "24.4(1)(1).1",
+    "casNumber": "1634-04-4",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 6.03126851,
+    "lnExperimentalActivity": 4.73
+  },
+  {
+    "index": 102,
+    "name": "1-Methoxypropane",
+    "configuration": "24.2.2.1",
+    "casNumber": "557-17-5",
+    "molecularWeight": 74.123,
+    "lnComputedActivity": 4.84371925,
+    "lnExperimentalActivity": 4.88
+  },
+  {
+    "index": 103,
+    "name": "1-Methoxybutane",
+    "configuration": "24.2.2.2.1",
+    "casNumber": "628-28-4",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 6.034833,
+    "lnExperimentalActivity": 6.3
+  },
+  {
+    "index": 104,
+    "name": "2-Ethoxypropane",
+    "configuration": "1.25.3(1).1",
+    "casNumber": "625-54-7",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 6.53155269,
+    "lnExperimentalActivity": 5.3
+  },
+  {
+    "index": 105,
+    "name": "1-Ethoxypropane",
+    "configuration": "1.25.2.2.1",
+    "casNumber": "628-32-0",
+    "molecularWeight": 88.15,
+    "lnComputedActivity": 6.53155269,
+    "lnExperimentalActivity": 5.55
+  },
+  {
+    "index": 106,
+    "name": "Propane, 1-(1-methylethoxy)-",
+    "configuration": "1.2.25.3(1).1",
+    "casNumber": "627-08-7",
+    "molecularWeight": 102.177,
+    "lnComputedActivity": 7.74232037,
+    "lnExperimentalActivity": 7.09
+  },
+  {
+    "index": 107,
+    "name": "Formic acid",
+    "configuration": "43",
+    "casNumber": "64-18-6",
+    "molecularWeight": 46.025,
+    "lnComputedActivity": -0.30917442,
+    "lnExperimentalActivity": -0.329
+  },
+  {
+    "index": 108,
+    "name": "Acetic acid",
+    "configuration": "1.42",
+    "casNumber": "64-19-7",
+    "molecularWeight": 60.052,
+    "lnComputedActivity": 1.18958199,
+    "lnExperimentalActivity": -0.0834
+  },
+  {
+    "index": 109,
+    "name": "Pentanoic acid",
+    "configuration": "1.2.2.2.42",
+    "casNumber": "109-52-4",
+    "molecularWeight": 102.133,
+    "lnComputedActivity": 4.36230647,
+    "lnExperimentalActivity": 4.84
+  },
+  {
+    "index": 110,
+    "name": "Hexanoic acid",
+    "configuration": "1.2.2.2.2.42",
+    "casNumber": "142-62-1",
+    "molecularWeight": 116.16,
+    "lnComputedActivity": 5.48404236,
+    "lnExperimentalActivity": 6.4
+  },
+  {
+    "index": 111,
+    "name": "Dimethyl sulfoxide",
+    "configuration": "67",
+    "casNumber": "67-68-5",
+    "molecularWeight": 78.13,
+    "lnComputedActivity": -3.03271711,
+    "lnExperimentalActivity": -2.41
+  }
+]

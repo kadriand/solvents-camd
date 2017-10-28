@@ -1,21 +1,24 @@
-/**
- *
- */
 package co.unal.camd.view;
+
+import co.unal.camd.methods.ProblemParameters;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * @author FAMILIA MORENO
  */
-public class CamdSetupWindow extends CamdRunner implements ActionListener {
+public class CamdSetupWindow extends CamdRunner {
 
-    private JTextField textFieldParents;
-    private JTextField textFieldMaxMolecules;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CamdSetupWindow.class);
+
+    private JTextField parentsPoolInput;
+    private JTextField maxGroupsPerMoleculeInput;
     private ContributionGroupsPanel unifacAndDataPanel;
 
     /**
@@ -24,62 +27,65 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
     public CamdSetupWindow() {
         super();
         this.setResizable(true);
-        // Unifac parameters manager
+        // Unifac groups manager
         initialize();
     }
 
     /**
      * This method initializes this
      *
-     * @return void
      */
     private void initialize() {
-        userMolecules = new ArrayList<>();
-        temperature = 298.15;
-        maxIterations = 50;
-        this.setSize(600, 600);
-        this.setTitle("CAMD");
-        JLabel labelParents = new JLabel("Número de padres para la primera generación");
-        textFieldParents = new JTextField();
-        textFieldParents.setEnabled(false);
-        parentSize = 1;
+        this.setSize(800, 600);
+        this.setTitle("CAMD - Universidad Nacional");
 
-        textFieldParents.addActionListener(evt -> {
-            parentSize = Integer.parseInt(textFieldParents.getText());
-            System.out.println("Molecules init :" + parentSize);
+        //TODO Cite icon
+        //https://www.iconfinder.com/icons/2119347/molecule_scientific_icon#size=256
+        // https://www.flaticon.com/free-icon/molecule_167735#term=molecule&page=1&position=1
+        ImageIcon imageIcon = new ImageIcon(CamdSetupWindow.class.getResource("/molecule-2.png"));
+        this.setIconImage(imageIcon.getImage());
 
-            //				HERE THE ALGORITHM STARTS
-            designSuitableMolecules();
-            textFieldParents.setEnabled(false);
-            textFieldMaxMolecules.setEnabled(true);
+        JLabel parentsPoolInputLabel = new JLabel("Parents pool of first generation");
+        parentsPoolInput = new JTextField();
+        parentsPoolInput.setText(String.valueOf(ProblemParameters.DEFAULT_PARENTS_POOL));
+        parentsPoolInput.getDocument().addDocumentListener((SimpleDocumentListener) e -> {
+            if (StringUtils.isNumeric(parentsPoolInput.getText())) {
+                ProblemParameters.setParentsPoolSize(Integer.parseInt(parentsPoolInput.getText()));
+                LOGGER.info("Parents pool size : {}", ProblemParameters.getParentsPoolSize());
+            }
+            checkRunButtonAvailability();
         });
 
-        JLabel labelMaxMolecules = new JLabel("Número máximo de grupos por molécula");
-        textFieldMaxMolecules = new JTextField();
-        maxGroups = 0;
-        textFieldMaxMolecules.addActionListener(evt -> {
-            maxGroups = Integer.parseInt(textFieldMaxMolecules.getText());
-            System.out.println("Num Max Molecs :" + maxGroups);
-            textFieldParents.setEnabled(true);
-            textFieldMaxMolecules.setEnabled(false);
+        JLabel maxGroupsPerMoleculeLabel = new JLabel("Number of groups per molecule");
+        maxGroupsPerMoleculeInput = new JTextField();
+        maxGroupsPerMoleculeInput.setText(String.valueOf(ProblemParameters.DEFAULT_MAX_GROUPS_PER_MOLECULE));
+        maxGroupsPerMoleculeInput.getDocument().addDocumentListener((SimpleDocumentListener) e -> {
+            if (StringUtils.isNumeric(maxGroupsPerMoleculeInput.getText())) {
+                ProblemParameters.setMaxGroupsPerMolecule(Integer.parseInt(maxGroupsPerMoleculeInput.getText()));
+                LOGGER.info("Max Groups Per Molecule : {}", ProblemParameters.getMaxGroupsPerMolecule());
+            }
+            checkRunButtonAvailability();
         });
         unifacAndDataPanel = new UnifacGroupSelector(this);
 
         JPanel options = new JPanel();
         options.setLayout(new GridLayout(2, 2));
-        options.add(labelParents);
-        options.add(textFieldParents);
-        options.add(labelMaxMolecules);
-        options.add(textFieldMaxMolecules);
+        options.add(parentsPoolInputLabel);
+        options.add(parentsPoolInput);
+        options.add(maxGroupsPerMoleculeLabel);
+        options.add(maxGroupsPerMoleculeInput);
         add(options, BorderLayout.SOUTH);
         add(unifacAndDataPanel, BorderLayout.EAST);
-        tab = new JTabbedPane();
-        JScrollPane scroll = new JScrollPane(tab);
+        candidateSolventsTabs = new JTabbedPane();
+        JScrollPane scroll = new JScrollPane(candidateSolventsTabs);
         add(scroll);
     }
 
-    public void setIterations(int iterations) {
-        this.maxIterations = iterations;
+    void checkRunButtonAvailability() {
+        boolean enabled = StringUtils.isNumeric(parentsPoolInput.getText()) && StringUtils.isNumeric(maxGroupsPerMoleculeInput.getText());
+        enabled = enabled && NumberUtils.isParsable(unifacAndDataPanel.temperatureInput.getText()) && StringUtils.isNumeric(unifacAndDataPanel.maxIterationsInput.getText());
+        enabled = enabled && this.solute != null && this.solvent != null;
+        unifacAndDataPanel.getRunEvolutionButton().setEnabled(enabled);
     }
 
     public void actionPerformed(ActionEvent arg0) {

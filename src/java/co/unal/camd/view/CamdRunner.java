@@ -1,45 +1,63 @@
 package co.unal.camd.view;
 
-import co.unal.camd.properties.parameters.ContributionGroupsManager;
+import co.unal.camd.availability.AvailabilityFinder;
+import co.unal.camd.availability.MongodbClient;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.MoleculeGroups;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.methods.EstimationConstants;
+import co.unal.camd.methods.ProblemParameters;
+import co.unal.camd.model.EnvironmentalProperties;
+import co.unal.camd.model.ThermoPhysicalProperties;
+import co.unal.camd.model.molecule.Molecule;
+import co.unal.camd.utils.CdkUtils;
+import co.unal.camd.utils.MoleculeEnvironmentalValidator;
+import co.unal.camd.utils.MoleculeThermoPhysicalValidator;
+import com.co.evolution.model.Population;
+import com.co.evolution.model.individual.IndividualImpl;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
-import unalcol.Tagged;
+import lombok.experimental.Accessors;
+import org.apache.commons.io.FileUtils;
+import org.openscience.cdk.exception.CDKException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author Kevin Adrián Rodríguez Ruiz
  */
 @Data
+@Accessors(chain = true)
 public class CamdRunner extends JFrame {
 
+    static {
+        System.setProperty(SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, "true");
+    }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CamdRunner.class);
+
     private static final long serialVersionUID = 1L;
-    public static final ContributionGroupsManager CONTRIBUTION_GROUPS = new ContributionGroupsManager();
+    public static final AvailabilityFinder AVAILABILITY_FINDER = MongodbClient.IS_DB_ENABLE ? new AvailabilityFinder() : null;
+    public static final EstimationConstants CONTRIBUTION_GROUPS = new EstimationConstants();
 
     @Setter(AccessLevel.NONE)
-    protected JTabbedPane tab;
-    protected int parentSize;
-    protected int maxGroups;
-    protected double temperature;
-    protected int maxIterations;
-    @Getter
-    protected ArrayList<MoleculeGroups> userMolecules;
-
-    private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
-    private double[][] constraintsLimits = new double[3][5];
-    private ArrayList<Molecule> molecules;
+    protected JTabbedPane candidateSolventsTabs;
+    protected Molecule solute;
+    protected Molecule solvent;
 
     /**
      * Despliega un JFileChooser y retorna la ruta absoluta del archivo
@@ -47,106 +65,163 @@ public class CamdRunner extends JFrame {
      *
      * @return Ruta absoluta del archivo seleccionado
      */
-    public String selectFile() {
+    String selectFile(String titleLabel) {
         JFileChooser fileChooser = new JFileChooser("./data/Molecules");
-        fileChooser.setDialogTitle("Seleccione una molécula");
+        fileChooser.setDialogTitle(titleLabel);
         int result = fileChooser.showOpenDialog(this);
 
         if (result != JFileChooser.APPROVE_OPTION)
             return null;
-        String selected = fileChooser.getSelectedFile().getAbsolutePath();
-        return selected;
+
+        String selectedFile = null;
+        try {
+            selectedFile = fileChooser.getSelectedFile().getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return selectedFile;
     }
 
-    public void designSuitableMolecules() {
-        tab.removeAll();
-        System.out.println("iterat " + maxIterations);
-        System.out.println("pesos (ge, bt, d, mt, sl)" + weight);
+    void designSuitableMolecules() {
+        if (!ProblemParameters.MULTI_RUNS_MODE) {
+            designOptimalMolecule("run");
+            return;
+        }
 
-        constraintsLimits[0][0] = 15;  //this is all the B
-        constraintsLimits[0][1] = 15;
-        constraintsLimits[0][2] = 15;
-        constraintsLimits[0][3] = 15;
-        constraintsLimits[0][4] = 15;
+        int[] range = IntStream.rangeClosed(1, ProblemParameters.DEFAULT_RUNS).toArray();
+        for (int run : range)
+            designOptimalMolecule(run + "-run");
+    }
 
-        //limits
-        constraintsLimits[1][0] = 5000;   //this is all the Po
-        constraintsLimits[1][1] = 573;
-        constraintsLimits[1][2] = 1;
-        constraintsLimits[1][3] = 323;
-        constraintsLimits[1][4] = 0.1;
-
-        constraintsLimits[2][0] = 0.076;  //this is all the uncertainty
-        constraintsLimits[2][1] = 0.0142;
-        constraintsLimits[2][2] = 0.1;
-        constraintsLimits[2][3] = 0.0723;
-        constraintsLimits[2][4] = 0.05;
-
+    private void designOptimalMolecule(String identifier) {
+        candidateSolventsTabs.removeAll();
+        LOGGER.info("\n");
+        LOGGER.info("NEW RUN FOR SOLVENT DESIGN USING CAMD");
+        LOGGER.info("RUN ID : {}", identifier);
+        LOGGER.info("ITERATIONS: {}", ProblemParameters.getMaxIterations());
+        LOGGER.info("Weights (gibbsEnergy, boilingPoint, density, meltingPoint, solventLoss) {}", ProblemParameters.CONSTRAINTS_WEIGHTS);
 
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
-        System.out.println("parent size" + parentSize);
-        System.out.println(" max iter :" + maxIterations);
+        LOGGER.info("PARENTS POOL SIZE: {}", ProblemParameters.getParentsPoolSize());
+        LOGGER.info("MAXIMUM OF ITERATIONS: {}", ProblemParameters.getMaxIterations());
 
         // EVOLUTION TIME
-        Tagged<Molecule>[] population = moleculeEvolution.evolve(parentSize, maxIterations);
+        String filesPrefix = "camd/" + identifier + "-";
+        moleculeEvolution.setFilesPrefix(filesPrefix);
+        Population<Molecule> population = moleculeEvolution.evolve();
 
-        //        double best = population.statistics().best;
-        //        double avg = population.statistics().avg;
-        //        double worst = population.statistics().worst;
-        //        System.out.println("best: " + best);
-        //        System.out.println("avg: " + avg);
-        //        System.out.println("worst: " + worst);
+        Molecule bestSolution = population.getBest();
+        Double bestFitness = bestSolution.getFitness();
+        LOGGER.info("BEST FITNESS : {}", bestFitness);
 
-        System.out.println("BEST FITNESS");
-        Tagged<Molecule> bestSolution = moleculeEvolution.getBestSolution();
-        Double bestFitness = bestSolution.unwrap().getFitness();
-        System.out.println(bestFitness);
+        Map<Molecule, Integer> groupedMolecules = new HashMap<>();
+        population.forEach(individual -> {
+            Optional<Map.Entry<Molecule, Integer>> filteredMoleculeEntry = groupedMolecules.entrySet().stream()
+                    .filter(molecule -> molecule.getKey().getSmiles().equals(individual.getSmiles()))
+                    .findFirst();
+            if (filteredMoleculeEntry.isPresent())
+                filteredMoleculeEntry.get().setValue(filteredMoleculeEntry.get().getValue() + 1);
+            else
+                groupedMolecules.put(individual, 1);
+        });
 
-        List<Tagged<Molecule>> sortedSolution = Arrays.stream(population)
-                .sorted(Comparator.comparingDouble(o -> o.unwrap().getFitness()))
+        List<Molecule> sortedSolutions = groupedMolecules.keySet().stream()
+                .sorted(Comparator.comparingDouble(IndividualImpl::getFitness))
                 .collect(Collectors.toList());
 
-        JTree jTree;
-        for (int i = 0; i < parentSize; i++) {
-            Molecule solvent = sortedSolution.get(i).unwrap();
+        int rank = 0;
+        File propertiesFile = initPropertiesFile(filesPrefix);
 
-            FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getRootNode());
-            DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
-            jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
-            //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
+        for (Molecule candidate : sortedSolutions) {
+            rank++;
+            int occurrences = groupedMolecules.get(candidate);
+            printMoleculeData(rank, candidate, occurrences);
 
-            // TODO Auto-generated method stub
-            double ge = solvent.getGe();
-            double bt = solvent.getBt();
-            double den = solvent.getD();
-            double mt = solvent.getMt();
-            double dc = solvent.getDc();
-            double ks = solvent.getKs();
-            double fitness = solvent.getFitness();
-
-            System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
-            System.out.println("Ge: " + ge);
-            System.out.println("BT: " + bt);
-            System.out.println("Den: " + den);
-            System.out.println("MT: " + mt);
-            System.out.println("DC: " + dc);
-            System.out.println("KS: " + ks);
-            System.out.println("//////////////////////////////////////////////////////////////");
-
-            // TODO IS THIS NECESSARY?
-            tab.addTab("F " + fitness, null, jTree, "molecule number");
+            if (!candidate.isSuitable())
+                continue;
+            MoleculeDetailsPanel moleculePanel = new MoleculeDetailsPanel(candidate);
+            candidateSolventsTabs.addTab(String.format("%d. %s [%d]", sortedSolutions.indexOf(candidate) + 1, candidate.getSmiles(), occurrences), null, moleculePanel, candidate.getSmiles());
+            appendCompoundProperties(filesPrefix, rank, propertiesFile, candidate, occurrences);
         }
     }
 
-    private DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
-        for (int i = 0; i < molec.countSubgroups(); i++) {
-            String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getRootNode());
-            DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
-
-            moleculeToJtree(molec.getGroupAt(i), aNode);
-            node.add(aNode);
+    private File initPropertiesFile(String filesPrefix) {
+        File propertiesFile = new File("output/" + filesPrefix + "final-props.tsv");
+        try {
+            FileUtils.writeStringToFile(propertiesFile, "index\tconfiguration\toccurrences\tsmiles\tinChIKey\tmolecularWeight\t" +
+                    "meltingPoint\tboilingPoint\tdensity\tgibbsEnergy\t" +
+                    "waterLogLC50FM\twaterLogLC50DM\tratLogLD50\twaterLogWS\twaterLogBFC\t" +
+                    "solventLoss\t" +
+                    "KS\tenvironmentalIndex\tpenalties\tmarketAvailability\t\tavailability...", StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            LOGGER.error("Problems creating properties file", e);
         }
-        return node;
+        return propertiesFile;
     }
+
+    private void appendCompoundProperties(String filesPrefix, int rank, File propertiesFile, Molecule candidate, int occurrences) {
+        try {
+            MoleculeThermoPhysicalValidator thermoPhysical = new MoleculeThermoPhysicalValidator();
+            thermoPhysical.setMolecule(candidate).buildRecomputed().buildIdentifiers();
+            MoleculeEnvironmentalValidator environmental = new MoleculeEnvironmentalValidator();
+            environmental.setMolecule(candidate).buildRecomputed();
+            StringBuilder candidateProperties = new StringBuilder(String.format("\n%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t",
+                    rank,
+                    candidate.getThermoPhysicalProperties().getGroupsSummary(),
+                    occurrences,
+                    thermoPhysical.getCamdEstimation().completeTsv(),
+                    environmental.getCamdEstimation().waterAsTsv(),
+                    candidate.getMixtureProperties().getLastBinary().getSolventLoss(),
+                    candidate.getObjectiveValues()[0],
+                    candidate.getObjectiveValues()[1],
+                    candidate.getPenalization(),
+                    candidate.getAvailabilityEntries().size()
+            ));
+            candidate.getAvailabilityEntries().forEach(compoundEntry -> candidateProperties.append(String.format("\t%s\t%s", compoundEntry.getSource().name(), compoundEntry.itemUrl())));
+            FileUtils.writeStringToFile(propertiesFile, candidateProperties.toString(), StandardCharsets.UTF_8, true);
+
+            BufferedImage moleculeImage = CdkUtils.moleculeImage(candidate.getSmiles(), rank + ". " + candidate.getSmiles());
+            File imageFile = new File("output/" + filesPrefix + "molec-" + rank + ".png");
+            ImageIO.write(moleculeImage, "png", imageFile);
+        } catch (IOException | CDKException e) {
+            LOGGER.error("Problems creating image file", e);
+        }
+    }
+
+    private void printMoleculeData(int rank, Molecule candidate, int occurrences) {
+        ThermoPhysicalProperties thermoPhysicalProps = candidate.getThermoPhysicalProperties();
+        EnvironmentalProperties environmentalProps = candidate.getEnvironmentalProperties();
+        Double fitness = candidate.getFitness();
+
+        StringBuilder solventInfo = new StringBuilder(String.format("/////////////////////////// %s. %s [%s] /////////////////////////////////////", rank, candidate.getSmiles(), occurrences));
+        solventInfo.append(String.format("\nMW: %s\nGibbs: %s\nBT: %s\nDen: %s\nMT: %s\nSmiles: %s\nGroups: %s\nSLoss: %s\nKS: %s",
+                candidate.getMolecularWeight(),
+                thermoPhysicalProps.getGibbsEnergy(),
+                thermoPhysicalProps.getBoilingPoint(),
+                thermoPhysicalProps.getDensity(),
+                thermoPhysicalProps.getMeltingPoint(),
+                candidate.getSmiles(),
+                candidate.toString(),
+                candidate.getMixtureProperties().getLastBinary().getSolventLoss(),
+                candidate.getMixtureProperties().getLastTernary().getKs()));
+
+        solventInfo.append("\n///////////////////////// ENVIRONMENT ///////////////////////////////////");
+        solventInfo
+                .append(String.format("\nwaterLogLC50FM : %s\nwaterLogLC50DM : %s\nratLogLD50 : %s\nwaterLogWS : %s\nwaterLogBFC : %s\nairUrbanEUAc : %s\nairUrbanEUAnc : %s\nairRuralERAc : %s\nairRuralERAnc : %s\n//////////////////////////////////////////////////////////////",
+                        environmentalProps.getWaterLogLC50FM(),
+                        environmentalProps.getWaterLogLC50DM(),
+                        environmentalProps.getRatLogLD50(),
+                        environmentalProps.getWaterLogWS(),
+                        environmentalProps.getWaterLogBFC(),
+                        environmentalProps.getAirUrbanEUAc(),
+                        environmentalProps.getAirUrbanEUAnc(),
+                        environmentalProps.getAirRuralERAc(),
+                        environmentalProps.getAirRuralERAnc()
+                ));
+
+        solventInfo.append(String.format("\nAvailability : %s\nPenalization : %s\nSUITABLE : %s", candidate.getAvailabilityEntries().size(), candidate.getPenalization(), candidate.isSuitable()));
+
+        LOGGER.info("Solvent fitness {}\n{}", fitness, solventInfo);
+    }
+
 }

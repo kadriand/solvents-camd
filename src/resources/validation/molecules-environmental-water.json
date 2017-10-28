@@ -1,0 +1,2270 @@
+[
+  {
+    "index": 1,
+    "name": "1,1,1-Trichloroethane",
+    "casNumber": "71-55-6",
+    "molecularWeight": 133.4,
+    "configuration": "1.51",
+    "experimental": {
+      "waterLogLC50FM": 3.4,
+      "waterLogLC50DM": 3.72,
+      "ratLogLD50": 1.14,
+      "waterLogWS": 2.02,
+      "waterLogBFC": 0.47
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.26,
+      "waterLogLC50DM": 3.84,
+      "ratLogLD50": 1.58,
+      "waterLogWS": 2,
+      "waterLogBFC": 1.26
+    }
+  },
+  {
+    "index": 2,
+    "name": "1,2-Dichloroethane",
+    "casNumber": "107-06-2",
+    "molecularWeight": 98.95,
+    "configuration": "44.44",
+    "experimental": {
+      "waterLogLC50FM": 2.9,
+      "waterLogLC50DM": 2.49,
+      "ratLogLD50": 2.17,
+      "waterLogWS": 1.06,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.06,
+      "waterLogLC50DM": 2.91,
+      "ratLogLD50": 2.04,
+      "waterLogWS": 1.32,
+      "waterLogBFC": 0.87
+    }
+  },
+  {
+    "index": 3,
+    "name": "2-Chloropropane",
+    "casNumber": "75-29-6",
+    "molecularWeight": 78.54,
+    "configuration": "1.45.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.2,
+      "waterLogWS": 1.4,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.58,
+      "waterLogLC50DM": 2.79,
+      "ratLogLD50": 1.33,
+      "waterLogWS": 1.07,
+      "waterLogBFC": 0.93
+    }
+  },
+  {
+    "index": 4,
+    "name": "Allyl bromide",
+    "casNumber": "106-95-6",
+    "molecularWeight": 120.977,
+    "configuration": "64.2.5",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 3,
+      "waterLogWS": 1.5,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.31,
+      "waterLogLC50DM": 4.33,
+      "ratLogLD50": 3.19,
+      "waterLogWS": 0.81,
+      "waterLogBFC": 0.72
+    }
+  },
+  {
+    "index": 5,
+    "name": "Bromoethane",
+    "casNumber": "74-96-4",
+    "molecularWeight": 108.966,
+    "configuration": "64.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.91,
+      "waterLogWS": 1.08,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.74,
+      "waterLogLC50DM": 3.51,
+      "ratLogLD50": 2.25,
+      "waterLogWS": 0.87,
+      "waterLogBFC": 0.64
+    }
+  },
+  {
+    "index": 6,
+    "name": "1-Bromopropane",
+    "casNumber": "106-94-5",
+    "molecularWeight": 122.993,
+    "configuration": "1.2.2.64",
+    "experimental": {
+      "waterLogLC50FM": 3.26,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 1.7,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.2,
+      "waterLogLC50DM": 3.84,
+      "ratLogLD50": 2.51,
+      "waterLogWS": 1.72,
+      "waterLogBFC": 0.75
+    }
+  },
+  {
+    "index": 7,
+    "name": "Perfluorooctane",
+    "casNumber": "307-34-6",
+    "molecularWeight": 438.059,
+    "configuration": "74.75.75.75.75.75.75.74",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.94,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.89,
+      "waterLogWS": 5.12,
+      "waterLogBFC": 2.63
+    }
+  },
+  {
+    "index": 8,
+    "name": "Perflexane",
+    "casNumber": "355-42-0",
+    "molecularWeight": 338.044,
+    "configuration": "74.75.75.75.75.74",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.19,
+      "waterLogLC50DM": 4.77,
+      "ratLogLD50": 2.48,
+      "waterLogWS": 5.55,
+      "waterLogBFC": 2.19
+    }
+  },
+  {
+    "index": 9,
+    "name": "1,1,2-Trichloroethane",
+    "casNumber": "79-00-5",
+    "molecularWeight": 133.4,
+    "configuration": "44.48",
+    "experimental": {
+      "waterLogLC50FM": 3.21,
+      "waterLogLC50DM": 3.49,
+      "ratLogLD50": 2.2,
+      "waterLogWS": 1.46,
+      "waterLogBFC": 0.53
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.42,
+      "waterLogLC50DM": 3.29,
+      "ratLogLD50": 2.25,
+      "waterLogWS": 1.67,
+      "waterLogBFC": 1.02
+    }
+  },
+  {
+    "index": 10,
+    "name": "Allyl iodide ",
+    "casNumber": "556-56-9",
+    "molecularWeight": 167.977,
+    "configuration": "5.2.63",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 4.22,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.4,
+      "waterLogLC50DM": 6.24,
+      "ratLogLD50": 3.31,
+      "waterLogWS": 2.02,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 11,
+    "name": "Methyl iodide",
+    "casNumber": "74-88-4",
+    "molecularWeight": 141.939,
+    "configuration": "1.63",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 3.27,
+      "waterLogWS": 1.01,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.38,
+      "waterLogLC50DM": 5.67,
+      "ratLogLD50": 2.77,
+      "waterLogWS": 1.48,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 12,
+    "name": "Allyl chloride",
+    "casNumber": "107-05-1",
+    "molecularWeight": 76.52,
+    "configuration": "5.44",
+    "experimental": {
+      "waterLogLC50FM": 3.55,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.22,
+      "waterLogWS": 1.36,
+      "waterLogBFC": 0.3
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.94,
+      "waterLogLC50DM": 3.72,
+      "ratLogLD50": 2.1,
+      "waterLogWS": 1.11,
+      "waterLogBFC": 0.89
+    }
+  },
+  {
+    "index": 13,
+    "name": "2,4-Pentanedione",
+    "casNumber": "123-54-6",
+    "molecularWeight": 100.117,
+    "configuration": "18.19.1",
+    "experimental": {
+      "waterLogLC50FM": 2.85,
+      "waterLogLC50DM": 3.32,
+      "ratLogLD50": 3.26,
+      "waterLogWS": -0.22,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.71,
+      "waterLogLC50DM": 2.38,
+      "ratLogLD50": 1.66,
+      "waterLogWS": -0.1,
+      "waterLogBFC": 0.26
+    }
+  },
+  {
+    "index": 14,
+    "name": "Acetone",
+    "casNumber": "67-64-1",
+    "molecularWeight": 58.08,
+    "configuration": "18.1",
+    "experimental": {
+      "waterLogLC50FM": 0.85,
+      "waterLogLC50DM": 0.67,
+      "ratLogLD50": 1,
+      "waterLogWS": -1.24,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.55,
+      "waterLogLC50DM": 1.68,
+      "ratLogLD50": 1.4,
+      "waterLogWS": -0.84,
+      "waterLogBFC": 0.28
+    }
+  },
+  {
+    "index": 15,
+    "name": "Pentanal",
+    "casNumber": "110-62-3",
+    "molecularWeight": 86.134,
+    "configuration": "1.2.2.2.20",
+    "experimental": {
+      "waterLogLC50FM": 3.83,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.27,
+      "waterLogWS": 0.87,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.55,
+      "waterLogLC50DM": 3.43,
+      "ratLogLD50": 1.51,
+      "waterLogWS": 0.81,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 16,
+    "name": "4-Heptanone",
+    "casNumber": "123-19-3",
+    "molecularWeight": 114.188,
+    "configuration": "1.2.19.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.57,
+      "waterLogWS": 1.55,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.02,
+      "waterLogLC50DM": 3.24,
+      "ratLogLD50": 1.62,
+      "waterLogWS": 1.26,
+      "waterLogBFC": 1.15
+    }
+  },
+  {
+    "index": 17,
+    "name": "Butanone",
+    "casNumber": "78-93-3",
+    "molecularWeight": 72.107,
+    "configuration": "1.19.1",
+    "experimental": {
+      "waterLogLC50FM": 1.35,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.42,
+      "waterLogWS": -0.49,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.03,
+      "waterLogLC50DM": 2.4,
+      "ratLogLD50": 1.94,
+      "waterLogWS": -0.13,
+      "waterLogBFC": 0.43
+    }
+  },
+  {
+    "index": 18,
+    "name": "2-Undecanone",
+    "casNumber": "112-12-9",
+    "molecularWeight": 170.296,
+    "configuration": "18.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 5.05,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.53,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.75,
+      "waterLogLC50DM": 4.3,
+      "ratLogLD50": 1.56,
+      "waterLogWS": 2.98,
+      "waterLogBFC": 1.68
+    }
+  },
+  {
+    "index": 19,
+    "name": "1-Chloropropan-2-one",
+    "casNumber": "78-95-5",
+    "molecularWeight": 92.52,
+    "configuration": "18.44",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.97,
+      "waterLogWS": 0.01,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.38,
+      "waterLogLC50DM": 2.76,
+      "ratLogLD50": 2.77,
+      "waterLogWS": -0.08,
+      "waterLogBFC": 0.4
+    }
+  },
+  {
+    "index": 20,
+    "name": "Methyl n-Amyl Ketone",
+    "casNumber": "110-43-0",
+    "molecularWeight": 114.188,
+    "configuration": "18.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 2.94,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.83,
+      "waterLogWS": 1.42,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.09,
+      "waterLogLC50DM": 3.45,
+      "ratLogLD50": 1.56,
+      "waterLogWS": 1.4,
+      "waterLogBFC": 1.08
+    }
+  },
+  {
+    "index": 21,
+    "name": "Methyl butyl ketone",
+    "casNumber": "591-78-6",
+    "molecularWeight": 100.161,
+    "configuration": "18.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 2.37,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.59,
+      "waterLogWS": 0.77,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.62,
+      "waterLogLC50DM": 3,
+      "ratLogLD50": 1.61,
+      "waterLogWS": 0.95,
+      "waterLogBFC": 0.8
+    }
+  },
+  {
+    "index": 22,
+    "name": "Methyl isobutyl ketone",
+    "casNumber": "108-10-1",
+    "molecularWeight": 100.161,
+    "configuration": "1.3(1).2.18",
+    "experimental": {
+      "waterLogLC50FM": 2.27,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.68,
+      "waterLogWS": 0.72,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.42,
+      "waterLogLC50DM": 2.83,
+      "ratLogLD50": 1.74,
+      "waterLogWS": 0.73,
+      "waterLogBFC": 0.92
+    }
+  },
+  {
+    "index": 23,
+    "name": "3-Pentanone",
+    "casNumber": "96-22-0",
+    "molecularWeight": 86.134,
+    "configuration": "1.19.2.1",
+    "experimental": {
+      "waterLogLC50FM": 1.75,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.6,
+      "waterLogWS": 0.27,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.28,
+      "waterLogLC50DM": 2.91,
+      "ratLogLD50": 1.72,
+      "waterLogWS": 0.41,
+      "waterLogBFC": 0.57
+    }
+  },
+  {
+    "index": 24,
+    "name": "Pentyl acetate",
+    "casNumber": "628-63-7",
+    "molecularWeight": 130.187,
+    "configuration": "21.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 1.88,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.74,
+      "waterLogLC50DM": 3.49,
+      "ratLogLD50": 1.3,
+      "waterLogWS": 1.82,
+      "waterLogBFC": 0.98
+    }
+  },
+  {
+    "index": 25,
+    "name": "Butyl acetate",
+    "casNumber": "123-86-4",
+    "molecularWeight": 116.16,
+    "configuration": "21.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 3.81,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.03,
+      "waterLogWS": 1.14,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.15,
+      "waterLogLC50DM": 3.22,
+      "ratLogLD50": 1.27,
+      "waterLogWS": 1.27,
+      "waterLogBFC": 0.75
+    }
+  },
+  {
+    "index": 26,
+    "name": "Ethyl acetate",
+    "casNumber": "141-78-6",
+    "molecularWeight": 88.106,
+    "configuration": "21.2.1",
+    "experimental": {
+      "waterLogLC50FM": 2.58,
+      "waterLogLC50DM": 2.09,
+      "ratLogLD50": 1.2,
+      "waterLogWS": 0.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.58,
+      "waterLogLC50DM": 2.6,
+      "ratLogLD50": 1.29,
+      "waterLogWS": 0.31,
+      "waterLogBFC": 0.42
+    }
+  },
+  {
+    "index": 27,
+    "name": "Isobutyl acetate",
+    "casNumber": "110-19-0",
+    "molecularWeight": 116.16,
+    "configuration": "21.2.3(1).1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 0.94,
+      "waterLogWS": 1.27,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.22,
+      "waterLogLC50DM": 3.22,
+      "ratLogLD50": 1.03,
+      "waterLogWS": 1.27,
+      "waterLogBFC": 0.7
+    }
+  },
+  {
+    "index": 28,
+    "name": "Methyl acetate",
+    "casNumber": "79-20-9",
+    "molecularWeight": 74.079,
+    "configuration": "21.1",
+    "experimental": {
+      "waterLogLC50FM": 2.27,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": -0.52,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.95,
+      "waterLogLC50DM": 2.78,
+      "ratLogLD50": 1.37,
+      "waterLogWS": -0.2,
+      "waterLogBFC": 0.19
+    }
+  },
+  {
+    "index": 29,
+    "name": "Propyl acetate",
+    "casNumber": "109-60-4",
+    "molecularWeight": 102.133,
+    "configuration": "21.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 3.23,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.04,
+      "waterLogWS": 0.73,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.88,
+      "waterLogLC50DM": 3.01,
+      "ratLogLD50": 1.07,
+      "waterLogWS": 0.76,
+      "waterLogBFC": 0.52
+    }
+  },
+  {
+    "index": 30,
+    "name": "Ethyl butyrate",
+    "casNumber": "105-54-4",
+    "molecularWeight": 116.16,
+    "configuration": "1.2.22.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 0.95,
+      "waterLogWS": 1.38,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.21,
+      "waterLogLC50DM": 3.29,
+      "ratLogLD50": 1.05,
+      "waterLogWS": 1.23,
+      "waterLogBFC": 0.96
+    }
+  },
+  {
+    "index": 31,
+    "name": "Isovaleric acid",
+    "casNumber": "503-74-2",
+    "molecularWeight": 102.133,
+    "configuration": "42.2.3(1).1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.74,
+      "waterLogWS": 0.4,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.81,
+      "waterLogLC50DM": 2.89,
+      "ratLogLD50": 1.65,
+      "waterLogWS": 0.59,
+      "waterLogBFC": 0.32
+    }
+  },
+  {
+    "index": 32,
+    "name": "Acetic acid",
+    "casNumber": "64-19-7",
+    "molecularWeight": 60.052,
+    "configuration": "1.42",
+    "experimental": {
+      "waterLogLC50FM": 2.86,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.26,
+      "waterLogWS": -1.22,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.65,
+      "waterLogLC50DM": 1.63,
+      "ratLogLD50": 1.47,
+      "waterLogWS": -0.85,
+      "waterLogBFC": -0.14
+    }
+  },
+  {
+    "index": 33,
+    "name": "Butanoic acid",
+    "casNumber": "107-92-6",
+    "molecularWeight": 88.106,
+    "configuration": "1.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 3.16,
+      "ratLogLD50": 1.64,
+      "waterLogWS": 0.17,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.8,
+      "waterLogLC50DM": 2.93,
+      "ratLogLD50": 1.79,
+      "waterLogWS": 0.24,
+      "waterLogBFC": 0.23
+    }
+  },
+  {
+    "index": 34,
+    "name": "Octanoic acid",
+    "casNumber": "124-07-2",
+    "molecularWeight": 144.214,
+    "configuration": "1.2.2.2.2.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.16,
+      "waterLogWS": 2.26,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.2,
+      "waterLogLC50DM": 3.23,
+      "ratLogLD50": 1.59,
+      "waterLogWS": 2.28,
+      "waterLogBFC": 1.04
+    }
+  },
+  {
+    "index": 35,
+    "name": "Hexanoic acid",
+    "casNumber": "142-62-1",
+    "molecularWeight": 116.16,
+    "configuration": "1.2.2.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": 2.84,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.79,
+      "waterLogWS": 1.05,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.31,
+      "waterLogLC50DM": 3.27,
+      "ratLogLD50": 1.75,
+      "waterLogWS": 1.26,
+      "waterLogBFC": 0.55
+    }
+  },
+  {
+    "index": 36,
+    "name": "Cyanoacetic acid",
+    "casNumber": "372-09-8",
+    "molecularWeight": 85.062,
+    "configuration": "41.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.75,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.25,
+      "waterLogLC50DM": 2.8,
+      "ratLogLD50": 2.35,
+      "waterLogWS": -0.32,
+      "waterLogBFC": -0.1
+    }
+  },
+  {
+    "index": 37,
+    "name": "Chloroacetic acid",
+    "casNumber": "79-11-8",
+    "molecularWeight": 94.49,
+    "configuration": "44.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 3.23,
+      "waterLogWS": -0.96,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.71,
+      "waterLogLC50DM": 2.98,
+      "ratLogLD50": 2.93,
+      "waterLogWS": -0.52,
+      "waterLogBFC": -0.02
+    }
+  },
+  {
+    "index": 38,
+    "name": "Octadecanoic acid",
+    "casNumber": "57-11-4",
+    "molecularWeight": 284.484,
+    "configuration": "42.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 5.68,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.37,
+      "waterLogLC50DM": 5.3,
+      "ratLogLD50": 1.31,
+      "waterLogWS": 6.02,
+      "waterLogBFC": 1.08
+    }
+  },
+  {
+    "index": 39,
+    "name": "Heptanoic acid",
+    "casNumber": "111-14-8",
+    "molecularWeight": 130.187,
+    "configuration": "42.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.27,
+      "waterLogWS": 1.66,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.76,
+      "waterLogLC50DM": 3.31,
+      "ratLogLD50": 1.75,
+      "waterLogWS": 1.73,
+      "waterLogBFC": 0.49
+    }
+  },
+  {
+    "index": 40,
+    "name": "Lactic acid",
+    "casNumber": "50-21-5",
+    "molecularWeight": 90.078,
+    "configuration": "1.3(81).42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.41,
+      "waterLogWS": -1.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.73,
+      "waterLogLC50DM": 1.87,
+      "ratLogLD50": 1.35,
+      "waterLogWS": -0.82,
+      "waterLogBFC": -0.31
+    }
+  },
+  {
+    "index": 41,
+    "name": "Linoleic acid ",
+    "casNumber": "60-33-3",
+    "molecularWeight": 280.452,
+    "configuration": "42.2.2.2.2.2.2.2.6.2.6.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.34,
+      "waterLogLC50DM": 5.51,
+      "ratLogLD50": 1.37,
+      "waterLogWS": 4.71,
+      "waterLogBFC": 1.37
+    }
+  },
+  {
+    "index": 42,
+    "name": "Oxalic acid",
+    "casNumber": "144-62-7",
+    "molecularWeight": 90.034,
+    "configuration": "42.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.08,
+      "waterLogWS": -0.39,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.96,
+      "waterLogLC50DM": 1.79,
+      "ratLogLD50": 2.25,
+      "waterLogWS": -0.81,
+      "waterLogBFC": -0.76
+    }
+  },
+  {
+    "index": 43,
+    "name": "Hexadecanoic acid",
+    "casNumber": "57-10-3",
+    "molecularWeight": 256.43,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 6.81,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.29,
+      "waterLogLC50DM": 5.11,
+      "ratLogLD50": 1.28,
+      "waterLogWS": 5.26,
+      "waterLogBFC": 1.46
+    }
+  },
+  {
+    "index": 44,
+    "name": "Propionic acid",
+    "casNumber": "79-09-4",
+    "molecularWeight": 74.079,
+    "configuration": "1.2.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 3.17,
+      "ratLogLD50": 1.46,
+      "waterLogWS": -1.13,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.48,
+      "waterLogLC50DM": 2.32,
+      "ratLogLD50": 2.19,
+      "waterLogWS": -0.55,
+      "waterLogBFC": -0.08
+    }
+  },
+  {
+    "index": 45,
+    "name": "Succinic acid",
+    "casNumber": "110-15-6",
+    "molecularWeight": 118.088,
+    "configuration": "42.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.72,
+      "waterLogWS": 0.15,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.73,
+      "waterLogLC50DM": 2.66,
+      "ratLogLD50": 1.68,
+      "waterLogWS": 0.11,
+      "waterLogBFC": -0.36
+    }
+  },
+  {
+    "index": 46,
+    "name": "dl-Tartaric acid",
+    "casNumber": "133-37-9",
+    "molecularWeight": 150.086,
+    "configuration": "42.3(81).3(81).42",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": -0.16,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.03,
+      "waterLogLC50DM": 2.11,
+      "ratLogLD50": 1.56,
+      "waterLogWS": -0.18,
+      "waterLogBFC": -0.94
+    }
+  },
+  {
+    "index": 47,
+    "name": "Trichloroacetic acid",
+    "casNumber": "76-03-9",
+    "molecularWeight": 163.38,
+    "configuration": "51.42",
+    "experimental": {
+      "waterLogLC50FM": 1.91,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 0.48,
+      "waterLogBFC": 0.02
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.06,
+      "waterLogLC50DM": 4.3,
+      "ratLogLD50": 2.53,
+      "waterLogWS": 0.41,
+      "waterLogBFC": 0.61
+    }
+  },
+  {
+    "index": 48,
+    "name": "Trifluoroacetic acid",
+    "casNumber": "76-05-1",
+    "molecularWeight": 114.023,
+    "configuration": "42.74",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": -0.94,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.78,
+      "waterLogLC50DM": 2.28,
+      "ratLogLD50": 2.99,
+      "waterLogWS": 0.47,
+      "waterLogBFC": -0.2
+    }
+  },
+  {
+    "index": 49,
+    "name": "Valeric acid",
+    "casNumber": "109-52-4",
+    "molecularWeight": 102.133,
+    "configuration": "1.2.2.2.42",
+    "experimental": {
+      "waterLogLC50FM": 3.12,
+      "waterLogLC50DM": 3.36,
+      "ratLogLD50": null,
+      "waterLogWS": 0.63,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.53,
+      "waterLogLC50DM": 2.87,
+      "ratLogLD50": 1.77,
+      "waterLogWS": 0.56,
+      "waterLogBFC": 0.26
+    }
+  },
+  {
+    "index": 50,
+    "name": "Dimethylamine",
+    "casNumber": "124-40-3",
+    "molecularWeight": 45.085,
+    "configuration": "31.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 2.96,
+      "ratLogLD50": 1.81,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.8,
+      "waterLogLC50DM": 2.81,
+      "ratLogLD50": 1.82,
+      "waterLogWS": -0.28,
+      "waterLogBFC": -0.01
+    }
+  },
+  {
+    "index": 51,
+    "name": "Ethylenediamine",
+    "casNumber": "107-15-3",
+    "molecularWeight": 60.1,
+    "configuration": "29.29",
+    "experimental": {
+      "waterLogLC50FM": 2.58,
+      "waterLogLC50DM": 3.36,
+      "ratLogLD50": 1.7,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.98,
+      "waterLogLC50DM": 2.49,
+      "ratLogLD50": 1.38,
+      "waterLogWS": -0.71,
+      "waterLogBFC": -0.19
+    }
+  },
+  {
+    "index": 52,
+    "name": "Diethylamine",
+    "casNumber": "109-89-7",
+    "molecularWeight": 73.139,
+    "configuration": "1.32.2.1",
+    "experimental": {
+      "waterLogLC50FM": 1.93,
+      "waterLogLC50DM": 3.12,
+      "ratLogLD50": 2.13,
+      "waterLogWS": -1.14,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.97,
+      "waterLogLC50DM": 2.24,
+      "ratLogLD50": 1.94,
+      "waterLogWS": -0.29,
+      "waterLogBFC": 0.33
+    }
+  },
+  {
+    "index": 53,
+    "name": "Butylamine",
+    "casNumber": "109-73-9",
+    "molecularWeight": 73.139,
+    "configuration": "1.2.2.29",
+    "experimental": {
+      "waterLogLC50FM": 2.44,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.3,
+      "waterLogWS": -1.14,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.31,
+      "waterLogLC50DM": 3.17,
+      "ratLogLD50": 2.07,
+      "waterLogWS": 0.01,
+      "waterLogBFC": 0.46
+    }
+  },
+  {
+    "index": 54,
+    "name": "Propylamine",
+    "casNumber": "107-10-8",
+    "molecularWeight": 59.112,
+    "configuration": "1.2.29",
+    "experimental": {
+      "waterLogLC50FM": 2.28,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.2,
+      "waterLogWS": -1.23,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.14,
+      "waterLogLC50DM": 2.92,
+      "ratLogLD50": 2.3,
+      "waterLogWS": -0.54,
+      "waterLogBFC": 0.26
+    }
+  },
+  {
+    "index": 55,
+    "name": "Triethylamine",
+    "casNumber": "121-44-8",
+    "molecularWeight": 101.193,
+    "configuration": "1.35(2.1).2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.34,
+      "waterLogWS": 0.17,
+      "waterLogBFC": 0.19
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.34,
+      "waterLogLC50DM": 3.1,
+      "ratLogLD50": 1.88,
+      "waterLogWS": 0.08,
+      "waterLogBFC": 0.61
+    }
+  },
+  {
+    "index": 56,
+    "name": "Diethyl propanedioate",
+    "casNumber": "105-53-3",
+    "molecularWeight": 160.169,
+    "configuration": "77(2.1).22.2.1",
+    "experimental": {
+      "waterLogLC50FM": 4.02,
+      "waterLogLC50DM": 2.9,
+      "ratLogLD50": 1.01,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.46,
+      "waterLogLC50DM": 3.49,
+      "ratLogLD50": 1.61,
+      "waterLogWS": 0.5,
+      "waterLogBFC": 0.32
+    }
+  },
+  {
+    "index": 57,
+    "name": "1,1-Diethoxyethane",
+    "casNumber": "105-57-7",
+    "molecularWeight": 118.176,
+    "configuration": "1.25.26(1).2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.41,
+      "waterLogWS": 0.43,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.11,
+      "waterLogLC50DM": 2.48,
+      "ratLogLD50": 1.68,
+      "waterLogWS": 0.55,
+      "waterLogBFC": 0.66
+    }
+  },
+  {
+    "index": 58,
+    "name": "Dimethoxyethane",
+    "casNumber": "110-71-4",
+    "molecularWeight": 90.122,
+    "configuration": "24.2.25.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": -1.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.41,
+      "waterLogLC50DM": 2.25,
+      "ratLogLD50": 1.48,
+      "waterLogWS": -0.55,
+      "waterLogBFC": 0.22
+    }
+  },
+  {
+    "index": 59,
+    "name": "N,N-Dimethylacetamide",
+    "casNumber": "127-19-5",
+    "molecularWeight": 87.122,
+    "configuration": "1.101",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.31,
+      "waterLogWS": -1.06,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.87,
+      "waterLogLC50DM": 2.76,
+      "ratLogLD50": 1.92,
+      "waterLogWS": -0.57,
+      "waterLogBFC": -0.11
+    }
+  },
+  {
+    "index": 60,
+    "name": "N-Methylacetamide",
+    "casNumber": "79-16-3",
+    "molecularWeight": 73.095,
+    "configuration": "1.92",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.17,
+      "waterLogWS": -1.14,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.96,
+      "waterLogLC50DM": 2.32,
+      "ratLogLD50": 1.44,
+      "waterLogWS": -0.65,
+      "waterLogBFC": -0.22
+    }
+  },
+  {
+    "index": 61,
+    "name": "Ethanethiol",
+    "casNumber": "75-08-1",
+    "molecularWeight": 62.13,
+    "configuration": "1.60",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 5.56,
+      "ratLogLD50": 1.96,
+      "waterLogWS": 0.6,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.34,
+      "waterLogLC50DM": 3.94,
+      "ratLogLD50": 1.9,
+      "waterLogWS": 1.11,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 62,
+    "name": "Decane",
+    "casNumber": "124-18-5",
+    "molecularWeight": 142.286,
+    "configuration": "1.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 5.3,
+      "ratLogLD50": null,
+      "waterLogWS": 6.44,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.38,
+      "waterLogLC50DM": 5.08,
+      "ratLogLD50": 1.24,
+      "waterLogWS": 5.78,
+      "waterLogBFC": 2.83
+    }
+  },
+  {
+    "index": 63,
+    "name": "Heptane",
+    "casNumber": "142-82-5",
+    "molecularWeight": 100.205,
+    "configuration": "1.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 4.47,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.39,
+      "waterLogLC50DM": 4.32,
+      "ratLogLD50": 0.97,
+      "waterLogWS": 3.99,
+      "waterLogBFC": 2.41
+    }
+  },
+  {
+    "index": 64,
+    "name": "Isooctane ",
+    "casNumber": "540-84-1",
+    "molecularWeight": 114.232,
+    "configuration": "1.4(1)(1).2.3(1).1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 4.67,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.49,
+      "waterLogLC50DM": 4.32,
+      "ratLogLD50": 1.31,
+      "waterLogWS": 4.19,
+      "waterLogBFC": 2.88
+    }
+  },
+  {
+    "index": 65,
+    "name": "n-Hexane",
+    "casNumber": "110-54-3",
+    "molecularWeight": 86.178,
+    "configuration": "1.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": 4.54,
+      "waterLogLC50DM": 4.34,
+      "ratLogLD50": 0.54,
+      "waterLogWS": 3.96,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.9,
+      "waterLogLC50DM": 4.17,
+      "ratLogLD50": 1.39,
+      "waterLogWS": 3.43,
+      "waterLogBFC": 2.23
+    }
+  },
+  {
+    "index": 66,
+    "name": "Octane",
+    "casNumber": "111-65-9",
+    "molecularWeight": 114.232,
+    "configuration": "1.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 5.47,
+      "ratLogLD50": null,
+      "waterLogWS": 5.24,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.91,
+      "waterLogLC50DM": 4.62,
+      "ratLogLD50": 1.13,
+      "waterLogWS": 4.65,
+      "waterLogBFC": 2.79
+    }
+  },
+  {
+    "index": 67,
+    "name": "1,3-Pentadiene",
+    "casNumber": "504-60-9",
+    "molecularWeight": 68.119,
+    "configuration": "5.6.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.54,
+      "waterLogLC50DM": 3.49,
+      "ratLogLD50": 1.89,
+      "waterLogWS": 1.94,
+      "waterLogBFC": 1.29
+    }
+  },
+  {
+    "index": 68,
+    "name": "Pentane",
+    "casNumber": "109-66-0",
+    "molecularWeight": 72.151,
+    "configuration": "1.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 3.87,
+      "ratLogLD50": 2.26,
+      "waterLogWS": 3.28,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.68,
+      "waterLogLC50DM": 3.81,
+      "ratLogLD50": 1.1,
+      "waterLogWS": 3.02,
+      "waterLogBFC": 1.47
+    }
+  },
+  {
+    "index": 69,
+    "name": "Propane",
+    "casNumber": "74-98-6",
+    "molecularWeight": 44.097,
+    "configuration": "1.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 2.85,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.27,
+      "waterLogLC50DM": 3.83,
+      "ratLogLD50": 1.83,
+      "waterLogWS": 2.16,
+      "waterLogBFC": 0.91
+    }
+  },
+  {
+    "index": 70,
+    "name": "1-Propene",
+    "casNumber": "115-07-1",
+    "molecularWeight": 42.081,
+    "configuration": "5.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 2.32,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.5,
+      "waterLogLC50DM": 3.81,
+      "ratLogLD50": 1.01,
+      "waterLogWS": 1.88,
+      "waterLogBFC": 0.79
+    }
+  },
+  {
+    "index": 71,
+    "name": "Undecane",
+    "casNumber": "1120-21-4",
+    "molecularWeight": 156.313,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 7.55,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.59,
+      "waterLogLC50DM": 5.21,
+      "ratLogLD50": 1.19,
+      "waterLogWS": 6.07,
+      "waterLogBFC": 2.79
+    }
+  },
+  {
+    "index": 72,
+    "name": "Isoprene",
+    "casNumber": "78-79-5",
+    "molecularWeight": 68.119,
+    "configuration": "7(1).5",
+    "experimental": {
+      "waterLogLC50FM": 2.95,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 2.03,
+      "waterLogBFC": 1.13
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.82,
+      "waterLogLC50DM": 3.93,
+      "ratLogLD50": 1.82,
+      "waterLogWS": 1.9,
+      "waterLogBFC": 0.86
+    }
+  },
+  {
+    "index": 73,
+    "name": "Isohexane",
+    "casNumber": "107-83-5",
+    "molecularWeight": 86.178,
+    "configuration": "1.3(1).2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 3.79,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.92,
+      "waterLogLC50DM": 4.04,
+      "ratLogLD50": 1.31,
+      "waterLogWS": 3.35,
+      "waterLogBFC": 2.19
+    }
+  },
+  {
+    "index": 74,
+    "name": "Diisopropyl ether",
+    "casNumber": "108-20-3",
+    "molecularWeight": 102.177,
+    "configuration": "1.26(1).3(1).1",
+    "experimental": {
+      "waterLogLC50FM": 2.11,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.08,
+      "waterLogWS": 1.06,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.42,
+      "waterLogLC50DM": 2.61,
+      "ratLogLD50": 1.97,
+      "waterLogWS": 1,
+      "waterLogBFC": 0.86
+    }
+  },
+  {
+    "index": 75,
+    "name": "Diethyl ether",
+    "casNumber": "60-29-7",
+    "molecularWeight": 74.123,
+    "configuration": "1.25.2.1",
+    "experimental": {
+      "waterLogLC50FM": 1.46,
+      "waterLogLC50DM": 1.73,
+      "ratLogLD50": 1.78,
+      "waterLogWS": 0.09,
+      "waterLogBFC": 0.47
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.92,
+      "waterLogLC50DM": 2.49,
+      "ratLogLD50": 1.45,
+      "waterLogWS": 0.19,
+      "waterLogBFC": 0.42
+    }
+  },
+  {
+    "index": 76,
+    "name": "tert-Butyl alcohol",
+    "casNumber": "75-65-0",
+    "molecularWeight": 74.123,
+    "configuration": "1.4(1)(1).82",
+    "experimental": {
+      "waterLogLC50FM": 1.06,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.43,
+      "waterLogWS": -1.13,
+      "waterLogBFC": 0.37
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.43,
+      "waterLogLC50DM": 2,
+      "ratLogLD50": 2.51,
+      "waterLogWS": -0.57,
+      "waterLogBFC": 0.53
+    }
+  },
+  {
+    "index": 77,
+    "name": "Methyl tert-butyl ether",
+    "casNumber": "1634-04-4",
+    "molecularWeight": 88.15,
+    "configuration": "24.4(1)(1).1",
+    "experimental": {
+      "waterLogLC50FM": 2.12,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.34,
+      "waterLogWS": 0.24,
+      "waterLogBFC": 0.18
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.06,
+      "waterLogLC50DM": 2.88,
+      "ratLogLD50": 1.81,
+      "waterLogWS": 0.52,
+      "waterLogBFC": 0.53
+    }
+  },
+  {
+    "index": 78,
+    "name": "Butanenitrile",
+    "casNumber": "109-74-0",
+    "molecularWeight": 69.107,
+    "configuration": "1.2.41",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 3.14,
+      "waterLogWS": 0.32,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.6,
+      "waterLogLC50DM": 3.06,
+      "ratLogLD50": 2.77,
+      "waterLogWS": 0.02,
+      "waterLogBFC": 0.63
+    }
+  },
+  {
+    "index": 79,
+    "name": "Nitroethane",
+    "casNumber": "79-24-3",
+    "molecularWeight": 75.067,
+    "configuration": "1.55",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.83,
+      "waterLogWS": 0.19,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.45,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.35,
+      "waterLogWS": 0.25,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 80,
+    "name": "Propionitrile",
+    "casNumber": "107-12-0",
+    "molecularWeight": 55.08,
+    "configuration": "1.41",
+    "experimental": {
+      "waterLogLC50FM": 1.56,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 3.15,
+      "waterLogWS": -0.27,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.78,
+      "waterLogLC50DM": 2.78,
+      "ratLogLD50": 2.44,
+      "waterLogWS": -0.18,
+      "waterLogBFC": 0.45
+    }
+  },
+  {
+    "index": 81,
+    "name": "Acetaldehyde",
+    "casNumber": "75-07-0",
+    "molecularWeight": 44.053,
+    "configuration": "1.20",
+    "experimental": {
+      "waterLogLC50FM": 3.08,
+      "waterLogLC50DM": 0.55,
+      "ratLogLD50": 1.82,
+      "waterLogWS": -1.36,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.28,
+      "waterLogLC50DM": 1.73,
+      "ratLogLD50": 1.68,
+      "waterLogWS": -0.72,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 82,
+    "name": "Decanal",
+    "casNumber": "112-31-2",
+    "molecularWeight": 156.269,
+    "configuration": "1.2.2.2.2.2.2.2.2.20",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.7,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.1,
+      "waterLogLC50DM": 4.11,
+      "ratLogLD50": 1.37,
+      "waterLogWS": 2.97,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 83,
+    "name": "3-Methyl-2-butanone",
+    "casNumber": "563-80-4",
+    "molecularWeight": 86.134,
+    "configuration": "1.3(1).18",
+    "experimental": {
+      "waterLogLC50FM": 2,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.77,
+      "waterLogWS": 0.15,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.25,
+      "waterLogLC50DM": 2.5,
+      "ratLogLD50": 2.12,
+      "waterLogWS": 0.34,
+      "waterLogBFC": 0.56
+    }
+  },
+  {
+    "index": 84,
+    "name": "Propanal",
+    "casNumber": "123-38-6",
+    "molecularWeight": 58.08,
+    "configuration": "1.2.20",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": 2.81,
+      "ratLogLD50": 1.61,
+      "waterLogWS": -0.72,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.36,
+      "waterLogLC50DM": 2.65,
+      "ratLogLD50": 2.57,
+      "waterLogWS": -0.34,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 85,
+    "name": "Butyraldehyde",
+    "casNumber": "123-72-8",
+    "molecularWeight": 72.107,
+    "configuration": "1.2.2.20",
+    "experimental": {
+      "waterLogLC50FM": 3.65,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.46,
+      "waterLogWS": 0.01,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.63,
+      "waterLogLC50DM": 2.96,
+      "ratLogLD50": 2.03,
+      "waterLogWS": 0.12,
+      "waterLogBFC": null
+    }
+  },
+  {
+    "index": 86,
+    "name": "2,3-Butanediol",
+    "casNumber": "513-85-9",
+    "molecularWeight": 90.122,
+    "configuration": "1.3(81).3(81).1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": -1.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.16,
+      "waterLogLC50DM": 1.44,
+      "ratLogLD50": 1.01,
+      "waterLogWS": -0.61,
+      "waterLogBFC": 0.15
+    }
+  },
+  {
+    "index": 87,
+    "name": "1,4-Butanediol",
+    "casNumber": "110-63-4",
+    "molecularWeight": 90.122,
+    "configuration": "14.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.77,
+      "waterLogWS": -1.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.65,
+      "waterLogLC50DM": 1.88,
+      "ratLogLD50": 1.71,
+      "waterLogWS": -0.5,
+      "waterLogBFC": 0.41
+    }
+  },
+  {
+    "index": 88,
+    "name": "2-Methyl-2,4-pentanediol",
+    "casNumber": "107-41-5",
+    "molecularWeight": 118.176,
+    "configuration": "1.4(82)(1).2.3(81).1",
+    "experimental": {
+      "waterLogLC50FM": 1.04,
+      "waterLogLC50DM": 1.22,
+      "ratLogLD50": 1.5,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.71,
+      "waterLogLC50DM": 1.77,
+      "ratLogLD50": 1.57,
+      "waterLogWS": 0.19,
+      "waterLogBFC": 0.41
+    }
+  },
+  {
+    "index": 89,
+    "name": "1,3-Propanediol",
+    "casNumber": "504-63-2",
+    "molecularWeight": 76.095,
+    "configuration": "14.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.63,
+      "waterLogLC50DM": 1.49,
+      "ratLogLD50": 1.21,
+      "waterLogWS": -0.87,
+      "waterLogBFC": 0.01
+    }
+  },
+  {
+    "index": 90,
+    "name": "Allyl alcohol",
+    "casNumber": "107-18-6",
+    "molecularWeight": 58.08,
+    "configuration": "14.2.5",
+    "experimental": {
+      "waterLogLC50FM": 5.26,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.96,
+      "waterLogWS": -1.24,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.79,
+      "waterLogLC50DM": 2.96,
+      "ratLogLD50": 2.73,
+      "waterLogWS": -0.64,
+      "waterLogBFC": 0.29
+    }
+  },
+  {
+    "index": 91,
+    "name": "1-Butanol",
+    "casNumber": "71-36-3",
+    "molecularWeight": 74.123,
+    "configuration": "1.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 1.59,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.97,
+      "waterLogWS": 0.07,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.28,
+      "waterLogLC50DM": 2.35,
+      "ratLogLD50": 1.87,
+      "waterLogWS": 0.09,
+      "waterLogBFC": 0.56
+    }
+  },
+  {
+    "index": 92,
+    "name": "1-Decanol",
+    "casNumber": "112-30-1",
+    "molecularWeight": 158.285,
+    "configuration": "1.2.2.2.2.2.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 4.82,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.52,
+      "waterLogWS": 3.63,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.87,
+      "waterLogLC50DM": 3.83,
+      "ratLogLD50": 1.86,
+      "waterLogWS": 3.39,
+      "waterLogBFC": 2.15
+    }
+  },
+  {
+    "index": 93,
+    "name": "Diethylene glycol",
+    "casNumber": "111-46-6",
+    "molecularWeight": 106.121,
+    "configuration": "14.2.25.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 0.15,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 0.93,
+      "waterLogWS": -0.97,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 0.92,
+      "waterLogLC50DM": 1.11,
+      "ratLogLD50": 1.39,
+      "waterLogWS": -0.76,
+      "waterLogBFC": -0.18
+    }
+  },
+  {
+    "index": 94,
+    "name": "Diacetone alcohol",
+    "casNumber": "123-42-2",
+    "molecularWeight": 116.16,
+    "configuration": "18.2.4(1)(1).82",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.66,
+      "waterLogWS": -0.94,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.71,
+      "waterLogLC50DM": 2.18,
+      "ratLogLD50": 1.65,
+      "waterLogWS": 0.07,
+      "waterLogBFC": 0.52
+    }
+  },
+  {
+    "index": 95,
+    "name": "Ethanol",
+    "casNumber": "64-17-5",
+    "molecularWeight": 46.069,
+    "configuration": "1.2.14",
+    "experimental": {
+      "waterLogLC50FM": 0.53,
+      "waterLogLC50DM": 0.59,
+      "ratLogLD50": 0.81,
+      "waterLogWS": -1.34,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.52,
+      "waterLogLC50DM": 1.47,
+      "ratLogLD50": 1.84,
+      "waterLogWS": -0.91,
+      "waterLogBFC": 0.11
+    }
+  },
+  {
+    "index": 96,
+    "name": "Ethylene glycol",
+    "casNumber": "107-21-1",
+    "molecularWeight": 62.068,
+    "configuration": "14.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 0.04,
+      "waterLogLC50DM": 0.12,
+      "ratLogLD50": 1.12,
+      "waterLogWS": null,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.16,
+      "waterLogLC50DM": 1.31,
+      "ratLogLD50": 1.92,
+      "waterLogWS": -1.06,
+      "waterLogBFC": -0.12
+    }
+  },
+  {
+    "index": 97,
+    "name": "Glycerol",
+    "casNumber": "56-81-5",
+    "molecularWeight": 92.094,
+    "configuration": "14.2.3(81).2.14",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 0.86,
+      "waterLogWS": -1.04,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 0.76,
+      "waterLogLC50DM": 1.16,
+      "ratLogLD50": 0.97,
+      "waterLogWS": -0.74,
+      "waterLogBFC": -0.23
+    }
+  },
+  {
+    "index": 98,
+    "name": "1-Heptanol",
+    "casNumber": "111-70-6",
+    "molecularWeight": 116.204,
+    "configuration": "1.2.2.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 3.51,
+      "waterLogLC50DM": 3.23,
+      "ratLogLD50": 2.37,
+      "waterLogWS": 1.84,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.65,
+      "waterLogLC50DM": 3.11,
+      "ratLogLD50": 1.62,
+      "waterLogWS": 1.89,
+      "waterLogBFC": 1.09
+    }
+  },
+  {
+    "index": 99,
+    "name": "1-Hexanol",
+    "casNumber": "111-27-3",
+    "molecularWeight": 102.177,
+    "configuration": "1.2.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 2.94,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 2.15,
+      "waterLogWS": 1.24,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 3.11,
+      "waterLogLC50DM": 3.04,
+      "ratLogLD50": 1.63,
+      "waterLogWS": 1.18,
+      "waterLogBFC": 0.84
+    }
+  },
+  {
+    "index": 100,
+    "name": "Isobutanol",
+    "casNumber": "78-83-1",
+    "molecularWeight": 74.123,
+    "configuration": "1.3(1).2.14",
+    "experimental": {
+      "waterLogLC50FM": 1.7,
+      "waterLogLC50DM": 1.82,
+      "ratLogLD50": 1.48,
+      "waterLogWS": -0.06,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.09,
+      "waterLogLC50DM": 2.43,
+      "ratLogLD50": 2.16,
+      "waterLogWS": -0.25,
+      "waterLogBFC": 0.34
+    }
+  },
+  {
+    "index": 101,
+    "name": "1-Pentanol",
+    "casNumber": "71-41-0",
+    "molecularWeight": 88.15,
+    "configuration": "1.3(1).2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 2.22,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.28,
+      "waterLogWS": 0.6,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.64,
+      "waterLogLC50DM": 2.69,
+      "ratLogLD50": 1.52,
+      "waterLogWS": 0.53,
+      "waterLogBFC": 0.54
+    }
+  },
+  {
+    "index": 102,
+    "name": "Isopropanol",
+    "casNumber": "67-63-0",
+    "molecularWeight": 60.096,
+    "configuration": "1.3(81).1",
+    "experimental": {
+      "waterLogLC50FM": 0.78,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.08,
+      "waterLogWS": -1.22,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.33,
+      "waterLogLC50DM": 1.57,
+      "ratLogLD50": 1.43,
+      "waterLogWS": -0.79,
+      "waterLogBFC": 0.36
+    }
+  },
+  {
+    "index": 103,
+    "name": "Mannitol",
+    "casNumber": "87-78-5",
+    "molecularWeight": 182.172,
+    "configuration": "14.2.3(81).3(81).3(81).3(81).2.14",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.06,
+      "waterLogWS": -0.07,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 1.37,
+      "waterLogLC50DM": 1.36,
+      "ratLogLD50": 1.13,
+      "waterLogWS": -0.27,
+      "waterLogBFC": -0.69
+    }
+  },
+  {
+    "index": 104,
+    "name": "1-Octanol",
+    "casNumber": "111-87-5",
+    "molecularWeight": 130.231,
+    "configuration": "1.2.2.2.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 3.98,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 2.38,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 4.07,
+      "waterLogLC50DM": 3.33,
+      "ratLogLD50": 1.38,
+      "waterLogWS": 2.31,
+      "waterLogBFC": 1.64
+    }
+  },
+  {
+    "index": 105,
+    "name": "Isopentyl alcohol",
+    "casNumber": "123-51-3",
+    "molecularWeight": 88.15,
+    "configuration": "1.2.2.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": 1.83,
+      "waterLogWS": 0.52,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.46,
+      "waterLogLC50DM": 2.65,
+      "ratLogLD50": 1.69,
+      "waterLogWS": 0.54,
+      "waterLogBFC": 0.66
+    }
+  },
+  {
+    "index": 106,
+    "name": "1-Propanol",
+    "casNumber": "71-23-8",
+    "molecularWeight": 60.096,
+    "configuration": "1.2.2.14",
+    "experimental": {
+      "waterLogLC50FM": 1.12,
+      "waterLogLC50DM": 0.94,
+      "ratLogLD50": 1.51,
+      "waterLogWS": -1.22,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.08,
+      "waterLogLC50DM": 2.53,
+      "ratLogLD50": 1.89,
+      "waterLogWS": -0.47,
+      "waterLogBFC": 0.4
+    }
+  },
+  {
+    "index": 107,
+    "name": "Methyl propyl ether",
+    "casNumber": "557-17-5",
+    "molecularWeight": 74.123,
+    "configuration": "24.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 0.39,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 2.14,
+      "waterLogLC50DM": 2.65,
+      "ratLogLD50": 1.62,
+      "waterLogWS": 0.46,
+      "waterLogBFC": 0.55
+    }
+  },
+  {
+    "index": 108,
+    "name": "1-Tetradecanol",
+    "casNumber": "112-72-1",
+    "molecularWeight": 214.393,
+    "configuration": "14.2.2.2.2.2.2.2.2.2.2.2.2.2.1",
+    "experimental": {
+      "waterLogLC50FM": null,
+      "waterLogLC50DM": null,
+      "ratLogLD50": null,
+      "waterLogWS": 6.05,
+      "waterLogBFC": null
+    },
+    "rigorousEstimation": {
+      "waterLogLC50FM": 5.64,
+      "waterLogLC50DM": 5.12,
+      "ratLogLD50": 1.45,
+      "waterLogWS": 5.56,
+      "waterLogBFC": 2.11
+    }
+  }
+]
