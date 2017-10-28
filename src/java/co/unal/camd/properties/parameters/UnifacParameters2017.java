@@ -33,7 +33,7 @@ public class UnifacParameters2017 {
     @Getter
     private Map<UnifacParametersPair, UnifacInteractionData> unifacInteractions = new HashMap<>();
 
-    //UNIFAC Interaction Parameters Matrix and variables
+//    UNIFAC Interaction Parameters Matrix and variables
     @Getter
     private String[][][] ijParams = new String[3][1000][1000];
     @Getter
@@ -51,7 +51,8 @@ public class UnifacParameters2017 {
             System.out.println("Loading UNIFAC parameters file");
             parametersWorkbook = new XSSFWorkbook(workbookIS);
             SHEETS_SIZE = (byte) parametersWorkbook.getNumberOfSheets();
-            loadInteractions();
+            loadijInteractions();
+
             loadGroupsData();
             loadSecondOrderParameters();
             loadProbabilities();
@@ -65,58 +66,57 @@ public class UnifacParameters2017 {
      * Read of sheet:
      * -  UNIFAC-DORTMUND-Interactions
      */
-    private void loadInteractions() {
+    private void loadijInteractions() {
         int row;
         XSSFSheet interactionsSheet = parametersWorkbook.getSheetAt(0);
         System.out.println("UNIFAC DORTMUND PARAMETERTS Hoja: " + parametersWorkbook.getSheetName(0));
         row = 1;
 
         // Second Row
-        XSSFCell currentCell = interactionsSheet.getRow(row).getCell(0);
+        XSSFRow currentRow = interactionsSheet.getRow(row);
         XSSFCell nextRowCell;
 
-        while (validateNumericCell(currentCell)) {
+        while (currentRow!=null && validateNumericCell(currentRow.getCell(0))) {
             try {
-                Integer iParam = (int) currentCell.getNumericCellValue();
-                Integer jParam = (int) interactionsSheet.getRow(row).getCell(1).getNumericCellValue();
-                System.out.println("\nRow " + row);
-                System.out.println("iParam " + iParam);
-                System.out.println("jParam " + jParam);
+                Integer iParam = (int) currentRow.getCell(0).getNumericCellValue();
+                Integer jParam = (int) currentRow.getCell(1).getNumericCellValue();
 
-                UnifacParametersPair unifacParametersPair = new UnifacParametersPair(iParam, jParam);
-                UnifacInteractionData interactionData = new UnifacInteractionData();
+                UnifacParametersPair parametersPair = new UnifacParametersPair(iParam, jParam);
+                UnifacInteractionData interactionData = new UnifacInteractionData(parametersPair);
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(2);
+                nextRowCell = currentRow.getCell(2);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setAij(nextRowCell.getNumericCellValue());
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(3);
+                nextRowCell = currentRow.getCell(3);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setBij(nextRowCell.getNumericCellValue());
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(4);
+                nextRowCell = currentRow.getCell(4);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setCij(nextRowCell.getNumericCellValue());
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(5);
+                nextRowCell = currentRow.getCell(5);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setAji(nextRowCell.getNumericCellValue());
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(6);
+                nextRowCell = currentRow.getCell(6);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setBji(nextRowCell.getNumericCellValue());
 
-                nextRowCell = interactionsSheet.getRow(row).getCell(7);
+                nextRowCell = currentRow.getCell(7);
                 if (validateNumericCell(nextRowCell))
                     interactionData.setCji(nextRowCell.getNumericCellValue());
 
-                unifacInteractions.put(unifacParametersPair, interactionData);
+                System.out.println(interactionData);
+
+                unifacInteractions.put(parametersPair, interactionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + row);
                 e.printStackTrace();
             }
 
-            currentCell = interactionsSheet.getRow(++row).getCell(0);
+            currentRow = interactionsSheet.getRow(++row);
         }
     }
 
