@@ -7,6 +7,7 @@ import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.GibbsEnergy;
 import co.unal.camd.properties.estimation.MeltingTemp;
 import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.parameters.UnifacParameters2017;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -17,8 +18,9 @@ import java.util.ArrayList;
 public class PropertiesComputation {
 
     public static void main(String[] args) throws IOException {
-        evaluateSingleMolecule();
-        evaluateJsonMoleculeSet();
+        new UnifacParameters2017();
+        //        evaluateSingleMolecule();
+        //        evaluateJsonMoleculeSet();
     }
 
     private static void evaluateJsonMoleculeSet() throws IOException {
@@ -49,11 +51,10 @@ public class PropertiesComputation {
     private static void evaluateSingleMolecule() {
         // Sample: *Metil isobutil cetona
         FunctionalGroupNode rootFunctionalGroupNode = new FunctionalGroupNode(18);
-        //        FunctionalGroupNode functionalGroupNode1 = new FunctionalGroupNode(2);
-        //        rootFunctionalGroupNode.addGroup(functionalGroupNode1);
+        FunctionalGroupNode functionalGroupNode1 = new FunctionalGroupNode(2);
+        rootFunctionalGroupNode.addGroup(functionalGroupNode1);
         FunctionalGroupNode functionalGroupNode2 = new FunctionalGroupNode(3);
-        rootFunctionalGroupNode.addGroup(functionalGroupNode2);
-        //        functionalGroupNode1.addGroup(functionalGroupNode2);
+        functionalGroupNode1.addGroup(functionalGroupNode2);
         FunctionalGroupNode functionalGroupNode3 = new FunctionalGroupNode(1);
         functionalGroupNode2.addGroup(functionalGroupNode3);
         FunctionalGroupNode functionalGroupNode4 = new FunctionalGroupNode(1);
@@ -62,7 +63,7 @@ public class PropertiesComputation {
         Molecule molecule = new Molecule(rootFunctionalGroupNode);
         double temperature = 298.15;
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
-        moleculeData.setName("Metil isopropil cetona");
+        moleculeData.setName("Metil isobutil cetona");
         computeProperties(moleculeData, molecule, temperature);
         System.out.println(moleculeData);
         System.out.println(molecule);

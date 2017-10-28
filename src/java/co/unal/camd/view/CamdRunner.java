@@ -1,6 +1,6 @@
 package co.unal.camd.view;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
+import co.unal.camd.properties.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.estimation.FunctionalGroupNode;
 import co.unal.camd.properties.estimation.MoleculeGroups;

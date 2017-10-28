@@ -1,4 +1,4 @@
-package co.unal.camd.control.parameters;
+package co.unal.camd.properties.parameters;
 
 
 import lombok.Getter;
