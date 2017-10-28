@@ -49,9 +49,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 .idea/**
-CAMD-nuHAEA.iml
+*.iml
 bin/
 classes/
 
 # MS Excel temporary files
 ~$*
+
+# Mongo files
+mongo/compounds-bank-db/**

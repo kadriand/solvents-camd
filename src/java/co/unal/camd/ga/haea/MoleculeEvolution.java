@@ -1,122 +1,86 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.Molecule;
-import co.unal.camd.properties.estimation.MoleculeGroups;
+import co.unal.camd.ga.haea.operators.CH2Appending;
+import co.unal.camd.ga.haea.operators.Cross;
+import co.unal.camd.ga.haea.operators.CutAndClose;
+import co.unal.camd.ga.haea.operators.CutAndReplace;
+import co.unal.camd.ga.haea.operators.GroupRemoval;
+import co.unal.camd.ga.haea.operators.MoleculeMutation;
+import co.unal.camd.properties.ProblemParameters;
+import co.unal.camd.properties.model.Molecule;
+import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.view.CamdRunner;
-import lombok.Getter;
-import unalcol.Tagged;
-import unalcol.clone.DefaultClone;
-import unalcol.descriptors.WriteDescriptors;
-import unalcol.evolution.EAFactory;
-import unalcol.evolution.haea.HaeaOperators;
-import unalcol.evolution.haea.HaeaStep;
-import unalcol.evolution.haea.SimpleHaeaOperators;
-import unalcol.evolution.haea.SimpleHaeaOperatorsDescriptor;
-import unalcol.evolution.haea.WriteHaeaStep;
-import unalcol.optimization.OptimizationFunction;
-import unalcol.random.raw.JavaGenerator;
-import unalcol.search.Search;
-import unalcol.search.population.PopulationDescriptors;
-import unalcol.search.population.PopulationSearch;
-import unalcol.search.selection.Uniform;
-import unalcol.search.solution.SolutionDescriptors;
-import unalcol.search.solution.SolutionWrite;
-import unalcol.search.space.Space;
-import unalcol.services.Service;
-import unalcol.services.ServicePool;
-import unalcol.tracer.ConsoleTracer;
-import unalcol.tracer.Tracer;
-import unalcol.types.real.array.DoubleArrayPlainWrite;
+import com.co.evolution.algorithm.HAEA;
+import com.co.evolution.fitness.NSGA2FitnessCalculation;
+import com.co.evolution.interceptor.ParetoPlotterImageInterceptor;
+import com.co.evolution.model.EvolutionInterceptor;
+import com.co.evolution.model.FitnessCalculation;
+import com.co.evolution.model.GeneticOperator;
+import com.co.evolution.model.ObjectiveFunction;
+import com.co.evolution.model.Population;
+import com.co.evolution.model.PopulationInitialization;
+import com.co.evolution.model.SelectionMethod;
+import com.co.evolution.selection.TournamentSelection;
+import com.co.evolution.termination.MaxIterationsTerminationCondition;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MoleculeEvolution {
 
-    private HaeaOperators operators;
-    private Space<Molecule> space;
-    private OptimizationFunction<Molecule> moleculeFitness;
-
-    @Getter
-    private Tagged<Molecule> bestSolution;
+    private List<GeneticOperator<Molecule>> operators;
+    private ObjectiveFunction[] objectiveFunctions;
 
     public MoleculeEvolution(CamdRunner camdRunner) {
-        this.space = new MoleculeSpace(camdRunner.getMaxGroups());
         MoleculeGroups solute = camdRunner.getUserMolecules().get(0);
         MoleculeGroups solvent = camdRunner.getUserMolecules().get(1);
 
         // Optimization Function
-        moleculeFitness = new MoleculeFitness(camdRunner.getTemperature(), solute, solvent, camdRunner.getWeight(), camdRunner.getConstraintsLimits());
-        moleculeFitness.minimize(false);
+        SolventPowerFitness solventPowerFitness = new SolventPowerFitness(solute, solvent);
+        EnvironmentFitness environmentFitness = new EnvironmentFitness();
+        objectiveFunctions = new ObjectiveFunction[]{solventPowerFitness, environmentFitness};
         buildOperators();
     }
 
-    public void buildOperators() {
+    private void buildOperators() {
         MoleculeMutation mutation = new MoleculeMutation();
         Cross xover = new Cross();
         CutAndClose cutAndClose = new CutAndClose();
         CutAndReplace cutAndReplace = new CutAndReplace();
-        ChangeByCH2 changeByCH2 = new ChangeByCH2();
+        CH2Appending appendingOfCH2 = new CH2Appending();
+        GroupRemoval groupRemoval = new GroupRemoval();
 
-        HaeaOperators<Molecule> operators = new SimpleHaeaOperators<>(
+        List<GeneticOperator<Molecule>> operators = Arrays.asList(
                 mutation,
                 xover,
                 cutAndClose,
                 cutAndReplace,
-                changeByCH2
+                appendingOfCH2,
+                groupRemoval
         );
 
         this.operators = operators;
     }
 
-    public Tagged<Molecule>[] evolve(int parentSize, int maxIterations) {
+    public Population<Molecule> evolve() {
+        MaxIterationsTerminationCondition terminationCondition = new MaxIterationsTerminationCondition(ProblemParameters.getMaxIterations());
+        SelectionMethod<Molecule> selectionMethod = new TournamentSelection(4);
+        PopulationInitialization<Molecule> initialization = new MoleculeSpace();
 
-        //        Elitism<Molecule> elitism = new Elitism(1.0, 0.0);
-        Uniform<Molecule> elitism = new Uniform<>();
-        // Search method
-        int POPSIZE = parentSize;
-        int MAXITERS = maxIterations;
-        EAFactory<Molecule> factory = new EAFactory<>();
-        PopulationSearch<Molecule, Double> search = factory.HAEA(POPSIZE, operators, elitism, MAXITERS);
-        search.setGoal(moleculeFitness);
+        FitnessCalculation<Molecule> fitnessCalculation = new NSGA2FitnessCalculation<Molecule>(objectiveFunctions);
+        EvolutionInterceptor<Molecule> evolutionInterceptor = new ParetoPlotterImageInterceptor<>(5, "nsga2/nsga2-", objectiveFunctions);
 
-        // Tracking the goal evaluations
-        real_service(moleculeFitness, search);
-        population_service(moleculeFitness);
-        haea_service();
+        //   FitnessCalculation<RealIndividual> fitnessCalculation = new SPEA2FitnessCalculation<RealIndividual>(objectiveFunctions);
+        //   EvolutionInterceptor<RealIndividual> evolutionInterceptor = new ParetoPlotterImageInterceptor<>(5, "spea2/spea2-");
 
-        // Apply the search method
-        Tagged<Molecule>[] solutionPopulation = search.init(space);
-        solutionPopulation = search.apply(solutionPopulation, space);
+        HAEA<Molecule> ga = new HAEA<>(operators, terminationCondition, selectionMethod, initialization, fitnessCalculation);
+        ga.setEvolutionInterceptor(evolutionInterceptor);
 
-        bestSolution = search.pick(solutionPopulation);
+        Population<Molecule> finalPop = ga.apply();
 
-        return solutionPopulation;
-    }
-
-    private void haea_service() {
-        ServicePool service = (ServicePool) Service.get();
-        service.register(new WriteHaeaStep(), HaeaStep.class);
-        service.register(new SimpleHaeaOperatorsDescriptor<Molecule>(), HaeaOperators.class);
-    }
-
-    public static void population_service(OptimizationFunction function) {
-        ServicePool service = (ServicePool) Service.get();
-        PopulationDescriptors pd = new PopulationDescriptors();
-        pd.setGoal(function);
-        service.register(pd, Tagged[].class);
-        service.register(new WriteDescriptors<Tagged[]>(), Tagged[].class);
-    }
-
-    public static void real_service(OptimizationFunction<Molecule> function, Search<Molecule, Double> search) {
-        // Tracking the goal evaluations
-        ServicePool service = new ServicePool();
-        service.register(new JavaGenerator(), Object.class);
-        service.register(new DefaultClone(), Object.class);
-        Tracer<Object> t = new ConsoleTracer<Object>();
-        t.start();
-        service.register(t, search);
-        service.register(new SolutionDescriptors<Molecule>(function), Tagged.class);
-        service.register(new DoubleArrayPlainWrite(',', false), double[].class);
-        service.register(new SolutionWrite<Molecule>(function, true), Tagged.class);
-        Service.set(service);
+        Molecule bestSolution = finalPop.getBest();
+        System.out.println("BEST : " + bestSolution.toString() + " Fitness: " + bestSolution.getFitness() + " Value: " + Arrays.toString(bestSolution.getObjectiveValues()));
+        return finalPop;
     }
 
 }

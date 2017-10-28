@@ -1,22 +1,31 @@
 package co.unal.camd.view;
 
-import co.unal.camd.control.parameters.ContributionGroupsManager;
+import co.unal.camd.availability.AvailabilityFinder;
+import co.unal.camd.availability.MongodbClient;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.MoleculeGroups;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.ProblemParameters;
+import co.unal.camd.properties.groups.EstimationParameters;
+import co.unal.camd.properties.model.EnvironmentalProperties;
+import co.unal.camd.properties.model.MixtureProperties;
+import co.unal.camd.properties.model.Molecule;
+import co.unal.camd.properties.model.MoleculeGroups;
+import co.unal.camd.properties.model.ThermoPhysicalProperties;
+import com.co.evolution.model.Population;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
-import unalcol.Tagged;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -25,21 +34,19 @@ import java.util.stream.Collectors;
 @Data
 public class CamdRunner extends JFrame {
 
+    static {
+        System.setProperty(SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, "true");
+    }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CamdRunner.class);
+
     private static final long serialVersionUID = 1L;
-    public static final ContributionGroupsManager CONTRIBUTION_GROUPS = new ContributionGroupsManager();
+    public static final AvailabilityFinder AVAILABILITY_FINDER = MongodbClient.ENABLE_DB ? new AvailabilityFinder() : null;
+    public static final EstimationParameters CONTRIBUTION_GROUPS = new EstimationParameters();
 
     @Setter(AccessLevel.NONE)
-    protected JTabbedPane tab;
-    protected int parentSize;
-    protected int maxGroups;
-    protected double temperature;
-    protected int maxIterations;
-    @Getter
+    protected JTabbedPane candidateSolventsTabs;
     protected ArrayList<MoleculeGroups> userMolecules;
-
-    private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
-    private double[][] constraintsLimits = new double[3][5];
-    private ArrayList<Molecule> molecules;
 
     /**
      * Despliega un JFileChooser y retorna la ruta absoluta del archivo
@@ -54,99 +61,81 @@ public class CamdRunner extends JFrame {
 
         if (result != JFileChooser.APPROVE_OPTION)
             return null;
-        String selected = fileChooser.getSelectedFile().getAbsolutePath();
+
+        String selected = null;
+        try {
+            selected = fileChooser.getSelectedFile().getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return selected;
     }
 
-    public void designSuitableMolecules() {
-        tab.removeAll();
-        System.out.println("iterat " + maxIterations);
-        System.out.println("pesos (ge, bt, d, mt, sl)" + weight);
-
-        constraintsLimits[0][0] = 15;  //this is all the B
-        constraintsLimits[0][1] = 15;
-        constraintsLimits[0][2] = 15;
-        constraintsLimits[0][3] = 15;
-        constraintsLimits[0][4] = 15;
-
-        //limits
-        constraintsLimits[1][0] = 5000;   //this is all the Po
-        constraintsLimits[1][1] = 573;
-        constraintsLimits[1][2] = 1;
-        constraintsLimits[1][3] = 323;
-        constraintsLimits[1][4] = 0.1;
-
-        constraintsLimits[2][0] = 0.076;  //this is all the uncertainty
-        constraintsLimits[2][1] = 0.0142;
-        constraintsLimits[2][2] = 0.1;
-        constraintsLimits[2][3] = 0.0723;
-        constraintsLimits[2][4] = 0.05;
-
+    void designSuitableMolecules() {
+        candidateSolventsTabs.removeAll();
+        LOGGER.info("ITERATIONS: {}", ProblemParameters.getMaxIterations());
+        LOGGER.info("pesos (gibbsEnergy, boilingPoint, density, meltingPoint, solventLoss) {}", ProblemParameters.PROPERTIES_WEIGHTS);
 
         MoleculeEvolution moleculeEvolution = new MoleculeEvolution(this);
-        System.out.println("parent size" + parentSize);
-        System.out.println(" max iter :" + maxIterations);
+        LOGGER.info("Parents pool size {}", ProblemParameters.getParentsPoolSize());
+        LOGGER.info("Maximum of iterations {}", ProblemParameters.getMaxIterations());
 
         // EVOLUTION TIME
-        Tagged<Molecule>[] population = moleculeEvolution.evolve(parentSize, maxIterations);
+        Population<Molecule> population = moleculeEvolution.evolve();
 
-        //        double best = population.statistics().best;
-        //        double avg = population.statistics().avg;
-        //        double worst = population.statistics().worst;
-        //        System.out.println("best: " + best);
-        //        System.out.println("avg: " + avg);
-        //        System.out.println("worst: " + worst);
+        Molecule bestSolution = population.getBest();
+        Double bestFitness = bestSolution.getFitness();
+        LOGGER.info("BEST FITNESS : {}", bestFitness);
 
-        System.out.println("BEST FITNESS");
-        Tagged<Molecule> bestSolution = moleculeEvolution.getBestSolution();
-        Double bestFitness = bestSolution.unwrap().getFitness();
-        System.out.println(bestFitness);
+        Map<Molecule, Integer> groupedMolecules = new HashMap<>();
+        population.forEach(individual -> {
+            Optional<Map.Entry<Molecule, Integer>> filteredMoleculeEntry = groupedMolecules.entrySet().stream()
+                    .filter(molecule -> molecule.getKey().getSmiles().equals(individual.getSmiles()))
+                    .findFirst();
+            if (filteredMoleculeEntry.isPresent())
+                filteredMoleculeEntry.get().setValue(filteredMoleculeEntry.get().getValue() + 1);
+            else
+                groupedMolecules.put(individual, 1);
+        });
 
-        List<Tagged<Molecule>> sortedSolution = Arrays.stream(population)
-                .sorted(Comparator.comparingDouble(o -> o.unwrap().getFitness()))
+        List<Molecule> sortedSolutions = groupedMolecules.keySet().stream()
+                .sorted(Comparator.comparingDouble(molecule -> molecule.getFitness()))
                 .collect(Collectors.toList());
 
-        JTree jTree;
-        for (int i = 0; i < parentSize; i++) {
-            Molecule solvent = sortedSolution.get(i).unwrap();
+        for (Molecule candidate : sortedSolutions) {
+            ThermoPhysicalProperties thermoPhysicalProperties = candidate.getThermoPhysicalProperties();
+            EnvironmentalProperties environmentalProperties = candidate.getEnvironmentalProperties();
+            int occurrences = groupedMolecules.get(candidate);
+            MixtureProperties mixtureProperties = candidate.getMixtureProperties();
+            Double fitness = candidate.getFitness();
 
-            FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getRootNode());
-            DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
-            jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
-            //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
+            StringBuilder solventInfo = new StringBuilder("/////////////////////////// " + candidate.getSmiles() + " [" + occurrences + "] /////////////////////////////////////");
+            solventInfo.append("\nMW: " + thermoPhysicalProperties.getMolecularWeight());
+            solventInfo.append("\nGe: " + thermoPhysicalProperties.getGibbsEnergy());
+            solventInfo.append("\nBT: " + thermoPhysicalProperties.getBoilingPoint());
+            solventInfo.append("\nDen: " + thermoPhysicalProperties.getDensity());
+            solventInfo.append("\nMT: " + thermoPhysicalProperties.getMeltingPoint());
+            solventInfo.append("\nDC: " + thermoPhysicalProperties.getDielectricConstant());
+            solventInfo.append("\nKS: " + mixtureProperties.getKs());
+            solventInfo.append("\nSMILES: " + candidate.getSmiles());
+            solventInfo.append("\nGROUPS: " + candidate.toString());
 
-            // TODO Auto-generated method stub
-            double ge = solvent.getGe();
-            double bt = solvent.getBt();
-            double den = solvent.getD();
-            double mt = solvent.getMt();
-            double dc = solvent.getDc();
-            double ks = solvent.getKs();
-            double fitness = solvent.getFitness();
+            solventInfo.append("\n///////////////////////// ENVIRONMENT ///////////////////////////////////");
+            solventInfo.append("\nwaterLC50FM : " + environmentalProperties.getWaterLC50FM());
+            solventInfo.append("\nwaterLC50DM : " + environmentalProperties.getWaterLC50DM());
+            solventInfo.append("\nratLD50 : " + environmentalProperties.getRatLD50());
+            solventInfo.append("\nwaterLogWS : " + environmentalProperties.getWaterLogWS());
+            solventInfo.append("\nwaterBFC : " + environmentalProperties.getWaterBFC());
+            solventInfo.append("\nairEUAc : " + environmentalProperties.getAirEUAc());
+            solventInfo.append("\nairEUAnc : " + environmentalProperties.getAirEUAnc());
+            solventInfo.append("\nairERAc : " + environmentalProperties.getAirERAc());
+            solventInfo.append("\nairERAnc : " + environmentalProperties.getAirERAnc());
+            solventInfo.append("\n//////////////////////////////////////////////////////////////\n");
 
-            System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
-            System.out.println("Ge: " + ge);
-            System.out.println("BT: " + bt);
-            System.out.println("Den: " + den);
-            System.out.println("MT: " + mt);
-            System.out.println("DC: " + dc);
-            System.out.println("KS: " + ks);
-            System.out.println("//////////////////////////////////////////////////////////////");
+            LOGGER.info("Solvent fitness {}\n{}", fitness, solventInfo);
 
-            // TODO IS THIS NECESSARY?
-            tab.addTab("F " + fitness, null, jTree, "molecule number");
+            candidateSolventsTabs.addTab(String.format("%d. %s [%d]", sortedSolutions.indexOf(candidate) + 1, candidate.getSmiles(), occurrences), null, new CandidateSolventPanel(candidate), candidate.getSmiles());
         }
     }
 
-    private DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
-        for (int i = 0; i < molec.countSubgroups(); i++) {
-            String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getRootNode());
-            DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
-
-            moleculeToJtree(molec.getGroupAt(i), aNode);
-            node.add(aNode);
-        }
-        return node;
-    }
 }

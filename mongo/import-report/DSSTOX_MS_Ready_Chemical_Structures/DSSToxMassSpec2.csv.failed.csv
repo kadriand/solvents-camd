@@ -1,0 +1,432 @@
+<MSG>cannot assign geometric configuration<MSG>
+[Fe++].CC1=C2[N-]C(\C=C3/N=C(/C=C4\[N-]\C(=C/C5=N/C(=C\2)/C(C=C)=C5C)C(C=C)=C4C)C(C)=C3CCC([O-])=O)=C1CCC([O-])=O,protoheme IX,104414-01-9,DTXSID70349377
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Cesium chlorobromide,70002-29-8,DTXSID70388468
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Gallium, diethyl-",119628-75-0,DTXSID80388479
+<MSG>cannot assign geometric configuration<MSG>
+[Cl-].[Cl-].[Cl-].[Cl-].[Cu++].CN(C)C(SCC1=CC2=C(C=C1)/C1=N/C3=N/C(=N\C4=C5C=C(CSC(N(C)C)=[N+](C)C)C=CC5=C([N-]4)/N=C4\N=C(\N=C\2/[N-]\1)C1=C4C=C(CSC(N(C)C)=[N+](C)C)C=C1)/C1=C3C=CC(CSC(N(C)C)=[N+](C)C)=C1)=[N+](C)C,NSC 324570,1328-52-5,DTXSID60388977
+<MSG>cannot assign geometric configuration<MSG>
+CC(C)(C)C1=C/C2=N/C3=C(C=C(N3)\N=C3/N=C(C=C3C(C)(C)C)/N=C3\N=C(C=C3C(C)(C)C)\N=C\1/N\2)C(C)(C)C,"2,7,12,17-Tetra-tert-butyl-5,10,15,20-tetraaza-21H,23H-porphine",64987-70-8,DTXSID70392863
+<MSG>cannot assign geometric configuration<MSG>
+COC(=O)CCC1=C(CC(=O)OC)/C2=C/C3=N/C(=C\C4=C(CCC(=O)OC)C(CC(=O)OC)=C(N4)/C=C4\N=C(\C=C\1/N\2)C(C)=C4CCC(=O)OC)/C(C)=C3CCC(=O)OC,HEXACARBOXYLPORPHYRIN I HEXAMETHYL ESTER,885267-25-4,DTXSID90395295
+<MSG>cannot assign geometric configuration<MSG>
+N1\C2=C/C3=C4C=CC=CC4=C(N3)\C=C3/N=C(/C=C4\N=C(\C=C1\C1=CC=CC=C21)C1=CC=CC=C41)C1=CC=CC=C31,TETRABENZOPORPHINE,52952-31-5,DTXSID90396964
+<MSG>cannot assign geometric configuration<MSG>
+CC(C)(C)C1=CC2=C(C=C1)\C1=N\C3=C4C=C(C=CC4=C4\N=C5/N=C(/N=C6\N(\C(=N/C2=N1)C1=C6C=C(C=C1)C(C)(C)C)[Si](O)(O)N34)C1=C5C=C(C=C1)C(C)(C)C)C(C)(C)C,"Silicon 2,9,16,23-tetra-tert-butyl-29H,31H-phthalocyanine dihydroxide",85214-70-6,DTXSID40399066
+<MSG>cannot assign geometric configuration<MSG>
+O[Si]1(O)N2\C3=N/C4=N/C(=N\C5=C6C=CC=CC6=C(\N=C6/N=C(/N=C2/C2=CC=CC=C32)C2=CC=CC=C62)N15)/C1=CC=CC=C41,Silicon phthalocyanine dihydroxide,19333-15-4,DTXSID70399115
+<MSG>cannot assign geometric configuration<MSG>
+CC(C)OC(=O)CCC1=C(C)/C2=C/C3=C(CCC(=O)OC(C)C)C(C)=C(N3)\C=C3/N=C(/C=C4\N=C(\C=C\1/N\2)C(C)=C4CCC(=O)OC(C)C)C(C)=C3CCC(=O)OC(C)C,"propan-2-yl 3-[3,8,13,18-tetramethyl-7,12,17-tris(3-oxo-3-propan-2-yloxypropyl)-21,22-dihydroporphyrin-2-yl]propanoate",145612-65-3,DTXSID20400063
+<MSG>cannot assign geometric configuration<MSG>
+COC(=O)CCC1=C(C)/C2=C/C3=N/C(=C\C4=N\C(=C/C5=C(C)C(CCC(=O)OC)=C(N5)\C=C\1/N\2)\C(C)=C4C)/C(C)=C3C,"2,4-DIMETHYL DEUTEROPORPHYRIN IX DIMETHYL ESTER",32464-39-4,DTXSID40407574
+<MSG>cannot assign geometric configuration<MSG>
+CCCCCCCCOC1=CC2=C3\N=C4/N=C(/N=C5\N6\C(=N/C7=N/C(=N\C(N3[Si]6(O)O)=C2C=C1OCCCCCCCC)/C1=CC(OCCCCCCCC)=C(OCCCCCCCC)C=C71)C1=CC(OCCCCCCCC)=C(OCCCCCCCC)C=C51)C1=CC(OCCCCCCCC)=C(OCCCCCCCC)C=C41,"Silicon 2,3,9,10,16,17,23,24-octakis(octyloxy)-29H,31H-phthalocyanine dihydroxide",118401-72-2,DTXSID70407724
+<MSG>cannot assign geometric configuration<MSG>
+CCCCOC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(OCCCC)C=C1)C1=CC=C(OCCCC)C=C1)C1=CC=C(OCCCC)C=C1,"5,10,15,20-Tetrakis(4-butoxyphenyl)-Porphine",57450-62-1,DTXSID20408802
+<MSG>cannot assign geometric configuration<MSG>
+[Zn++].O=C1NC=NC=C1.[N-]1C2=CC=C1\C(=C1\C=CC(=N1)\C(=C1/[N-]\C(\C=C1)=C(/C1=N/C(/C=C1)=C2/C1=CC=CC=C1)C1=CC=CC=C1)\C1=CC=CC=C1)C1=CC=CC=C1,"Zinc 5,10,15,20-tetraphenylporphine-21,23-diide--pyrimidin-4(3H)-one (1/1/1)",7232-31-7,DTXSID10413107
+<MSG>cannot assign geometric configuration<MSG>
+[Mo++].C1=CC=C(C=C1)C#CC1=CC=CC=C1.CC1=CC=C(C=C1)C1=C2C=CC(=N2)\C(=C2/[N-]\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=CC=C1[N-]2)C1=CC=C(C)C=C1)C1=CC=C(C)C=C1)C1=CC=C(C)C=C1,"Molybdenum(2+) 5,10,15,20-tetrakis(4-methylphenyl)porphine-21,23-diide--1,1'-(ethyne-1,2-diyl)dibenzene (1/1/1)",7233-82-1,DTXSID90413206
+<MSG>cannot assign geometric configuration<MSG>
+O.Cl[Ru++].Cl[Ru++].CCC1=C(CC)/C2=C/C3=N/C(=C\C4=C(CC)C(CC)=C([N-]4)/C=C4\N=C(\C=C\1/[N-]\2)C(CC)=C4CC)/C(CC)=C3CC.CCC1=C(CC)/C2=C/C3=N/C(=C\C4=C(CC)C(CC)=C([N-]4)/C=C4\N=C(\C=C\1/[N-]\2)C(CC)=C4CC)/C(CC)=C3CC,"Chlororuthenium(2+) 2,3,7,8,12,13,17,18-octaethylporphine-21,23-diide--water (2/2/1)",7242-99-1,DTXSID60413970
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,BISMUTH SULFIDE,11104-47-5,DTXSID90418594
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,tellanyl,13940-36-8,DTXSID30420090
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,HSe(.),13940-22-2,DTXSID40420102
+<MSG>cannot assign geometric configuration<MSG>
+COC(=O)CCC1=C(C)C2=N\C\1=C/C1=N/C(=C\C3=C(C)C(C=O)=C(N3)\C=C3/N/C(=C\2)C(C=O)=C3C)/C(C)=C1CCC(=O)OC,NSC22369,15341-25-0,DTXSID00420244
+<MSG>cannot assign geometric configuration<MSG>
+COC(=O)CCC1=C(C)/C2=C/C3=C(C)/C(=C(/C)N=O)/C(/N3)=C/C3=C(C)/C(=C(/C)N=O)/C(/N3)=C/C3=C(C)C(CCC(=O)OC)=C(N3)\C=C\1/N\2,NSC36574,75469-18-0,DTXSID20420246
+<MSG>cannot assign geometric configuration<MSG>
+[Cu].CC1=C(CCC(O)=O)/C2=C/C3=C(C)C(CCC(O)=O)=C([N-]3)\C=C3/[N-]\C(=C/C4=C(C)C(CCC(O)=O)=C([N-]4)\C=C\1/[N-]\2)C(CCC(O)=O)=C3C,NSC267074,91798-66-2,DTXSID30420378
+<MSG>cannot assign geometric configuration<MSG>
+[Cd].CC1=C(CCC(O)=O)/C2=C/C3=C(C)C(CCC(O)=O)=C([N-]3)\C=C3/[N-]\C(=C/C4=C(C)C(CCC(O)=O)=C([N-]4)\C=C\1/[N-]\2)C(CCC(O)=O)=C3C,NSC267077,14876-54-1,DTXSID00420380
+<MSG>cannot assign geometric configuration<MSG>
+[Na+].[Na+].[Na+].[Na+].CCC1=C(C)/C2=C/C3=C(C=C)C(C)=C(N3)\C=C3/N=C([C@@H](CCC([O-])=O)[C@@H]3C)/C(/CC(=O)N[C@@H](CC([O-])=O)C([O-])=O)=C3\N=C(\C=C\1/N\2)C(C)=C3C([O-])=O,Talaporfin sodium,220680-62-6,DTXSID70420519
+<MSG>cannot assign geometric configuration<MSG>
+CC(C)(C)C1=CC2=CC3=C(C=C2C=C1)/C1=N/C2=C4C=C5C=C(C=CC5=CC4=C(N2)/N=C2\N=C(/N=C4\N=C(\N=C\3/N\1)C1=C4C=C3C=C(C=CC3=C1)C(C)(C)C)C1=C2C=C2C=C(C=CC2=C1)C(C)(C)C)C(C)(C)C,"2,11,20,29-Tetra-tert-butyl-2,3-naphthalocyanine",58687-99-3,DTXSID90420935
+<MSG>cannot assign geometric configuration<MSG>
+CCN(CC)/C1=C2\C=CC3=C2/C(CC3=O)=C\C=C/C=C\1/C,AC1Q6N7K,83026-60-2,DTXSID70422058
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,4-Chlorophenylselenol,16645-10-6,DTXSID70422538
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Hexaphenyldigermane,2816-39-9,DTXSID60422542
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,triphenyllead,6640-01-3,DTXSID20422548
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Carbanilide, seleno-",16519-43-0,DTXSID30422554
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"(N,N'-Dibenzylcarbamimidoyl)selanyl",59403-75-7,DTXSID90422555
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"(N,N'-Diethylcarbamimidoyl)selanyl",15909-81-6,DTXSID50422556
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"(N,N'-Dibutylcarbamimidoyl)selanyl",39645-73-3,DTXSID10422557
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,2-Benzimidazoleselenol,59403-74-6,DTXSID70422558
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"(1,3-Benzothiazol-2-yl)selanyl",10200-72-3,DTXSID30422559
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Tribenzylstannyl--water (1/1),15082-85-6,DTXSID20422563
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC227358,3902-98-5,DTXSID20422568
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC227374,13904-04-6,DTXSID80422569
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC234179,72308-53-3,DTXSID90422570
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC235764,57575-12-9,DTXSID50422571
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC235766,57575-13-0,DTXSID10422572
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,52019-23-5,52019-23-5,DTXSID70422573
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC269600,20447-33-0,DTXSID30422574
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Stannane, ethylhydroxydiphenyl-",81928-40-7,DTXSID90422575
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC294220,993-61-3,DTXSID10422577
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC294222,7289-73-8,DTXSID70422578
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC294224,14908-74-8,DTXSID30422579
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC297137,68774-88-9,DTXSID40422580
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(1E)-N-(4-Bromophenyl)ethanimidoyl]selanyl,62448-80-0,DTXSID00422581
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(1Z)-N-(4-Ethoxyphenyl)propanimidoyl]selanyl,62448-82-2,DTXSID60422582
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(1Z)-N-(4-Bromophenyl)pentanimidoyl]selanyl,62448-89-9,DTXSID20422583
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(1Z)-N-(3-Methylbutyl)pentanimidoyl]selanyl,62448-91-3,DTXSID80422584
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(1Z)-N-(4-Methoxyphenyl)-4-methylpentanimidoyl]selanyl,62448-94-6,DTXSID40422585
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC629928,894-08-6,DTXSID10422592
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"2,2-Dibutyl-1,2-selenagermolane",18438-01-2,DTXSID30422594
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC111647,19483-56-8,DTXSID40422621
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC147788,60870-16-8,DTXSID80422625
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC150418,39102-63-1,DTXSID40422626
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,63676-54-0,63676-54-0,DTXSID00422627
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC154833,55921-90-9,DTXSID60422628
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC160796,10443-86-4,DTXSID90422636
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"6-amino-1H-imidazo[4,5-c]pyridine-4-selenol",52605-86-4,DTXSID50422637
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Diethyl-lambda~2~-germane--triethylgermyl (1/2),13937-05-8,DTXSID80422645
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC188488,68559-16-0,DTXSID40422646
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,21227-23-6,21227-23-6,DTXSID00422647
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC202675,6028-85-9,DTXSID60422648
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC304709,51342-15-5,DTXSID30422650
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC304710,51342-17-7,DTXSID90422651
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC315501,68774-87-8,DTXSID70422654
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,2-morpholin-4-yl-5-phenylpyrimidine-4-selenol,69909-08-6,DTXSID30422655
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC330692,54598-22-0,DTXSID90422656
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Gallium, dimethyl-",106693-86-1,DTXSID10422658
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,37044-16-9,37044-16-9,DTXSID00422662
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC371173,37718-79-9,DTXSID20422664
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Triphenylgermyl--water (1/1),1529-27-7,DTXSID80422665
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Sodium dodecyl sulfate-1-14C,155614-07-6,DTXSID90422671
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"2,3-dihydro-1,4-benzodioxin-6-yl-hydroxy-oxoantimony",6963-04-8,DTXSID40422686
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,13356-09-7,13356-09-7,DTXSID80422706
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC158202,21647-72-3,DTXSID60422729
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC162781,14354-58-6,DTXSID90422732
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Triphenylgermyl--triphenylsilyl (1/1),6928-69-4,DTXSID80422741
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Triphenylgermyl--triphenylstannyl (1/1),13904-13-7,DTXSID40422742
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC179719,7289-74-9,DTXSID00422748
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Stannane, chlorohydroxydiphenyl-",2984-83-0,DTXSID30422776
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC325016,68612-11-3,DTXSID70422795
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC325017,68612-10-2,DTXSID30422796
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,dinaphthalen-1-ylthallium,5249-53-6,DTXSID00422809
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Butylthiostannonic acid,102622-67-3,DTXSID30422817
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(Tributylstannyl)trimethylsilane,17955-46-3,DTXSID90422853
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Trimethylstannyltriphenylsilane,18748-68-0,DTXSID70422856
+<MSG>cannot assign geometric configuration<MSG>
+CC1=C/C(/C=C\C\1=C(/C#N)C1=CC=CC=C1)=N/O,AC1Q4QD8,839-75-8,DTXSID60422880
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC281280,14647-20-2,DTXSID80422943
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC319699,75602-13-0,DTXSID10422951
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,ANTINEOPLASTIC-168784,38496-26-3,DTXSID60422981
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Lithium, (triethylgermyl)-",6727-87-3,DTXSID40422984
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,ANTINEOPLASTIC-187652,14126-26-2,DTXSID70422992
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,CTK1F9789,54008-44-5,DTXSID30422993
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Tris(2-methylphenyl)tin,56913-05-4,DTXSID50423003
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Silane, diphenylbis(triphenylstannyl)-",113330-70-4,DTXSID30423006
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,{(E)-Amino[(2Z)-{[4-(dimethylamino)phenyl]methylidene}hydrazinylidene]methyl}selanyl,58531-92-3,DTXSID00423018
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC326160,21198-80-1,DTXSID30423021
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Indium sulfide,37231-03-1,DTXSID20423030
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,ANTINEOPLASTIC-168794,16242-55-0,DTXSID90423042
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC330691,85715-43-1,DTXSID50423048
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC176229,12291-01-9,DTXSID10423049
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,5264-94-8,5264-94-8,DTXSID40423057
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7226-11-1,7226-11-1,DTXSID90423082
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7227-07-8,7227-07-8,DTXSID10423089
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7228-04-8,7228-04-8,DTXSID80423096
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7229-35-8,7229-35-8,DTXSID30423102
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7238-57-5,7238-57-5,DTXSID40423178
+<MSG>cannot assign geometric configuration<MSG>
+[V++].C[PH+](C)C1=CC=CC=C1.C[PH+](C)C1=CC=CC=C1.CCC1=C(CC)/C2=C/C3=N/C(=C\C4=C(CC)C(CC)=C([N-]4)/C=C4\N=C(\C=C\1/[N-]\2)C(CC)=C4CC)/C(CC)=C3CC,7241-49-8,7241-49-8,DTXSID30423208
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,1H-arsole,287-77-4,DTXSID20423217
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,phenyl acetyl Coa,108321-26-2,DTXSID80423551
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,DL-|A-Hydroxybutyryl coenzyme A lithium salt,103404-51-9,DTXSID80423556
+<MSG>cannot assign geometric configuration<MSG>
+[Sn++].[N-]1\C2=N/C3=C4C=CC=CC4=C([N-]3)\N=C3/N=C(/N=C4\N=C(\N=C1\C1=CC=CC=C21)C1=CC=CC=C41)C1=CC=CC=C31,15304-57-1,15304-57-1,DTXSID00424848
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,5259-70-1,5259-70-1,DTXSID30425843
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC329241,79514-47-9,DTXSID70430613
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Sodium amalgam,11110-52-4,DTXSID10431583
+<MSG>cannot assign geometric configuration<MSG>
+FC1=C2NC(=C1F)\C(=C1/N=C(C(F)=C1F)/C(=C1\N=C(C(F)=C1F)\C(=C1/N\C(\C(F)=C1F)=C2\C1=C(F)C(F)=C(F)C(F)=C1F)\C1=C(F)C(F)=C(F)C(F)=C1F)/C1=C(F)C(F)=C(F)C(F)=C1F)C1=C(F)C(F)=C(F)C(F)=C1F,"2,3,7,8,12,13,17,18-Octafluoro-5,10,15,20-tetrakis(pentafluorophenyl)porphyrin",121399-88-0,DTXSID50432473
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(+/-)-alpha-Tocopherol phosphate disodium salt,60934-46-5,DTXSID60433037
+<MSG>cannot assign geometric configuration<MSG>
+Cl[Co++].CC1=C(CCC(O)=O)/C2=C/C3=N/C(=C\C4=C(C)C(C=C)=C([N-]4)/C=C4\N=C(\C=C\1/[N-]\2)C(C=C)=C4C)/C(C)=C3CCC(O)=O,COBALTIC PROTOPORPHYRIN IX CHLORIDE,102601-60-5,DTXSID10433325
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"1,3,2-Diazaborolidine, 1,3-dimethyl-2-(trimethylstannyl)-",36333-59-2,DTXSID90446539
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"1,2-Benzenediselenol",104478-75-3,DTXSID60446889
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Silane, (1,1-dimethylethyl)dimethyl(trimethylstannyl)-",97877-91-3,DTXSID60446960
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,SCHEMBL9751580,22702-77-8,DTXSID70448950
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Copper, (tributylstannyl)-",82097-93-6,DTXSID80449852
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,trimethylstannyl lithium,17946-71-3,DTXSID70450013
+<MSG>cannot assign geometric configuration<MSG>
+[Cl-].Cl[P+]1(Cl)N2C3=CC=C2\C(=C2\C=CC(=N2)\C(=C2\C=C/C(/N12)=C(/C1=N/C(/C=C1)=C3/C1=CC=CC=C1)C1=CC=CC=C1)\C1=CC=CC=C1)C1=CC=CC=C1,Perchlorate ionophore I,84896-72-0,DTXSID70451540
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Distannaselenane, hexabutyl-",6031-46-5,DTXSID90451981
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Thallium(2+), hydroxy-",15823-78-6,DTXSID30452179
+<MSG>cannot assign geometric configuration<MSG>
+[O-][N+](=O)C1=CC=CC=C1\C1=C2\N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C1N2)C1=CC=CC=C1[N+]([O-])=O)C1=CC=CC=C1[N+]([O-])=O)C1=CC=CC=C1[N+]([O-])=O,"5,10,15,20-Tetrakis(2-nitrophenyl)porphyrin",37116-82-8,DTXSID20452401
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Germane,trimethyl(trichlorosilyl)-",150112-38-2,DTXSID00453113
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,CTK1D3552,41924-21-4,DTXSID10453245
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Sodium, (trimethylstannyl)-",16643-09-7,DTXSID10453402
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,CTK0J6169,22702-72-3,DTXSID40454063
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Digermirane, 1,1,2,2-tetrakis(2,6-diethylphenyl)-",115385-08-5,DTXSID40454109
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,CTK0J4337,25149-72-8,DTXSID40454225
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,tributylstannyllithium,4226-01-1,DTXSID10455183
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"1,2,4,5-Tetrastannin, hexahydro-1,1,2,2,3,3,4,4,5,5,6,6-dodecamethyl-",93061-72-4,DTXSID10455264
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Germane, trimethyl(phenylseleno)-",61501-51-7,DTXSID70455927
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"1,2-Digermin, hexahydro-1,1,2,2-tetramethyl-4,5-bis(methylene)-",144865-58-7,DTXSID80455938
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Sodium, (triethylgermyl)-",43106-47-4,DTXSID60456140
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Lithium, (triphenylstannyl)-",4167-90-2,DTXSID10456776
+<MSG>cannot assign geometric configuration<MSG>
+FC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(F)C=C1)C1=CC=C(F)C=C1)C1=CC=C(F)C=C1,"5,10,15,20-Tetrakis(4-fluorophenyl)porphyrin",37095-43-5,DTXSID20457476
+<MSG>cannot assign geometric configuration<MSG>
+Br\C1=C2\N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(Br)\C2=N\C(\C=C2)=C(/C2=CC=C1N2)C1=CC=CC=C1)C1=CC=CC=C1,"5,15-DIBROMO-10,20-DIPHENYLPORPHINE",151256-86-9,DTXSID60458220
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Stannane, tributyl[(4-fluorophenyl)seleno]-",206431-87-0,DTXSID70458938
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Potassium, (triphenylstannyl)-",61810-54-6,DTXSID90459285
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Germane, tributyl(tributylstannyl)-",832146-91-5,DTXSID90462153
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Stannane, chlorobis(1,1-dimethylethyl)hydroxy-",44968-11-8,DTXSID50463848
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Digermane, 1,2-dimethyl-1,1,2,2-tetraphenyl-",13892-12-1,DTXSID00467114
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Stannane, triphenyl(phenylseleno)-",29328-48-1,DTXSID30467460
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,AGN-PC-00ALT1,478960-97-3,DTXSID50467806
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"8-Quinolineselenol, 2-methyl-",560069-59-2,DTXSID50468838
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Lithium, [(triphenylstannyl)methyl]-",64331-89-1,DTXSID50471221
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Lithium, (tributylplumbyl)-",95728-88-4,DTXSID50471261
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Silane, chlorodiphenyl(trimethylstannyl)-",184848-90-6,DTXSID80472322
+<MSG>cannot assign geometric configuration<MSG>
+CC(C)(C)\N=N\C1=C(C=CC=N1)/N=N/N1CCOCC1,"Morpholine, 4-[[2-[(1,1-dimethylethyl)azo]-3-pyridinyl]azo]-",832077-18-6,DTXSID30473642
+<MSG>cannot assign geometric configuration<MSG>
+[Fe+4].[N-]=O.ClC1=CC=CC(Cl)=C1\C1=C2\[N-]\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=CC=C([N-]2)C2=CC=C1[N-]2)C1=C(Cl)C=CC=C1Cl)C1=C(Cl)C=CC=C1Cl,7226-32-6,7226-32-6,DTXSID60474869
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7231-07-4,7231-07-4,DTXSID50474919
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC227376,6102-83-6,DTXSID60475093
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,NSC227377,4554-93-2,DTXSID20475094
+<MSG>cannot assign geometric configuration<MSG>
+[Pd++].CC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(C)C=C1)C1=CC=NC=C1)C1=CC=C(C)C=C1.CC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(C)C=C1)C1=CC=NC=C1)C1=CC=C(C)C=C1.CC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(C)C=C1)C1=CC=NC=C1)C1=CC=C(C)C=C1.CC1=CC=C(C=C1)C1=C2/N\C(\C=C2)=C(/C2=N/C(/C=C2)=C(\C2=N\C(\C=C2)=C(/C2=CC=C\1N2)C1=CC=C(C)C=C1)C1=CC=NC=C1)C1=CC=C(C)C=C1,4935-27-7,4935-27-7,DTXSID50475108
+<MSG>cannot assign geometric configuration<MSG>
+[Ho].CCC1=C(CC)\C2=C\C3=N\C(=C/C4=C(CC)C(CC)=C([N-]4)\C=C4/N=C(C=C1[N-]2)C(CC)=C4CC)\C(CC)=C3CC.[N-]1\C2=N/C3=N/C(=N\C4=C5C=C6C=CC=CC6=CC5=C([N-]4)\N=C4/N=C(/N=C1/C1=CC5=CC=CC=C5C=C21)C1=CC2=CC=CC=C2C=C41)/C1=CC2=CC=CC=C2C=C31,7234-94-8,7234-94-8,DTXSID00475118
+<MSG>cannot assign geometric configuration<MSG>
+[Zn].[Zn].[Zn].[Zn].CC(C)(C)C1CC(CC(C1)C(C)(C)C)C1=C2C=CC(=N2)\C(C2CCC[N-]C2)=C2\[N-]\C(\C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)/C2=N/C(/C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)\C2=CC=C1[N-]2.CC(C)(C)C1CC(CC(C1)C(C)(C)C)C1=C2\C=CC(=N2)C(C2CCC[N-]C2)=C2[N-]\C(C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)/C2=N/C(/C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)\C2=CC=C\1[N-]2.CC(C)(C)C1CC(CC(C1)C(C)(C)C)C1=C2\C=CC(=N2)C(C2CCC[N-]C2)=C2[N-]\C(C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)/C2=N/C(/C=C2)=C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)\C2=CC=C\1[N-]2.CC(C)(C)C1CC(CC(C1)C(C)(C)C)C1=C2C=CC(=N2)\C(C2CC(CC(C2)C(C)(C)C)C(C)(C)C)=C2/[N-]\C(\C=C2)=C(/C2=N/C(/C=C2)=C(C2C[N-]CC=C2)\C2=CC=C1[N-]2)C1=CC(=CC(=C1)C(C)(C)C)C(C)(C)C,7229-62-1,7229-62-1,DTXSID10475124
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7224-89-7,7224-89-7,DTXSID50475224
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7230-33-3,7230-33-3,DTXSID40475253
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,7241-40-9,7241-40-9,DTXSID00475254
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"8-Quinolineselenol, 6-methyl-",428510-81-0,DTXSID30475686
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"1,3,2-Benzodioxaborole, 5-(1,1-dimethylethyl)-2-(triphenylgermyl)-",664354-90-9,DTXSID50476453
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Germane, mercaptotris(2,2'',6,6''-tetramethyl[1,1':3',1''-terphenyl]-5'-yl)-",658064-04-1,DTXSID70477260
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Lithium, (methyldiphenylgermyl)-",104470-11-3,DTXSID60479132
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12427235,58529-40-1,DTXSID00497774
+<MSG>cannot assign geometric configuration<MSG>
+OC(=O)CCC1=C(CC(O)=O)/C2=C/C3=N/C(=C\C4=N\C(=C/C5=C(CC(O)=O)C(CCC(O)=O)=C(N5)\C=C\1/N\2)\C(CCC(O)=O)=C4CC(O)=O)/C(CC(O)=O)=C3CCC(O)=O,"3,3',3'',3'''-[3,8,12,17-Tetrakis(carboxymethyl)porphyrin-2,7,13,18-tetrayl]tetrapropanoic acid",613-02-5,DTXSID00498504
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Mercury--tris(pentafluorophenyl)germyl (1/2),35406-49-6,DTXSID20499593
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Phosphane--trimethylgermyl (1/3),13904-36-4,DTXSID80502537
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Phosphane--trimethylstannyl (1/3),10569-17-2,DTXSID40502538
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12573528,54882-13-2,DTXSID20503048
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12573530,75355-28-1,DTXSID80503049
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Cadmium--triphenylgermyl (1/2),21121-75-5,DTXSID70503674
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12595813,1802-69-3,DTXSID50503819
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Lithium methanide--triphenylplumbyl (1/1/2),76002-47-6,DTXSID60503820
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Lithium methanide--trimethylgermyl (1/1/1),60683-32-1,DTXSID60503825
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12599736,57482-41-4,DTXSID40503944
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12599738,34422-60-1,DTXSID00503945
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12599741,42451-63-8,DTXSID60503946
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(4-Methylphenyl)tellanyl--triphenylgermyl (1/1),66261-86-7,DTXSID70506069
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Phenyltellanyl--triphenylstannyl (1/1),61361-92-0,DTXSID80506070
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(4-Methylphenyl)tellanyl--triphenylstannyl (1/1),62834-27-9,DTXSID40506071
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(4-Methoxyphenyl)tellanyl--triphenylstannyl (1/1),62834-28-0,DTXSID00506072
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12685903,3839-32-5,DTXSID20506857
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Triethylgermyl--tris(pentafluorophenyl)germyl (1/1),59871-30-6,DTXSID30507017
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Mercury--triphenylgermyl (1/2),23082-96-4,DTXSID90507270
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(Z)-[4-(4-Fluorophenyl)piperazin-1-yl]{(2E)-[1-(pyridin-2-yl)ethylidene]hydrazinylidene}methyl]selanyl,79514-44-6,DTXSID10507656
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(Z)-(Azetidin-1-yl){(2E)-[1-(pyridin-2-yl)ethylidene]hydrazinylidene}methyl]selanyl,79514-46-8,DTXSID70507657
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(Z)-(4-Methylpiperidin-1-yl){(2E)-[1-(pyridin-2-yl)ethylidene]hydrazinylidene}methyl]selanyl,79514-48-0,DTXSID30507658
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[(Z)-(Diethylamino){(2E)-[1-(pyridin-2-yl)ethylidene]hydrazinylidene}methyl]selanyl,79514-50-4,DTXSID90507659
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Bis(diethylamino)boranyl--trimethylstannyl (1/1),79812-14-9,DTXSID50507877
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12719083,30295-76-2,DTXSID80507941
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12722400,18489-76-4,DTXSID40508095
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Bis(trifluoromethyl)phosphane--trimethylstannyl (1/1),39185-13-2,DTXSID10508229
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_12772181,83183-39-5,DTXSID70509479
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(Naphthalen-1-yl)selanyl,16645-11-7,DTXSID70514366
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_13015140,65487-81-2,DTXSID50515230
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,(2-Aminophenyl)(butyl)arsanyl,50870-82-1,DTXSID40519924
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,[2-(Dibutylphosphanyl)ethyl](dimethyl)stannyl--trimethylstannyl (1/1),90127-52-9,DTXSID30522604
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Mercury--tris(trifluoromethyl)germyl (1/2),82477-25-6,DTXSID90526906
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_13199583,89928-24-5,DTXSID50526907
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Triethylgermyl--tris(trifluoromethyl)germyl (1/1),82471-43-0,DTXSID10526908
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Lithium iodomethanide--triphenylgermyl (1/1/1),90159-00-5,DTXSID80528792
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Tris(2-methylphenyl)germyl--water (1/1),88225-89-2,DTXSID70529738
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,Tris(2-methylphenyl)stannyl--water (1/1),60514-19-4,DTXSID30529739
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,"Tris(2,4,6-trimethylphenyl)stannyl--water (1/1)",56797-47-8,DTXSID40529740
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_13313851,95151-58-9,DTXSID40536454
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_13383301,89748-39-0,DTXSID30538947
+<MSG>could not parse 'FAIL', unexpected character:. FAIL.  ^<MSG>
+FAIL,PUBCHEM_13383303,127801-59-6,DTXSID90538948
