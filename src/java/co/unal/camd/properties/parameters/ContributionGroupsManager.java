@@ -176,7 +176,6 @@ public final class ContributionGroupsManager {
 
     public int findGroupValence(Object toSearch) {
         resolveValence(toSearch);
-        //System.out.println("valence"+valence);
         return valence;
     }
 

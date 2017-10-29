@@ -3,7 +3,7 @@ package co.unal.camd.properties.check;
 import co.unal.camd.properties.methods.BoilingTemp;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingTemp;
 import co.unal.camd.properties.model.Molecule;
@@ -30,10 +30,10 @@ public class PropertiesComputation {
             if (moleculeData.getGroups().length == 0)
                 continue;
 
-            FunctionalGroupNode firstFunctionalGroupNode = new FunctionalGroupNode(moleculeData.getGroups()[0]);
-            FunctionalGroupNode lastFunctionalNode = firstFunctionalGroupNode;
+            ContributionGroupNode firstFunctionalGroupNode = new ContributionGroupNode(moleculeData.getGroups()[0]);
+            ContributionGroupNode lastFunctionalNode = firstFunctionalGroupNode;
             for (int i = 1; i < moleculeData.getGroups().length; i++) {
-                FunctionalGroupNode functionalGroupNode = new FunctionalGroupNode(moleculeData.getGroups()[i]);
+                ContributionGroupNode functionalGroupNode = new ContributionGroupNode(moleculeData.getGroups()[i]);
                 lastFunctionalNode.addGroup(functionalGroupNode);
                 lastFunctionalNode = functionalGroupNode;
             }
@@ -50,14 +50,14 @@ public class PropertiesComputation {
 
     private static void evaluateSingleMolecule() {
         // Sample: *Metil isobutil cetona
-        FunctionalGroupNode rootFunctionalGroupNode = new FunctionalGroupNode(18);
-        FunctionalGroupNode functionalGroupNode1 = new FunctionalGroupNode(2);
+        ContributionGroupNode rootFunctionalGroupNode = new ContributionGroupNode(18);
+        ContributionGroupNode functionalGroupNode1 = new ContributionGroupNode(2);
         rootFunctionalGroupNode.addGroup(functionalGroupNode1);
-        FunctionalGroupNode functionalGroupNode2 = new FunctionalGroupNode(3);
+        ContributionGroupNode functionalGroupNode2 = new ContributionGroupNode(3);
         functionalGroupNode1.addGroup(functionalGroupNode2);
-        FunctionalGroupNode functionalGroupNode3 = new FunctionalGroupNode(1);
+        ContributionGroupNode functionalGroupNode3 = new ContributionGroupNode(1);
         functionalGroupNode2.addGroup(functionalGroupNode3);
-        FunctionalGroupNode functionalGroupNode4 = new FunctionalGroupNode(1);
+        ContributionGroupNode functionalGroupNode4 = new ContributionGroupNode(1);
         functionalGroupNode2.addGroup(functionalGroupNode4);
 
         Molecule molecule = new Molecule(rootFunctionalGroupNode);

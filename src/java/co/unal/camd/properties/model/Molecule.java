@@ -18,7 +18,7 @@ import java.util.Vector;
 @Accessors(chain = true)
 public class Molecule {
 
-    private FunctionalGroupNode genotype;
+    private ContributionGroupNode genotype;
     private int size;
 
     private double fitness;
@@ -35,11 +35,6 @@ public class Molecule {
 
     private Vector<TreeModelListener> treeModelListeners = new Vector<>();
 
-    public Molecule() {
-        genotype = new FunctionalGroupNode(1);
-        size = 1;
-    }
-
     public Molecule(Molecule molecule) {
         genotype = molecule.genotype.clone();
         size = molecule.size;
@@ -47,19 +42,19 @@ public class Molecule {
         fitness = molecule.fitness;
     }
 
-    public Molecule(FunctionalGroupNode root) {
+    public Molecule(ContributionGroupNode root) {
         genotype = root;
         size = 1 + size(genotype);
     }
 
-    public int size(FunctionalGroupNode root) {
+    public int size(ContributionGroupNode root) {
         int s = 0;
         if (root != null)
             s = root.countTotalGroups();
         return s;
     }
 
-    private void chemicalFormula(FunctionalGroupNode root, String show) {
+    private void chemicalFormula(ContributionGroupNode root, String show) {
         if (root == null)
             return;
         show = show + root.toString() + " - ";
@@ -72,7 +67,7 @@ public class Molecule {
      *
      * @return
      */
-    public FunctionalGroupNode getMoleculeByRootGroup() {
+    public ContributionGroupNode getMoleculeByRootGroup() {
         return genotype;
     }
 
@@ -84,25 +79,25 @@ public class Molecule {
     @Override
     public String toString() {
         String show = "";
-        ArrayList<FunctionalGroupNode> a = getArray();
+        ArrayList<ContributionGroupNode> a = getArray();
         for (int i = 0; i < a.size(); i++) {
             if (i > 0)
                 show += "-";
-            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getRootNode());
+            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getGroupId());
         }
         return show;
     }
 
-    public FunctionalGroupNode getGroupAt(int i) {
+    public ContributionGroupNode getGroupAt(int i) {
         return getArray().get(i);
     }
 
-    private ArrayList<FunctionalGroupNode> getArray() {
-        ArrayList<FunctionalGroupNode> array = new ArrayList<>();
+    private ArrayList<ContributionGroupNode> getArray() {
+        ArrayList<ContributionGroupNode> array = new ArrayList<>();
         return getArray(genotype, array);
     }
 
-    private ArrayList<FunctionalGroupNode> getArray(FunctionalGroupNode functionalGroupNode, ArrayList<FunctionalGroupNode> array) {
+    private ArrayList<ContributionGroupNode> getArray(ContributionGroupNode functionalGroupNode, ArrayList<ContributionGroupNode> array) {
         if (functionalGroupNode != null) {
             array.add(functionalGroupNode);
             if (functionalGroupNode.countSubgroups() > 0)
@@ -113,11 +108,11 @@ public class Molecule {
     }
 
     public MoleculeGroups getGroupsArray() {
-        ArrayList<FunctionalGroupNode> groupsNodes = getArray();
+        ArrayList<ContributionGroupNode> groupsNodes = getArray();
         int n = groupsNodes.size();
         int[] groups = new int[n];
         for (int i = 0; i < n; i++) {
-            groups[i] = groupsNodes.get(i).getRootNode();
+            groups[i] = groupsNodes.get(i).getGroupId();
         }
         MoleculeGroups moleculeGroups = new MoleculeGroups(groups);
         return moleculeGroups;
@@ -129,7 +124,7 @@ public class Molecule {
         return secondOrderCode;
     }
 
-    private void secOrderContribution(FunctionalGroupNode aRootFunctionalGroupNode, ArrayList<Integer> secondOrderCode) {
+    private void secOrderContribution(ContributionGroupNode aRootFunctionalGroupNode, ArrayList<Integer> secondOrderCode) {
         if (aRootFunctionalGroupNode != null)
             identifySecondOrderGroups(aRootFunctionalGroupNode, secondOrderCode);
 
@@ -137,13 +132,13 @@ public class Molecule {
             return;
 
         for (int i = 0; i < aRootFunctionalGroupNode.countSubgroups(); i++) {
-            FunctionalGroupNode leaf = aRootFunctionalGroupNode.getGroupAt(i);
+            ContributionGroupNode leaf = aRootFunctionalGroupNode.getGroupAt(i);
             secOrderContribution(leaf, secondOrderCode);
         }
     }
 
-    private void identifySecondOrderGroups(FunctionalGroupNode root, ArrayList<Integer> secondOrderCode) {
-        ArrayList<String[]> secondGroup = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupCase(root.getRootNode());
+    private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCode) {
+        ArrayList<String[]> secondGroup = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupCase(root.getGroupId());
         //	System.out.println("DimensionArray: "+s.size());
         int dim = root.countSubgroups();
         int a[] = leavesToVector(root);
@@ -186,7 +181,7 @@ public class Molecule {
                     }
                     if (sameVector(tempCond, b)) { //if the leaves are the same that sec order groups, add the code of SOG
                         for (int p = 0; p < dim; p++) {
-                            if (root.getGroupAt(p).getRootNode() != caseOH[0])
+                            if (root.getGroupAt(p).getGroupId() != caseOH[0])
                                 continue;
                             int[] tempCond2 = new int[1];
                             tempCond2[0] = caseOH[1];
@@ -235,12 +230,12 @@ public class Molecule {
         return n == 0;
     }
 
-    private int[] leavesToVector(FunctionalGroupNode root) {
+    private int[] leavesToVector(ContributionGroupNode root) {
         int dim = root.countSubgroups();
         int[] a = new int[dim];
         //System.out.println("prueba9");
         for (int i = 0; i < dim; i++)
-            a[i] = root.getGroupAt(i).getRootNode();
+            a[i] = root.getGroupAt(i).getGroupId();
         return a;
     }
 

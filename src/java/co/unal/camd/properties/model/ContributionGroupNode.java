@@ -6,14 +6,13 @@ import lombok.Data;
 import java.util.Vector;
 
 @Data
-public class FunctionalGroupNode {
+public class ContributionGroupNode {
 
-    private int rootNode; //identification of each group by refCode
-    private Vector<FunctionalGroupNode> subGroups;
-    //    private ContributionParametersManager CONTRIBUTION_GROUPS;
+    private int groupId; //identification of each group by refCode
+    private Vector<ContributionGroupNode> subGroups;
 
-    public FunctionalGroupNode(FunctionalGroupNode functionalGroupNode) {
-        rootNode = functionalGroupNode.getRootNode();
+    public ContributionGroupNode(ContributionGroupNode functionalGroupNode) {
+        groupId = functionalGroupNode.getGroupId();
         subGroups = new Vector<>();
         int n = functionalGroupNode.countSubgroups();
         for (int i = 0; i < n; i++) {
@@ -21,24 +20,24 @@ public class FunctionalGroupNode {
         }
     }
 
-    public FunctionalGroupNode clone() {
-        return new FunctionalGroupNode(this);
+    public ContributionGroupNode clone() {
+        return new ContributionGroupNode(this);
     }
 
-    public FunctionalGroupNode(int refCode) {
-        rootNode = refCode;
+    public ContributionGroupNode(int refCode) {
+        groupId = refCode;
         subGroups = new Vector<>();
     }
 
-    public FunctionalGroupNode(String name) {
-        rootNode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(name);
+    public ContributionGroupNode(String name) {
+        groupId = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(name);
         subGroups = new Vector<>();
     }
 
     /**
      * add a group to this group and count the valence to waranty the 0 valence and octete law in the molecule
      */
-    public void addGroup(FunctionalGroupNode subG) {
+    public void addGroup(ContributionGroupNode subG) {
         subGroups.addElement(subG);
     }
 
@@ -57,7 +56,7 @@ public class FunctionalGroupNode {
         return subGroups.size();
     }
 
-    public int getIndexOfGroup(FunctionalGroupNode aG) {
+    public int getIndexOfGroup(ContributionGroupNode aG) {
         return subGroups.indexOf(aG);
     }
 
@@ -65,17 +64,17 @@ public class FunctionalGroupNode {
         if (subGroups.size() < i + 1)
             return 0;
         else
-            return subGroups.elementAt(i).getRootNode();
+            return subGroups.elementAt(i).getGroupId();
     }
 
-    public FunctionalGroupNode getGroupAt(int i) {
+    public ContributionGroupNode getGroupAt(int i) {
         if (subGroups.size() < i + 1)
             return null;
         else
             return subGroups.elementAt(i);
     }
 
-    public void setGroupAt(int i, FunctionalGroupNode aGr) {
+    public void setGroupAt(int i, ContributionGroupNode aGr) {
         subGroups.set(i, aGr);
     }
 
@@ -83,13 +82,13 @@ public class FunctionalGroupNode {
         subGroups.removeElementAt(i);
     }
 
-    public Vector<FunctionalGroupNode> getSubGroups() {
+    public Vector<ContributionGroupNode> getSubGroups() {
         return subGroups;
     }
 
     public String toString() {
-        return Integer.toString(rootNode);
-        //        return CONTRIBUTION_GROUPS.findGroupName(rootNode);
+        return Integer.toString(groupId);
+        //        return CONTRIBUTION_GROUPS.findGroupName(groupId);
     }
 
 }

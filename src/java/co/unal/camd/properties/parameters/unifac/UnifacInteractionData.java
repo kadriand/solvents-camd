@@ -18,6 +18,6 @@ public class UnifacInteractionData {
 
     @Override
     public String toString() {
-        return String.format("Interactions [%d][%d] : aij:%f , bij:%f , cij:%f , aji:%f , bji:%f , cji:%f", parametersPair.getI(), parametersPair.getJ(), aij, bij, cij, aji, bji, cji);
+        return String.format("Interactions [%d][%d] : rParam:%f , qParam:%f , groupName:%f , mainGroup:%f , bji:%f , cji:%f", parametersPair.getI(), parametersPair.getJ(), aij, bij, cij, aji, bji, cji);
     }
 }

@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import unalcol.search.variation.Variation_1_1;
 import unalcol.services.MicroService;
@@ -19,18 +19,18 @@ public class CutAndReplace extends MicroService<Molecule> implements Variation_1
         int valence = (int) (Math.random() * 3) + 2;
         boolean functional = false;
 
-        FunctionalGroupNode aGroupMut = clone_genome.getGroupAt(num);
-        if (aGroupMut.getRootNode() > 4) {
+        ContributionGroupNode aGroupMut = clone_genome.getGroupAt(num);
+        if (aGroupMut.getGroupId() > 4) {
             functional = true;
         }
         int refCode = MoleculeOperations.findNewRefCode(valence, functional);
-        FunctionalGroupNode newGroup = new FunctionalGroupNode(refCode);
+        ContributionGroupNode newGroup = new ContributionGroupNode(refCode);
 
         if (valence == 3) {
-            newGroup.addGroup(new FunctionalGroupNode(1));
+            newGroup.addGroup(new ContributionGroupNode(1));
         } else if (valence == 4) {
-            newGroup.addGroup(new FunctionalGroupNode(1));
-            newGroup.addGroup(new FunctionalGroupNode(1));
+            newGroup.addGroup(new ContributionGroupNode(1));
+            newGroup.addGroup(new ContributionGroupNode(1));
         }
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false);
         return clone_genome;

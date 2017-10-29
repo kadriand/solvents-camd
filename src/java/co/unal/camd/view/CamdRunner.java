@@ -2,7 +2,7 @@ package co.unal.camd.view;
 
 import co.unal.camd.properties.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.properties.model.Molecule;
 import lombok.AccessLevel;
@@ -110,8 +110,8 @@ public class CamdRunner extends JFrame {
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = sortedSolution.get(i).unwrap();
 
-            FunctionalGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
-            String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getRootNode());
+            ContributionGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
+            String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getGroupId());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
             //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
@@ -139,9 +139,9 @@ public class CamdRunner extends JFrame {
         }
     }
 
-    private DefaultMutableTreeNode moleculeToJtree(FunctionalGroupNode molec, DefaultMutableTreeNode node) {
+    private DefaultMutableTreeNode moleculeToJtree(ContributionGroupNode molec, DefaultMutableTreeNode node) {
         for (int i = 0; i < molec.countSubgroups(); i++) {
-            String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getRootNode());
+            String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getGroupId());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 
             moleculeToJtree(molec.getGroupAt(i), aNode);

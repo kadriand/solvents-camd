@@ -1,13 +1,13 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.view.CamdRunner;
 
 
 public class GeneticOperator {
 
-    public static final void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, FunctionalGroupNode aGrToReplace, boolean replaceAll) {
-        FunctionalGroupNode aGroup = new FunctionalGroupNode(0);
+    public static final void searchAndReplace(ContributionGroupNode genotype, int codeToCut, ContributionGroupNode aGrToReplace, boolean replaceAll) {
+        ContributionGroupNode aGroup = new ContributionGroupNode(0);
         //System.out.println("CCoperator");
         //	System.out.println("c:"+genotype.countSubgroups());
         //	System.out.println("code:"+codeToCut);
@@ -15,7 +15,7 @@ public class GeneticOperator {
         if (codeToCut == 0) {
             if (!replaceAll) {
                 for (int j = 0; j < genotype.countSubgroups(); j++) {
-                    FunctionalGroupNode subG = genotype.getGroupAt(j);
+                    ContributionGroupNode subG = genotype.getGroupAt(j);
                     aGrToReplace.addGroup(subG);
                 }
             }
@@ -55,12 +55,12 @@ public class GeneticOperator {
          */
     }
 
-    public static void searchAndReplace(FunctionalGroupNode genotype, int codeToCut, boolean replaceAll) {
+    public static void searchAndReplace(ContributionGroupNode genotype, int codeToCut, boolean replaceAll) {
         if (codeToCut == 0) {
-            int valence = CamdRunner.CONTRIBUTION_GROUPS.findGroupValence((genotype.getRootNode()));
-            CamdRunner.CONTRIBUTION_GROUPS.resolveValence(genotype.getRootNode());
+            int valence = CamdRunner.CONTRIBUTION_GROUPS.findGroupValence((genotype.getGroupId()));
+            CamdRunner.CONTRIBUTION_GROUPS.resolveValence(genotype.getGroupId());
             int new_code = MoleculeOperations.findNewRefCode(valence, CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() > 1);
-            genotype.setRootNode(new_code);
+            genotype.setGroupId(new_code);
 
         } else {
             codeToCut--;

@@ -1,6 +1,6 @@
 package co.unal.camd.properties.methods;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.view.CamdRunner;
@@ -56,9 +56,9 @@ public class Density {
                 sum = sum + (a + b * temperature + c * temperature * temperature);
             } else {
                 for (int j = 0; j <= 3; j++) {
-                    a = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][0];
-                    b = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][1];
-                    c = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getRootNode())[j][2];
+                    a = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][0];
+                    b = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][1];
+                    c = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][2];
                     sum = sum + (a + b * temperature + c * temperature * temperature);
                     //System.out.println("a "+a);
                     //System.out.println("b "+b);
@@ -74,14 +74,14 @@ public class Density {
         return PM.getMethodResult(gr) / sum;
     }
 
-    public static boolean isBond(FunctionalGroupNode aGroup, int rootGroup, int leafGroup) {
+    public static boolean isBond(ContributionGroupNode aGroup, int rootGroup, int leafGroup) {
         boolean show = false;
 
-        if (aGroup.getRootNode() == rootGroup && aGroup.getGroupAt(0) != null) {
+        if (aGroup.getGroupId() == rootGroup && aGroup.getGroupAt(0) != null) {
             for (int i = 0; i < aGroup.countSubgroups(); i++) {
-                //System.out.println("grupo:"+aGroup.getRootNode());
-                //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getRootNode());
-                if (aGroup.getGroupAt(i).getRootNode() == leafGroup) {
+                //System.out.println("grupo:"+aGroup.getGroupId());
+                //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getGroupId());
+                if (aGroup.getGroupAt(i).getGroupId() == leafGroup) {
                     show = true;
                 }
             }

@@ -75,9 +75,9 @@ public class UnifacParameters {
 
     /**
      * Read of sheets:
-     * Parámetros interacción aij
-     * Parámetros bij
-     * Parámetros interacción cij
+     * Parámetros interacción rParam
+     * Parámetros qParam
+     * Parámetros interacción groupName
      */
     private void loadInteractions() {
         int row;

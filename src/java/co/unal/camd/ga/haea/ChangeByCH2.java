@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import unalcol.search.variation.Variation_1_1;
 import unalcol.services.MicroService;
@@ -17,7 +17,7 @@ public class ChangeByCH2 extends MicroService<Molecule> implements Variation_1_1
         // TODO: Mutacion
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
 
-        FunctionalGroupNode newCH2 = new FunctionalGroupNode(2);
+        ContributionGroupNode newCH2 = new ContributionGroupNode(2);
 
         newCH2.addGroup(clone_genome.getGroupAt(num));
         searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true);

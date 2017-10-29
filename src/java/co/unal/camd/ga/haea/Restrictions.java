@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 
 import java.util.ArrayList;
 
@@ -16,12 +16,12 @@ public class Restrictions {
      *
      * @return
      */
-    public static boolean canBeFunctional(ArrayList<FunctionalGroupNode> functionalGroups) {
+    public static boolean canBeFunctional(ArrayList<ContributionGroupNode> functionalGroups) {
         typeFunctional = 0;
         // if the code Row of the group is grater than 1 the group is functional, so the counter increase in one.
         for (int j = 0; j < functionalGroups.size(); j++) {
-            FunctionalGroupNode functionalGroup = functionalGroups.get(j);
-            CONTRIBUTION_GROUPS.resolveValence(functionalGroup.getRootNode());
+            ContributionGroupNode functionalGroup = functionalGroups.get(j);
+            CONTRIBUTION_GROUPS.resolveValence(functionalGroup.getGroupId());
             if (CONTRIBUTION_GROUPS.getCodeOfRow() > 1)
                 typeFunctional++;
             count(functionalGroup);
@@ -29,10 +29,10 @@ public class Restrictions {
         return typeFunctional < 3;
     }
 
-    public static void count(FunctionalGroupNode aFunctionalGroupNode) {
+    public static void count(ContributionGroupNode aFunctionalGroupNode) {
         for (int i = 0; i < aFunctionalGroupNode.getSubGroups().size(); i++) {
-            FunctionalGroupNode functionalGroup = aFunctionalGroupNode.getGroupAt(i);
-            CONTRIBUTION_GROUPS.resolveValence(functionalGroup.getRootNode());
+            ContributionGroupNode functionalGroup = aFunctionalGroupNode.getGroupAt(i);
+            CONTRIBUTION_GROUPS.resolveValence(functionalGroup.getGroupId());
             if (CONTRIBUTION_GROUPS.getCodeOfRow() > 1)
                 typeFunctional++;
             if (functionalGroup.countSubgroups() > 0)
@@ -48,48 +48,48 @@ public class Restrictions {
      * @param canBeChangeNewGr
      */
 
-    public static void mayBeFuncFuncOrOH(FunctionalGroupNode aG1, FunctionalGroupNode newGr, boolean canBeChangeNewGr) {
-        FunctionalGroupNode gr;
-        FunctionalGroupNode gr2 = aG1;
+    public static void mayBeFuncFuncOrOH(ContributionGroupNode aG1, ContributionGroupNode newGr, boolean canBeChangeNewGr) {
+        ContributionGroupNode gr;
+        ContributionGroupNode gr2 = aG1;
         int aValence = 0;
         gr = newGr;
 
-        int code = newGr.getRootNode();
+        int code = newGr.getGroupId();
         switch (code) {
             case 2: {
 
-                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
+                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getGroupId()) == 5) {
                     //System.out.println("cambio por OHp");
-                    aG1 = new FunctionalGroupNode("OHP");
+                    aG1 = new ContributionGroupNode("OHP");
                 }
             }
             case 3: {
-                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
+                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getGroupId()) == 5) {
                     //System.out.println("cambio por OHs");
-                    aG1 = new FunctionalGroupNode("OHS");
+                    aG1 = new ContributionGroupNode("OHS");
                 }
             }
             case 4: {
                 //System.out.println(aGroups.getGroupAt(i).findGroupName());
-                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getRootNode()) == 5) {
+                if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getGroupId()) == 5) {
                     //System.out.println("cambio por OHt");
-                    aG1 = new FunctionalGroupNode("OHT");
+                    aG1 = new ContributionGroupNode("OHT");
                 }
             }
             default: {
 
-                aValence = CONTRIBUTION_GROUPS.findGroupValence(newGr.getRootNode());
+                aValence = CONTRIBUTION_GROUPS.findGroupValence(newGr.getGroupId());
                 //System.out.println("avalence"+aValence);
 
-                CONTRIBUTION_GROUPS.resolveValence(aG1.getRootNode());
+                CONTRIBUTION_GROUPS.resolveValence(aG1.getGroupId());
                 int a = CONTRIBUTION_GROUPS.getCodeOfRow();
-                CONTRIBUTION_GROUPS.resolveValence(newGr.getRootNode());
+                CONTRIBUTION_GROUPS.resolveValence(newGr.getGroupId());
                 int b = CONTRIBUTION_GROUPS.getCodeOfRow();
 
                 while (a > 1 && b > 1) {
                     //System.out.println("entra a while_restric");
                     if (canBeChangeNewGr == true) {
-                        newGr = new FunctionalGroupNode(MoleculeOperations.findNewRefCode(aValence, false));
+                        newGr = new ContributionGroupNode(MoleculeOperations.findNewRefCode(aValence, false));
                         if (gr.countSubgroups() > 0) {
                             for (int i = 0; i < gr.countSubgroups(); i++) {
                                 //aValence=gr.getTemporalValence();
@@ -98,11 +98,11 @@ public class Restrictions {
                             }
                         }
                     } else {
-                        aG1 = new FunctionalGroupNode(MoleculeOperations.findNewRefCode(1, false));
+                        aG1 = new ContributionGroupNode(MoleculeOperations.findNewRefCode(1, false));
                     }
-                    CONTRIBUTION_GROUPS.resolveValence(aG1.getRootNode());
+                    CONTRIBUTION_GROUPS.resolveValence(aG1.getGroupId());
                     a = CONTRIBUTION_GROUPS.getCodeOfRow();
-                    CONTRIBUTION_GROUPS.resolveValence(newGr.getRootNode());
+                    CONTRIBUTION_GROUPS.resolveValence(newGr.getGroupId());
                     b = CONTRIBUTION_GROUPS.getCodeOfRow();
                 }
             }

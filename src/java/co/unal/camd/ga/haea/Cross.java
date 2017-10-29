@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import unalcol.search.variation.Variation_2_2;
 import unalcol.services.MicroService;
@@ -16,8 +16,8 @@ public class Cross extends MicroService<Molecule> implements Variation_2_2<Molec
         int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
         int num2 = (int) (Math.random() * (clone_genome2.getTotalGroups()) - 1);
 
-        FunctionalGroupNode aGroup1 = one.getGroupAt(num);
-        FunctionalGroupNode aGroup2 = two.getGroupAt(num2);
+        ContributionGroupNode aGroup1 = one.getGroupAt(num);
+        ContributionGroupNode aGroup2 = two.getGroupAt(num2);
 
         GeneticOperator.searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, aGroup2, true);
         GeneticOperator.searchAndReplace(clone_genome2.getMoleculeByRootGroup(), num2, aGroup1, true);

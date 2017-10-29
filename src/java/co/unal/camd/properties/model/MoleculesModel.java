@@ -8,11 +8,11 @@ import java.util.Vector;
 
 public class MoleculesModel implements TreeModel {
 
-    private FunctionalGroupNode rootGroup;
+    private ContributionGroupNode rootGroup;
     private Vector<TreeModelListener> treeModelListeners =
             new Vector<>();
 
-    public MoleculesModel(FunctionalGroupNode aGroup) {
+    public MoleculesModel(ContributionGroupNode aGroup) {
         rootGroup = aGroup;
     }
 
@@ -27,7 +27,7 @@ public class MoleculesModel implements TreeModel {
      * Returns the child of parent at index index in the parent's child array.
      */
     public Object getChild(Object parent, int index) {
-        FunctionalGroupNode g = (FunctionalGroupNode) parent;
+        ContributionGroupNode g = (ContributionGroupNode) parent;
         return g.getGroupAt(index);
     }
 
@@ -35,7 +35,7 @@ public class MoleculesModel implements TreeModel {
      * Returns the number of child of parent.
      */
     public int getChildCount(Object parent) {
-        FunctionalGroupNode g = (FunctionalGroupNode) parent;
+        ContributionGroupNode g = (ContributionGroupNode) parent;
         return g.countSubgroups();
     }
 
@@ -43,8 +43,8 @@ public class MoleculesModel implements TreeModel {
      * Returns the index of child in parent.
      */
     public int getIndexOfChild(Object parent, Object child) {
-        FunctionalGroupNode g = (FunctionalGroupNode) parent;
-        return g.getIndexOfGroup((FunctionalGroupNode) child);
+        ContributionGroupNode g = (ContributionGroupNode) parent;
+        return g.getIndexOfGroup((ContributionGroupNode) child);
     }
 
     /**
@@ -58,7 +58,7 @@ public class MoleculesModel implements TreeModel {
      * Returns true if node is a leaf.
      */
     public boolean isLeaf(Object node) {
-        FunctionalGroupNode g = (FunctionalGroupNode) node;
+        ContributionGroupNode g = (ContributionGroupNode) node;
         return g.countSubgroups() == 0;
     }
 
