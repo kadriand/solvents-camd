@@ -1,7 +1,7 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.Molecule;
-import co.unal.camd.properties.estimation.MoleculeGroups;
+import co.unal.camd.properties.model.Molecule;
+import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.view.CamdRunner;
 import lombok.Getter;
 import unalcol.Tagged;

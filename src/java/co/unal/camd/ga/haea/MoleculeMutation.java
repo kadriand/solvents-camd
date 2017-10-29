@@ -1,7 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.GeneticOperator;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.model.Molecule;
 import unalcol.search.variation.Variation_1_1;
 import unalcol.services.MicroService;
 

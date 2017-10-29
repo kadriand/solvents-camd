@@ -1,11 +1,11 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.Molecule;
 import unalcol.search.variation.Variation_1_1;
 import unalcol.services.MicroService;
 
-import static co.unal.camd.properties.estimation.GeneticOperator.searchAndReplace;
+import static co.unal.camd.ga.haea.GeneticOperator.searchAndReplace;
 
 public class CutAndClose extends MicroService<Molecule> implements Variation_1_1<Molecule> {
 

@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.model.Molecule;
 import unalcol.search.space.Space;
 import unalcol.services.MicroService;
 

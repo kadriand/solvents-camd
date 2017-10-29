@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
+import co.unal.camd.properties.model.FunctionalGroupNode;
 
 import java.util.ArrayList;
 

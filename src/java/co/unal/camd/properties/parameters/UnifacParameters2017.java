@@ -33,7 +33,7 @@ public class UnifacParameters2017 {
     @Getter
     private Map<UnifacParametersPair, UnifacInteractionData> unifacInteractions = new HashMap<>();
 
-//    UNIFAC Interaction Parameters Matrix and variables
+    //    UNIFAC Interaction Parameters Matrix and variables
     @Getter
     private String[][][] ijParams = new String[3][1000][1000];
     @Getter
@@ -76,7 +76,7 @@ public class UnifacParameters2017 {
         XSSFRow currentRow = interactionsSheet.getRow(row);
         XSSFCell nextRowCell;
 
-        while (currentRow!=null && validateNumericCell(currentRow.getCell(0))) {
+        while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer iParam = (int) currentRow.getCell(0).getNumericCellValue();
                 Integer jParam = (int) currentRow.getCell(1).getNumericCellValue();

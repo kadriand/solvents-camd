@@ -1,12 +1,12 @@
 package co.unal.camd.properties.check;
 
-import co.unal.camd.properties.estimation.BoilingTemp;
-import co.unal.camd.properties.estimation.Density;
-import co.unal.camd.properties.estimation.DielectricConstant;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.GibbsEnergy;
-import co.unal.camd.properties.estimation.MeltingTemp;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.methods.BoilingTemp;
+import co.unal.camd.properties.methods.Density;
+import co.unal.camd.properties.methods.DielectricConstant;
+import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.methods.GibbsEnergy;
+import co.unal.camd.properties.methods.MeltingTemp;
+import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.parameters.UnifacParameters2017;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

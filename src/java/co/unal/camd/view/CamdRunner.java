@@ -2,9 +2,9 @@ package co.unal.camd.view;
 
 import co.unal.camd.properties.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
-import co.unal.camd.properties.estimation.FunctionalGroupNode;
-import co.unal.camd.properties.estimation.MoleculeGroups;
-import co.unal.camd.properties.estimation.Molecule;
+import co.unal.camd.properties.model.FunctionalGroupNode;
+import co.unal.camd.properties.model.MoleculeGroups;
+import co.unal.camd.properties.model.Molecule;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;

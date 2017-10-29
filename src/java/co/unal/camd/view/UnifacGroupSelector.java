@@ -1,6 +1,6 @@
 package co.unal.camd.view;
 
-import co.unal.camd.properties.estimation.MoleculeGroups;
+import co.unal.camd.properties.model.MoleculeGroups;
 
 import java.io.BufferedReader;
 import java.io.File;
