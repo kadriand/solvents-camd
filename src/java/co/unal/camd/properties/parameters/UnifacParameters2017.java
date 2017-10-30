@@ -54,10 +54,11 @@ public class UnifacParameters2017 {
     public UnifacParameters2017() {
         try (InputStream unifacWBIS = UnifacParameters2017.class.getResourceAsStream(UNIFAC_WORKBOOK_PATH);
              InputStream thermoContributionsWBIS = UnifacParameters2017.class.getResourceAsStream(THERMOPROPS_WORKBOOK_PATH)) {
-            System.out.println("Loading UNIFAC parameters file");
+            System.out.println("Loading UNIFAC parameters file: " + UNIFAC_WORKBOOK_PATH);
             unifacWorkbook = new XSSFWorkbook(unifacWBIS);
+            System.out.println("Loading thermodynamical properties contributions parameters file: " + THERMOPROPS_WORKBOOK_PATH);
             contributionsWorkbook = new XSSFWorkbook(thermoContributionsWBIS);
-            loadijInteractions();
+            loadUnifacijInteractions();
             loadUnifacGroupContributions();
             loadThermoGroupContributions();
 
@@ -76,10 +77,10 @@ public class UnifacParameters2017 {
      * Read of sheet:
      * -  UNIFAC-DORTMUND-Interactions
      */
-    private void loadijInteractions() {
+    private void loadUnifacijInteractions() {
         int row;
         XSSFSheet interactionsSheet = unifacWorkbook.getSheetAt(0);
-        System.out.println("UNIFAC DORTMUND PARAMETERTS sheet: " + unifacWorkbook.getSheetName(0));
+        System.out.println("\nUNIFAC DORTMUND PARAMETERTS sheet: " + unifacWorkbook.getSheetName(0));
         row = 1;
 
         // Second Row
@@ -100,7 +101,6 @@ public class UnifacParameters2017 {
                 System.out.println("\nRow failed: " + row);
                 e.printStackTrace();
             }
-
             currentRow = interactionsSheet.getRow(++row);
         }
     }
@@ -134,16 +134,13 @@ public class UnifacParameters2017 {
 
     /**
      * Read of sheet:
-     * -  UNIFAC-DORTMUND-Interactions
+     * -  UNIFAC-DORTMUND-SurfaceVolume
      */
     private void loadUnifacGroupContributions() {
         int unifacRow;
         XSSFSheet unifacRQSheet = unifacWorkbook.getSheetAt(1);
-        System.out.println("UNIFAC R AND Q sheet: " + unifacWorkbook.getSheetName(1));
+        System.out.println("\nUNIFAC R AND Q sheet: " + unifacWorkbook.getSheetName(1));
         unifacRow = 1;
-
-
-        //TODO CONTINUE
 
         // Second Row
         XSSFRow currentRow = unifacRQSheet.getRow(unifacRow);
@@ -151,55 +148,25 @@ public class UnifacParameters2017 {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
                 GroupContributionData contributionData = new GroupContributionData(groupId);
-                readUnifacGroupsParams(currentRow, contributionData);
+                readUnifacRQParams(currentRow, contributionData);
                 System.out.println(contributionData);
                 groupContributions.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + unifacRow);
                 e.printStackTrace();
             }
-
             currentRow = unifacRQSheet.getRow(++unifacRow);
         }
 
     }
 
-    /**
-     * Read of sheet:
-     * -  UNIFAC-DORTMUND-Interactions
-     */
-    private void loadThermoGroupContributions() {
-        int gcRow;
-        XSSFSheet contributionsSheet = unifacWorkbook.getSheetAt(0);
-        System.out.println("UNIFAC R AND Q Hoja: " + unifacWorkbook.getSheetName(0));
-        gcRow = 1;
-
-        // Second Row
-        XSSFRow currentRow = contributionsSheet.getRow(gcRow);
-        while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
-            try {
-                Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                GroupContributionData contributionData = new GroupContributionData(groupId);
-                readUnifacGroupsParams(currentRow, contributionData);
-                System.out.println(contributionData);
-                groupContributions.put(groupId, contributionData);
-            } catch (Exception e) {
-                System.out.println("\nRow failed: " + gcRow);
-                e.printStackTrace();
-            }
-
-            currentRow = contributionsSheet.getRow(++gcRow);
-        }
-
-    }
-
-    private void readUnifacGroupsParams(XSSFRow currentRow, GroupContributionData contributionData) {
+    private void readUnifacRQParams(XSSFRow currentRow, GroupContributionData contributionData) {
         XSSFCell rowCell;
         rowCell = currentRow.getCell(1);
         if (validateNumericCell(rowCell))
             contributionData.setMainGroup((int) rowCell.getNumericCellValue());
 
-        rowCell = currentRow.getCell(2);
+        rowCell = currentRow.getCell(3);
         if (rowCell != null)
             contributionData.setGroupName(rowCell.getStringCellValue());
 
@@ -212,12 +179,118 @@ public class UnifacParameters2017 {
             contributionData.setQParam(rowCell.getNumericCellValue());
     }
 
-    private boolean validateNumericCell(XSSFCell nextRowCell) {
-        if (nextRowCell == null)
+    /**
+     * Read of sheet:
+     * -  UNIFAC-DORTMUND-Interactions
+     */
+    private void loadThermoGroupContributions() {
+        int gcRow;
+        XSSFSheet contributionsSheet = contributionsWorkbook.getSheetAt(0);
+        System.out.println("\nTHERMODYNAMICAL PROPERTIES Sheet: " + contributionsWorkbook.getSheetName(0));
+        gcRow = 1;
+
+        // Second Row
+        XSSFRow currentRow = contributionsSheet.getRow(gcRow);
+        while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
+            try {
+                Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
+                GroupContributionData contributionData = groupContributions.get(groupId);
+                readContributionsParams(currentRow, contributionData);
+                System.out.println(contributionData);
+                groupContributions.put(groupId, contributionData);
+            } catch (Exception e) {
+                System.out.println("\nRow failed: " + gcRow);
+                e.printStackTrace();
+            }
+
+            currentRow = contributionsSheet.getRow(++gcRow);
+        }
+    }
+
+    private void readContributionsParams(XSSFRow currentRow, GroupContributionData contributionData) {
+        XSSFCell rowCell;
+
+        rowCell = currentRow.getCell(3);
+        if (rowCell != null)
+            System.out.println(String.format(">> %s should match %s", rowCell.getStringCellValue(), contributionData.getGroupName()));
+
+        rowCell = currentRow.getCell(1);
+        if (validateNumericCell(rowCell))
+            contributionData.setValence((int) rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(4);
+        if (validateNumericCell(rowCell))
+            contributionData.setMolecularWeight(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(5);
+        if (validateNumericCell(rowCell))
+            contributionData.setBoilingPoint(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(6);
+        if (validateNumericCell(rowCell))
+            contributionData.setMeltingPoint(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(7);
+        if (validateNumericCell(rowCell))
+            contributionData.setFreeEnergy(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(8);
+        if (validateNumericCell(rowCell))
+            contributionData.setDipoleMoment(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(9);
+        if (validateNumericCell(rowCell))
+            contributionData.setDipoleMomentH1i(rowCell.getNumericCellValue());
+
+        rowCell = currentRow.getCell(10);
+        if (validateNumericCell(rowCell))
+            contributionData.setDipoleMomentH1i(rowCell.getNumericCellValue());
+
+        // DENSITY PARAMETERS
+        rowCell = currentRow.getCell(11);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityAd1(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(12);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityBd1(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(13);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityCd1(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(14);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityAd2(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(15);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityBd2(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(16);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityCd2(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(17);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityAd3(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(18);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityBd3(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(19);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityCd4(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(21);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityAd4(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(21);
+        if (validateNumericCell(rowCell))
+            contributionData.setDensityBd4(rowCell.getNumericCellValue());
+        rowCell = currentRow.getCell(22);
+        if (validateNumericCell(rowCell))
+            contributionData.setLiquidMolarVolume(rowCell.getNumericCellValue());
+    }
+
+    private boolean validateNumericCell(XSSFCell cell) {
+        if (cell == null)
             return false;
-        if (CellType.NUMERIC != nextRowCell.getCellTypeEnum() && CellType.BLANK != nextRowCell.getCellTypeEnum())
-            System.out.println("*" + nextRowCell.getStringCellValue());
-        return CellType.NUMERIC == nextRowCell.getCellTypeEnum();
+        if (CellType.NUMERIC != cell.getCellTypeEnum() && CellType.BLANK != cell.getCellTypeEnum())
+            System.out.println(String.format("(!) %s : %s", cell.getReference(), cell.getRichStringCellValue()));
+        return CellType.NUMERIC == cell.getCellTypeEnum();
     }
 
     /**

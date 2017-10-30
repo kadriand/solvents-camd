@@ -2,6 +2,8 @@ package co.unal.camd.properties.parameters.unifac;
 
 import lombok.Data;
 
+import java.util.Locale;
+
 @Data
 public class UnifacInteractionData {
     private Double aij;
@@ -18,6 +20,6 @@ public class UnifacInteractionData {
 
     @Override
     public String toString() {
-        return String.format("Interactions [%d][%d] : rParam:%f , qParam:%f , groupName:%f , mainGroup:%f , bji:%f , cji:%f", parametersPair.getI(), parametersPair.getJ(), aij, bij, cij, aji, bji, cji);
+        return String.format(Locale.ROOT, "Unifac interactions [%d][%d] : aij:%f , bij:%f , cij:%f , aji:%f , bji:%f , cji:%f", parametersPair.getI(), parametersPair.getJ(), aij, bij, cij, aji, bji, cji);
     }
 }

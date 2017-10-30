@@ -1,15 +1,13 @@
 package co.unal.camd.properties.model;
 
 import co.unal.camd.view.CamdRunner;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Arrays;
 
+@Data
 public class MoleculeGroups {
 
-    @Setter
-    @Getter
     double composition;
     int[] amount;
     int[] groups;

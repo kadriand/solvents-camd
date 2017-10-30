@@ -50,7 +50,7 @@ public class DielectricConstant {
     public double getVapHeat() {
         double c = 6.829;
         for (int i = 0; i < aMolecule.size(); i++) {
-            int n = aMolecule.amount[i];
+            int n = aMolecule.getAmount()[i];
             double hi = CamdRunner.CONTRIBUTION_GROUPS.getHi(aMolecule.getGroupCode(i));
             c = c + n * hi;
         }
@@ -62,7 +62,7 @@ public class DielectricConstant {
         double d = 0.01211;
         double c = 0;
         for (int i = 0; i < aMolecule.size(); i++) {
-            int n = aMolecule.amount[i];
+            int n = aMolecule.getAmount()[i];
             //	System.out.println("c"+c);
 
             double mvi = CamdRunner.CONTRIBUTION_GROUPS.getMV(aMolecule.getGroupCode(i));
@@ -113,7 +113,7 @@ public class DielectricConstant {
         } else {
             double c = 0;
             for (int i = 0; i < aMolecule.size(); i++) {
-                int n = aMolecule.amount[i];
+                int n = aMolecule.getAmount()[i];
                 double dmi = CamdRunner.CONTRIBUTION_GROUPS.getDM(aMolecule.getGroupCode(i));
                 //	System.out.println("DMi"+dmi);
                 c = c + n * dmi;
@@ -181,9 +181,9 @@ public class DielectricConstant {
 
     public boolean isConditionCase(int[] conditionCase) {
         boolean b = false;
-        int l = aMolecule.groups.length;
+        int l = aMolecule.getGroups().length;
         for (int i = 0; i < l; i++) {
-            int g = aMolecule.groups[i];
+            int g = aMolecule.getGroups()[i];
             for (int j = 0; j < conditionCase.length; j++) {
                 int cc = conditionCase[j];
                 if (g == cc) {
