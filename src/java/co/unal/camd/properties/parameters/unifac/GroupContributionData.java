@@ -7,7 +7,7 @@ import java.util.Locale;
 @Data
 public class GroupContributionData {
     private Integer groupId;
-    private Integer mainGroup;
+    private ContributionGroup.Main mainGroup;
     private String groupName;
     private Double rParam;
     private Double qParam;
@@ -40,7 +40,7 @@ public class GroupContributionData {
 
     @Override
     public String toString() {
-        return String.format(Locale.ROOT, "Group contributions of %s [%d] : mainGroup:%d , rParam:%.4f , qParam:%.4f valence:%d , molecularWeight:%f , boilingPoint:%f , freeEnergy:%f , meltingPoint:%f , dipoleMoment:%f , dipoleMomentH1i:%f , liquidMolarVolume:%f , densityAd1:%f , densityBd1:%f , densityCd1:%f",
+        return String.format(Locale.ROOT, "Group contributions of %s [%d] : mainGroup:%s , rParam:%.4f , qParam:%.4f valence:%d , molecularWeight:%f , boilingPoint:%f , freeEnergy:%f , meltingPoint:%f , dipoleMoment:%f , dipoleMomentH1i:%f , liquidMolarVolume:%f , densityAd1:%f , densityBd1:%f , densityCd1:%f",
                 groupName, groupId, mainGroup, rParam, qParam, valence, molecularWeight, boilingPoint, freeEnergy, meltingPoint, dipoleMoment, dipoleMomentH1i, liquidMolarVolume, densityAd1, densityBd1, densityCd1);
     }
 

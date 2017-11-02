@@ -2,6 +2,7 @@ package co.unal.camd.properties.parameters;
 
 
 import co.unal.camd.properties.parameters.unifac.GroupContributionData;
+import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 import co.unal.camd.properties.parameters.unifac.SecondOrderContributionData;
 import co.unal.camd.properties.parameters.unifac.UnifacInteractionData;
 import co.unal.camd.properties.parameters.unifac.UnifacParametersPair;
@@ -24,7 +25,7 @@ import java.util.Map;
  * Manage all the operations between the Molecules, and the UNIFAC method
  * to estimate properties
  *
- * @author FAMILIA MORENO
+ * @author Kevin Adrián Rodríguez Ruiz
  */
 public class UnifacParameters2017 {
 
@@ -42,16 +43,15 @@ public class UnifacParameters2017 {
     @Getter
     private Map<Integer, GroupContributionData> groupContributions = new HashMap<>();
 
+    private Map<Integer, ContributionGroup.Main> mainGroups = new HashMap<>();
+
+    @Getter
+    private List<ContributionGroup.Family> familyGroups = new ArrayList<>();
+
     @Getter
     private Map<Integer, SecondOrderContributionData> secondOrderGroupsContributions = new HashMap<>();
 
     //    UNIFAC Interaction Parameters Matrix and variables
-    @Getter
-    private String[][][] ijParams = new String[3][1000][1000];
-    @Getter
-    private String[][][] groupsData = new String[8][50][50];
-    @Getter
-    private String[][][] secondOrderParameters = new String[2][210][7];
     @Getter
     private String[][] mainGroupProbabilities = new String[100][3];
 
@@ -65,10 +65,11 @@ public class UnifacParameters2017 {
             unifacWorkbook = new XSSFWorkbook(unifacWBIS);
             System.out.println("Loading thermodynamical properties contributions parameters file: " + THERMOPROPS_WORKBOOK_PATH);
             contributionsWorkbook = new XSSFWorkbook(thermoContributionsWBIS);
+
             loadUnifacijInteractions();
             loadGroupContributions();
             loadSecondOrderContributions();
-            loadProbabilities();
+            loadFamilyGroups();
 
             unifacWBIS.close();
             thermoContributionsWBIS.close();
@@ -84,30 +85,26 @@ public class UnifacParameters2017 {
      * -  Unifac-2017.xlsx
      */
     private void loadUnifacijInteractions() {
-        int row;
         XSSFSheet interactionsSheet = unifacWorkbook.getSheetAt(0);
         System.out.println("\nUNIFAC DORTMUND PARAMETERTS sheet: " + unifacWorkbook.getSheetName(0));
-        row = 1;
-
         // Second Row
-        XSSFRow currentRow = interactionsSheet.getRow(row);
+        int ijRow = 1;
+
+        XSSFRow currentRow = interactionsSheet.getRow(ijRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer iParam = (int) currentRow.getCell(0).getNumericCellValue();
                 Integer jParam = (int) currentRow.getCell(1).getNumericCellValue();
-
                 UnifacParametersPair parametersPair = new UnifacParametersPair(iParam, jParam);
                 UnifacInteractionData unifacData = new UnifacInteractionData(parametersPair);
-
                 readInteractionsCells(currentRow, unifacData);
                 System.out.println(unifacData);
-
                 unifacInteractions.put(parametersPair, unifacData);
             } catch (Exception e) {
-                System.out.println("\nRow failed: " + row);
+                System.out.println("\nRow failed: " + ijRow);
                 e.printStackTrace();
             }
-            currentRow = interactionsSheet.getRow(++row);
+            currentRow = interactionsSheet.getRow(++ijRow);
         }
     }
 
@@ -153,9 +150,9 @@ public class UnifacParameters2017 {
     private void loadUnifacGroupContributions() {
         XSSFSheet unifacRQSheet = unifacWorkbook.getSheetAt(1);
         System.out.println("\nUNIFAC R AND Q sheet: " + unifacWorkbook.getSheetName(1));
+        // Second Row
         int unifacRow = 1;
 
-        // Second Row
         XSSFRow currentRow = unifacRQSheet.getRow(unifacRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
@@ -174,8 +171,11 @@ public class UnifacParameters2017 {
     private void readUnifacRQParams(XSSFRow currentRow, GroupContributionData contributionData) {
         XSSFCell rowCell;
         rowCell = currentRow.getCell(1);
-        if (validateNumericCell(rowCell))
-            contributionData.setMainGroup((int) rowCell.getNumericCellValue());
+        if (validateNumericCell(rowCell)) {
+            int mainGroupId = (int) rowCell.getNumericCellValue();
+            ContributionGroup.Main mainGroup = mainGroups.putIfAbsent(mainGroupId, new ContributionGroup.Main(mainGroupId, currentRow.getCell(2).getStringCellValue()));
+            contributionData.setMainGroup(mainGroup);
+        }
 
         rowCell = currentRow.getCell(3);
         if (rowCell != null)
@@ -199,10 +199,10 @@ public class UnifacParameters2017 {
     private void loadThermoGroupContributions() {
         XSSFSheet contributionsSheet = contributionsWorkbook.getSheetAt(0);
         System.out.println("\nTHERMODYNAMICAL PROPERTIES Sheet: " + contributionsWorkbook.getSheetName(0));
-        int gcRow = 1;
-
         // Second Row
-        XSSFRow currentRow = contributionsSheet.getRow(gcRow);
+        int tgcRow = 1;
+
+        XSSFRow currentRow = contributionsSheet.getRow(tgcRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
@@ -210,10 +210,10 @@ public class UnifacParameters2017 {
                 readThermoContributionsParams(currentRow, contributionData);
                 groupContributions.put(groupId, contributionData);
             } catch (Exception e) {
-                System.out.println("\nRow failed: " + gcRow);
+                System.out.println("\nRow failed: " + tgcRow);
                 e.printStackTrace();
             }
-            currentRow = contributionsSheet.getRow(++gcRow);
+            currentRow = contributionsSheet.getRow(++tgcRow);
         }
     }
 
@@ -304,9 +304,9 @@ public class UnifacParameters2017 {
     private void loadSecondOrderContributions() {
         XSSFSheet secondOrderGroupsSheet = contributionsWorkbook.getSheetAt(1);
         System.out.println("\nSECOND ORDER GROUPS Sheet: " + contributionsWorkbook.getSheetName(1));
+        // Second Row
         int soGroupRow = 1;
 
-        // Second Row
         XSSFRow currentRow = secondOrderGroupsSheet.getRow(soGroupRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
@@ -350,13 +350,12 @@ public class UnifacParameters2017 {
      * -  ThermoPropsContributions.xlsx
      */
     private void loadSecondOrderRelationships() {
-        int gcRow;
         XSSFSheet secondOrderGroupsSheet = contributionsWorkbook.getSheetAt(2);
         System.out.println("\nSECOND ORDER RELATIONSHIPS Sheet: " + contributionsWorkbook.getSheetName(2));
-        gcRow = 1;
-
         // Second Row
-        XSSFRow currentRow = secondOrderGroupsSheet.getRow(gcRow);
+        int soRow = 1;
+
+        XSSFRow currentRow = secondOrderGroupsSheet.getRow(soRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupCase = (int) currentRow.getCell(0).getNumericCellValue();
@@ -370,12 +369,48 @@ public class UnifacParameters2017 {
                 }
                 Integer[] groupsArray = contributionsGroups.toArray(new Integer[0]);
                 secondOrderContribution.getGroupsConfigurations().add(groupsArray);
-                System.out.println(secondOrderContribution);
+            } catch (Exception e) {
+                System.out.println("\nRow failed: " + soRow);
+                e.printStackTrace();
+            }
+            currentRow = secondOrderGroupsSheet.getRow(++soRow);
+        }
+    }
+
+    /**
+     * Read the family groups as seen in the right side groups selector
+     *
+     * @see co.unal.camd.view.ContributionGroupsPanel#actionPerformed(java.awt.event.ActionEvent)
+     */
+    private void loadFamilyGroups() {
+        XSSFSheet secondOrderGroupsSheet = unifacWorkbook.getSheetAt(2);
+        System.out.println("\nFAMILY GROUPS Sheet: " + unifacWorkbook.getSheetName(2));
+        // Second Row
+        int gcRow = 1;
+
+        XSSFRow currentRow = secondOrderGroupsSheet.getRow(gcRow);
+        while (currentRow != null && currentRow.getCell(0) != null && validateNumericCell(currentRow.getCell(1))) {
+            try {
+                String familyName = currentRow.getCell(0).getStringCellValue();
+                ContributionGroup.Family family = new ContributionGroup.Family(familyName);
+                Iterator<Cell> cellsIterator = currentRow.cellIterator();
+                while (cellsIterator.hasNext()) {
+                    XSSFCell rowCell = (XSSFCell) cellsIterator.next();
+                    if (rowCell.getColumnIndex() > 0 && validateNumericCell(rowCell)) {
+                        int mainGroupId = (int) rowCell.getNumericCellValue();
+                        ContributionGroup.Main mainGroup = mainGroups.get(mainGroupId);
+                        if (mainGroup != null)
+                            family.getMainGroups().add(mainGroup);
+                        else
+                            System.out.println(String.format("main group %d not found", mainGroupId));
+                    }
+                }
+                System.out.println(family);
+                familyGroups.add(family);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + gcRow);
                 e.printStackTrace();
             }
-
             currentRow = secondOrderGroupsSheet.getRow(++gcRow);
         }
     }
@@ -388,26 +423,5 @@ public class UnifacParameters2017 {
         return CellType.NUMERIC == cell.getCellTypeEnum();
     }
 
-    private void loadProbabilities() {
-        int row;
-        int col;
-        XSSFSheet sheet = unifacWorkbook.getSheetAt(13);
-        System.out.println("Hoja: " + unifacWorkbook.getSheetName(13));
-        Iterator iteratorSheets = sheet.rowIterator();
-        row = 0;
-        while (iteratorSheets.hasNext()) {
-            XSSFRow fila = (XSSFRow) iteratorSheets.next();
-            Iterator iteratorCeldas = fila.cellIterator();
-            col = 0;
-            while (iteratorCeldas.hasNext()) {
-                XSSFCell celda = (XSSFCell) iteratorCeldas.next();
-                mainGroupProbabilities[row][col] = celda.toString();
-                //System.out.print("\t" + celda.readableString());
-                // Imprime el contenido de la celda (valores o formulas)
-                col = col + 1;
-            }
-            row = row + 1;
-        }
-    }
 }
 
