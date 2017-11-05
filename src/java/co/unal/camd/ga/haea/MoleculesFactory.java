@@ -29,7 +29,7 @@ public class MoleculesFactory {
         for (int i = 0; i <= random(min); i++) {
             groupCode = findNewGroupCode(1, opt);
             functionalGroupNodes.add(new ContributionGroupNode(groupCode));
-            //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getGroupId())+" "+CONTRIBUTION_GROUPS.getPrincipalGroupCode(auxiliar.get(i).getGroupId()));
+            //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getCode())+" "+CONTRIBUTION_GROUPS.getPrincipalGroupCode(auxiliar.get(i).getCode()));
             if (probabilityFunction(functionalGroupNodes, aProba)) {
                 CamdRunner.CONTRIBUTION_GROUPS.resolveValence(groupCode);
                 opt = CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() <= 1;
@@ -88,7 +88,7 @@ public class MoleculesFactory {
      */
     private Molecule newMoleculeFromBaseGroups(ArrayList<ContributionGroupNode> leaves, int dim) {
         ContributionGroupNode group = createRandomGroups(leaves.size() + 1, dim, leaves);
-        //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getGroupId()));
+        //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getCode()));
         boolean next;
 
         if (leaves.size() <= CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId())) { // if is the last group
@@ -96,7 +96,7 @@ public class MoleculesFactory {
             while (next) {
                 //System.out.println("tamaño: "+leaves.size());
                 ContributionGroupNode temporal = leaves.get(0);
-                //	System.out.println("Grupo: "+gr.getGroupId());
+                //	System.out.println("Grupo: "+gr.getCode());
                 Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                 leaves.remove(0);
                 next = leaves.size() != 0;
@@ -105,7 +105,7 @@ public class MoleculesFactory {
                 int m = group.countSubgroups();
                 for (int i = 0; i < CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId()) - m; i++) {  // en esta parte se corrigió el error de la valencia incompleta
                     ContributionGroupNode aG = new ContributionGroupNode(findNewGroupCode(1, probabilityFunction(leaves, 0.4)));
-                    //	System.out.println("SUb: "+aG.getGroupId());
+                    //	System.out.println("SUb: "+aG.getCode());
                     Restrictions.mayBeFuncFuncOrOH(aG, group, false);
                     dim = dim + 1;
                 }
@@ -113,14 +113,14 @@ public class MoleculesFactory {
             leaves.add(group);
             dim = dim + 1;
         } else if (leaves.size() > CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId())) {
-            //System.out.println("valence New"+contributionGroups.findGroupValence(gr.getGroupId()));
+            //System.out.println("valence New"+contributionGroups.findGroupValence(gr.getCode()));
             next = true;
             while (next) {
                 if (leaves.size() > 0) {
                     ContributionGroupNode temporal = leaves.get(0);
                     Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                     leaves.remove(0);
-                    //System.out.println("Valencia hojas: "+(contributionGroups.findGroupValence(gr.getGroupId())+" hijos: "+gr.countSubgroups()));
+                    //System.out.println("Valencia hojas: "+(contributionGroups.findGroupValence(gr.getCode())+" hijos: "+gr.countSubgroups()));
                     if (CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId()) - 1 == group.countSubgroups())
                         next = false; //
                 } else {

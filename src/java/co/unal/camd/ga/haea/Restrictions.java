@@ -57,7 +57,6 @@ public class Restrictions {
         int code = newGr.getGroupId();
         switch (code) {
             case 2: {
-
                 if (CONTRIBUTION_GROUPS.getPrincipalGroupCode(aG1.getGroupId()) == 5) {
                     //System.out.println("cambio por OHp");
                     aG1 = new ContributionGroupNode("OHP");

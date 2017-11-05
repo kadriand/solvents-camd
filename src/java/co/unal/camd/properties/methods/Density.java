@@ -79,8 +79,8 @@ public class Density {
 
         if (aGroup.getGroupId() == rootGroup && aGroup.getGroupAt(0) != null) {
             for (int i = 0; i < aGroup.countSubgroups(); i++) {
-                //System.out.println("grupo:"+aGroup.getGroupId());
-                //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getGroupId());
+                //System.out.println("grupo:"+aGroup.getCode());
+                //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getCode());
                 if (aGroup.getGroupAt(i).getGroupId() == leafGroup) {
                     show = true;
                 }

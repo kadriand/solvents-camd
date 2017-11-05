@@ -1,10 +1,10 @@
 package co.unal.camd.view;
 
-import co.unal.camd.properties.parameters.ContributionGroupsManager;
 import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.model.ContributionGroupNode;
-import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.properties.model.Molecule;
+import co.unal.camd.properties.model.MoleculeGroups;
+import co.unal.camd.properties.parameters.ContributionGroupsManager2017;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class CamdRunner extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    public static final ContributionGroupsManager CONTRIBUTION_GROUPS = new ContributionGroupsManager();
+    public static final ContributionGroupsManager2017 CONTRIBUTION_GROUPS = new ContributionGroupsManager2017();
 
     @Setter(AccessLevel.NONE)
     protected JTabbedPane tab;

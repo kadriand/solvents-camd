@@ -88,7 +88,7 @@ public class ContributionGroupNode {
 
     public String toString() {
         return Integer.toString(groupId);
-        //        return CONTRIBUTION_GROUPS.findGroupName(groupId);
+        //        return CONTRIBUTION_GROUPS.findGroupName(code);
     }
 
 }

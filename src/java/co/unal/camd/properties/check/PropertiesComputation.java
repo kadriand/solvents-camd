@@ -7,7 +7,7 @@ import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingTemp;
 import co.unal.camd.properties.model.Molecule;
-import co.unal.camd.properties.parameters.UnifacParameters2017;
+import co.unal.camd.properties.parameters.EstimationParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class PropertiesComputation {
 
     public static void main(String[] args) throws IOException {
-        new UnifacParameters2017();
+        new EstimationParameters();
         //        evaluateSingleMolecule();
         //        evaluateJsonMoleculeSet();
     }

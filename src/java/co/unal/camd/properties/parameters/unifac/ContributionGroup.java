@@ -20,7 +20,7 @@ public class ContributionGroup {
 
         @Override
         public String toString() {
-            List<Integer> groups = mainGroups.stream().map(Main::getId).collect(Collectors.toList());
+            List<Integer> groups = mainGroups.stream().map(Main::getCode).collect(Collectors.toList());
             return String.format("Group family %s : %s", name, Arrays.toString(groups.toArray()));
         }
     }
@@ -28,16 +28,16 @@ public class ContributionGroup {
     @Data
     public static class Main {
         private String name;
-        private Integer id;
+        private Integer code;
 
-        public Main(Integer id, String name) {
+        public Main(Integer code, String name) {
             this.name = name;
-            this.id = id;
+            this.code = code;
         }
 
         @Override
         public String toString() {
-            return String.format("Group %s [%d]", name, id);
+            return String.format("Group %s [%d]", name, code);
         }
     }
 

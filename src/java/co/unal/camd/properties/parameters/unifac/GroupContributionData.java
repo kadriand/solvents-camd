@@ -6,7 +6,7 @@ import java.util.Locale;
 
 @Data
 public class GroupContributionData {
-    private Integer groupId;
+    private Integer code;
     private ContributionGroup.Main mainGroup;
     private String groupName;
     private Double rParam;
@@ -34,14 +34,14 @@ public class GroupContributionData {
     private Double densityBd4;
     private Double densityCd4;
 
-    public GroupContributionData(Integer groupId) {
-        this.groupId = groupId;
+    public GroupContributionData(Integer code) {
+        this.code = code;
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.ROOT, "Group contributions of %s [%d] : mainGroup:%s , rParam:%.4f , qParam:%.4f valence:%d , molecularWeight:%f , boilingPoint:%f , freeEnergy:%f , meltingPoint:%f , dipoleMoment:%f , dipoleMomentH1i:%f , liquidMolarVolume:%f , densityAd1:%f , densityBd1:%f , densityCd1:%f",
-                groupName, groupId, mainGroup, rParam, qParam, valence, molecularWeight, boilingPoint, freeEnergy, meltingPoint, dipoleMoment, dipoleMomentH1i, liquidMolarVolume, densityAd1, densityBd1, densityCd1);
+        return String.format(Locale.ROOT, "Group contributions of %s [%d] : mainGroup:%s , rParam:%.4f , qParam:%.4f , valence:%d , molecularWeight:%f , boilingPoint:%f , freeEnergy:%f , meltingPoint:%f , dipoleMoment:%f , dipoleMomentH1i:%f , liquidMolarVolume:%f , densityAd1:%f , densityBd1:%f , densityCd1:%f",
+                groupName, code, mainGroup, rParam, qParam, valence, molecularWeight, boilingPoint, freeEnergy, meltingPoint, dipoleMoment, dipoleMomentH1i, liquidMolarVolume, densityAd1, densityBd1, densityCd1);
     }
 
 }
