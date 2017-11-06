@@ -47,7 +47,8 @@
     "index": 3,
     "groups": [
       1,
-      45
+      45,
+      1
     ],
     "name": "2 cloro propano",
     "experimental": {
@@ -1644,7 +1645,6 @@
     "index": 78,
     "groups": [
       1,
-      2,
       2,
       41
     ],

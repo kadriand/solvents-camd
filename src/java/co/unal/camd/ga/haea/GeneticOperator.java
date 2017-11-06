@@ -1,6 +1,7 @@
 package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.model.ContributionGroupNode;
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 import co.unal.camd.view.CamdRunner;
 
 
@@ -57,11 +58,9 @@ public class GeneticOperator {
 
     public static void searchAndReplace(ContributionGroupNode genotype, int codeToCut, boolean replaceAll) {
         if (codeToCut == 0) {
-            int valence = CamdRunner.CONTRIBUTION_GROUPS.findGroupValence((genotype.getGroupId()));
-            CamdRunner.CONTRIBUTION_GROUPS.resolveValence(genotype.getGroupId());
-            int new_code = MoleculeOperations.findNewRefCode(valence, CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() > 1);
-            genotype.setGroupId(new_code);
-
+            ContributionGroupData groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(genotype.getGroupCode());
+            int new_code = MoleculeOperations.getNewGroupCode(groupContribution.getValence(), groupContribution.getMainGroup().getCode() > 1);
+            genotype.setGroupCode(new_code);
         } else {
             codeToCut--;
             int i = 0;

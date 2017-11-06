@@ -1,7 +1,7 @@
 package co.unal.camd.properties.parameters;
 
 
-import co.unal.camd.properties.parameters.unifac.GroupContributionData;
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 import co.unal.camd.properties.parameters.unifac.SecondOrderContributionData;
 import co.unal.camd.properties.parameters.unifac.UnifacInteractionData;
@@ -39,15 +39,41 @@ public class EstimationParameters {
     @Getter
     protected Map<UnifacParametersPair, UnifacInteractionData> unifacInteractions = new HashMap<>();
 
+    /**
+     * <code, group>
+     */
     @Getter
-    protected Map<Integer, GroupContributionData> groupContributions = new HashMap<>();
+    protected Map<Integer, ContributionGroupData> contributionGroups = new HashMap<>();
 
+    /**
+     * <valence, list of c. groups>
+     */
+    @Getter
+    protected Map<Integer, List<ContributionGroupData>> valenceContributionGroups = new HashMap<Integer, List<ContributionGroupData>>() {{
+        put(0, new ArrayList<>());
+        put(1, new ArrayList<>());
+        put(2, new ArrayList<>());
+        put(3, new ArrayList<>());
+        put(4, new ArrayList<>());
+        put(5, new ArrayList<>());
+        put(6, new ArrayList<>());
+    }};
+
+    /**
+     * <main group code, main group>
+     */
     @Getter
     protected Map<Integer, ContributionGroup.Main> mainGroups = new HashMap<>();
 
+    /**
+     * List of C. groups families, its probabilites are also stored
+     */
     @Getter
     protected List<ContributionGroup.Family> familyGroups = new ArrayList<>();
 
+    /**
+     * <groups case, main group>
+     */
     @Getter
     protected Map<Integer, SecondOrderContributionData> secondOrderGroupsContributions = new HashMap<>();
 
@@ -134,7 +160,7 @@ public class EstimationParameters {
     private void loadGroupContributions() {
         loadUnifacGroupContributions();
         loadThermoGroupContributions();
-        groupContributions.forEach((integer, groupContribution) -> debug(groupContribution));
+        contributionGroups.forEach((integer, groupContribution) -> debug(groupContribution));
     }
 
     /**
@@ -153,9 +179,9 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                GroupContributionData contributionData = new GroupContributionData(groupId);
+                ContributionGroupData contributionData = new ContributionGroupData(groupId);
                 readUnifacRQParams(currentRow, contributionData);
-                groupContributions.put(groupId, contributionData);
+                contributionGroups.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + unifacRow);
                 e.printStackTrace();
@@ -164,7 +190,7 @@ public class EstimationParameters {
         }
     }
 
-    private void readUnifacRQParams(XSSFRow currentRow, GroupContributionData contributionData) {
+    private void readUnifacRQParams(XSSFRow currentRow, ContributionGroupData contributionData) {
         XSSFCell rowCell;
         rowCell = currentRow.getCell(1);
         if (validateNumericCell(rowCell)) {
@@ -202,9 +228,9 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                GroupContributionData contributionData = groupContributions.get(groupId);
+                ContributionGroupData contributionData = contributionGroups.get(groupId);
                 readThermoContributionsParams(currentRow, contributionData);
-                groupContributions.put(groupId, contributionData);
+                contributionGroups.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + tgcRow);
                 e.printStackTrace();
@@ -213,7 +239,7 @@ public class EstimationParameters {
         }
     }
 
-    private void readThermoContributionsParams(XSSFRow currentRow, GroupContributionData contributionData) {
+    private void readThermoContributionsParams(XSSFRow currentRow, ContributionGroupData contributionData) {
         XSSFCell rowCell;
 
         rowCell = currentRow.getCell(3);
@@ -221,8 +247,11 @@ public class EstimationParameters {
             debug(String.format(">> %s should match %s", rowCell.getStringCellValue(), contributionData.getGroupName()));
 
         rowCell = currentRow.getCell(1);
-        if (validateNumericCell(rowCell))
-            contributionData.setValence((int) rowCell.getNumericCellValue());
+        if (validateNumericCell(rowCell)) {
+            int valence = (int) rowCell.getNumericCellValue();
+            contributionData.setValence(valence);
+            valenceContributionGroups.get(valence).add(contributionData);
+        }
 
         rowCell = currentRow.getCell(4);
         if (validateNumericCell(rowCell))
@@ -238,7 +267,7 @@ public class EstimationParameters {
 
         rowCell = currentRow.getCell(7);
         if (validateNumericCell(rowCell))
-            contributionData.setFreeEnergy(rowCell.getNumericCellValue());
+            contributionData.setGibbsFreeEnergy(rowCell.getNumericCellValue());
 
         rowCell = currentRow.getCell(8);
         if (validateNumericCell(rowCell))
@@ -250,45 +279,45 @@ public class EstimationParameters {
 
         rowCell = currentRow.getCell(10);
         if (validateNumericCell(rowCell))
-            contributionData.setDipoleMomentH1i(rowCell.getNumericCellValue());
+            contributionData.setLiquidMolarVolume(rowCell.getNumericCellValue());
 
         // DENSITY PARAMETERS
         rowCell = currentRow.getCell(11);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityAd1(rowCell.getNumericCellValue());
+            contributionData.getDensityA()[0] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(12);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityBd1(rowCell.getNumericCellValue());
+            contributionData.getDensityB()[0] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(13);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityCd1(rowCell.getNumericCellValue());
+            contributionData.getDensityC()[0] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(14);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityAd2(rowCell.getNumericCellValue());
+            contributionData.getDensityA()[1] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(15);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityBd2(rowCell.getNumericCellValue());
+            contributionData.getDensityB()[1] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(16);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityCd2(rowCell.getNumericCellValue());
+            contributionData.getDensityC()[1] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(17);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityAd3(rowCell.getNumericCellValue());
+            contributionData.getDensityA()[2] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(18);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityBd3(rowCell.getNumericCellValue());
+            contributionData.getDensityB()[2] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(19);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityCd4(rowCell.getNumericCellValue());
+            contributionData.getDensityC()[2] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(21);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityAd4(rowCell.getNumericCellValue());
+            contributionData.getDensityA()[3] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(21);
         if (validateNumericCell(rowCell))
-            contributionData.setDensityBd4(rowCell.getNumericCellValue());
+            contributionData.getDensityB()[3] = rowCell.getNumericCellValue();
         rowCell = currentRow.getCell(22);
         if (validateNumericCell(rowCell))
-            contributionData.setLiquidMolarVolume(rowCell.getNumericCellValue());
+            contributionData.getDensityC()[3] = rowCell.getNumericCellValue();
     }
 
     /**
@@ -375,6 +404,10 @@ public class EstimationParameters {
 
     /**
      * Read the family groups as seen in the right side groups selector
+     * Sheet;
+     * -  FamilyGroups
+     * In file
+     * -  Unifac-2017.xlsx
      *
      * @see co.unal.camd.view.ContributionGroupsPanel#actionPerformed(java.awt.event.ActionEvent)
      */
@@ -393,12 +426,12 @@ public class EstimationParameters {
                 while (cellsIterator.hasNext()) {
                     XSSFCell rowCell = (XSSFCell) cellsIterator.next();
                     if (rowCell.getColumnIndex() > 0 && validateNumericCell(rowCell)) {
-                        int mainGroupId = (int) rowCell.getNumericCellValue();
-                        ContributionGroup.Main mainGroup = mainGroups.get(mainGroupId);
+                        int mainGroupCode = (int) rowCell.getNumericCellValue();
+                        ContributionGroup.Main mainGroup = mainGroups.get(mainGroupCode);
                         if (mainGroup != null)
                             family.getMainGroups().add(mainGroup);
                         else
-                            System.out.println(String.format("main group %d not found", mainGroupId));
+                            System.out.println(String.format("main group %d not found", mainGroupCode));
                     }
                 }
                 debug(family);
@@ -420,7 +453,7 @@ public class EstimationParameters {
     }
 
     private void debug(Object object) {
-        System.out.println(object);
+        //        System.out.println(object);
     }
 
     private void warning(Object object) {

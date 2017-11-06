@@ -1,5 +1,6 @@
 package co.unal.camd.properties.model;
 
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 
@@ -8,17 +9,28 @@ import java.util.Arrays;
 @Data
 public class MoleculeGroups {
 
-    double composition;
-    int[] amount;
-    int[] groups;
+    private double composition;
+    private int[] amount;
+    private int[] groups;
+    private ContributionGroupData[] groupContributions;
 
     public MoleculeGroups(int[] _groups) {
         groups = _groups;
+        findGroupContributions();
     }
 
     public MoleculeGroups(int[] _groups, double _composition) {
         groups = _groups;
         composition = _composition;
+        findGroupContributions();
+    }
+
+    private void findGroupContributions() {
+        groupContributions = new ContributionGroupData[groups.length];
+        for (int i = 0; i < groups.length; i++) {
+            ContributionGroupData groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(groups[i]);
+            groupContributions[i] = groupContribution;
+        }
     }
 
     public void optimize() {
@@ -43,14 +55,15 @@ public class MoleculeGroups {
             }
 
         groups = new_groups;
+        findGroupContributions();
     }
 
     public int size() {
         return groups.length;
     }
 
-    public int getGroupCode(int group) {
-        return groups[group];
+    public int getGroupCode(int groupIndex) {
+        return groups[groupIndex];
     }
 
     public int getAmount(int group) {
@@ -58,22 +71,19 @@ public class MoleculeGroups {
     }
 
     ////q///
-    public double getq() {
-        double qi = 0;
+    public double getQ() {
+        double q = 0;
         for (int i = 0; i < groups.length; i++)
-            qi = qi + CamdRunner.CONTRIBUTION_GROUPS.getQ(groups[i]);
-
-        //System.out.println("qi"+qi);
-        return qi;
+            q += groupContributions[i].getQParam();
+        return q;
     }
 
     ////////r///////
-    public double getr() {
-        double ri = 0;
+    public double getR() {
+        double r = 0;
         for (int i = 0; i < groups.length; i++)
-            ri = ri + CamdRunner.CONTRIBUTION_GROUPS.getR(groups[i]);
-        //	System.out.println("ri"+ri);
-        return ri;
+            r += groupContributions[i].getRParam();
+        return r;
     }
 
     public String readableString() {
@@ -82,7 +92,7 @@ public class MoleculeGroups {
         for (int i = 0; i < groups.length; i++) {
             int n = groups[i];
             if (n > 0)
-                show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(n) + "-";
+                show += (show.length() > 0 ? "-" : "") + CamdRunner.CONTRIBUTION_GROUPS.findGroupName(n);
         }
         return show;
     }

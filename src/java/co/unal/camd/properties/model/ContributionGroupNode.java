@@ -1,6 +1,5 @@
 package co.unal.camd.properties.model;
 
-import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 
 import java.util.Vector;
@@ -8,11 +7,12 @@ import java.util.Vector;
 @Data
 public class ContributionGroupNode {
 
-    private int groupId; //identification of each group by refCode
-    private Vector<ContributionGroupNode> subGroups;
+    private int groupCode; //identification of the group by refCode
+    private Vector<ContributionGroupNode> subGroups = new Vector<>();
+    ;
 
     public ContributionGroupNode(ContributionGroupNode functionalGroupNode) {
-        groupId = functionalGroupNode.getGroupId();
+        groupCode = functionalGroupNode.getGroupCode();
         subGroups = new Vector<>();
         int n = functionalGroupNode.countSubgroups();
         for (int i = 0; i < n; i++) {
@@ -24,14 +24,8 @@ public class ContributionGroupNode {
         return new ContributionGroupNode(this);
     }
 
-    public ContributionGroupNode(int refCode) {
-        groupId = refCode;
-        subGroups = new Vector<>();
-    }
-
-    public ContributionGroupNode(String name) {
-        groupId = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(name);
-        subGroups = new Vector<>();
+    public ContributionGroupNode(int groupCode) {
+        this.groupCode = groupCode;
     }
 
     /**
@@ -64,7 +58,7 @@ public class ContributionGroupNode {
         if (subGroups.size() < i + 1)
             return 0;
         else
-            return subGroups.elementAt(i).getGroupId();
+            return subGroups.elementAt(i).getGroupCode();
     }
 
     public ContributionGroupNode getGroupAt(int i) {
@@ -87,7 +81,7 @@ public class ContributionGroupNode {
     }
 
     public String toString() {
-        return Integer.toString(groupId);
+        return Integer.toString(groupCode);
         //        return CONTRIBUTION_GROUPS.findGroupName(code);
     }
 

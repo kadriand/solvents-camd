@@ -23,6 +23,7 @@ public class MoleculeData {
     @Data
     @Accessors(chain = true)
     public static class PropertiesSet {
+        private double molecularWeight;
         private double dielectricConst;
         private double fusionTemp;
         private double boilingTemp;
@@ -31,7 +32,8 @@ public class MoleculeData {
 
         @Override
         public String toString() {
-            return "\nDC: " + dielectricConst +
+            return "\nMW: " + molecularWeight +
+                    "\nDC: " + dielectricConst +
                     "\nMT: " + fusionTemp +
                     "\nBT: " + boilingTemp +
                     "\nD : " + density +
@@ -39,7 +41,8 @@ public class MoleculeData {
         }
 
         public String compared(PropertiesSet other) {
-            return "\nDC: " + dielectricConst + " - " + other.dielectricConst +
+            return "\nMW: " + molecularWeight + " - " + other.molecularWeight +
+                    "\nDC: " + dielectricConst + " - " + other.dielectricConst +
                     "\nMT: " + fusionTemp + " - " + other.fusionTemp +
                     "\nBT: " + boilingTemp + " - " + other.boilingTemp +
                     "\nD : " + density + " - " + other.density +

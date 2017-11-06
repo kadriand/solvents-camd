@@ -13,9 +13,18 @@ public class ContributionGroup {
     public static class Family {
         private String name;
         private List<Main> mainGroups = new ArrayList<>();
+        private double probability = 1;
 
         public Family(String name) {
             this.name = name;
+        }
+
+        public String readableMainGroups() {
+            List<String> groupsNames = mainGroups.stream()
+                    .map(ContributionGroup.Main::getName)
+                    .collect(Collectors.toList());
+            String familyLabel = Arrays.toString(groupsNames.toArray());
+            return familyLabel.replaceAll("\\[|\\]|\\s", "");
         }
 
         @Override

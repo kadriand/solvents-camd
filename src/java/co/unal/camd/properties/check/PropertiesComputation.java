@@ -3,10 +3,12 @@ package co.unal.camd.properties.check;
 import co.unal.camd.properties.methods.BoilingTemp;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
+import co.unal.camd.properties.methods.MolecularWeight;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingTemp;
 import co.unal.camd.properties.model.Molecule;
+import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.properties.parameters.EstimationParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,8 +21,8 @@ public class PropertiesComputation {
 
     public static void main(String[] args) throws IOException {
         new EstimationParameters();
-        //        evaluateSingleMolecule();
-        //        evaluateJsonMoleculeSet();
+        evaluateSingleMolecule();
+        evaluateJsonMoleculeSet();
     }
 
     private static void evaluateJsonMoleculeSet() throws IOException {
@@ -77,8 +79,12 @@ public class PropertiesComputation {
         Density D = new Density(molecule, temperature);
         MeltingTemp MT = new MeltingTemp(molecule, secOrderCodes);
         DielectricConstant DC = new DielectricConstant(molecule, secOrderCodes, temperature);
+        MoleculeGroups groupsArray = molecule.getGroupsArray();
+        groupsArray.optimize();
+        double mw = MolecularWeight.getMethodResult(groupsArray);
 
         moleculeData.getRecomputed()
+                .setMolecularWeight(mw)
                 .setDeltaGibbs(GE.getMethodResult())
                 .setBoilingTemp(BT.getMethodResult())
                 .setDensity(D.getMethodResult())

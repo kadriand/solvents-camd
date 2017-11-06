@@ -1,35 +1,32 @@
 package co.unal.camd.ga.haea;
 
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 import co.unal.camd.view.CamdRunner;
+
+import java.util.List;
 
 public final class MoleculeOperations {
 
-    public static int findNewRefCode(int valence, boolean functional) {
-        int codeOfRow = 0;
-        int refCode = 0;
+    /**
+     * Retuns a random contribution group code
+     *
+     * @param valence
+     * @param functional
+     * @return
+     */
+    public static int getNewGroupCode(int valence, boolean functional) {
+        List<ContributionGroupData> valenceContributionGroups = CamdRunner.CONTRIBUTION_GROUPS.getValenceContributionGroups().get(valence);
+        int groupIndex = 0;
         if (functional) {
-            double proba = Math.random();
-            double p = 0;
-            int n = CamdRunner.CONTRIBUTION_GROUPS.getTotalNumberOfGroupOfValence(valence);
-            while (proba <= 1 - p) {
-                codeOfRow = (int) (Math.random() * n) + 1;//random row to choose the group
-                p = CamdRunner.CONTRIBUTION_GROUPS.getProbability(valence, codeOfRow);
-                //	System.out.println("pruebaaa");
+            double requestProbability = Math.random();
+            double groupProbaility = 0;
+            while (requestProbability <= 1 - groupProbaility) {
+                groupIndex = (int) (Math.random() * valenceContributionGroups.size());//random row to choose the group
+                //TODO update to a new way
+                ContributionGroupData contributionGroup = valenceContributionGroups.get(groupIndex);
+                groupProbaility = CamdRunner.CONTRIBUTION_GROUPS.getProbability(contributionGroup.getCode());
             }
-            //	/	System.out.println("pruebaa2");
-            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
-        } else {
-            codeOfRow = 1;//the code of the firs group (Structural group)
-            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
         }
-        return refCode;
+        return valenceContributionGroups.get(groupIndex).getCode();
     }
-
-    public static int findNewRefCode(int type) {
-        int codeOfRow = 0;
-        int refCode = 0;
-
-        return refCode;
-    }
-
 }

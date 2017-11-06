@@ -8,22 +8,20 @@ import java.util.ArrayList;
 
 public class BoilingTemp {
 
-    private double sum = 0;
-    private MoleculeGroups aMolecule;
+    private MoleculeGroups molecule;
     private ArrayList<Integer> secondOrderCodes;
 
     public BoilingTemp(Molecule solvent, ArrayList<Integer> secOrderCode) {
         secondOrderCodes = secOrderCode;
-        aMolecule = solvent.getGroupsArray();
-        aMolecule.optimize();
+        molecule = solvent.getGroupsArray();
+        molecule.optimize();
     }
 
     public double getMethodResult() {
-        for (int i = 0; i < aMolecule.size(); i++) {
-            double q = CamdRunner.CONTRIBUTION_GROUPS.getConstantPTeb(aMolecule.getGroupCode(i));
-            sum += aMolecule.getAmount(i) * q;
-        }
-        sum = sum + calculateSecOrderContribution();
+        double sum = 0;
+        for (int i = 0; i < molecule.size(); i++)
+            sum += molecule.getAmount(i) * molecule.getGroupContributions()[i].getBoilingPoint();
+        sum += calculateSecOrderContribution();
         return 204.359 * Math.log10(sum) * 2.30258509;
     }
 
@@ -31,12 +29,8 @@ public class BoilingTemp {
         double a = 0;
         for (int i = 0; i < secondOrderCodes.size(); i++) {
             int so = secondOrderCodes.get(i);
-            //System.out.println("so :"+so);
-            a += CamdRunner.CONTRIBUTION_GROUPS.getBoilingTempSecondOrderParameter(so);
-
-            //System.out.println("sum :"+sum);
+            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(so).getBoilingPoint();
         }
-        //System.out.println("a :"+a);
         return a;
 
     }

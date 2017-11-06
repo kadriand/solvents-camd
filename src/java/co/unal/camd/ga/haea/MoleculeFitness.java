@@ -7,7 +7,7 @@ import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingTemp;
-import co.unal.camd.properties.methods.PM;
+import co.unal.camd.properties.methods.MolecularWeight;
 import co.unal.camd.properties.methods.SolventLoss;
 import co.unal.camd.properties.methods.UnifacMethod;
 import unalcol.optimization.OptimizationFunction;
@@ -53,8 +53,8 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         ab = allMethods.getMethodResult(AB, 0, temperature);
         //	System.out.println("1___"+ab);
 
-        double pmb = PM.getMethodResult(solventGroupsUser);
-        double pma = PM.getMethodResult(soluteGroups);
+        double pmb = MolecularWeight.getMethodResult(solventGroupsUser);
+        double pma = MolecularWeight.getMethodResult(soluteGroups);
         pm = pma / pmb;
 
         w = weight;

@@ -3,90 +3,78 @@ package co.unal.camd.properties.methods;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.view.CamdRunner;
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 
 public class Density {
-    private Molecule aMolecule;
+    private Molecule molecule;
     private double temperature;
 
     public Density(Molecule solvent, double temp) {
         temperature = temp;
-        aMolecule = solvent;
+        molecule = solvent;
     }
-
 
     public double getMethodResult() {
         double sum = 0;
-        double a = 0;
-        double b = 0;
-        double c = 0;
-        for (int i = 0; i < aMolecule.getGroupsArray().size(); i++) {
+        double a, b, c;
+
+        for (int i = 0; i < molecule.getGroupsArray().size(); i++) {
             /**
              * this are 6 exceptions to create density groups between unifac groups
              */
-            if (isBond(aMolecule.getGroupAt(i), 10, 4)) {
+            if (isBond(molecule.getGroupAt(i), 10, 4)) {
                 a = 39.37;
                 b = -0.2721;
                 c = 0.0002492;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
-            } else if (isBond(aMolecule.getGroupAt(i), 2, 14)) {
+                sum += (a + b * temperature + c * temperature * temperature);
+            } else if (isBond(molecule.getGroupAt(i), 2, 14)) {
                 a = 36.73;
                 b = -0.07125;
                 c = 0.0001406;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
-            } else if (isBond(aMolecule.getGroupAt(i), 3, 81)) {
+                sum += (a + b * temperature + c * temperature * temperature);
+            } else if (isBond(molecule.getGroupAt(i), 3, 81)) {
                 a = 14.26;
                 b = -0.008187;
                 c = 0;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
-            } else if (isBond(aMolecule.getGroupAt(i), 4, 82)) {
+                sum += (a + b * temperature + c * temperature * temperature);
+            } else if (isBond(molecule.getGroupAt(i), 4, 82)) {
                 a = -95.68;
                 b = 0.5935;
                 c = -0.0009479;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
-            } else if (isBond(aMolecule.getGroupAt(i), 3, 77)) {
+                sum += (a + b * temperature + c * temperature * temperature);
+            } else if (isBond(molecule.getGroupAt(i), 3, 77)) {
                 a = 38.23;
                 b = -0.1121;
                 c = 0.0001665;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
-            } else if (isBond(aMolecule.getGroupAt(i), 10, 77)) {
+                sum += (a + b * temperature + c * temperature * temperature);
+            } else if (isBond(molecule.getGroupAt(i), 10, 77)) {
                 a = 27.61;
                 b = -0.02077;
                 c = 0;
-                sum = sum + (a + b * temperature + c * temperature * temperature);
+                sum += (a + b * temperature + c * temperature * temperature);
             } else {
-                for (int j = 0; j <= 3; j++) {
-                    a = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][0];
-                    b = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][1];
-                    c = CamdRunner.CONTRIBUTION_GROUPS.getDensityConstants(aMolecule.getGroupAt(i).getGroupId())[j][2];
-                    sum = sum + (a + b * temperature + c * temperature * temperature);
-                    //System.out.println("a "+a);
-                    //System.out.println("b "+b);
-                    //System.out.println("c "+c);
-                    //System.out.println("SUm"+sum);
+                ContributionGroupData groupContribution = molecule.getGroupsArray().getGroupContributions()[i];
+                for (int j = 0; j < 4; j++) {
+                    a = groupContribution.getDensityA()[j];
+                    b = groupContribution.getDensityB()[j];
+                    c = groupContribution.getDensityC()[j];
+                    sum += (a + b * temperature + c * temperature * temperature);
                 }
             }
         }
         //System.out.println(sum);
-        MoleculeGroups gr = aMolecule.getGroupsArray();
+        MoleculeGroups gr = molecule.getGroupsArray();
         gr.optimize();
         //System.out.println("SUmaD"+sum);
-        return PM.getMethodResult(gr) / sum;
+        return MolecularWeight.getMethodResult(gr) / sum;
     }
 
     public static boolean isBond(ContributionGroupNode aGroup, int rootGroup, int leafGroup) {
-        boolean show = false;
-
-        if (aGroup.getGroupId() == rootGroup && aGroup.getGroupAt(0) != null) {
-            for (int i = 0; i < aGroup.countSubgroups(); i++) {
-                //System.out.println("grupo:"+aGroup.getCode());
-                //System.out.println("Subgrupo:"+aGroup.getGroupAt(i).getCode());
-                if (aGroup.getGroupAt(i).getGroupId() == leafGroup) {
-                    show = true;
-                }
-            }
-        }
-
-        return show;
+        if (aGroup.getGroupCode() == rootGroup && aGroup.getGroupAt(0) != null)
+            for (int i = 0; i < aGroup.countSubgroups(); i++)
+                if (aGroup.getGroupAt(i).getGroupCode() == leafGroup)
+                    return true;
+        return false;
     }
+
 }

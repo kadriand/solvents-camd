@@ -20,11 +20,8 @@ public class Molecule {
 
     private ContributionGroupNode genotype;
     private int size;
-
     private double fitness;
-
     private double x; //composición
-
     private double ge;
     private double bt;
     private double d;
@@ -83,7 +80,7 @@ public class Molecule {
         for (int i = 0; i < a.size(); i++) {
             if (i > 0)
                 show += "-";
-            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getGroupId());
+            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getGroupCode());
         }
         return show;
     }
@@ -112,7 +109,7 @@ public class Molecule {
         int n = groupsNodes.size();
         int[] groups = new int[n];
         for (int i = 0; i < n; i++) {
-            groups[i] = groupsNodes.get(i).getGroupId();
+            groups[i] = groupsNodes.get(i).getGroupCode();
         }
         MoleculeGroups moleculeGroups = new MoleculeGroups(groups);
         return moleculeGroups;
@@ -138,7 +135,7 @@ public class Molecule {
     }
 
     private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCode) {
-        ArrayList<String[]> secondGroup = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupCase(root.getGroupId());
+        ArrayList<String[]> secondGroup = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupCase(root.getGroupCode());
         //	System.out.println("DimensionArray: "+s.size());
         int dim = root.countSubgroups();
         int a[] = leavesToVector(root);
@@ -181,7 +178,7 @@ public class Molecule {
                     }
                     if (sameVector(tempCond, b)) { //if the leaves are the same that sec order groups, add the code of SOG
                         for (int p = 0; p < dim; p++) {
-                            if (root.getGroupAt(p).getGroupId() != caseOH[0])
+                            if (root.getGroupAt(p).getGroupCode() != caseOH[0])
                                 continue;
                             int[] tempCond2 = new int[1];
                             tempCond2[0] = caseOH[1];
@@ -235,7 +232,7 @@ public class Molecule {
         int[] a = new int[dim];
         //System.out.println("prueba9");
         for (int i = 0; i < dim; i++)
-            a[i] = root.getGroupAt(i).getGroupId();
+            a[i] = root.getGroupAt(i).getGroupCode();
         return a;
     }
 

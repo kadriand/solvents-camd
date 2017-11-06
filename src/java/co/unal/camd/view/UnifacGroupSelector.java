@@ -20,7 +20,7 @@ public class UnifacGroupSelector extends ContributionGroupsPanel {
         allGroups = new String[8][28];
         for (int i = 0; i < 7; i++)
             for (int j = 0; j < 27; j++)
-                allGroups[i][j] = (CamdRunner.CONTRIBUTION_GROUPS.getGroupsData()[i][j + 1][2]);
+                allGroups[i][j] = CamdRunner.CONTRIBUTION_GROUPS.getGroupsData()[i][j + 1][2];
         initialize();
     }
 
@@ -49,7 +49,7 @@ public class UnifacGroupSelector extends ContributionGroupsPanel {
                 String groupName = CamdRunner.CONTRIBUTION_GROUPS.findGroupName(num);
                 userMoleculeGroups.add(groupName);
                 // System.out.println("linea" + line);
-                // System.out.println("num" + num);
+                // System.out.print("*** group : " + num);
                 newLine = br.readLine();
             }
             br.close();

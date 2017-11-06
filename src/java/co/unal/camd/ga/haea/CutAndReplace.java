@@ -20,10 +20,10 @@ public class CutAndReplace extends MicroService<Molecule> implements Variation_1
         boolean functional = false;
 
         ContributionGroupNode aGroupMut = clone_genome.getGroupAt(num);
-        if (aGroupMut.getGroupId() > 4) {
+        if (aGroupMut.getGroupCode() > 4) {
             functional = true;
         }
-        int refCode = MoleculeOperations.findNewRefCode(valence, functional);
+        int refCode = MoleculeOperations.getNewGroupCode(valence, functional);
         ContributionGroupNode newGroup = new ContributionGroupNode(refCode);
 
         if (valence == 3) {

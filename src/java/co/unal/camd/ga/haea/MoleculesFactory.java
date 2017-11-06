@@ -27,15 +27,14 @@ public class MoleculesFactory {
         double aProba = 0.4;
         boolean opt = probabilityFunction(functionalGroupNodes, aProba);
         for (int i = 0; i <= random(min); i++) {
-            groupCode = findNewGroupCode(1, opt);
+            groupCode = MoleculeOperations.getNewGroupCode(1, opt);
             functionalGroupNodes.add(new ContributionGroupNode(groupCode));
             //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getCode())+" "+CONTRIBUTION_GROUPS.getPrincipalGroupCode(auxiliar.get(i).getCode()));
             if (probabilityFunction(functionalGroupNodes, aProba)) {
-                CamdRunner.CONTRIBUTION_GROUPS.resolveValence(groupCode);
-                opt = CamdRunner.CONTRIBUTION_GROUPS.getCodeOfRow() <= 1;
-            } else {
+                Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(groupCode).getMainGroup().getCode();
+                opt = mainGroupCode <= 1;
+            } else
                 opt = false;
-            }
         }
         dim = functionalGroupNodes.size();
         return newMoleculeFromBaseGroups(functionalGroupNodes, dim);
@@ -49,27 +48,6 @@ public class MoleculesFactory {
     public Molecule buildMolecule(ArrayList<ContributionGroupNode> functionalGroupNodes) {
         int dim = functionalGroupNodes.size();
         return newMoleculeFromBaseGroups(functionalGroupNodes, dim);
-    }
-
-    private int findNewGroupCode(int valence, boolean functional) {
-        int codeOfRow = 0;
-        int refCode = 0;
-        if (functional) {
-            double proba = Math.random();
-            double p = 0;
-            int n = CamdRunner.CONTRIBUTION_GROUPS.getTotalNumberOfGroupOfValence(valence);
-            while (proba <= 1 - p) {
-                codeOfRow = (int) (Math.random() * n) + 1;//random row to choose the group
-                p = CamdRunner.CONTRIBUTION_GROUPS.getProbability(valence, codeOfRow);
-                //	System.out.println("pruebaaa");
-            }
-            //	/	System.out.println("pruebaa2");
-            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
-        } else {
-            codeOfRow = 1;//the code of the firs group (Structural group)
-            refCode = CamdRunner.CONTRIBUTION_GROUPS.findGroupCode(valence, codeOfRow);
-        }
-        return refCode;
     }
 
     private boolean probabilityFunction(ArrayList<ContributionGroupNode> root, double aProba) {
@@ -91,7 +69,9 @@ public class MoleculesFactory {
         //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getCode()));
         boolean next;
 
-        if (leaves.size() <= CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId())) { // if is the last group
+        int groupValence = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence();
+
+        if (leaves.size() <= groupValence) { // if is the last group
             next = true;
             while (next) {
                 //System.out.println("tamaño: "+leaves.size());
@@ -101,18 +81,19 @@ public class MoleculesFactory {
                 leaves.remove(0);
                 next = leaves.size() != 0;
             }
-            if (CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId()) > group.countSubgroups()) {
+
+            int valence = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence();
+            if (valence > group.countSubgroups()) {
                 int m = group.countSubgroups();
-                for (int i = 0; i < CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId()) - m; i++) {  // en esta parte se corrigió el error de la valencia incompleta
-                    ContributionGroupNode aG = new ContributionGroupNode(findNewGroupCode(1, probabilityFunction(leaves, 0.4)));
+                for (int i = 0; i < valence - m; i++) {  // en esta parte se corrigió el error de la valencia incompleta
+                    ContributionGroupNode randomGroup = new ContributionGroupNode(MoleculeOperations.getNewGroupCode(1, probabilityFunction(leaves, 0.4)));
                     //	System.out.println("SUb: "+aG.getCode());
-                    Restrictions.mayBeFuncFuncOrOH(aG, group, false);
+                    Restrictions.mayBeFuncFuncOrOH(randomGroup, group, false);
                     dim = dim + 1;
                 }
             }
             leaves.add(group);
-            dim = dim + 1;
-        } else if (leaves.size() > CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId())) {
+        } else if (leaves.size() > groupValence) {
             //System.out.println("valence New"+contributionGroups.findGroupValence(gr.getCode()));
             next = true;
             while (next) {
@@ -121,12 +102,11 @@ public class MoleculesFactory {
                     Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                     leaves.remove(0);
                     //System.out.println("Valencia hojas: "+(contributionGroups.findGroupValence(gr.getCode())+" hijos: "+gr.countSubgroups()));
-                    if (CamdRunner.CONTRIBUTION_GROUPS.findGroupValence(group.getGroupId()) - 1 == group.countSubgroups())
+                    if (CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence() - 1 == group.countSubgroups())
                         next = false; //
                 } else {
                     next = false;
                 }
-
             }
             leaves.add(group);
             dim = dim + 1;
@@ -148,7 +128,7 @@ public class MoleculesFactory {
     private ContributionGroupNode createRandomGroups(int sizeAux, int dim, ArrayList<ContributionGroupNode> leaves) {
         int valence = randomProbability(sizeAux, dim);
         //System.out.println("The valence was"+Valence);
-        ContributionGroupNode newG = new ContributionGroupNode(findNewGroupCode(valence, probabilityFunction(leaves, 0.4)));
+        ContributionGroupNode newG = new ContributionGroupNode(MoleculeOperations.getNewGroupCode(valence, probabilityFunction(leaves, 0.4)));
         return newG;
     }
 

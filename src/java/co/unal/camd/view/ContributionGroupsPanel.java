@@ -1,11 +1,14 @@
 package co.unal.camd.view;
 
 import co.unal.camd.properties.methods.UnifacMethod;
+import co.unal.camd.properties.parameters.ProblemDefaults;
+import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 
 
@@ -39,7 +42,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private ArrayList<JCheckBox> jcheck = new ArrayList<>();
     private JScrollPane jScrollPane = null;
 
-    private int co;
     private int valence;
     CamdSetupWindow camdSetupWindow;
     String[][] allGroups;
@@ -287,7 +289,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         return buttonFixMolecule;
     }
 
-
     /**
      * This method initializes newMoleculeBtn
      *
@@ -314,10 +315,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
             for (int i = 0; i < 28; i++)
                 comboBoxGroups.addItem(allGroups[valence][i]);
         }
-        for (int i = 0; i < jcheck.size(); i++)
-            if (!jcheck.get(i).isSelected())
-                CamdRunner.CONTRIBUTION_GROUPS.setProbability(i, 0);
-        //	System.out.println("aa");
     }
 
     /**
@@ -436,7 +433,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private JTextField getTextFieldIterations() {
         if (textFieldIterations == null) {
             textFieldIterations = new JTextField();
-            textFieldIterations.setText("50");
+            textFieldIterations.setText(String.valueOf(ProblemDefaults.ITERATIONS));
             textFieldIterations.addActionListener(evt -> {
                 int num = Integer.parseInt(textFieldIterations.getText());
                 camdSetupWindow.setIterations(num);
@@ -557,24 +554,25 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
         if (scrollPanel == null) {
             scrollPanel = new JPanel();
             scrollPanel.setLayout(new BoxLayout(getJPanel2(), BoxLayout.Y_AXIS));
-            co = 0;
-            for (int i = 0; i < 23; i++) {
-                scrollPanel.add(getJCheck(), null);
-                co = co + 1;
-            }
-
+            int family = 0;
+            for (int i = 0; i < 23; i++, family++)
+                scrollPanel.add(getJCheck(family), null);
         }
         return scrollPanel;
     }
 
-
-    private JCheckBox getJCheck() {
-        String name = CamdRunner.CONTRIBUTION_GROUPS.getGlobalGroupName(co + 1);
-        JCheckBox j = new JCheckBox(name);
-        j.setToolTipText(CamdRunner.CONTRIBUTION_GROUPS.getPrincipalGroupNames(co + 1));
-        jcheck.add(j);
-        jcheck.get(co).setSelected(true);
-        return jcheck.get(co);
+    private JCheckBox getJCheck(int familyIndex) {
+        ContributionGroup.Family family = CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(familyIndex);
+        JCheckBox familyCB = new JCheckBox(family.getName());
+        familyCB.setToolTipText(family.readableMainGroups());
+        familyCB.setSelected(true);
+        familyCB.addItemListener(e -> {
+            boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+            System.out.println(selected ? "SELECTED " : "DESELECTED " + family);
+            family.setProbability(selected ? 1.0 : 0.0);
+        });
+        jcheck.add(familyCB);
+        return jcheck.get(familyIndex);
     }
 
 

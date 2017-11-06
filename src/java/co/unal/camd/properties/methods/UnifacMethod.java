@@ -46,13 +46,13 @@ public class UnifacMethod {
         MoleculeGroups g;
         for (MoleculeGroups aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * g.getq();
-            //System.out.println("Qi"+g.getq(CONTRIBUTION_GROUPS));
+            sum += g.getComposition() * g.getQ();
+            //System.out.println("Qi"+g.getQ(CONTRIBUTION_GROUPS));
         }
         g = molecule.get(principal);
-        //System.out.println("Qiprin"+g.getq(CONTRIBUTION_GROUPS));
-        // System.out.println("Fi"+g.getq(CONTRIBUTION_GROUPS)/sum);
-        return g.getq() / sum;
+        //System.out.println("Qiprin"+g.getQ(CONTRIBUTION_GROUPS));
+        // System.out.println("Fi"+g.getQ(CONTRIBUTION_GROUPS)/sum);
+        return g.getQ() / sum;
     }
 
     ///////////V//////////
@@ -61,11 +61,11 @@ public class UnifacMethod {
         MoleculeGroups g;
         for (MoleculeGroups aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * g.getr();
+            sum += g.getComposition() * g.getR();
         }
         g = molecule.get(principal);
-        // System.out.println("V"+g.getr(CONTRIBUTION_GROUPS)/sum);
-        return g.getr() / sum;
+        // System.out.println("V"+g.getR(CONTRIBUTION_GROUPS)/sum);
+        return g.getR() / sum;
     }
 
     ///////V'///////////////////
@@ -74,27 +74,27 @@ public class UnifacMethod {
         MoleculeGroups g;
         for (MoleculeGroups aMolecule : molecule) {
             g = aMolecule;
-            sum += g.getComposition() * Math.pow(g.getr(), 0.75);
+            sum += g.getComposition() * Math.pow(g.getR(), 0.75);
             //System.out.println("comVp:"+g.getComposition());
-            //System.out.println("r3vp:"+Math.pow(g.getr(CONTRIBUTION_GROUPS), 0.75));
+            //System.out.println("r3vp:"+Math.pow(g.getR(CONTRIBUTION_GROUPS), 0.75));
             //	System.out.println("vpsum:"+sum);
         }
         g = molecule.get(principal);
         // System.out.println("comPrin:"+g.getComposition());
-        //System.out.println("r3Prin:"+Math.pow(g.getr(CONTRIBUTION_GROUPS), 0.75));
+        //System.out.println("r3Prin:"+Math.pow(g.getR(CONTRIBUTION_GROUPS), 0.75));
 
-        //System.out.println("Vp: "+Math.pow(g.getr(CONTRIBUTION_GROUPS),0.75)/sum);
-        return Math.pow(g.getr(), 0.75) / sum;
+        //System.out.println("Vp: "+Math.pow(g.getR(CONTRIBUTION_GROUPS),0.75)/sum);
+        return Math.pow(g.getR(), 0.75) / sum;
     }
 
     /////////gamma i combinat/////////
     private double getGamma(int principal, ArrayList<MoleculeGroups> molecules) {
         MoleculeGroups g = molecules.get(principal);
         // System.out.println("Gamma comb: "+(1-getVprima(principal, molecules)+2.30258509*Math.log10(getVprima(principal, molecules))
-        //	-5*g.getq(CONTRIBUTION_GROUPS)*(1-(getV(principal,molecules)/getF(principal,molecules))
+        //	-5*g.getQ(CONTRIBUTION_GROUPS)*(1-(getV(principal,molecules)/getF(principal,molecules))
         //	+2.30258509*Math.log10(getV(principal,molecules)/getF(principal,molecules)))));
         return 1 - getVprima(principal, molecules) + 2.30258509 * Math.log10(getVprima(principal, molecules))
-                - 5 * g.getq() * (1 - (getV(principal, molecules) / getF(principal, molecules))
+                - 5 * g.getQ() * (1 - (getV(principal, molecules) / getF(principal, molecules))
                 + 2.30258509 * Math.log10(getV(principal, molecules) / getF(principal, molecules)));
     }
 
@@ -153,20 +153,16 @@ public class UnifacMethod {
     ///////////////////THETA////////////////////////////////////
     public double getTheta(ArrayList<MoleculeGroups> molecules, int principal, int group) {
         double sum = 0;
-        MoleculeGroups g;
-        MoleculeGroups g2 = molecules.get(principal);
+        MoleculeGroups molecule;
+        MoleculeGroups mainMolecule = molecules.get(principal);
 
         for (int i = 0; i < molecules.size(); i++) {
-            g = molecules.get(i);
-            for (int j = 0; j < g.size(); j++) {
-                sum = sum + getX(molecules, i, j) * CamdRunner.CONTRIBUTION_GROUPS.getQ(g.getGroupCode(j));
-                //    System.out.println("esta es la suma de teta :"+sum);
-            }
+            molecule = molecules.get(i);
+            for (int j = 0; j < molecule.size(); j++)
+                sum += getX(molecules, i, j) * molecule.getGroupContributions()[j].getQParam();
         }
-        //System.out.println("esta es la suma de teta :"+sum);
-        int aux = g2.getGroupCode(group);
-        //System.out.println("teta: "+getX(molecules,principal,group)*CONTRIBUTION_GROUPS.getQ(aux)/sum);
-        return getX(molecules, principal, group) * CamdRunner.CONTRIBUTION_GROUPS.getQ(aux) / sum;
+
+        return getX(molecules, principal, group) * mainMolecule.getGroupContributions()[group].getQParam() / sum;
     }
 
     ////////////Y///////////
@@ -229,13 +225,10 @@ public class UnifacMethod {
         //System.out.println("esta es la suma 1 :"+sum1);
         //	System.out.println("esta es la suma 2 :"+sum2);
         //	System.out.println("esta es la suma 3.. :"+sum3);
-        if (canBeDone) {
-            double p = CamdRunner.CONTRIBUTION_GROUPS.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
-            //System.out.println("F"+group+": "+p);
-            return CamdRunner.CONTRIBUTION_GROUPS.getQ(g2.getGroupCode(group)) * (1 - 2.30258509 * Math.log10(sum1) - sum2);
-        } else {
+        if (canBeDone)
+            return g2.getGroupContributions()[group].getQParam() * (1 - 2.30258509 * Math.log10(sum1) - sum2);
+        else
             return 0.0001;
-        }
     }
 
     /////////gamma i residual/////////

@@ -20,8 +20,8 @@ public class SolventLoss {
     public double getMethodResult() {
         aMethods = new UnifacMethod();
         double unifac = aMethods.getMethodResult(solventUandD, 0, temp);
-        double pmSolventUser = PM.getMethodResult((solventUandD.get(1)));
-        double pmSolventDesign = PM.getMethodResult((solventUandD.get(0)));
+        double pmSolventUser = MolecularWeight.getMethodResult((solventUandD.get(1)));
+        double pmSolventDesign = MolecularWeight.getMethodResult((solventUandD.get(0)));
         return 1 / unifac * pmSolventDesign / pmSolventUser;
     }
 
