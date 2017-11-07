@@ -7,7 +7,7 @@ import java.util.Locale;
 
 @Data
 public class ContributionGroupData {
-    private Integer code;
+    private int code;
     private ContributionGroup.Main mainGroup;
     private String groupName;
     private Double rParam;
@@ -26,7 +26,7 @@ public class ContributionGroupData {
     private Double[] densityB = new Double[4];
     private Double[] densityC = new Double[4];
 
-    public ContributionGroupData(Integer code) {
+    public ContributionGroupData(int code) {
         this.code = code;
     }
 

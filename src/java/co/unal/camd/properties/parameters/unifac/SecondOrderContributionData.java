@@ -12,7 +12,7 @@ import java.util.Locale;
 @Data
 public class SecondOrderContributionData {
 
-    private Integer groupsCase;
+    private int groupsCase;
     private Double boilingPoint;
     private Double meltingPoint;
     private Double gibbsEnergy;
@@ -20,7 +20,7 @@ public class SecondOrderContributionData {
     @Setter(AccessLevel.NONE)
     private List<Integer[]> groupsConfigurations = new ArrayList<>();
 
-    public SecondOrderContributionData(Integer groupsCase) {
+    public SecondOrderContributionData(int groupsCase) {
         this.groupsCase = groupsCase;
     }
 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class SolventLoss {
 
-    private UnifacMethod aMethods;
     private double temp;
     private ArrayList<MoleculeGroups> solventUandD;
 
@@ -18,11 +17,11 @@ public class SolventLoss {
     }
 
     public double getMethodResult() {
-        aMethods = new UnifacMethod();
-        double unifac = aMethods.getMethodResult(solventUandD, 0, temp);
-        double pmSolventUser = MolecularWeight.getMethodResult((solventUandD.get(1)));
-        double pmSolventDesign = MolecularWeight.getMethodResult((solventUandD.get(0)));
-        return 1 / unifac * pmSolventDesign / pmSolventUser;
+        UnifacEstimator unifacEstimator = new UnifacEstimator(solventUandD);
+        double unifacGamma = unifacEstimator.solve(temp);
+        double pmSolventUser = MolecularWeight.compute((solventUandD.get(1)));
+        double pmSolventDesign = MolecularWeight.compute((solventUandD.get(0)));
+        return 1 / unifacGamma * pmSolventDesign / pmSolventUser;
     }
 
 }

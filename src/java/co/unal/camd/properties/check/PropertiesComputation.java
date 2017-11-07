@@ -1,12 +1,12 @@
 package co.unal.camd.properties.check;
 
-import co.unal.camd.properties.methods.BoilingTemp;
+import co.unal.camd.properties.methods.BoilingPoint;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
 import co.unal.camd.properties.methods.MolecularWeight;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.methods.GibbsEnergy;
-import co.unal.camd.properties.methods.MeltingTemp;
+import co.unal.camd.properties.methods.MeltingPoint;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.properties.parameters.EstimationParameters;
@@ -75,13 +75,13 @@ public class PropertiesComputation {
     private static void computeProperties(MoleculeData moleculeData, Molecule molecule, double temperature) {
         ArrayList<Integer> secOrderCodes = molecule.findSecondOrderGroupArray();
         GibbsEnergy GE = new GibbsEnergy(molecule, secOrderCodes);
-        BoilingTemp BT = new BoilingTemp(molecule, secOrderCodes);
+        BoilingPoint BT = new BoilingPoint(molecule, secOrderCodes);
         Density D = new Density(molecule, temperature);
-        MeltingTemp MT = new MeltingTemp(molecule, secOrderCodes);
+        MeltingPoint MT = new MeltingPoint(molecule, secOrderCodes);
         DielectricConstant DC = new DielectricConstant(molecule, secOrderCodes, temperature);
         MoleculeGroups groupsArray = molecule.getGroupsArray();
         groupsArray.optimize();
-        double mw = MolecularWeight.getMethodResult(groupsArray);
+        double mw = MolecularWeight.compute(groupsArray);
 
         moleculeData.getRecomputed()
                 .setMolecularWeight(mw)

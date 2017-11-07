@@ -29,7 +29,7 @@ public class MoleculesFactory {
         for (int i = 0; i <= random(min); i++) {
             groupCode = MoleculeOperations.getNewGroupCode(1, opt);
             functionalGroupNodes.add(new ContributionGroupNode(groupCode));
-            //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getCode())+" "+CONTRIBUTION_GROUPS.getPrincipalGroupCode(auxiliar.get(i).getCode()));
+            //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getCode())+" "+CONTRIBUTION_GROUPS.getMainGroupCode(auxiliar.get(i).getCode()));
             if (probabilityFunction(functionalGroupNodes, aProba)) {
                 Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(groupCode).getMainGroup().getCode();
                 opt = mainGroupCode <= 1;

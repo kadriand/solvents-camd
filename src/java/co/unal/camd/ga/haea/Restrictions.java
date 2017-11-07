@@ -99,7 +99,7 @@ public class Restrictions {
      for(int i=0;i<aGroups.countSubgroups();i++){
      if(aGroups.findGroupCode()==2){
      System.out.println("cambio?");
-     if(aGroups.getGroupAt(i).getPrincipalGroupCode()==5){
+     if(aGroups.getGroupAt(i).getMainGroupCode()==5){
      System.out.println("cambio por oh1");
      aGroups.setGroupAt(i, new Groups("OH1",operator));
      }
@@ -107,7 +107,7 @@ public class Restrictions {
 
      } else if(aGroups.findGroupCode()==3){
 
-     if(aGroups.getGroupAt(i).getPrincipalGroupCode()==5){
+     if(aGroups.getGroupAt(i).getMainGroupCode()==5){
      System.out.println("cambio por oh2");
      aGroups.setGroupAt(i, new Groups("OH1",operator));
      }
@@ -115,7 +115,7 @@ public class Restrictions {
 
      } else  if(aGroups.findGroupCode()==4){
      //System.out.println(aGroups.getGroupAt(i).findGroupName());
-     if(aGroups.getGroupAt(i).getPrincipalGroupCode()==5){
+     if(aGroups.getGroupAt(i).getMainGroupCode()==5){
      System.out.println("cambio por oh3");
      aGroups.setGroupAt(i, new Groups("OH3",operator));
      }

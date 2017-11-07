@@ -6,12 +6,12 @@ import co.unal.camd.view.CamdRunner;
 
 import java.util.ArrayList;
 
-public class MeltingTemp {
+public class MeltingPoint {
 
     private MoleculeGroups molecule;
     private ArrayList<Integer> secondOrderCodes;
 
-    public MeltingTemp(Molecule molecule, ArrayList<Integer> secOrderCode) {
+    public MeltingPoint(Molecule molecule, ArrayList<Integer> secOrderCode) {
         secondOrderCodes = secOrderCode;
         this.molecule = molecule.getGroupsArray();
         this.molecule.optimize();
@@ -20,9 +20,9 @@ public class MeltingTemp {
     public double getMethodResult() {
         double sum = 0;
         for (int i = 0; i < molecule.size(); i++)
-            sum += molecule.getAmount(i) * molecule.getGroupContributions()[i].getMeltingPoint();
+            sum += molecule.getAmount()[i] * molecule.getGroupContributions()[i].getMeltingPoint();
 
-        sum = sum + calculateSecOrderContribution();
+        sum += calculateSecOrderContribution();
         return 102.425 * Math.log10(sum) * 2.30258509;
     }
 

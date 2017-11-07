@@ -66,7 +66,7 @@ public class Density {
         MoleculeGroups gr = molecule.getGroupsArray();
         gr.optimize();
         //System.out.println("SUmaD"+sum);
-        return MolecularWeight.getMethodResult(gr) / sum;
+        return MolecularWeight.compute(gr) / sum;
     }
 
     public static boolean isBond(ContributionGroupNode aGroup, int rootGroup, int leafGroup) {

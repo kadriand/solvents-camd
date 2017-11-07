@@ -6,10 +6,15 @@ import java.util.Objects;
 
 @Data
 public class UnifacParametersPair {
-    private Integer i;
-    private Integer j;
+    private int i;
+    private int j;
 
-    public UnifacParametersPair(Integer i, Integer j) {
+    public UnifacParametersPair(int i, int j) {
+        if (i == j) {
+            this.i = 0;
+            this.j = 0;
+            return;
+        }
         this.i = i;
         this.j = j;
     }
@@ -21,7 +26,7 @@ public class UnifacParametersPair {
         if (other == this)
             return true;
         UnifacParametersPair otherCasted = (UnifacParametersPair) other;
-        return this.i == otherCasted.i && this.j == otherCasted.j;
+        return (this.i == otherCasted.i && this.j == otherCasted.j) || (this.i == this.j && otherCasted.i == otherCasted.j);
     }
 
     @Override

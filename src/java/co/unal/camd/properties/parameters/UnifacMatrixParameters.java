@@ -16,7 +16,7 @@ import java.util.Iterator;
  *
  * @author FAMILIA MORENO
  */
-public class UnifacParameters {
+public class UnifacMatrixParameters {
 
     /**
      * Unifac parameters file path in resources directory (/src/resources/)
@@ -38,8 +38,8 @@ public class UnifacParameters {
     /**
      * constructors for load the info
      */
-    public UnifacParameters() {
-        try (InputStream workbookIS = UnifacParameters.class.getResourceAsStream(PARAMETERS_WORKBOOK_PATH)) {
+    public UnifacMatrixParameters() {
+        try (InputStream workbookIS = UnifacMatrixParameters.class.getResourceAsStream(PARAMETERS_WORKBOOK_PATH)) {
             System.out.println("Loading UNIFAC parameters file");
             parametersWorkbook = new XSSFWorkbook(workbookIS);
             SHEETS_SIZE = (byte) parametersWorkbook.getNumberOfSheets();

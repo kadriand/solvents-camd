@@ -112,16 +112,21 @@ public class EstimationParameters {
         // Second Row
         int ijRow = 1;
 
+        // Element for interactions where i=j
+        UnifacParametersPair parametersPair = new UnifacParametersPair(0, 0);
+        UnifacInteractionData unifacInteractions = new UnifacInteractionData(parametersPair).setAij(0.0).setBij(0.0).setCij(0.0).setAji(0.0).setBji(0.0).setCji(0.0);
+        this.unifacInteractions.put(parametersPair, unifacInteractions);
+
         XSSFRow currentRow = interactionsSheet.getRow(ijRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer iParam = (int) currentRow.getCell(0).getNumericCellValue();
                 Integer jParam = (int) currentRow.getCell(1).getNumericCellValue();
-                UnifacParametersPair parametersPair = new UnifacParametersPair(iParam, jParam);
-                UnifacInteractionData unifacData = new UnifacInteractionData(parametersPair);
-                readInteractionsCells(currentRow, unifacData);
-                debug(unifacData);
-                unifacInteractions.put(parametersPair, unifacData);
+                parametersPair = new UnifacParametersPair(iParam, jParam);
+                unifacInteractions = new UnifacInteractionData(parametersPair);
+                readInteractionsCells(currentRow, unifacInteractions);
+                debug(unifacInteractions);
+                this.unifacInteractions.put(parametersPair, unifacInteractions);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + ijRow);
                 e.printStackTrace();

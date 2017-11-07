@@ -2,21 +2,20 @@ package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.properties.methods.BoilingTemp;
+import co.unal.camd.properties.methods.BoilingPoint;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
 import co.unal.camd.properties.methods.GibbsEnergy;
-import co.unal.camd.properties.methods.MeltingTemp;
+import co.unal.camd.properties.methods.MeltingPoint;
 import co.unal.camd.properties.methods.MolecularWeight;
 import co.unal.camd.properties.methods.SolventLoss;
-import co.unal.camd.properties.methods.UnifacMethod;
+import co.unal.camd.properties.methods.UnifacEstimator;
 import unalcol.optimization.OptimizationFunction;
 
 import java.util.ArrayList;
 
 public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
-    private UnifacMethod allMethods;
     private double temperature;
     private MoleculeGroups solventUser;
     private MoleculeGroups solute;
@@ -38,7 +37,6 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         this.solute = soluteGroups;
         this.solventUser = solventGroupsUser;
         this.temperature = temperature;
-        allMethods = new UnifacMethod();
         ArrayList<MoleculeGroups> AB = new ArrayList<>();
 
         MoleculeGroups a0 = soluteGroups;
@@ -49,20 +47,20 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         b0.setComposition(_C);
         AB.add(b0);
 
-        allMethods.canBeDone = true;
-        ab = allMethods.getMethodResult(AB, 0, temperature);
+        UnifacEstimator unifac = new UnifacEstimator(AB);
+        ab = unifac.solve(temperature);
         //	System.out.println("1___"+ab);
 
-        double pmb = MolecularWeight.getMethodResult(solventGroupsUser);
-        double pma = MolecularWeight.getMethodResult(soluteGroups);
+        double pmb = MolecularWeight.compute(solventGroupsUser);
+        double pma = MolecularWeight.compute(soluteGroups);
         pm = pma / pmb;
 
         w = weight;
         B = limits[0];
         Po = limits[1];
         unc = limits[2];
-        //       		System.out.println("5___"+PM.getMethodResult(solute,CONTRIBUTION_GROUPS));
-        //        		System.out.println("6___"+PM.getMethodResult(solventUser,CONTRIBUTION_GROUPS));
+        //       		System.out.println("5___"+PM.solve(solute,CONTRIBUTION_GROUPS));
+        //        		System.out.println("6___"+PM.solve(solventUser,CONTRIBUTION_GROUPS));
     }
 
     /**
@@ -74,7 +72,6 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
     @Override
     public Double apply(Molecule solvent) {
-
         //System.out.println("solvent"+SB.get(0).getMoleculeByRootGroup());
         //System.out.println("solventuser"+SB.get(1).getMoleculeByRootGroup());
 
@@ -88,9 +85,9 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
 
         ArrayList<Integer> secOrderCodes = solvent.findSecondOrderGroupArray();
         GibbsEnergy GE = new GibbsEnergy(solvent, secOrderCodes);
-        BoilingTemp BT = new BoilingTemp(solvent, secOrderCodes);
+        BoilingPoint BT = new BoilingPoint(solvent, secOrderCodes);
         Density D = new Density(solvent, temperature);
-        MeltingTemp MT = new MeltingTemp(solvent, secOrderCodes);
+        MeltingPoint MT = new MeltingPoint(solvent, secOrderCodes);
         DielectricConstant DC = new DielectricConstant(solvent, secOrderCodes, temperature);
         SolventLoss SL = new SolventLoss(temperature, targetAndDesignedSolvents);
 
@@ -152,20 +149,19 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         //System.out.println("solut"+AS.get(0).getMoleculeByRootGroup());
         //System.out.println("solvent: "+AS.get(1).getMoleculeByRootGroup());
 
-        //		UNIFAC aUNIFAC=(UNIFAC)allMethods;
-        allMethods.canBeDone = true;
-        double as = allMethods.getMethodResult(AS, 0, temperature);
-        double bs = allMethods.getMethodResult(BS, 0, temperature);
-        ks = (ab * bs) / (as * as) * (pm);
+        //		UNIFAC aUNIFAC=(UNIFAC)unifacMethod;
+        UnifacEstimator unifac = new UnifacEstimator(AS);
+        double as = unifac.solve(temperature);
+        boolean success = unifac.isSuccess();
 
-        //	System.out.println("2___"+allMethods.getMethodResult(BS, 0,temperature,CONTRIBUTION_GROUPS));
-        //	System.out.println("3___"+allMethods.getMethodResult(AS,0,temperature,CONTRIBUTION_GROUPS));
+        unifac = new UnifacEstimator(BS);
+        double bs = unifac.solve(temperature);
+        success = success && unifac.isSuccess();
 
-        if (!allMethods.canBeDone) {
-            allMethods.canBeDone = true;
+        if (success)
+            ks = (ab * bs) / (as * as) * (pm);
+        else
             ks = -100000.0;
-        }
-
         return ks;
     }
 

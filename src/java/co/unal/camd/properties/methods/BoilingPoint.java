@@ -6,12 +6,12 @@ import co.unal.camd.view.CamdRunner;
 
 import java.util.ArrayList;
 
-public class BoilingTemp {
+public class BoilingPoint {
 
     private MoleculeGroups molecule;
     private ArrayList<Integer> secondOrderCodes;
 
-    public BoilingTemp(Molecule solvent, ArrayList<Integer> secOrderCode) {
+    public BoilingPoint(Molecule solvent, ArrayList<Integer> secOrderCode) {
         secondOrderCodes = secOrderCode;
         molecule = solvent.getGroupsArray();
         molecule.optimize();
@@ -20,7 +20,7 @@ public class BoilingTemp {
     public double getMethodResult() {
         double sum = 0;
         for (int i = 0; i < molecule.size(); i++)
-            sum += molecule.getAmount(i) * molecule.getGroupContributions()[i].getBoilingPoint();
+            sum += molecule.getAmount()[i] * molecule.getGroupContributions()[i].getBoilingPoint();
         sum += calculateSecOrderContribution();
         return 204.359 * Math.log10(sum) * 2.30258509;
     }

@@ -1,6 +1,6 @@
 package co.unal.camd.view;
 
-import co.unal.camd.properties.methods.UnifacMethod;
+import co.unal.camd.properties.methods.UnifacEstimator;
 import co.unal.camd.properties.parameters.ProblemDefaults;
 import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 
@@ -201,9 +201,10 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
             ButtonSolveUNIFAC = new JButton("Calcular GAMMAi");
             ButtonSolveUNIFAC.setText("gamma");
             ButtonSolveUNIFAC.addActionListener(evt -> {
-                UnifacMethod unifac = new UnifacMethod();
-                double Gamma = unifac.getMethodResult(camdSetupWindow.getUserMolecules(), principal, camdSetupWindow.getTemperature());
-                System.out.println("El GAMMAi es: " + Gamma);
+                UnifacEstimator unifac = new UnifacEstimator(camdSetupWindow.getUserMolecules());
+                unifac.setPrincipal(principal);
+                double gamma = unifac.solve(camdSetupWindow.getTemperature());
+                System.out.println("El GAMMAi es: " + gamma);
                 //TODO implement as it should be
                 //                camdSetupWindow.setGamma(Gamma);
             });

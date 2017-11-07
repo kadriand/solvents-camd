@@ -37,9 +37,9 @@ public class ContributionGroup {
     @Data
     public static class Main {
         private String name;
-        private Integer code;
+        private int code;
 
-        public Main(Integer code, String name) {
+        public Main(int code, String name) {
             this.name = name;
             this.code = code;
         }

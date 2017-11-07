@@ -93,7 +93,7 @@ public class DielectricConstant {
         int sum = 0;
         for (int k = 0; k < molecule.size(); k++)
             for (int j = 0; j < conditionGHC.length; j++)
-                if (molecule.getGroupCode(k) == conditionGHC[j])
+                if (molecule.getGroups()[k] == conditionGHC[j])
                     sum += 1;
 
         if (conditionCase & sum == molecule.size())
@@ -113,7 +113,7 @@ public class DielectricConstant {
         if (conditionCase && otherCond) {
             for (int i = 0; i < molecule.size(); i++) {
                 for (int j = 0; j < condition1_9.length; j++) {
-                    if (molecule.getGroupCode(i) == condition1_9[j]) {
+                    if (molecule.getGroups()[i] == condition1_9[j]) {
                         sum += 1;
                     }
                 }
@@ -127,7 +127,7 @@ public class DielectricConstant {
         if (conditionCase && otherCond) {
             for (int i = 0; i < molecule.size(); i++) {
                 for (int j = 0; j < condition1_9.length; j++) {
-                    if (molecule.getGroupCode(i) == condition1_9[j]) {
+                    if (molecule.getGroups()[i] == condition1_9[j]) {
                         sum += 1;
                     }
                 }

@@ -62,14 +62,6 @@ public class MoleculeGroups {
         return groups.length;
     }
 
-    public int getGroupCode(int groupIndex) {
-        return groups[groupIndex];
-    }
-
-    public int getAmount(int group) {
-        return amount[group];
-    }
-
     ////q///
     public double getQ() {
         double q = 0;
