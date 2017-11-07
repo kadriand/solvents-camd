@@ -32,8 +32,6 @@ public class BoilingPoint {
             a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(so).getBoilingPoint();
         }
         return a;
-
     }
-
 
 }

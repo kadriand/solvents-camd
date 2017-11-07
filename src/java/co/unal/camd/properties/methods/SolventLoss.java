@@ -4,7 +4,6 @@ import co.unal.camd.properties.model.MoleculeGroups;
 
 import java.util.ArrayList;
 
-
 public class SolventLoss {
 
     private double temp;

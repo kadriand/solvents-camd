@@ -7,7 +7,6 @@ import co.unal.camd.view.CamdRunner;
 import java.util.ArrayList;
 
 public class GibbsEnergy {
-    /////////////////////////////G/////////////////////////////////////////////
 
     private MoleculeGroups molecule;
     private ArrayList<Integer> secondOrderCodes;
@@ -25,7 +24,6 @@ public class GibbsEnergy {
         double g0 = -14.828;
         return sum + g0 + calculateSecOrderContribution();
     }
-
 
     private double calculateSecOrderContribution() {
         double sum = 0;

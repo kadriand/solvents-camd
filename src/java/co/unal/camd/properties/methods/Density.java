@@ -62,14 +62,12 @@ public class Density {
                 }
             }
         }
-        //System.out.println(sum);
         MoleculeGroups gr = molecule.getGroupsArray();
         gr.optimize();
-        //System.out.println("SUmaD"+sum);
         return MolecularWeight.compute(gr) / sum;
     }
 
-    public static boolean isBond(ContributionGroupNode aGroup, int rootGroup, int leafGroup) {
+    private static boolean isBond(ContributionGroupNode aGroup, int rootGroup, int leafGroup) {
         if (aGroup.getGroupCode() == rootGroup && aGroup.getGroupAt(0) != null)
             for (int i = 0; i < aGroup.countSubgroups(); i++)
                 if (aGroup.getGroupAt(i).getGroupCode() == leafGroup)
