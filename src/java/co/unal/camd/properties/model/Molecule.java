@@ -1,11 +1,13 @@
 package co.unal.camd.properties.model;
 
+import co.unal.camd.properties.parameters.unifac.SecondOrderContributionData;
 import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.swing.event.TreeModelListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -116,90 +118,84 @@ public class Molecule {
     }
 
     public ArrayList<Integer> findSecondOrderGroupArray() {
-        ArrayList<Integer> secondOrderCode = new ArrayList<>();
-        secOrderContribution(genotype, secondOrderCode);
-        return secondOrderCode;
+        ArrayList<Integer> secondOrderCodes = new ArrayList<>();
+        secOrderContribution(genotype, secondOrderCodes);
+        return secondOrderCodes;
     }
 
-    private void secOrderContribution(ContributionGroupNode aRootFunctionalGroupNode, ArrayList<Integer> secondOrderCode) {
+    private void secOrderContribution(ContributionGroupNode aRootFunctionalGroupNode, ArrayList<Integer> secondOrderCodes) {
         if (aRootFunctionalGroupNode != null)
-            identifySecondOrderGroups(aRootFunctionalGroupNode, secondOrderCode);
+            identifySecondOrderGroups(aRootFunctionalGroupNode, secondOrderCodes);
 
         if (aRootFunctionalGroupNode.countSubgroups() < 1)
             return;
 
         for (int i = 0; i < aRootFunctionalGroupNode.countSubgroups(); i++) {
             ContributionGroupNode leaf = aRootFunctionalGroupNode.getGroupAt(i);
-            secOrderContribution(leaf, secondOrderCode);
+            secOrderContribution(leaf, secondOrderCodes);
         }
     }
 
-    private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCode) {
-        ArrayList<String[]> secondGroup = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupCase(root.getGroupCode());
-        //	System.out.println("DimensionArray: "+s.size());
-        int dim = root.countSubgroups();
-        int a[] = leavesToVector(root);
-
-        if (secondGroup.size() < 1)
+    //    TODO >  IMPROVE
+    private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCodes) {
+        int rootGroupCode = root.getGroupCode();
+        List<SecondOrderContributionData> secondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsRoots().get(rootGroupCode);
+        if (secondOrderContributions == null)
             return;
+        int dim = root.getSubGroups().size();
+        int leaves[] = leavesToVector(root);
 
+        //        System.out.println(String.format("***** Second order alt START ******"));
         for (int i = 0; i < dim; i++) {
-            int c = 0;
-            int codeColumn = (int) Double.parseDouble(secondGroup.get(c)[2]);
-            //System.out.println("prueba2: "+codeColumn);
-            //System.out.println("prueba11: "+a[i]);
-            while (a[i] >= codeColumn) {  //
-                //System.out.println("prueba6");
-                int[] caseOH = new int[2];
-                int[] tempCond = new int[3]; //this is the array of groups (less central group and second) that construct de second order groups
-                //System.out.println("prueba10: "+a[i]);
-                //System.out.println("prueba12: "+codeColumn);
-                if (a[i] == codeColumn) {
-                    int[] b = new int[a.length];
-                    for (int r = 0; r < a.length; r++)
-                        b[r] = r == i ? 0 : a[r];
-                    //	System.out.println("prueba7");
-                    //if(>0){ //no more groups bond
-                    int restric = (int) Double.parseDouble(secondGroup.get(c)[4]);
-                    int z = 3;
-                    int caseArray = 1;
-                    while (caseArray > 0 && z < secondGroup.get(c).length - 2) {
-                        //   System.out.println("prueba8");
-                        caseArray = (int) Double.parseDouble(secondGroup.get(c)[z]); //revisar esto para ver si puede se mas r�pido
-                        //  System.out.println("Temp "+i+": "+caseArray);
-                        tempCond[z - 2] = caseArray;
-                        z = z + 1;
-                    }
-                    boolean flat = true;
-                    if (restric == 14 || restric == 81 || restric == 82) {
-                        caseOH[0] = tempCond[0];
-                        caseOH[1] = tempCond[1];
-                        tempCond[2] = 0;
-                    }
-                    if (sameVector(tempCond, b)) { //if the leaves are the same that sec order groups, add the code of SOG
-                        for (int p = 0; p < dim; p++) {
-                            if (root.getGroupAt(p).getGroupCode() != caseOH[0])
-                                continue;
-                            int[] tempCond2 = new int[1];
-                            tempCond2[0] = caseOH[1];
-                            flat = sameVector(caseOH, tempCond2);
-                            //		System.out.println("prueba5");
-                        }
-                        if (flat) {
-                            //	System.out.println("caso: "+(int)Double.parseDouble(s.get(c)[0]));
-                            secondOrderCode.add((int) Double.parseDouble(secondGroup.get(c)[0]));
-                            secondGroup.remove(c);
-                        }
-                    }
-                }
-                c++;
-                codeColumn = secondGroup.size() <= c ? 1000 : (int) Double.parseDouble(secondGroup.get(c)[2]);
-                //	System.out.println("C: "+c);
-                //System.out.println("Size: "+s.size());
-                //System.out.println("Ai"+a[i]);
-            }
-        }
+            final int iFinal = i;
+            secondOrderContributions.stream()
+                    .filter(secondOrderContribution -> !secondOrderCodes.contains(secondOrderContribution.getGroupsCase()))
+                    .forEach(secondOrderContribution -> secondOrderContribution.getGroupsConfigurations().stream()
+                            .filter(groupConfiguration -> groupConfiguration[0] == rootGroupCode && leaves[iFinal] == groupConfiguration[1])
+                            .forEach(groupConfiguration ->
+                                    {
+                                        if (secondOrderCodes.contains(secondOrderContribution.getGroupsCase()))
+                                            return;
 
+                                        int[] caseOH = new int[2];
+                                        int[] tempCond = new int[3]; //this is the array of groups (less central group and second) that construct de second order groups
+
+                                        //                                            System.out.println("Alt enter " + leaves[iFinal] + " with " + secondOrderContribution.getGroupsCase() + "-" + groupConfiguration[1]);
+                                        int[] b = new int[leaves.length];
+
+                                        for (int r = 0; r < leaves.length; r++)
+                                            b[r] = r == iFinal ? 0 : leaves[r];
+
+                                        for (int z = 1; z < groupConfiguration.length - 1 && z < tempCond.length; z++)
+                                            tempCond[z] = groupConfiguration[z + 1]; //revisar esto para ver si puede se mas r�pido
+
+                                        boolean flat = true;
+                                        if (secondOrderContribution.getGroupsCase() == 30) {
+                                            caseOH[0] = tempCond[0];
+                                            caseOH[1] = tempCond[1];
+                                            tempCond[2] = 0;
+                                        }
+
+                                        if (sameVector(tempCond, b)) { //if the leaves are the same that sec order groups, add the code of SOG
+                                            for (int p = 0; p < dim; p++) {
+                                                if (root.getGroupAt(p).getGroupCode() != caseOH[0])
+                                                    continue;
+                                                int[] tempCond2 = new int[1];
+                                                tempCond2[0] = caseOH[1];
+                                                flat = sameVector(caseOH, tempCond2);
+                                                //		System.out.println("prueba5");
+                                            }
+                                            if (flat) {
+                                                //	System.out.println("caso: "+(int)Double.parseDouble(s.get(c)[0]));
+                                                //TODO Check if second order groups repetition are being ignored
+                                                secondOrderCodes.add(secondOrderContribution.getGroupsCase());
+                                                //                                            secondGroup.remove(c);
+                                            }
+                                        }
+                                    }
+                            )
+                    );
+        }
     }
 
     private boolean sameVector(int[] vect1, int[] vect2) {
@@ -228,7 +224,7 @@ public class Molecule {
     }
 
     private int[] leavesToVector(ContributionGroupNode root) {
-        int dim = root.countSubgroups();
+        int dim = root.getSubGroups().size();
         int[] a = new int[dim];
         //System.out.println("prueba9");
         for (int i = 0; i < dim; i++)

@@ -9,17 +9,17 @@ public class ContributionGroupNode {
 
     private int groupCode; //identification of the group by refCode
     private Vector<ContributionGroupNode> subGroups = new Vector<>();
-    ;
 
     public ContributionGroupNode(ContributionGroupNode functionalGroupNode) {
         groupCode = functionalGroupNode.getGroupCode();
         subGroups = new Vector<>();
-        int n = functionalGroupNode.countSubgroups();
+        int n = functionalGroupNode.subGroups.size();
         for (int i = 0; i < n; i++) {
             subGroups.add(functionalGroupNode.subGroups.get(i).clone());
         }
     }
 
+    @Override
     public ContributionGroupNode clone() {
         return new ContributionGroupNode(this);
     }
@@ -74,10 +74,6 @@ public class ContributionGroupNode {
 
     public void clearGroup(int i) {
         subGroups.removeElementAt(i);
-    }
-
-    public Vector<ContributionGroupNode> getSubGroups() {
-        return subGroups;
     }
 
     public String toString() {

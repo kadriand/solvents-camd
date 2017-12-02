@@ -68,7 +68,7 @@ public class DielectricConstant {
 
         for (int j = 0; j < secondOrderCode.size(); j++) {
             int caseNum = secondOrderCode.get(j);
-            c += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(caseNum).getLiquidMolarVolume();
+            c += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(caseNum).getLiquidMolarVolume();
         }
         //System.out.println("MVC2:" +c);
         return (c + d) * 1000;

@@ -29,7 +29,7 @@ public class BoilingPoint {
         double a = 0;
         for (int i = 0; i < secondOrderCodes.size(); i++) {
             int so = secondOrderCodes.get(i);
-            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(so).getBoilingPoint();
+            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(so).getBoilingPoint();
         }
         return a;
     }

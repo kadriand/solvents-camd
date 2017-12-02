@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ContributionGroup {
+    public static int[] DEFAULT_UNCHECKED_FAMILIES = new int[]{3, 13, 16, 17};
 
     @Data
     public static class Family {

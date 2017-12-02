@@ -3,6 +3,8 @@
  */
 package co.unal.camd.view;
 
+import co.unal.camd.properties.parameters.ProblemDefaults;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -35,7 +37,7 @@ public class CamdSetupWindow extends CamdRunner implements ActionListener {
      */
     private void initialize() {
         userMolecules = new ArrayList<>();
-        temperature = 298.15;
+        temperature = ProblemDefaults.TEMPERATURE;
         maxIterations = 50;
         this.setSize(600, 600);
         this.setTitle("CAMD");

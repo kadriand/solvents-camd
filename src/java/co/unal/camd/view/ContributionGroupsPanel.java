@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 
 public abstract class ContributionGroupsPanel extends JPanel implements ActionListener {
@@ -17,9 +20,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private static final long serialVersionUID = 1L;
 
     private JLabel labelTemperature = null;
-    private JTextField textFieldTemperature = null;
-
-    JComboBox<String> comboBoxMolecules = null;
     private JButton jButton = null;
     private JButton buttonFixMolecule = null;
     private JButton newMoleculeBtn = null;
@@ -42,13 +42,15 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private ArrayList<JCheckBox> jcheck = new ArrayList<>();
     private JScrollPane jScrollPane = null;
 
-    private int valence;
-    CamdSetupWindow camdSetupWindow;
-    String[][] allGroups;
-    JList groupsList = null;
-    DefaultListModel<String> groupsListModel = new DefaultListModel<>();
-    ArrayList<String> userMoleculeGroups = new ArrayList<>();
-    int principal;
+    protected CamdSetupWindow camdSetupWindow;
+    protected JComboBox<String> comboBoxMolecules = null;
+    protected Map<Integer, java.util.List<String>> selectionBoxGroups = new HashMap<>();
+
+    protected JTextField textFieldTemperature = null;
+    protected JList groupsList = null;
+    protected DefaultListModel<String> groupsListModel = new DefaultListModel<>();
+    protected ArrayList<String> userMoleculeGroups = new ArrayList<>();
+    protected int principal;
 
     public abstract void addMolecule();
 
@@ -228,21 +230,6 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
 
 
     /**
-     * This method initializes textFieldTemperature
-     *
-     * @return javax.swing.JTextField
-     */
-    private JTextField getTextFieldTemperature() {
-        if (textFieldTemperature == null) {
-            textFieldTemperature = new JTextField("298.15");
-
-            textFieldTemperature.addActionListener(evt -> camdSetupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText()))));
-        }
-
-        return textFieldTemperature;
-    }
-
-    /**
      * This method initializes groupsList
      *
      * @return javax.swing.JList
@@ -311,10 +298,8 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
 
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equals("comboBoxChanged")) {
-            valence = comboBoxValence.getSelectedIndex();
             comboBoxGroups.removeAllItems();
-            for (int i = 0; i < 28; i++)
-                comboBoxGroups.addItem(allGroups[valence][i]);
+            selectionBoxGroups.get(comboBoxValence.getSelectedIndex()).forEach(groupName -> comboBoxGroups.addItem(groupName));
         }
     }
 
@@ -357,10 +342,9 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private JComboBox getComboBoxValence() {
         if (comboBoxValence == null) {
             comboBoxValence = new JComboBox<>();
-            String valences[] = {"1", "2", "3", "4", "Aromáticos", "Ciclos", "0"};
+            String valences[] = {"0", "1", "2", "3", "4", "Aromatics", "Cyclics"};
             comboBoxValence = new JComboBox<>(valences);
             comboBoxValence.setSelectedIndex(0);
-            valence = comboBoxValence.getSelectedIndex();
             comboBoxValence.addActionListener(this);
         }
         return comboBoxValence;
@@ -374,7 +358,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private JComboBox buildComboBoxGroups() {
         if (comboBoxGroups == null) {
             comboBoxGroups = new JComboBox<>();
-            comboBoxGroups = new JComboBox<>(allGroups[valence]);
+            comboBoxGroups = new JComboBox<>(selectionBoxGroups.get(comboBoxValence.getSelectedIndex()).toArray(new String[0]));
             comboBoxGroups.addActionListener(evt -> {
                 String group = (String) comboBoxGroups.getSelectedItem();
                 if (group != null) {//se genera un null cada vez q hay cambio en valencia
@@ -484,7 +468,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
             jPanel1.add(labelIterations, gridBagConstraints15);
             jPanel1.add(labelTemperature, gridBagConstraints);
             jPanel1.add(getTextFieldIterations(), gridBagConstraints16);
-            jPanel1.add(getTextFieldTemperature(), gridBagConstraints1);
+            jPanel1.add(textFieldTemperature, gridBagConstraints1);
         }
         return jPanel1;
     }
@@ -551,29 +535,33 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
      *
      * @return javax.swing.JPanel
      */
-    private JPanel getJPanel2() {
+    private JPanel buildGroupFamiliesSelectionPanel() {
         if (scrollPanel == null) {
             scrollPanel = new JPanel();
-            scrollPanel.setLayout(new BoxLayout(getJPanel2(), BoxLayout.Y_AXIS));
-            int family = 0;
-            for (int i = 0; i < 23; i++, family++)
-                scrollPanel.add(getJCheck(family), null);
+            scrollPanel.setLayout(new BoxLayout(buildGroupFamiliesSelectionPanel(), BoxLayout.Y_AXIS));
+            completeFamilyChecks();
         }
         return scrollPanel;
     }
 
-    private JCheckBox getJCheck(int familyIndex) {
-        ContributionGroup.Family family = CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(familyIndex);
-        JCheckBox familyCB = new JCheckBox(family.getName());
-        familyCB.setToolTipText(family.readableMainGroups());
-        familyCB.setSelected(true);
-        familyCB.addItemListener(e -> {
-            boolean selected = e.getStateChange() == ItemEvent.SELECTED;
-            System.out.println(selected ? "SELECTED " : "DESELECTED " + family);
-            family.setProbability(selected ? 1.0 : 0.0);
-        });
-        jcheck.add(familyCB);
-        return jcheck.get(familyIndex);
+    private void completeFamilyChecks() {
+        for (Map.Entry<Integer, ContributionGroup.Family> familyEntry : CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().entrySet()) {
+            ContributionGroup.Family family = familyEntry.getValue();
+            JCheckBox familyCB = new JCheckBox(family.getName());
+            familyCB.setToolTipText(family.readableMainGroups());
+            if (!IntStream.of(ContributionGroup.DEFAULT_UNCHECKED_FAMILIES).anyMatch(i -> i == familyEntry.getKey()))
+                familyCB.setSelected(true);
+            else
+                family.setProbability(0);
+
+            familyCB.addItemListener(e -> {
+                boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+                System.out.println((selected ? "SELECTED " : "DESELECTED ") + family);
+                family.setProbability(selected ? 1.0 : 0.0);
+            });
+            jcheck.add(familyCB);
+            scrollPanel.add(familyCB, null);
+        }
     }
 
 
@@ -585,7 +573,7 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     private JScrollPane getJScrollPane() {
         if (jScrollPane == null) {
             jScrollPane = new JScrollPane();
-            jScrollPane.setViewportView(getJPanel2());
+            jScrollPane.setViewportView(buildGroupFamiliesSelectionPanel());
         }
         return jScrollPane;
     }

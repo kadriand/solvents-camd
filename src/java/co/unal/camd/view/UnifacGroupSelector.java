@@ -1,7 +1,9 @@
 package co.unal.camd.view;
 
 import co.unal.camd.properties.model.MoleculeGroups;
+import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +11,8 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class UnifacGroupSelector extends ContributionGroupsPanel {
@@ -17,10 +21,32 @@ public class UnifacGroupSelector extends ContributionGroupsPanel {
 
     UnifacGroupSelector(CamdSetupWindow setupWindow) {
         this.camdSetupWindow = setupWindow;
-        allGroups = new String[8][28];
-        for (int i = 0; i < 7; i++)
-            for (int j = 0; j < 27; j++)
-                allGroups[i][j] = CamdRunner.CONTRIBUTION_GROUPS.getGroupsData()[i][j + 1][2];
+        for (int i = 0; i < 5; i++) {
+            List<String> namesList = CamdRunner.CONTRIBUTION_GROUPS.getValenceContributionGroups().get(i).stream()
+                    .map(ContributionGroupData::getGroupName)
+                    .collect(Collectors.toList());
+            selectionBoxGroups.put(i, namesList);
+        }
+        //Aromatics
+        List<Integer> mainCodes = new ArrayList<>();
+        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(3).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        List<String> aromatics = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().values().stream()
+                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ContributionGroupData::getGroupName)
+                .collect(Collectors.toList());
+        selectionBoxGroups.put(5, aromatics);
+
+        //Cyclics
+        mainCodes.clear();
+        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(16).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(17).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        List<String> cyclics = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().values().stream()
+                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ContributionGroupData::getGroupName)
+                .collect(Collectors.toList());
+        selectionBoxGroups.put(6, cyclics);
+
+        textFieldTemperature = new JTextField(String.valueOf(setupWindow.getTemperature()));
+        textFieldTemperature.addActionListener(evt -> camdSetupWindow.setTemperature(Double.parseDouble((textFieldTemperature.getText()))));
+
         initialize();
     }
 

@@ -16,10 +16,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Manage all the paramameters required to estimate properties using the Unifac method, Gani-Marrero method, ...
@@ -69,13 +72,19 @@ public class EstimationParameters {
      * List of C. groups families, its probabilites are also stored
      */
     @Getter
-    protected List<ContributionGroup.Family> familyGroups = new ArrayList<>();
+    protected Map<Integer, ContributionGroup.Family> familyGroups = new HashMap<>();
 
     /**
-     * <groups case, main group>
+     * <contribution case, second order data>
      */
     @Getter
-    protected Map<Integer, SecondOrderContributionData> secondOrderGroupsContributions = new HashMap<>();
+    protected Map<Integer, SecondOrderContributionData> secondOrderContributionsCases = new HashMap<>();
+
+    /**
+     * <root groups code, second order data>
+     */
+    @Getter
+    protected Map<Integer, List<SecondOrderContributionData>> secondOrderContributionsRoots = new HashMap<>();
 
     /**
      * constructors for load the info
@@ -98,6 +107,34 @@ public class EstimationParameters {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * Find the name of a contribution group
+     *
+     * @param groupCode
+     * @return
+     */
+    public final String findGroupName(int groupCode) {
+        return contributionGroups.get(groupCode).getGroupName();
+    }
+
+    /**
+     * Find the code of a contribution group given teh name
+     *
+     * @param name
+     * @return
+     */
+    public final int findGroupCode(String name) {
+        ContributionGroupData contributionGroup = contributionGroups.values().stream().filter(oneContributionGroup -> Objects.equals(name, oneContributionGroup.getGroupName())).findFirst().get();
+        return contributionGroup.getCode();
+    }
+
+    //TODO HANDLE WITH AROMATICS AND STUFF
+    public final double getProbability(int contributionGroupCode) {
+        ContributionGroup.Main mainGroup = contributionGroups.get(contributionGroupCode).getMainGroup();
+        Optional<ContributionGroup.Family> family = familyGroups.values().stream().filter(oneFamily -> oneFamily.getMainGroups().stream().anyMatch(main -> main.equals(mainGroup))).findFirst();
+        return family.map(ContributionGroup.Family::getProbability).orElse(0.0);
     }
 
     /**
@@ -343,7 +380,7 @@ public class EstimationParameters {
                 Integer groupsCase = (int) currentRow.getCell(0).getNumericCellValue();
                 SecondOrderContributionData secondOrderContribution = new SecondOrderContributionData(groupsCase);
                 readSecondGroupContributionsParams(currentRow, secondOrderContribution);
-                secondOrderGroupsContributions.put(groupsCase, secondOrderContribution);
+                secondOrderContributionsCases.put(groupsCase, secondOrderContribution);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + soGroupRow);
                 e.printStackTrace();
@@ -351,7 +388,7 @@ public class EstimationParameters {
             currentRow = secondOrderGroupsSheet.getRow(++soGroupRow);
         }
         loadSecondOrderRelationships();
-        secondOrderGroupsContributions.forEach((integer, secondOrderContribution) -> debug(secondOrderContribution));
+        secondOrderContributionsCases.forEach((integer, secondOrderContribution) -> debug(secondOrderContribution));
     }
 
     private void readSecondGroupContributionsParams(XSSFRow currentRow, SecondOrderContributionData secondOrderContribution) {
@@ -389,7 +426,7 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupCase = (int) currentRow.getCell(0).getNumericCellValue();
-                SecondOrderContributionData secondOrderContribution = secondOrderGroupsContributions.get(groupCase);
+                SecondOrderContributionData secondOrderContribution = secondOrderContributionsCases.get(groupCase);
                 List<Integer> contributionsGroups = new ArrayList<>();
                 Iterator<Cell> cellsIterator = currentRow.cellIterator();
                 while (cellsIterator.hasNext()) {
@@ -399,6 +436,14 @@ public class EstimationParameters {
                 }
                 Integer[] groupsArray = contributionsGroups.toArray(new Integer[0]);
                 secondOrderContribution.getGroupsConfigurations().add(groupsArray);
+
+                Integer rootGroupCode = contributionsGroups.get(0);
+                if (secondOrderContributionsRoots.containsKey(rootGroupCode)) {
+                    if (!secondOrderContributionsRoots.get(rootGroupCode).contains(secondOrderContribution))
+                        secondOrderContributionsRoots.get(rootGroupCode).add(secondOrderContribution);
+                } else
+                    secondOrderContributionsRoots.put(rootGroupCode, new ArrayList<>(Arrays.asList(secondOrderContribution)));
+
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + soRow);
                 e.printStackTrace();
@@ -423,14 +468,15 @@ public class EstimationParameters {
         int gcRow = 1;
 
         XSSFRow currentRow = secondOrderGroupsSheet.getRow(gcRow);
-        while (currentRow != null && currentRow.getCell(0) != null && validateNumericCell(currentRow.getCell(1))) {
+        while (currentRow != null && currentRow.getCell(0) != null && validateNumericCell(currentRow.getCell(0))) {
             try {
-                String familyName = currentRow.getCell(0).getStringCellValue();
+                Integer familyIndex = (int) currentRow.getCell(0).getNumericCellValue();
+                String familyName = currentRow.getCell(1).getStringCellValue();
                 ContributionGroup.Family family = new ContributionGroup.Family(familyName);
                 Iterator<Cell> cellsIterator = currentRow.cellIterator();
                 while (cellsIterator.hasNext()) {
                     XSSFCell rowCell = (XSSFCell) cellsIterator.next();
-                    if (rowCell.getColumnIndex() > 0 && validateNumericCell(rowCell)) {
+                    if (rowCell.getColumnIndex() > 1 && validateNumericCell(rowCell)) {
                         int mainGroupCode = (int) rowCell.getNumericCellValue();
                         ContributionGroup.Main mainGroup = mainGroups.get(mainGroupCode);
                         if (mainGroup != null)
@@ -440,7 +486,7 @@ public class EstimationParameters {
                     }
                 }
                 debug(family);
-                familyGroups.add(family);
+                familyGroups.put(familyIndex, family);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + gcRow);
                 e.printStackTrace();
@@ -452,7 +498,7 @@ public class EstimationParameters {
     private boolean validateNumericCell(XSSFCell cell) {
         if (cell == null)
             return false;
-        if (CellType.NUMERIC != cell.getCellTypeEnum() && CellType.BLANK != cell.getCellTypeEnum())
+        if (CellType.NUMERIC != cell.getCellTypeEnum() && CellType.BLANK != cell.getCellTypeEnum() && cell.getRichStringCellValue().toString().trim().length() > 0)
             warning(String.format("(!) %s : %s", cell.getReference(), cell.getRichStringCellValue()));
         return CellType.NUMERIC == cell.getCellTypeEnum();
     }

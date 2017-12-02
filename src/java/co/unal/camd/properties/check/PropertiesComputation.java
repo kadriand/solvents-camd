@@ -22,6 +22,7 @@ public class PropertiesComputation {
     public static void main(String[] args) throws IOException {
         new EstimationParameters();
         evaluateSingleMolecule();
+        evaluateSingleMolecule4Subs();
         evaluateJsonMoleculeSet();
     }
 
@@ -66,6 +67,33 @@ public class PropertiesComputation {
         double temperature = 298.15;
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
         moleculeData.setName("Metil isobutil cetona");
+        computeProperties(moleculeData, molecule, temperature);
+        System.out.println(moleculeData);
+        System.out.println(molecule);
+        System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
+    }
+
+    private static void evaluateSingleMolecule4Subs() {
+        // Sample: *Metil isobutil cetona
+        ContributionGroupNode rootFunctionalGroupNode = new ContributionGroupNode(4);
+        ContributionGroupNode functionalGroup1 = new ContributionGroupNode(82);
+        rootFunctionalGroupNode.addGroup(functionalGroup1);
+        ContributionGroupNode functionalGroup2 = new ContributionGroupNode(49);
+        rootFunctionalGroupNode.addGroup(functionalGroup2);
+        ContributionGroupNode functionalGroup3 = new ContributionGroupNode(2);
+        rootFunctionalGroupNode.addGroup(functionalGroup3);
+        ContributionGroupNode functionalGroup4 = new ContributionGroupNode(1);
+        rootFunctionalGroupNode.addGroup(functionalGroup4);
+
+        ContributionGroupNode functionalGroup21 = new ContributionGroupNode(1);
+        functionalGroup2.addGroup(functionalGroup21);
+        ContributionGroupNode functionalGroup31 = new ContributionGroupNode(1);
+        functionalGroup3.addGroup(functionalGroup31);
+
+        Molecule molecule = new Molecule(rootFunctionalGroupNode);
+        double temperature = 298.15;
+        MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
+        moleculeData.setName("That thing");
         computeProperties(moleculeData, molecule, temperature);
         System.out.println(moleculeData);
         System.out.println(molecule);

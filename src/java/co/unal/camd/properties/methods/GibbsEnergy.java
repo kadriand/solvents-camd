@@ -29,7 +29,7 @@ public class GibbsEnergy {
         double sum = 0;
         for (int i = 0; i < secondOrderCodes.size(); i++) {
             int code = secondOrderCodes.get(i);
-            sum += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(code).getGibbsEnergy();
+            sum += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(code).getGibbsEnergy();
         }
         return sum;
     }

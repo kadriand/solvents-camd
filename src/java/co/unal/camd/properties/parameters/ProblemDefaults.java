@@ -5,7 +5,7 @@ package co.unal.camd.properties.parameters;
  */
 public class ProblemDefaults {
 
-    public static double defaultTemperature = 298.15; // K
-    public static int ITERATIONS = 10; // int
+    public static double TEMPERATURE = 298.15; // K
+    public static int ITERATIONS = 50; // int
 
 }

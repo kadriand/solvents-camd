@@ -30,7 +30,7 @@ public class MeltingPoint {
         double a = 0;
         for (int i = 0; i < secondOrderCodes.size(); i++) {
             int code = secondOrderCodes.get(i);
-            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderGroupsContributions().get(code).getMeltingPoint();
+            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(code).getMeltingPoint();
         }
         return a;
     }
