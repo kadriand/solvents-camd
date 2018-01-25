@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Data
-public class SecondOrderContributionData {
+public class ThermodynamicSecondOrderContribution {
 
     private int groupsCase;
     private Double boilingPoint;
@@ -20,7 +20,7 @@ public class SecondOrderContributionData {
     @Setter(AccessLevel.NONE)
     private List<Integer[]> groupsConfigurations = new ArrayList<>();
 
-    public SecondOrderContributionData(int groupsCase) {
+    public ThermodynamicSecondOrderContribution(int groupsCase) {
         this.groupsCase = groupsCase;
     }
 

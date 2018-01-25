@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class ContributionGroup {
     public static int[] DEFAULT_UNCHECKED_FAMILIES = new int[]{3, 13, 16, 17};
+    public static int MAX_GROUP_DATA = 103;
 
     @Data
     public static class Family {

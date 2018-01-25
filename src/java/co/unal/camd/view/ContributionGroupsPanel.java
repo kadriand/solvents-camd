@@ -545,14 +545,16 @@ public abstract class ContributionGroupsPanel extends JPanel implements ActionLi
     }
 
     private void completeFamilyChecks() {
-        for (Map.Entry<Integer, ContributionGroup.Family> familyEntry : CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().entrySet()) {
+        for (Map.Entry<Integer, ContributionGroup.Family> familyEntry : CamdRunner.CONTRIBUTION_GROUPS.getUnifacFamilyGroups().entrySet()) {
             ContributionGroup.Family family = familyEntry.getValue();
             JCheckBox familyCB = new JCheckBox(family.getName());
             familyCB.setToolTipText(family.readableMainGroups());
             if (!IntStream.of(ContributionGroup.DEFAULT_UNCHECKED_FAMILIES).anyMatch(i -> i == familyEntry.getKey()))
                 familyCB.setSelected(true);
-            else
+            else {
                 family.setProbability(0);
+                familyCB.setEnabled(false);
+            }
 
             familyCB.addItemListener(e -> {
                 boolean selected = e.getStateChange() == ItemEvent.SELECTED;

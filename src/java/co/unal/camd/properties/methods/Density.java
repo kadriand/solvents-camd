@@ -3,7 +3,7 @@ package co.unal.camd.properties.methods;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 
 public class Density {
     private Molecule molecule;
@@ -53,7 +53,7 @@ public class Density {
                 c = 0;
                 sum += (a + b * temperature + c * temperature * temperature);
             } else {
-                ContributionGroupData groupContribution = molecule.getGroupsArray().getGroupContributions()[i];
+                ThermodynamicFirstOrderContribution groupContribution = molecule.getGroupsArray().getGroupContributions()[i];
                 for (int j = 0; j < 4; j++) {
                     a = groupContribution.getDensityA()[j];
                     b = groupContribution.getDensityB()[j];

@@ -1,7 +1,7 @@
 package co.unal.camd.view;
 
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 
 import javax.swing.*;
 import java.io.BufferedReader;
@@ -23,24 +23,24 @@ public class UnifacGroupSelector extends ContributionGroupsPanel {
         this.camdSetupWindow = setupWindow;
         for (int i = 0; i < 5; i++) {
             List<String> namesList = CamdRunner.CONTRIBUTION_GROUPS.getValenceContributionGroups().get(i).stream()
-                    .map(ContributionGroupData::getGroupName)
+                    .map(ThermodynamicFirstOrderContribution::getGroupName)
                     .collect(Collectors.toList());
             selectionBoxGroups.put(i, namesList);
         }
         //Aromatics
         List<Integer> mainCodes = new ArrayList<>();
-        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(3).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
-        List<String> aromatics = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().values().stream()
-                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ContributionGroupData::getGroupName)
+        CamdRunner.CONTRIBUTION_GROUPS.getUnifacFamilyGroups().get(3).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        List<String> aromatics = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().values().stream()
+                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ThermodynamicFirstOrderContribution::getGroupName)
                 .collect(Collectors.toList());
         selectionBoxGroups.put(5, aromatics);
 
         //Cyclics
         mainCodes.clear();
-        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(16).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
-        CamdRunner.CONTRIBUTION_GROUPS.getFamilyGroups().get(17).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
-        List<String> cyclics = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().values().stream()
-                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ContributionGroupData::getGroupName)
+        CamdRunner.CONTRIBUTION_GROUPS.getUnifacFamilyGroups().get(16).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        CamdRunner.CONTRIBUTION_GROUPS.getUnifacFamilyGroups().get(17).getMainGroups().forEach(main -> mainCodes.add(main.getCode()));
+        List<String> cyclics = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().values().stream()
+                .filter(contributionGroupData -> mainCodes.contains(contributionGroupData.getMainGroup().getCode())).map(ThermodynamicFirstOrderContribution::getGroupName)
                 .collect(Collectors.toList());
         selectionBoxGroups.put(6, cyclics);
 

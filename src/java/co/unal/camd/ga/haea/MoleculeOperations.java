@@ -1,6 +1,6 @@
 package co.unal.camd.ga.haea;
 
-import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 import co.unal.camd.view.CamdRunner;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public final class MoleculeOperations {
      * @return
      */
     public static int getNewGroupCode(int valence, boolean functional) {
-        List<ContributionGroupData> valenceContributionGroups = CamdRunner.CONTRIBUTION_GROUPS.getValenceContributionGroups().get(valence);
+        List<ThermodynamicFirstOrderContribution> valenceContributionGroups = CamdRunner.CONTRIBUTION_GROUPS.getValenceContributionGroups().get(valence);
         int groupIndex = 0;
         if (functional) {
             double requestProbability = Math.random();
@@ -23,7 +23,7 @@ public final class MoleculeOperations {
             while (requestProbability <= 1 - groupProbaility) {
                 groupIndex = (int) (Math.random() * valenceContributionGroups.size());//random row to choose the group
                 //TODO update to a new way
-                ContributionGroupData contributionGroup = valenceContributionGroups.get(groupIndex);
+                ThermodynamicFirstOrderContribution contributionGroup = valenceContributionGroups.get(groupIndex);
                 groupProbaility = CamdRunner.CONTRIBUTION_GROUPS.getProbability(contributionGroup.getCode());
             }
         }

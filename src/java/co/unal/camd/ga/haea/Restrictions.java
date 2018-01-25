@@ -1,7 +1,7 @@
 package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.model.ContributionGroupNode;
-import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 import co.unal.camd.view.CamdRunner;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Restrictions {
         // if the code Row of the group is grater than 1 the group is functional, so the counter increase in one.
         for (int j = 0; j < functionalGroups.size(); j++) {
             ContributionGroupNode functionalGroup = functionalGroups.get(j);
-            Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(functionalGroup.getGroupCode()).getMainGroup().getCode();
+            Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(functionalGroup.getGroupCode()).getMainGroup().getCode();
             if (mainGroupCode > 1)
                 typeFunctional++;
             count(functionalGroup);
@@ -34,7 +34,7 @@ public class Restrictions {
     public static void count(ContributionGroupNode aFunctionalGroupNode) {
         for (int i = 0; i < aFunctionalGroupNode.getSubGroups().size(); i++) {
             ContributionGroupNode functionalGroup = aFunctionalGroupNode.getGroupAt(i);
-            Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(functionalGroup.getGroupCode()).getMainGroup().getCode();
+            Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(functionalGroup.getGroupCode()).getMainGroup().getCode();
             if (mainGroupCode > 1)
                 typeFunctional++;
             if (functionalGroup.countSubgroups() > 0)
@@ -52,7 +52,7 @@ public class Restrictions {
 
     public static void mayBeFuncFuncOrOH(ContributionGroupNode group, ContributionGroupNode newGr, boolean canBeChangeNewGr) {
         ContributionGroupNode originalGroup = newGr;
-        ContributionGroupData newGroupContribution = CONTRIBUTION_GROUPS.getContributionGroups().get(newGr.getGroupCode());
+        ThermodynamicFirstOrderContribution newGroupContribution = CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(newGr.getGroupCode());
         int mainGroupCode = newGroupContribution.getMainGroup().getCode();
 
         switch (newGroupContribution.getCode()) {
@@ -72,8 +72,8 @@ public class Restrictions {
                     group = new ContributionGroupNode(82);
             }
             default: {
-                ContributionGroupData groupContribution = CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode());
-                ContributionGroupData newGroupContributionDef = CONTRIBUTION_GROUPS.getContributionGroups().get(newGr.getGroupCode());
+                ThermodynamicFirstOrderContribution groupContribution = CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(group.getGroupCode());
+                ThermodynamicFirstOrderContribution newGroupContributionDef = CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(newGr.getGroupCode());
                 while (groupContribution.getMainGroup().getCode() > 1 && newGroupContributionDef.getMainGroup().getCode() > 1)
                     //System.out.println("entra a while_restric");
                     if (canBeChangeNewGr) {
@@ -84,10 +84,10 @@ public class Restrictions {
                                 //	gr.getGroupAt(i).setValence(aValence+1);//incrementar valencia por qutar grupo
                                 newGr.addGroup(originalGroup.getGroupAt(i));
                             }
-                        newGroupContributionDef = CONTRIBUTION_GROUPS.getContributionGroups().get(newGr.getGroupCode());
+                        newGroupContributionDef = CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(newGr.getGroupCode());
                     } else {
                         group = new ContributionGroupNode(MoleculeOperations.getNewGroupCode(1, false));
-                        groupContribution = CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode());
+                        groupContribution = CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(group.getGroupCode());
                     }
             }
             break;

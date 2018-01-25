@@ -1,6 +1,6 @@
 package co.unal.camd.properties.model;
 
-import co.unal.camd.properties.parameters.unifac.SecondOrderContributionData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
 import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -139,7 +139,7 @@ public class Molecule {
     //    TODO >  IMPROVE
     private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCodes) {
         int rootGroupCode = root.getGroupCode();
-        List<SecondOrderContributionData> secondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsRoots().get(rootGroupCode);
+        List<ThermodynamicSecondOrderContribution> secondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsRoots().get(rootGroupCode);
         if (secondOrderContributions == null)
             return;
         int dim = root.getSubGroups().size();

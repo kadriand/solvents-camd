@@ -3,13 +3,12 @@ package co.unal.camd.properties.check;
 import co.unal.camd.properties.methods.BoilingPoint;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
-import co.unal.camd.properties.methods.MolecularWeight;
-import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingPoint;
+import co.unal.camd.properties.methods.MolecularWeight;
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.properties.parameters.EstimationParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 public class PropertiesComputation {
 
     public static void main(String[] args) throws IOException {
-        new EstimationParameters();
         evaluateSingleMolecule();
         evaluateSingleMolecule4Subs();
         evaluateJsonMoleculeSet();

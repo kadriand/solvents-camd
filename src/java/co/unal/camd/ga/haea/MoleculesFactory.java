@@ -31,7 +31,7 @@ public class MoleculesFactory {
             functionalGroupNodes.add(new ContributionGroupNode(groupCode));
             //System.out.println("Se agrego: "+CONTRIBUTION_GROUPS.findGroupName(auxiliar.get(i).getCode())+" "+CONTRIBUTION_GROUPS.getMainGroupCode(auxiliar.get(i).getCode()));
             if (probabilityFunction(functionalGroupNodes, aProba)) {
-                Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(groupCode).getMainGroup().getCode();
+                Integer mainGroupCode = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(groupCode).getMainGroup().getCode();
                 opt = mainGroupCode <= 1;
             } else
                 opt = false;
@@ -69,7 +69,7 @@ public class MoleculesFactory {
         //System.out.println("GroupNew: "+contributionGroups.findGroupName(gr.getCode()));
         boolean next;
 
-        int groupValence = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence();
+        int groupValence = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(group.getGroupCode()).getValence();
 
         if (leaves.size() <= groupValence) { // if is the last group
             next = true;
@@ -82,7 +82,7 @@ public class MoleculesFactory {
                 next = leaves.size() != 0;
             }
 
-            int valence = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence();
+            int valence = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(group.getGroupCode()).getValence();
             if (valence > group.countSubgroups()) {
                 int m = group.countSubgroups();
                 for (int i = 0; i < valence - m; i++) {  // en esta parte se corrigió el error de la valencia incompleta
@@ -102,7 +102,7 @@ public class MoleculesFactory {
                     Restrictions.mayBeFuncFuncOrOH(temporal, group, true);
                     leaves.remove(0);
                     //System.out.println("Valencia hojas: "+(contributionGroups.findGroupValence(gr.getCode())+" hijos: "+gr.countSubgroups()));
-                    if (CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(group.getGroupCode()).getValence() - 1 == group.countSubgroups())
+                    if (CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(group.getGroupCode()).getValence() - 1 == group.countSubgroups())
                         next = false; //
                 } else {
                     next = false;

@@ -1,6 +1,6 @@
 package co.unal.camd.properties.model;
 
-import co.unal.camd.properties.parameters.unifac.ContributionGroupData;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 
@@ -12,7 +12,7 @@ public class MoleculeGroups {
     private double composition;
     private int[] amount;
     private int[] groups;
-    private ContributionGroupData[] groupContributions;
+    private ThermodynamicFirstOrderContribution[] groupContributions;
 
     public MoleculeGroups(int[] _groups) {
         groups = _groups;
@@ -26,9 +26,9 @@ public class MoleculeGroups {
     }
 
     private void findGroupContributions() {
-        groupContributions = new ContributionGroupData[groups.length];
+        groupContributions = new ThermodynamicFirstOrderContribution[groups.length];
         for (int i = 0; i < groups.length; i++) {
-            ContributionGroupData groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getContributionGroups().get(groups[i]);
+            ThermodynamicFirstOrderContribution groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(groups[i]);
             groupContributions[i] = groupContribution;
         }
     }
