@@ -1,9 +1,12 @@
 package co.unal.camd.properties.parameters.unifac;
 
+import co.unal.camd.properties.model.ContributionGroupNode;
 import lombok.Data;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 @Data
 public class ThermodynamicFirstOrderContribution {
@@ -25,6 +28,8 @@ public class ThermodynamicFirstOrderContribution {
     private Double[] densityA = new Double[4];
     private Double[] densityB = new Double[4];
     private Double[] densityC = new Double[4];
+
+    private Map<ContributionGroupNode, ThermodynamicSecondOrderContribution> secondOrderContributions = new HashMap<>();
 
     public ThermodynamicFirstOrderContribution(int code) {
         this.code = code;

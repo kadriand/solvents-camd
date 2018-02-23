@@ -16,7 +16,7 @@ public class MoleculeSpace extends MicroService<Molecule> implements Space<Molec
 
     @Override
     public boolean feasible(Molecule molecule) {
-        return molecule.getTotalGroups() <= maxGroups;
+        return molecule.getSize() <= maxGroups;
     }
 
     @Override

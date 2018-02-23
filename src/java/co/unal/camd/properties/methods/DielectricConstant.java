@@ -1,30 +1,27 @@
 package co.unal.camd.properties.methods;
 
 import co.unal.camd.properties.model.Molecule;
-import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.view.CamdRunner;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
+import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 public class DielectricConstant {
 
-    private double sum = 0;
-    private MoleculeGroups molecule;
+    private Molecule molecule;
 
+    @Setter
     private double temperature;
-    private double vapHeat;
-    private double molarVolume;
-    private double refracIndex;
-    private double dipolarMoment;
 
     /*TODO move to parameters worksheet*/
-    ArrayList<Integer> secondOrderCode;
-    private int[] conditionG1 = {81, 82, 14, 18, 19, 20, 41, 55, 56};
-    private int[] conditionGHC = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 70};
-    private int[] condition1_9 = {1, 2, 3, 4, 5, 6, 7, 8, 70};
-    private int[] conditionG3 = {44, 45, 48};
-    private int[] conditionGND = {24, 25, 26, 44, 45, 48, 53, 63, 64, 71};
-    private int[] conditionG2 = {42};
+    private static final int[] conditionG1 = {81, 82, 14, 18, 19, 20, 41, 55, 56};
+    private static final int[] conditionGHC = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 70};
+    private static final int[] condition1_9 = {1, 2, 3, 4, 5, 6, 7, 8, 70};
+    private static final int[] conditionG3 = {44, 45, 48};
+    private static final int[] conditionGND = {24, 25, 26, 44, 45, 48, 53, 63, 64, 71};
+    private static final int[] conditionG2 = {42};
 
     private boolean isConditionG1;
     private boolean isConditionGHC;
@@ -34,11 +31,9 @@ public class DielectricConstant {
     private boolean isConditionG2;
 
 
-    public DielectricConstant(Molecule molecule, ArrayList<Integer> secOrder, double temperature) {
+    public DielectricConstant(Molecule molecule, double temperature) {
         this.temperature = temperature;
-        this.secondOrderCode = secOrder;
-        this.molecule = molecule.getGroupsArray();
-        this.molecule.optimize();
+        this.molecule = molecule;
 
         isConditionG1 = isConditionCase(conditionG1);
         isConditionGHC = isConditionCase(conditionGHC);
@@ -48,40 +43,34 @@ public class DielectricConstant {
         isConditionG2 = isConditionCase(conditionG2);
     }
 
-    public double getVapHeat() {
+    private double computeVaporizationHeat() {
         double c = 6.829;
-        for (int i = 0; i < molecule.size(); i++) {
-            int n = molecule.getAmount()[i];
-            c += n * molecule.getGroupContributions()[i].getDipoleMomentH1i();
-        }
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getDipoleMomentH1i();
         return c;
     }
 
-    public double getMolarVolume() {
+    private double computeMolarVolume() {
         double d = 0.01211;
         double c = 0;
 
-        for (int i = 0; i < molecule.size(); i++) {
-            int n = molecule.getAmount()[i];
-            c += n * molecule.getGroupContributions()[i].getLiquidMolarVolume();
-        }
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getLiquidMolarVolume();
 
-        for (int j = 0; j < secondOrderCode.size(); j++) {
-            int caseNum = secondOrderCode.get(j);
-            c += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(caseNum).getLiquidMolarVolume();
-        }
-        //System.out.println("MVC2:" +c);
+        for (Map.Entry<ThermodynamicSecondOrderContribution, Integer> secondOrderContributionEntry : molecule.getSecondOrderContributions().entrySet())
+            c += secondOrderContributionEntry.getValue() * secondOrderContributionEntry.getKey().getLiquidMolarVolume();
+
         return (c + d) * 1000;
     }
 
-    public double getd() {
+    private double computeD() {
         double R = 8.314;
-        double d = Math.pow((getVapHeat() - R * temperature / 1000) / getMolarVolume(), 0.5);
+        double d = Math.pow((computeVaporizationHeat() - R * temperature / 1000) / computeMolarVolume(), 0.5);
         return d;
     }
 
-    public double getRefracIndex(boolean conditionCase) {
-        double d = getd();
+    private double computeRefracIndex(boolean conditionCase) {
+        double d = computeD();
         if (conditionCase) {
             return 1 / 7.26 * (Math.pow(d, 0.36) + 8.15);
         } else {
@@ -89,102 +78,67 @@ public class DielectricConstant {
         }
     }
 
-    public double getDipolarMoment(boolean conditionCase) {
+    private double computeDipolarMoment(boolean conditionCase) {
         int sum = 0;
-        for (int k = 0; k < molecule.size(); k++)
-            for (int j = 0; j < conditionGHC.length; j++)
-                if (molecule.getGroups()[k] == conditionGHC[j])
-                    sum += 1;
 
-        if (conditionCase & sum == molecule.size())
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            if (IntStream.of(conditionGHC).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
+                sum += firstOrderContributionEntry.getValue();
+
+        if (conditionCase & sum == molecule.getSize())
             return 0;
 
         double c = 0;
-        for (int i = 0; i < molecule.size(); i++) {
-            int n = molecule.getAmount()[i];
-            c += n * molecule.getGroupContributions()[i].getDipoleMoment();
-        }
-        return 0.11 * Math.pow(c, 0.29) * Math.pow(getMolarVolume(), -0.16);
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getDipoleMoment();
+
+        return 0.11 * Math.pow(c, 0.29) * Math.pow(computeMolarVolume(), -0.16);
     }
 
-    private double getE1(boolean conditionCase, boolean otherCond) {
-        int sum = 0;
-
-        if (conditionCase && otherCond) {
-            for (int i = 0; i < molecule.size(); i++) {
-                for (int j = 0; j < condition1_9.length; j++) {
-                    if (molecule.getGroups()[i] == condition1_9[j]) {
-                        sum += 1;
-                    }
-                }
-            }
-            return 70 / (sum + 4.5);
-        } else return 0;
-    }
-
-    private double getE2(boolean conditionCase, boolean otherCond) {
-        double sum = 0;
-        if (conditionCase && otherCond) {
-            for (int i = 0; i < molecule.size(); i++) {
-                for (int j = 0; j < condition1_9.length; j++) {
-                    if (molecule.getGroups()[i] == condition1_9[j]) {
-                        sum += 1;
-                    }
-                }
-            }
-            return -16 * 1 / (sum + 3);
-        } else return 0;
-    }
-
-    private double getE3(boolean conditionCase) {
-        if (conditionCase) {
-            return 2.5;
-        } else {
+    private double computeE1(boolean conditionCase, boolean otherCond) {
+        if (!conditionCase || !otherCond)
             return 0;
-        }
+
+        int sum = 0;
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            if (IntStream.of(condition1_9).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
+                sum += firstOrderContributionEntry.getValue();
+
+        return 70 / (sum + 4.5);
     }
 
-    public double getDielectricConstant() {
-        double DM = getDipolarMoment(isConditionGHC);
-        //System.out.println("DM:"+DM);
-        double VM = getMolarVolume();
-        //System.out.println("VM:"+VM);
-        if (DM <= 0.5) {
-            double r = (0.1 + Math.pow(getRefracIndex(isConditionGND), 2));
-            //System.out.println("r: "+r);
-            return r;
-        } else {
-            double r = 0.91 * (48 * DM * DM - 15.5 * DM * DM * DM) * Math.pow(VM, -0.5)
-                    + getE1(isConditionG1, isCondition1_9) + getE2(isConditionG2, isCondition1_9) + getE3(isConditionG3);
-            //System.out.println("E1: "+getE1(isConditionG1,isCondition1_9));
-            //System.out.println("E2: "+getE2(isConditionG2,isCondition1_9));
-            //System.out.println("E3: "+getE3(isConditionG3));
-            //System.out.println("r: "+r);
-            return r;
-        }
+    private double computeE2(boolean conditionCase, boolean otherCond) {
+        double sum = 0;
+        if (!conditionCase || !otherCond)
+            return 0;
+
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            if (IntStream.of(condition1_9).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
+                sum += firstOrderContributionEntry.getValue();
+
+        return -16 * 1.0 / (sum + 3);
     }
 
-    public boolean isConditionCase(int[] conditionCase) {
-        boolean b = false;
-        int l = molecule.getGroups().length;
-        for (int i = 0; i < l; i++) {
-            int g = molecule.getGroups()[i];
-            for (int j = 0; j < conditionCase.length; j++) {
-                int cc = conditionCase[j];
-                if (g == cc) {
-                    b = true;
-                }
-            }
-        }
-        return b;
+    private double computeE3(boolean conditionCase) {
+        return conditionCase ? 2.5 : 0;
     }
 
-    public double getMethodResult() {
-        for (int i = 0; i < molecule.size(); i++) {
-
-        }
-        return 204.359;
+    public double compute() {
+        double DM = computeDipolarMoment(isConditionGHC);
+        double VM = computeMolarVolume();
+        double r;
+        if (DM <= 0.5)
+            r = (0.1 + Math.pow(computeRefracIndex(isConditionGND), 2));
+        else
+            r = 0.91 * (48 * DM * DM - 15.5 * DM * DM * DM) * Math.pow(VM, -0.5) + computeE1(isConditionG1, isCondition1_9) + computeE2(isConditionG2, isCondition1_9) + computeE3(isConditionG3);
+        return r;
     }
 
+    private boolean isConditionCase(int[] conditionCase) {
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            if (IntStream.of(conditionCase).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
+                return true;
+        return false;
+    }
 
 }

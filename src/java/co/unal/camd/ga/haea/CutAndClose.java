@@ -13,11 +13,9 @@ public class CutAndClose extends MicroService<Molecule> implements Variation_1_1
     public Molecule apply(Molecule genome) {
         //System.out.println("CutAndClose");
         Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
-
         ContributionGroupNode newGroup = new ContributionGroupNode(1);
-
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, true);
+        int num = (int) (Math.random() * (clone_genome.getSize()) - 1);
+        searchAndReplace(clone_genome.getRootContributionGroup(), num, newGroup, true);
         return clone_genome;
     }
 }

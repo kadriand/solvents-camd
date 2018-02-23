@@ -13,8 +13,8 @@ public class MoleculeMutation extends MicroService<Molecule> implements Variatio
         Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
 
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups() - 1));
-        GeneticOperator.searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, false);
+        int num = (int) (Math.random() * (clone_genome.getSize() - 1));
+        GeneticOperator.searchAndReplace(clone_genome.getRootContributionGroup(), num, false);
         return clone_genome;
     }
 

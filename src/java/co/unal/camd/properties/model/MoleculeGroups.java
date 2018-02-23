@@ -28,7 +28,7 @@ public class MoleculeGroups {
     private void findGroupContributions() {
         groupContributions = new ThermodynamicFirstOrderContribution[groups.length];
         for (int i = 0; i < groups.length; i++) {
-            ThermodynamicFirstOrderContribution groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicContributionsGroups().get(groups[i]);
+            ThermodynamicFirstOrderContribution groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(groups[i]);
             groupContributions[i] = groupContribution;
         }
     }

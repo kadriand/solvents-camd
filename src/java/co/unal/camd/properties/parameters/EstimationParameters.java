@@ -1,6 +1,7 @@
 package co.unal.camd.properties.parameters;
 
 
+import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalFirstOrderContribution;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalSecondOrderContribution;
@@ -11,6 +12,7 @@ import co.unal.camd.properties.parameters.unifac.UnifacParametersPair;
 import lombok.Getter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -25,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Manage all the paramameters required to estimate properties using the Unifac method, Gani-Marrero method, ...
@@ -33,13 +38,17 @@ import java.util.Optional;
  */
 public class EstimationParameters {
 
+    private final Pattern GROUP_OPTIONS_PATTERN = Pattern.compile("(?:^|[().])*([^(^)^.]*\\|[^(^)^.]*)(?:[().]|$)*");
+    private final Pattern MAIN_GROUP_PATTERN = Pattern.compile("^[^(]*");
+    private final Pattern SUBGROUP_PATTERN = Pattern.compile("\\(([^)]+)\\)");
+
     /**
      * Unifac parameters file path in resources directory (/src/resources/)
      */
     private static String UNIFAC_WORKBOOK_PATH = "/properties/Unifac-2017.xlsx";
     private XSSFWorkbook unifacWorkbook;
     private static String THERMOPROPS_WORKBOOK_PATH = "/properties/ThermoPropsContributions.xlsx";
-    private XSSFWorkbook contributionsWorkbook;
+    private XSSFWorkbook thermoPropsWorkbook;
     private static String ENVIRONMENTAL_PROPS_WORKBOOK_PATH = "/properties/HukkerikarEnvironmental.xlsx";
     private XSSFWorkbook environmantalWorkbook;
 
@@ -50,7 +59,7 @@ public class EstimationParameters {
      * <code, first order contributions>
      */
     @Getter
-    protected Map<Integer, ThermodynamicFirstOrderContribution> thermodynamicContributionsGroups = new HashMap<>();
+    protected Map<Integer, ThermodynamicFirstOrderContribution> thermodynamicFirstOrderContributionsGroups = new HashMap<>();
 
     /**
      * <valence, list of c. groups>
@@ -87,8 +96,8 @@ public class EstimationParameters {
     /**
      * <root groups code, second order data>
      */
-    @Getter
-    protected Map<Integer, List<ThermodynamicSecondOrderContribution>> secondOrderContributionsRoots = new HashMap<>();
+    @Getter // todo remove
+    protected Map<Integer, List<ThermodynamicSecondOrderContribution>> secondOrderContributionsRoots = new HashMap<>(); // todo remove
 
     // ENVIRONMENTAL CONTRIBUTIONS
 
@@ -120,7 +129,7 @@ public class EstimationParameters {
             System.out.println("Loading UNIFAC parameters file: " + UNIFAC_WORKBOOK_PATH);
             unifacWorkbook = new XSSFWorkbook(unifacWBIS);
             System.out.println("Loading thermodynamical properties contributions parameters file: " + THERMOPROPS_WORKBOOK_PATH);
-            contributionsWorkbook = new XSSFWorkbook(thermoContributionsWBIS);
+            thermoPropsWorkbook = new XSSFWorkbook(thermoContributionsWBIS);
 
             System.out.println("Loading environmental properties contributions parameters file: " + ENVIRONMENTAL_PROPS_WORKBOOK_PATH);
             environmantalWorkbook = new XSSFWorkbook(environmentalContributionsWBIS);
@@ -147,7 +156,7 @@ public class EstimationParameters {
      * @return
      */
     public final String findGroupName(int groupCode) {
-        return thermodynamicContributionsGroups.get(groupCode).getGroupName();
+        return thermodynamicFirstOrderContributionsGroups.get(groupCode).getGroupName();
     }
 
     /**
@@ -157,13 +166,13 @@ public class EstimationParameters {
      * @return
      */
     public final int findGroupCode(String name) {
-        ThermodynamicFirstOrderContribution contributionGroup = thermodynamicContributionsGroups.values().stream().filter(oneContributionGroup -> Objects.equals(name, oneContributionGroup.getGroupName())).findFirst().get();
+        ThermodynamicFirstOrderContribution contributionGroup = thermodynamicFirstOrderContributionsGroups.values().stream().filter(oneContributionGroup -> Objects.equals(name, oneContributionGroup.getGroupName())).findFirst().get();
         return contributionGroup.getCode();
     }
 
     //TODO HANDLE WITH AROMATICS AND STUFF
     public final double getProbability(int contributionGroupCode) {
-        ContributionGroup.Main mainGroup = thermodynamicContributionsGroups.get(contributionGroupCode).getMainGroup();
+        ContributionGroup.Main mainGroup = thermodynamicFirstOrderContributionsGroups.get(contributionGroupCode).getMainGroup();
         Optional<ContributionGroup.Family> family = unifacFamilyGroups.values().stream().filter(oneFamily -> oneFamily.getMainGroups().stream().anyMatch(main -> main.equals(mainGroup))).findFirst();
         return family.map(ContributionGroup.Family::getProbability).orElse(0.0);
     }
@@ -233,7 +242,7 @@ public class EstimationParameters {
     private void loadGroupContributions() {
         loadUnifacGroupContributions();
         loadThermodynamicGroupContributions();
-        thermodynamicContributionsGroups.forEach((integer, groupContribution) -> debug(groupContribution));
+        thermodynamicFirstOrderContributionsGroups.forEach((integer, groupContribution) -> debug(groupContribution));
     }
 
     /**
@@ -254,7 +263,7 @@ public class EstimationParameters {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
                 ThermodynamicFirstOrderContribution contributionData = new ThermodynamicFirstOrderContribution(groupId);
                 readUnifacRQParams(currentRow, contributionData);
-                thermodynamicContributionsGroups.put(groupId, contributionData);
+                thermodynamicFirstOrderContributionsGroups.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + unifacRow);
                 e.printStackTrace();
@@ -292,8 +301,8 @@ public class EstimationParameters {
      * -  ThermoPropsContributions.xlsx
      */
     private void loadThermodynamicGroupContributions() {
-        XSSFSheet contributionsSheet = contributionsWorkbook.getSheetAt(0);
-        System.out.println("\nTHERMODYNAMICAL PROPERTIES Sheet: " + contributionsWorkbook.getSheetName(0));
+        XSSFSheet contributionsSheet = thermoPropsWorkbook.getSheetAt(0);
+        System.out.println("\nTHERMODYNAMICAL PROPERTIES Sheet: " + thermoPropsWorkbook.getSheetName(0));
         // Second Row
         int tgcRow = 1;
 
@@ -301,7 +310,7 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                ThermodynamicFirstOrderContribution contributionData = thermodynamicContributionsGroups.get(groupId);
+                ThermodynamicFirstOrderContribution contributionData = thermodynamicFirstOrderContributionsGroups.get(groupId);
                 readThermodynamicContributions(currentRow, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + tgcRow);
@@ -399,8 +408,8 @@ public class EstimationParameters {
      * -  ThermoPropsContributions.xlsx
      */
     private void loadSecondOrderContributions() {
-        XSSFSheet secondOrderGroupsSheet = contributionsWorkbook.getSheetAt(1);
-        System.out.println("\nSECOND ORDER GROUPS Sheet: " + contributionsWorkbook.getSheetName(1));
+        XSSFSheet secondOrderGroupsSheet = thermoPropsWorkbook.getSheetAt(1);
+        System.out.println("\nSECOND ORDER GROUPS Sheet: " + thermoPropsWorkbook.getSheetName(1));
         // Second Row
         int soGroupRow = 1;
 
@@ -409,35 +418,61 @@ public class EstimationParameters {
             try {
                 Integer groupsCase = (int) currentRow.getCell(0).getNumericCellValue();
                 ThermodynamicSecondOrderContribution secondOrderContribution = new ThermodynamicSecondOrderContribution(groupsCase);
+
+                XSSFCell rowCell = currentRow.getCell(1);
+                if (rowCell != null)
+                    secondOrderContribution.setGroupsDescription(rowCell.getStringCellValue().trim());
+
                 readSecondGroupContributionsParams(currentRow, secondOrderContribution);
+                readSecondOrderConfigurations(currentRow, secondOrderContribution);
+
                 secondOrderContributionsCases.put(groupsCase, secondOrderContribution);
+
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + soGroupRow);
                 e.printStackTrace();
+            } finally {
+                currentRow = secondOrderGroupsSheet.getRow(++soGroupRow);
             }
-            currentRow = secondOrderGroupsSheet.getRow(++soGroupRow);
         }
-        loadSecondOrderRelationships();
+        loadSecondOrderRelationshipsBU();
         secondOrderContributionsCases.forEach((integer, secondOrderContribution) -> debug(secondOrderContribution));
     }
 
     private void readSecondGroupContributionsParams(XSSFRow currentRow, ThermodynamicSecondOrderContribution secondOrderContribution) {
         XSSFCell rowCell;
-        rowCell = currentRow.getCell(1);
+        rowCell = currentRow.getCell(2);
         if (validateNumericCell(rowCell))
             secondOrderContribution.setBoilingPoint(rowCell.getNumericCellValue());
 
-        rowCell = currentRow.getCell(2);
+        rowCell = currentRow.getCell(3);
         if (rowCell != null)
             secondOrderContribution.setMeltingPoint(rowCell.getNumericCellValue());
 
-        rowCell = currentRow.getCell(3);
+        rowCell = currentRow.getCell(4);
         if (validateNumericCell(rowCell))
             secondOrderContribution.setGibbsEnergy(rowCell.getNumericCellValue());
 
-        rowCell = currentRow.getCell(4);
+        rowCell = currentRow.getCell(5);
         if (validateNumericCell(rowCell))
             secondOrderContribution.setLiquidMolarVolume(rowCell.getNumericCellValue());
+    }
+
+    private void readSecondOrderConfigurations(XSSFRow currentRow, ThermodynamicSecondOrderContribution secondOrderContribution) {
+        XSSFCell rowCell = currentRow.getCell(6);
+        if (rowCell == null)
+            return;
+
+        String rawGroupCases = rowCell.getCellTypeEnum() == CellType.NUMERIC ? NumberToTextConverter.toText(rowCell.getNumericCellValue()) : rowCell.getStringCellValue().trim();
+        String[] differentAlternatives = rawGroupCases.split("/");
+        for (String differentAlternative : differentAlternatives) {
+            List<String> singleConfigurations = breakAlternative(differentAlternative);
+            singleConfigurations.forEach(singleConfiguration -> {
+                ContributionGroupNode secondGroupConfiguration = parseNodeGroupsConfiguration(singleConfiguration);
+                secondOrderContribution.getGroupConfigurations().add(secondGroupConfiguration);
+                appendToFirstOrderContributions(singleConfiguration, secondGroupConfiguration, secondOrderContribution);
+            });
+        }
     }
 
     /**
@@ -446,9 +481,9 @@ public class EstimationParameters {
      * In file
      * -  ThermoPropsContributions.xlsx
      */
-    private void loadSecondOrderRelationships() {
-        XSSFSheet secondOrderGroupsSheet = contributionsWorkbook.getSheetAt(2);
-        System.out.println("\nSECOND ORDER RELATIONSHIPS Sheet: " + contributionsWorkbook.getSheetName(2));
+    private void loadSecondOrderRelationshipsBU() {
+        XSSFSheet secondOrderGroupsSheet = thermoPropsWorkbook.getSheetAt(3);
+        System.out.println("\nSECOND ORDER RELATIONSHIPS Sheet: " + thermoPropsWorkbook.getSheetName(3));
         // Second Row
         int soRow = 1;
 
@@ -464,8 +499,8 @@ public class EstimationParameters {
                     if (rowCell.getColumnIndex() > 0 && validateNumericCell(rowCell))
                         contributionsGroups.add((int) rowCell.getNumericCellValue());
                 }
-                Integer[] groupsArray = contributionsGroups.toArray(new Integer[0]);
-                secondOrderContribution.getGroupsConfigurations().add(groupsArray);
+                int[] groupsArray = contributionsGroups.stream().mapToInt(i -> i).toArray();
+                secondOrderContribution.getRawGroupsConfigurations().add(groupsArray);
 
                 Integer rootGroupCode = contributionsGroups.get(0);
                 if (secondOrderContributionsRoots.containsKey(rootGroupCode)) {
@@ -479,6 +514,74 @@ public class EstimationParameters {
                 e.printStackTrace();
             }
             currentRow = secondOrderGroupsSheet.getRow(++soRow);
+        }
+    }
+
+    private void appendToFirstOrderContributions(String singleConfiguration, ContributionGroupNode secondGroupConfiguration, ThermodynamicSecondOrderContribution secondOrderContribution) {
+        String[] rawGroups = singleConfiguration.split("[|().]+");
+        int[] groups = Stream.of(rawGroups).mapToInt(Integer::parseInt).toArray();
+        int biggerGroup = Arrays.stream(groups).max().getAsInt();
+        if (thermodynamicFirstOrderContributionsGroups.containsKey(biggerGroup))
+            thermodynamicFirstOrderContributionsGroups.get(biggerGroup).getSecondOrderContributions().put(secondGroupConfiguration, secondOrderContribution);
+        //        secondOrderContribution.getRawGroupsConfigurations().add(groups);
+    }
+
+    public ContributionGroupNode parseGroupsConfiguration(String textConfiguration) {
+        return parseNodeGroupsConfiguration(textConfiguration);
+    }
+
+    private ContributionGroupNode parseNodeGroupsConfiguration(String singleConfiguration) {
+        ContributionGroupNode mainGroupNode = null;
+        ContributionGroupNode formerGroupNode = null;
+        ContributionGroupNode currentGroup;
+
+        String[] groups = singleConfiguration.split("\\.");
+        for (String group : groups) {
+            Matcher mainGroupMatcher = MAIN_GROUP_PATTERN.matcher(group);
+            mainGroupMatcher.find();
+            Integer mainGroup = Integer.valueOf(mainGroupMatcher.group(0));
+
+            currentGroup = new ContributionGroupNode(mainGroup);
+            if (mainGroupNode == null)
+                mainGroupNode = currentGroup;
+            else
+                formerGroupNode.getSubGroups().add(currentGroup);
+
+            if (group.matches(".*\\(.*\\).*")) {
+                Matcher subgroupMatcher = SUBGROUP_PATTERN.matcher(group);
+                while (subgroupMatcher.find()) {
+                    int groupMatch = Integer.valueOf(subgroupMatcher.group(1));
+                    currentGroup.getSubGroups().add(new ContributionGroupNode(groupMatch));
+                }
+            }
+            formerGroupNode = currentGroup;
+        }
+        return mainGroupNode;
+    }
+
+    private List<String> breakAlternative(String alternative) {
+        List<String> singleConfigurations = new ArrayList<>();
+        breakAlternative(alternative, singleConfigurations);
+        return singleConfigurations;
+    }
+
+    private void breakAlternative(String alternative, List<String> alternatives) {
+        if (alternative.isEmpty())
+            return;
+
+        if (!alternative.contains("|")) {
+            alternatives.add(alternative);
+            return;
+        }
+
+        Matcher groupOptionsMatcher = GROUP_OPTIONS_PATTERN.matcher(alternative);
+        if (groupOptionsMatcher.find()) {
+            String groupsMatch = groupOptionsMatcher.group(1);
+            String[] groupAlternatives = groupsMatch.split("\\|");
+            for (String groupAlternative : groupAlternatives) {
+                String newAlternative = alternative.replaceFirst(Pattern.quote(groupsMatch), groupAlternative);
+                breakAlternative(newAlternative, alternatives);
+            }
         }
     }
 

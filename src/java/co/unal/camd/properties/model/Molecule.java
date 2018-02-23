@@ -1,113 +1,147 @@
 package co.unal.camd.properties.model;
 
+import co.unal.camd.properties.methods.BoilingPoint;
+import co.unal.camd.properties.methods.Density;
+import co.unal.camd.properties.methods.DielectricConstant;
+import co.unal.camd.properties.methods.GibbsEnergy;
+import co.unal.camd.properties.methods.MeltingPoint;
+import co.unal.camd.properties.methods.MolecularWeight;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
 import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
 import co.unal.camd.view.CamdRunner;
-import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.swing.event.TreeModelListener;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * this create ramdom molecules
  *
- * @author Nicol�s Moreno
+ * @author Kevin Adrián Rodríguez Ruiz
  */
-@Data
-@Accessors(chain = true)
 public class Molecule {
 
-    private ContributionGroupNode genotype;
-    private int size;
-    private double fitness;
-    private double x; //composición
-    private double ge;
-    private double bt;
-    private double d;
-    private double mt;
-    private double sl;
-    private double dc;
-    private double ks;
+    private ContributionGroupNode rootContributionGroup;
 
-    private Vector<TreeModelListener> treeModelListeners = new Vector<>();
+    private int size = -1;
+
+    @Getter
+    @Setter
+    private double fitness;
+
+    @Getter
+    @Setter
+    private double temperature;
+
+    @Getter
+    private double x; //composición
+
+    private ThermodynamicProperties thermodynamicProperties;
+
+    private Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContributions;
+
+    private Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions;
 
     public Molecule(Molecule molecule) {
-        genotype = molecule.genotype.clone();
-        size = molecule.size;
+        rootContributionGroup = molecule.rootContributionGroup.clone();
         x = molecule.x;
         fitness = molecule.fitness;
     }
 
     public Molecule(ContributionGroupNode root) {
-        genotype = root;
-        size = 1 + size(genotype);
-    }
-
-    public int size(ContributionGroupNode root) {
-        int s = 0;
-        if (root != null)
-            s = root.countTotalGroups();
-        return s;
-    }
-
-    private void chemicalFormula(ContributionGroupNode root, String show) {
-        if (root == null)
-            return;
-        show = show + root.toString() + " - ";
-        for (int i = 0; i < root.getSubGroups().size(); i++)
-            chemicalFormula(root.getGroupAt(i), show);
+        rootContributionGroup = root;
     }
 
     /**
-     * the molecule made
+     * Every time the rootContributionGroup is accessed, the second order groups get emptied
      *
      * @return
      */
-    public ContributionGroupNode getMoleculeByRootGroup() {
-        return genotype;
+    public ContributionGroupNode getRootContributionGroup() {
+        this.secondOrderContributions = null;
+        this.firstOrderContributions = null;
+        this.thermodynamicProperties = null;
+        this.size = -1;
+        return this.rootContributionGroup;
     }
 
+    public ThermodynamicProperties getThermodynamicProperties() {
+        if (thermodynamicProperties == null) {
+            thermodynamicProperties = new ThermodynamicProperties();
+            double gibbsEnergy = GibbsEnergy.compute(this);
+            double boilingPoint = BoilingPoint.compute(this);
+            double meltingPoint = MeltingPoint.compute(this);
+            double molecularWeight = MolecularWeight.compute(this);
+            double density = Density.compute(this, temperature);
+            DielectricConstant dielectricConstant = new DielectricConstant(this, temperature);
+            thermodynamicProperties.
+                    setGibbsEnergy(gibbsEnergy)
+                    .setBoilingPoint(boilingPoint)
+                    .setDensity(density)
+                    .setMeltingPoint(meltingPoint)
+                    .setDielectricConstant(dielectricConstant.compute())
+                    .setMolecularWeight(molecularWeight);
+        }
+        return thermodynamicProperties;
+    }
 
-    public int getTotalGroups() {
+    public int getSize() {
+        if (this.size == -1)
+            this.size = rootContributionGroup.countTotalGroups();
         return size;
     }
 
-    @Override
-    public String toString() {
-        String show = "";
-        ArrayList<ContributionGroupNode> a = getArray();
-        for (int i = 0; i < a.size(); i++) {
-            if (i > 0)
-                show += "-";
-            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getGroupCode());
+    /**
+     * Return a map with the present ThermodynamicFirstOrderContribution's and the occurrences of each one
+     *
+     * @return <ThermodynamicFirstOrderContribution, occurrences>
+     */
+    public Map<ThermodynamicFirstOrderContribution, Integer> getFirstOrderContributions() {
+        if (firstOrderContributions == null) {
+            Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContribution = new HashMap<>();
+            findFirstOrderGroups(this.rootContributionGroup, firstOrderContribution);
+            this.firstOrderContributions = firstOrderContribution;
         }
-        return show;
+        return firstOrderContributions;
+    }
+
+    /**
+     * Return a map with the present ThermodynamicSecondOrderContribution's and the occurrences of each one
+     *
+     * @return <ThermodynamicSecondOrderContribution, occurrences>
+     */
+    public Map<ThermodynamicSecondOrderContribution, Integer> getSecondOrderContributions() {
+        if (secondOrderContributions == null) {
+            Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions = new HashMap<>();
+            findSecondOrderGroups(this.rootContributionGroup, secondOrderContributions);
+            this.secondOrderContributions = secondOrderContributions;
+        }
+        return secondOrderContributions;
     }
 
     public ContributionGroupNode getGroupAt(int i) {
-        return getArray().get(i);
+        return pickAllGroups().get(i);
     }
 
-    private ArrayList<ContributionGroupNode> getArray() {
-        ArrayList<ContributionGroupNode> array = new ArrayList<>();
-        return getArray(genotype, array);
+    public ArrayList<ContributionGroupNode> pickAllGroups() {
+        ArrayList<ContributionGroupNode> groupNodes = new ArrayList<>();
+        return pickGroups(rootContributionGroup, groupNodes);
     }
 
-    private ArrayList<ContributionGroupNode> getArray(ContributionGroupNode functionalGroupNode, ArrayList<ContributionGroupNode> array) {
-        if (functionalGroupNode != null) {
-            array.add(functionalGroupNode);
-            if (functionalGroupNode.countSubgroups() > 0)
-                for (int i = 0; i < functionalGroupNode.countSubgroups(); i++)
-                    getArray(functionalGroupNode.getGroupAt(i), array);
+    private ArrayList<ContributionGroupNode> pickGroups(ContributionGroupNode contributionGroup, ArrayList<ContributionGroupNode> groupNodes) {
+        if (contributionGroup != null) {
+            groupNodes.add(contributionGroup);
+            for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
+                pickGroups(subGroup, groupNodes);
         }
-        return array;
+        return groupNodes;
     }
 
     public MoleculeGroups getGroupsArray() {
-        ArrayList<ContributionGroupNode> groupsNodes = getArray();
+        ArrayList<ContributionGroupNode> groupsNodes = pickAllGroups();
         int n = groupsNodes.size();
         int[] groups = new int[n];
         for (int i = 0; i < n; i++) {
@@ -117,119 +151,29 @@ public class Molecule {
         return moleculeGroups;
     }
 
-    public ArrayList<Integer> findSecondOrderGroupArray() {
-        ArrayList<Integer> secondOrderCodes = new ArrayList<>();
-        secOrderContribution(genotype, secondOrderCodes);
-        return secondOrderCodes;
+    private void findFirstOrderGroups(ContributionGroupNode contributionGroup, Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContributions) {
+        ThermodynamicFirstOrderContribution thermodynamicFirstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(contributionGroup.getGroupCode());
+        if (firstOrderContributions.containsKey(thermodynamicFirstOrderContribution))
+            firstOrderContributions.replace(thermodynamicFirstOrderContribution, firstOrderContributions.get(thermodynamicFirstOrderContribution) + 1);
+        else
+            firstOrderContributions.put(thermodynamicFirstOrderContribution, 1);
+
+        for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
+            findFirstOrderGroups(subGroup, firstOrderContributions);
     }
 
-    private void secOrderContribution(ContributionGroupNode aRootFunctionalGroupNode, ArrayList<Integer> secondOrderCodes) {
-        if (aRootFunctionalGroupNode != null)
-            identifySecondOrderGroups(aRootFunctionalGroupNode, secondOrderCodes);
-
-        if (aRootFunctionalGroupNode.countSubgroups() < 1)
-            return;
-
-        for (int i = 0; i < aRootFunctionalGroupNode.countSubgroups(); i++) {
-            ContributionGroupNode leaf = aRootFunctionalGroupNode.getGroupAt(i);
-            secOrderContribution(leaf, secondOrderCodes);
+    private void findSecondOrderGroups(ContributionGroupNode contributionGroup, Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions) {
+        Map<ContributionGroupNode, ThermodynamicSecondOrderContribution> branchSecondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(contributionGroup.getGroupCode()).getSecondOrderContributions();
+        for (Map.Entry<ContributionGroupNode, ThermodynamicSecondOrderContribution> contributionNodeEntry : branchSecondOrderContributions.entrySet()) {
+            if (secondOrderContributions.containsKey(contributionNodeEntry.getValue()))
+                continue;
+            int occurrences = contributionGroup.contains(contributionNodeEntry.getKey());
+            if (occurrences > 0)
+                secondOrderContributions.put(contributionNodeEntry.getValue(), occurrences);
         }
-    }
 
-    //    TODO >  IMPROVE
-    private void identifySecondOrderGroups(ContributionGroupNode root, ArrayList<Integer> secondOrderCodes) {
-        int rootGroupCode = root.getGroupCode();
-        List<ThermodynamicSecondOrderContribution> secondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsRoots().get(rootGroupCode);
-        if (secondOrderContributions == null)
-            return;
-        int dim = root.getSubGroups().size();
-        int leaves[] = leavesToVector(root);
-
-        //        System.out.println(String.format("***** Second order alt START ******"));
-        for (int i = 0; i < dim; i++) {
-            final int iFinal = i;
-            secondOrderContributions.stream()
-                    .filter(secondOrderContribution -> !secondOrderCodes.contains(secondOrderContribution.getGroupsCase()))
-                    .forEach(secondOrderContribution -> secondOrderContribution.getGroupsConfigurations().stream()
-                            .filter(groupConfiguration -> groupConfiguration[0] == rootGroupCode && leaves[iFinal] == groupConfiguration[1])
-                            .forEach(groupConfiguration ->
-                                    {
-                                        if (secondOrderCodes.contains(secondOrderContribution.getGroupsCase()))
-                                            return;
-
-                                        int[] caseOH = new int[2];
-                                        int[] tempCond = new int[3]; //this is the array of groups (less central group and second) that construct de second order groups
-
-                                        //                                            System.out.println("Alt enter " + leaves[iFinal] + " with " + secondOrderContribution.getGroupsCase() + "-" + groupConfiguration[1]);
-                                        int[] b = new int[leaves.length];
-
-                                        for (int r = 0; r < leaves.length; r++)
-                                            b[r] = r == iFinal ? 0 : leaves[r];
-
-                                        for (int z = 1; z < groupConfiguration.length - 1 && z < tempCond.length; z++)
-                                            tempCond[z] = groupConfiguration[z + 1]; //revisar esto para ver si puede se mas r�pido
-
-                                        boolean flat = true;
-                                        if (secondOrderContribution.getGroupsCase() == 30) {
-                                            caseOH[0] = tempCond[0];
-                                            caseOH[1] = tempCond[1];
-                                            tempCond[2] = 0;
-                                        }
-
-                                        if (sameVector(tempCond, b)) { //if the leaves are the same that sec order groups, add the code of SOG
-                                            for (int p = 0; p < dim; p++) {
-                                                if (root.getGroupAt(p).getGroupCode() != caseOH[0])
-                                                    continue;
-                                                int[] tempCond2 = new int[1];
-                                                tempCond2[0] = caseOH[1];
-                                                flat = sameVector(caseOH, tempCond2);
-                                                //		System.out.println("prueba5");
-                                            }
-                                            if (flat) {
-                                                //	System.out.println("caso: "+(int)Double.parseDouble(s.get(c)[0]));
-                                                //TODO Check if second order groups repetition are being ignored
-                                                secondOrderCodes.add(secondOrderContribution.getGroupsCase());
-                                                //                                            secondGroup.remove(c);
-                                            }
-                                        }
-                                    }
-                            )
-                    );
-        }
-    }
-
-    private boolean sameVector(int[] vect1, int[] vect2) {
-        int n = 0;
-        int l = vect1.length;
-        //System.out.println("prueba4");
-        //for(int i = 0; i < l ; i++){
-        //System.out.println("Vtestfirst:"+i+" "+vect1[i]);
-        //}
-        for (int i = 0; i < l; i++) {
-            //System.out.println("V1:"+i+" "+vect1[i]);
-            for (int j = 0; j < vect2.length; j++) {
-                //System.out.println("V2:"+j+" "+vect2[j]);
-                if (vect1[i] == vect2[j]) {
-                    vect1[i] = 0;
-                    vect2[j] = 0;
-                }
-            }
-        }
-        for (int i = 0; i < l; i++) {
-            //System.out.println("Vtest:"+i+" "+vect1[i]);
-            n = n + vect1[i];
-        }
-        //System.out.println("n Value"+n);
-        return n == 0;
-    }
-
-    private int[] leavesToVector(ContributionGroupNode root) {
-        int dim = root.getSubGroups().size();
-        int[] a = new int[dim];
-        //System.out.println("prueba9");
-        for (int i = 0; i < dim; i++)
-            a[i] = root.getGroupAt(i).getGroupCode();
-        return a;
+        for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
+            findSecondOrderGroups(subGroup, secondOrderContributions);
     }
 
     /**
@@ -239,5 +183,17 @@ public class Molecule {
     @Override
     public Molecule clone() {
         return new Molecule(this);
+    }
+
+    @Override
+    public String toString() {
+        String show = "";
+        ArrayList<ContributionGroupNode> a = pickAllGroups();
+        for (int i = 0; i < a.size(); i++) {
+            if (i > 0)
+                show += "-";
+            show += CamdRunner.CONTRIBUTION_GROUPS.findGroupName(a.get(i).getGroupCode());
+        }
+        return show;
     }
 }

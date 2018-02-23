@@ -11,6 +11,7 @@ public class MoleculeData {
     private int index;
     private int[] groups;
     private String name;
+    private String configuration;
     private PropertiesSet experimental;
     private PropertiesSet computed;
     private PropertiesSet recomputed = new PropertiesSet();
@@ -25,28 +26,28 @@ public class MoleculeData {
     public static class PropertiesSet {
         private double molecularWeight;
         private double dielectricConst;
-        private double fusionTemp;
-        private double boilingTemp;
+        private double meltingPoint;
+        private double boilingPoint;
         private double density;
-        private double deltaGibbs;
+        private double gibbsEnergy;
 
         @Override
         public String toString() {
             return "\nMW: " + molecularWeight +
                     "\nDC: " + dielectricConst +
-                    "\nMT: " + fusionTemp +
-                    "\nBT: " + boilingTemp +
+                    "\nMP: " + meltingPoint +
+                    "\nBP: " + boilingPoint +
                     "\nD : " + density +
-                    "\nGE: " + deltaGibbs;
+                    "\nGE: " + gibbsEnergy;
         }
 
         public String compared(PropertiesSet other) {
             return "\nMW: " + molecularWeight + " - " + other.molecularWeight +
                     "\nDC: " + dielectricConst + " - " + other.dielectricConst +
-                    "\nMT: " + fusionTemp + " - " + other.fusionTemp +
-                    "\nBT: " + boilingTemp + " - " + other.boilingTemp +
+                    "\nMP: " + meltingPoint + " - " + other.meltingPoint +
+                    "\nBP: " + boilingPoint + " - " + other.boilingPoint +
                     "\nD : " + density + " - " + other.density +
-                    "\nGE: " + deltaGibbs + " - " + other.deltaGibbs;
+                    "\nGE: " + gibbsEnergy + " - " + other.gibbsEnergy;
         }
 
     }

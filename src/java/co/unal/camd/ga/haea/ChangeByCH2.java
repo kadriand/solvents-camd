@@ -15,12 +15,12 @@ public class ChangeByCH2 extends MicroService<Molecule> implements Variation_1_1
         //System.out.println("changeByCh2");
         Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
+        int num = (int) (Math.random() * (clone_genome.getSize()) - 1);
 
         ContributionGroupNode newCH2 = new ContributionGroupNode(2);
 
-        newCH2.addGroup(clone_genome.getGroupAt(num));
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newCH2, true);
+        newCH2.getSubGroups().add(clone_genome.getGroupAt(num));
+        searchAndReplace(clone_genome.getRootContributionGroup(), num, newCH2, true);
         return clone_genome;
     }
 

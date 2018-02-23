@@ -14,7 +14,7 @@ public class CutAndReplace extends MicroService<Molecule> implements Variation_1
         //System.out.println("CutAndReplace");
         Molecule clone_genome = genome.clone(); // @TODO: clonar objeto
         // TODO: Mutacion
-        int num = (int) (Math.random() * (clone_genome.getTotalGroups()) - 1);
+        int num = (int) (Math.random() * (clone_genome.getSize()) - 1);
 
         int valence = (int) (Math.random() * 3) + 2;
         boolean functional = false;
@@ -27,12 +27,12 @@ public class CutAndReplace extends MicroService<Molecule> implements Variation_1
         ContributionGroupNode newGroup = new ContributionGroupNode(refCode);
 
         if (valence == 3) {
-            newGroup.addGroup(new ContributionGroupNode(1));
+            newGroup.getSubGroups().add(new ContributionGroupNode(1));
         } else if (valence == 4) {
-            newGroup.addGroup(new ContributionGroupNode(1));
-            newGroup.addGroup(new ContributionGroupNode(1));
+            newGroup.getSubGroups().add(new ContributionGroupNode(1));
+            newGroup.getSubGroups().add(new ContributionGroupNode(1));
         }
-        searchAndReplace(clone_genome.getMoleculeByRootGroup(), num, newGroup, false);
+        searchAndReplace(clone_genome.getRootContributionGroup(), num, newGroup, false);
         return clone_genome;
     }
 

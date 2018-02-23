@@ -6,19 +6,20 @@
       51
     ],
     "name": "1,1,1 tricloroetano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7.5,
-      "fusionTemp": 242.8,
-      "boilingTemp": 347.15,
+      "meltingPoint": 242.8,
+      "boilingPoint": 347.15,
       "density": 1.32,
-      "deltaGibbs": -76.21
+      "gibbsEnergy": -76.21
     },
     "computed": {
       "dielectricConst": 0.94,
-      "fusionTemp": 242.75,
-      "boilingTemp": 305.06,
+      "meltingPoint": 242.75,
+      "boilingPoint": 305.06,
       "density": 1.31,
-      "deltaGibbs": -61.113
+      "gibbsEnergy": -61.113
     }
   },
   {
@@ -28,19 +29,20 @@
       48
     ],
     "name": "1,2 dicloroetano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 10.5,
-      "fusionTemp": 237.5,
-      "boilingTemp": 356.66,
+      "meltingPoint": 237.5,
+      "boilingPoint": 356.66,
       "density": 1.253,
-      "deltaGibbs": -73.94
+      "gibbsEnergy": -73.94
     },
     "computed": {
       "dielectricConst": 9.4,
-      "fusionTemp": 194.44,
-      "boilingTemp": 363.67,
+      "meltingPoint": 194.44,
+      "boilingPoint": 363.67,
       "density": 1.2231,
-      "deltaGibbs": -81.574
+      "gibbsEnergy": -81.574
     }
   },
   {
@@ -51,19 +53,20 @@
       1
     ],
     "name": "2 cloro propano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 9.82,
-      "fusionTemp": 156,
-      "boilingTemp": 308.85,
+      "meltingPoint": 156,
+      "boilingPoint": 308.85,
       "density": 1.103,
-      "deltaGibbs": -61.36
+      "gibbsEnergy": -61.36
     },
     "computed": {
       "dielectricConst": 8.409,
-      "fusionTemp": 139.95,
-      "boilingTemp": 306.17,
+      "meltingPoint": 139.95,
+      "boilingPoint": 306.17,
       "density": 0.854,
-      "deltaGibbs": -62.39
+      "gibbsEnergy": -62.39
     }
   },
   {
@@ -73,20 +76,21 @@
       2,
       5
     ],
-    "name": "Bromo propeno",
+    "name": "3-Bromo 1-propeno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7,
-      "fusionTemp": 154.2,
-      "boilingTemp": 343.25,
+      "meltingPoint": 154.2,
+      "boilingPoint": 343.25,
       "density": 1.398,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 5.142,
-      "fusionTemp": 178.78,
-      "boilingTemp": 337.47,
+      "meltingPoint": 178.78,
+      "boilingPoint": 337.47,
       "density": 1.654,
-      "deltaGibbs": 77.306
+      "gibbsEnergy": 77.306
     }
   },
   {
@@ -97,38 +101,40 @@
       1
     ],
     "name": "Bromuro de etilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.56,
-      "fusionTemp": 154.6,
-      "boilingTemp": 311.5,
+      "meltingPoint": 154.6,
+      "boilingPoint": 311.5,
       "density": 1.47,
-      "deltaGibbs": -25.82
+      "gibbsEnergy": -25.82
     },
     "computed": {
       "dielectricConst": 9.39,
-      "fusionTemp": 167.53,
-      "boilingTemp": 305.61,
+      "meltingPoint": 167.53,
+      "boilingPoint": 305.61,
       "density": 1.407,
-      "deltaGibbs": -16.348
+      "gibbsEnergy": -16.348
     }
   },
   {
     "index": 6,
     "groups": [],
     "name": "Bromuro de propilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7.2,
-      "fusionTemp": 163.2,
-      "boilingTemp": 344.25,
+      "meltingPoint": 163.2,
+      "boilingPoint": 344.25,
       "density": 1.353,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 5.09,
-      "fusionTemp": 184.49,
-      "boilingTemp": 344.02,
+      "meltingPoint": 184.49,
+      "boilingPoint": 344.02,
       "density": 1.313,
-      "deltaGibbs": -8.12
+      "gibbsEnergy": -8.12
     }
   },
   {
@@ -143,19 +149,20 @@
       74
     ],
     "name": "Perfluoroheptano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.8,
-      "fusionTemp": 195.2,
-      "boilingTemp": 355.59,
+      "meltingPoint": 195.2,
+      "boilingPoint": 355.59,
       "density": 1.75,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 1.117,
-      "fusionTemp": 191.44,
-      "boilingTemp": 483.11,
+      "meltingPoint": 191.44,
+      "boilingPoint": 483.11,
       "density": 1.913,
-      "deltaGibbs": -1268
+      "gibbsEnergy": -1268
     }
   },
   {
@@ -169,38 +176,40 @@
       74
     ],
     "name": "Perfluorohexano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.8,
-      "fusionTemp": 186.1,
-      "boilingTemp": 329.75,
+      "meltingPoint": 186.1,
+      "boilingPoint": 329.75,
       "density": 1.71,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 1.111,
-      "fusionTemp": 191.44,
-      "boilingTemp": 449.52,
+      "meltingPoint": 191.44,
+      "boilingPoint": 449.52,
       "density": 1.86,
-      "deltaGibbs": -1268
+      "gibbsEnergy": -1268
     }
   },
   {
     "index": 9,
     "groups": [],
     "name": "1,1,2 Tricloroetano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7.2,
-      "fusionTemp": 236.6,
-      "boilingTemp": 386.95,
+      "meltingPoint": 236.6,
+      "boilingPoint": 386.95,
       "density": 1.443,
-      "deltaGibbs": -80.97
+      "gibbsEnergy": -80.97
     },
     "computed": {
       "dielectricConst": 8.936,
-      "fusionTemp": 219.21,
-      "boilingTemp": 394.54,
+      "meltingPoint": 219.21,
+      "boilingPoint": 394.54,
       "density": 1.434,
-      "deltaGibbs": -84.015
+      "gibbsEnergy": -84.015
     }
   },
   {
@@ -210,20 +219,21 @@
       2,
       5
     ],
-    "name": "Yodo propeno",
+    "name": "3-Yodo 1-propeno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.1,
-      "fusionTemp": 173.9,
-      "boilingTemp": 376.15,
+      "meltingPoint": 173.9,
+      "boilingPoint": 376.15,
       "density": 1.835,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 5.588,
-      "fusionTemp": 193.18,
-      "boilingTemp": 373.83,
+      "meltingPoint": 193.18,
+      "boilingPoint": 373.83,
       "density": 2.134,
-      "deltaGibbs": 125.97
+      "gibbsEnergy": 125.97
     }
   },
   {
@@ -233,57 +243,60 @@
       1
     ],
     "name": "Yodometano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7,
-      "fusionTemp": 206.8,
-      "boilingTemp": 315.58,
+      "meltingPoint": 206.8,
+      "boilingPoint": 315.58,
       "density": 2.2789,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 6.77,
-      "fusionTemp": 166.33,
-      "boilingTemp": 309.83,
+      "meltingPoint": 166.33,
+      "boilingPoint": 309.83,
       "density": 2.127,
-      "deltaGibbs": 24.09
+      "gibbsEnergy": 24.09
     }
   },
   {
     "index": 12,
     "groups": [],
     "name": "Cloro propeno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 8.2,
-      "fusionTemp": 138.7,
-      "boilingTemp": 318.25,
+      "meltingPoint": 138.7,
+      "boilingPoint": 318.25,
       "density": 0.94,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 8.94,
-      "fusionTemp": 164.53,
-      "boilingTemp": 318.26,
+      "meltingPoint": 164.53,
+      "boilingPoint": 318.26,
       "density": 1.105,
-      "deltaGibbs": 36.72
+      "gibbsEnergy": 36.72
     }
   },
   {
     "index": 13,
     "groups": [],
     "name": "Acetil acetona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 16.65,
-      "fusionTemp": 250.2,
-      "boilingTemp": 411.15,
+      "meltingPoint": 250.2,
+      "boilingPoint": 411.15,
       "density": 0.98,
-      "deltaGibbs": -275
+      "gibbsEnergy": -275
     },
     "computed": {
       "dielectricConst": 23.1,
-      "fusionTemp": 239.71,
-      "boilingTemp": 426.95,
+      "meltingPoint": 239.71,
+      "boilingPoint": 426.95,
       "density": 1.002,
-      "deltaGibbs": -269.25
+      "gibbsEnergy": -269.25
     }
   },
   {
@@ -293,19 +306,20 @@
       1
     ],
     "name": "Acetona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 20.7,
-      "fusionTemp": 178.5,
-      "boilingTemp": 329.22,
+      "meltingPoint": 178.5,
+      "boilingPoint": 329.22,
       "density": 0.79,
-      "deltaGibbs": -151.3
+      "gibbsEnergy": -151.3
     },
     "computed": {
       "dielectricConst": 19.53,
-      "fusionTemp": 171.61,
-      "boilingTemp": 305.37,
+      "meltingPoint": 171.61,
+      "boilingPoint": 305.37,
       "density": 0.776,
-      "deltaGibbs": -154.22
+      "gibbsEnergy": -154.22
     }
   },
   {
@@ -317,133 +331,140 @@
       1
     ],
     "name": "3 pentanona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 17.3,
-      "fusionTemp": 234.2,
-      "boilingTemp": 375.14,
+      "meltingPoint": 234.2,
+      "boilingPoint": 375.14,
       "density": 0.815,
-      "deltaGibbs": -134.4
+      "gibbsEnergy": -134.4
     },
     "computed": {
       "dielectricConst": 16.69,
-      "fusionTemp": 206.58,
-      "boilingTemp": 385.58,
+      "meltingPoint": 206.58,
+      "boilingPoint": 385.58,
       "density": 0.8,
-      "deltaGibbs": -155.04
+      "gibbsEnergy": -155.04
     }
   },
   {
     "index": 16,
     "groups": [],
     "name": "4 heptanona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 240.2,
-      "boilingTemp": 417.15,
+      "meltingPoint": 240.2,
+      "boilingPoint": 417.15,
       "density": 0.81,
-      "deltaGibbs": -120.8
+      "gibbsEnergy": -120.8
     },
     "computed": {
       "dielectricConst": 15.98,
-      "fusionTemp": 229.11,
-      "boilingTemp": 435.97,
+      "meltingPoint": 229.11,
+      "boilingPoint": 435.97,
       "density": 0.8144,
-      "deltaGibbs": -138.58
+      "gibbsEnergy": -138.58
     }
   },
   {
     "index": 17,
     "groups": [],
     "name": "2 butanona (MEK)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 18.5,
-      "fusionTemp": 186.5,
-      "boilingTemp": 352.71,
+      "meltingPoint": 186.5,
+      "boilingPoint": 352.71,
       "density": 0.805,
-      "deltaGibbs": -147
+      "gibbsEnergy": -147
     },
     "computed": {
       "dielectricConst": 17.07,
-      "fusionTemp": 183.02,
-      "boilingTemp": 344.67,
+      "meltingPoint": 183.02,
+      "boilingPoint": 344.67,
       "density": 0.791,
-      "deltaGibbs": -145.92
+      "gibbsEnergy": -145.92
     }
   },
   {
     "index": 18,
     "groups": [],
     "name": "2 undecanona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 8.4,
-      "fusionTemp": 288.2,
-      "boilingTemp": 504.65,
+      "meltingPoint": 288.2,
+      "boilingPoint": 504.65,
       "density": 0.829,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 15.09,
-      "fusionTemp": 258.23,
-      "boilingTemp": 505.39,
+      "meltingPoint": 258.23,
+      "boilingPoint": 505.39,
       "density": 0.831,
-      "deltaGibbs": -88.3
+      "gibbsEnergy": -88.3
     }
   },
   {
     "index": 19,
     "groups": [],
     "name": "Cloroacetona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 29.8,
-      "fusionTemp": 228.7,
-      "boilingTemp": 392.15,
+      "meltingPoint": 228.7,
+      "boilingPoint": 392.15,
       "density": 1.162,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 8.15,
-      "fusionTemp": 215.7,
-      "boilingTemp": 383.47,
+      "meltingPoint": 215.7,
+      "boilingPoint": 383.47,
       "density": 1.124,
-      "deltaGibbs": -179.57
+      "gibbsEnergy": -179.57
     }
   },
   {
     "index": 20,
     "groups": [],
     "name": "Heptanona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 11.9,
-      "fusionTemp": 237.7,
-      "boilingTemp": 424.15,
+      "meltingPoint": 237.7,
+      "boilingPoint": 424.15,
       "density": 0.8,
-      "deltaGibbs": -121.8
+      "gibbsEnergy": -121.8
     },
     "computed": {
       "dielectricConst": 15.96,
-      "fusionTemp": 225.5,
-      "boilingTemp": 428.65,
+      "meltingPoint": 225.5,
+      "boilingPoint": 428.65,
       "density": 0.816,
-      "deltaGibbs": -138.58
+      "gibbsEnergy": -138.58
     }
   },
   {
     "index": 21,
     "groups": [],
     "name": "Hexanona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 14.6,
-      "fusionTemp": 217.4,
-      "boilingTemp": 400.7,
+      "meltingPoint": 217.4,
+      "boilingPoint": 400.7,
       "density": 0.818,
-      "deltaGibbs": -130.1
+      "gibbsEnergy": -130.1
     },
     "computed": {
       "dielectricConst": 16.27,
-      "fusionTemp": 214.45,
-      "boilingTemp": 404.09,
+      "meltingPoint": 214.45,
+      "boilingPoint": 404.09,
       "density": 0.81,
-      "deltaGibbs": -129.53
+      "gibbsEnergy": -129.53
     }
   },
   {
@@ -455,20 +476,21 @@
       2,
       18
     ],
-    "name": "Metil isobutil cetona",
+    "name": "*Metil isobutil cetona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 12.4,
-      "fusionTemp": 189.2,
-      "boilingTemp": 389.15,
+      "meltingPoint": 189.2,
+      "boilingPoint": 389.15,
       "density": 0.8,
-      "deltaGibbs": -135
+      "gibbsEnergy": -135
     },
     "computed": {
       "dielectricConst": 14.8,
-      "fusionTemp": 196.77,
-      "boilingTemp": 391.08,
+      "meltingPoint": 196.77,
+      "boilingPoint": 391.08,
       "density": 0.81,
-      "deltaGibbs": -133.8
+      "gibbsEnergy": -133.8
     }
   },
   {
@@ -480,19 +502,20 @@
       18
     ],
     "name": "Metil isopropil cetona",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 16.8,
-      "fusionTemp": 181.2,
-      "boilingTemp": 367.55,
+      "meltingPoint": 181.2,
+      "boilingPoint": 367.55,
       "density": 0.804,
-      "deltaGibbs": -139
+      "gibbsEnergy": -139
     },
     "computed": {
       "dielectricConst": 16.6,
-      "fusionTemp": 181.81,
-      "boilingTemp": 363.6,
+      "meltingPoint": 181.81,
+      "boilingPoint": 363.6,
       "density": 0.802,
-      "deltaGibbs": -142.41
+      "gibbsEnergy": -142.41
     }
   },
   {
@@ -507,19 +530,20 @@
       1
     ],
     "name": "Acetato de amilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5,
-      "fusionTemp": 202.4,
-      "boilingTemp": 422.35,
+      "meltingPoint": 202.4,
+      "boilingPoint": 422.35,
       "density": 0.876,
-      "deltaGibbs": -303.5
+      "gibbsEnergy": -303.5
     },
     "computed": {
       "dielectricConst": 4.935,
-      "fusionTemp": 216.07,
-      "boilingTemp": 430.38,
+      "meltingPoint": 216.07,
+      "boilingPoint": 430.38,
       "density": 0.868,
-      "deltaGibbs": -308.55
+      "gibbsEnergy": -308.55
     }
   },
   {
@@ -533,19 +557,20 @@
       1
     ],
     "name": "Acetato de butilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.1,
-      "fusionTemp": 195.2,
-      "boilingTemp": 399.25,
+      "meltingPoint": 195.2,
+      "boilingPoint": 399.25,
       "density": 0.88,
-      "deltaGibbs": -312.6
+      "gibbsEnergy": -312.6
     },
     "computed": {
       "dielectricConst": 5.248,
-      "fusionTemp": 203.89,
-      "boilingTemp": 406.04,
+      "meltingPoint": 203.89,
+      "boilingPoint": 406.04,
       "density": 0.869,
-      "deltaGibbs": -316.78
+      "gibbsEnergy": -316.78
     }
   },
   {
@@ -557,114 +582,120 @@
       1
     ],
     "name": "Acetato de etilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.02,
-      "fusionTemp": 189.6,
-      "boilingTemp": 350.25,
+      "meltingPoint": 189.6,
+      "boilingPoint": 350.25,
       "density": 0.897,
-      "deltaGibbs": -328
+      "gibbsEnergy": -328
     },
     "computed": {
       "dielectricConst": 6.103,
-      "fusionTemp": 174.06,
-      "boilingTemp": 346.43,
+      "meltingPoint": 174.06,
+      "boilingPoint": 346.43,
       "density": 0.87,
-      "deltaGibbs": -333.24
+      "gibbsEnergy": -333.24
     }
   },
   {
     "index": 27,
     "groups": [],
     "name": "Acetato de isobutilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.6,
-      "fusionTemp": 174.3,
-      "boilingTemp": 389.72,
+      "meltingPoint": 174.3,
+      "boilingPoint": 389.72,
       "density": 0.85,
-      "deltaGibbs": -321.2
+      "gibbsEnergy": -321.2
     },
     "computed": {
       "dielectricConst": 5.22,
-      "fusionTemp": 188.98,
-      "boilingTemp": 392.48,
+      "meltingPoint": 188.98,
+      "boilingPoint": 392.48,
       "density": 0.868,
-      "deltaGibbs": -321.12
+      "gibbsEnergy": -321.12
     }
   },
   {
     "index": 28,
     "groups": [],
     "name": "Acetato de metilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.7,
-      "fusionTemp": 175.2,
-      "boilingTemp": 330.09,
+      "meltingPoint": 175.2,
+      "boilingPoint": 330.09,
       "density": 0.932,
-      "deltaGibbs": -324.2
+      "gibbsEnergy": -324.2
     },
     "computed": {
       "dielectricConst": 6.71,
-      "fusionTemp": 155.1,
-      "boilingTemp": 308.52,
+      "meltingPoint": 155.1,
+      "boilingPoint": 308.52,
       "density": 0.872,
-      "deltaGibbs": -341.47
+      "gibbsEnergy": -341.47
     }
   },
   {
     "index": 29,
     "groups": [],
     "name": "Acetato de propilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.3,
-      "fusionTemp": 178.2,
-      "boilingTemp": 374.65,
+      "meltingPoint": 178.2,
+      "boilingPoint": 374.65,
       "density": 0.888,
-      "deltaGibbs": -320.4
+      "gibbsEnergy": -320.4
     },
     "computed": {
       "dielectricConst": 6.1,
-      "fusionTemp": 174.06,
-      "boilingTemp": 346.43,
+      "meltingPoint": 174.06,
+      "boilingPoint": 346.43,
       "density": 0.87,
-      "deltaGibbs": -333.24
+      "gibbsEnergy": -333.24
     }
   },
   {
     "index": 30,
     "groups": [],
     "name": "Butanoato de etilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.1,
-      "fusionTemp": 180.2,
-      "boilingTemp": 394.69,
+      "meltingPoint": 180.2,
+      "boilingPoint": 394.69,
       "density": 0.879,
-      "deltaGibbs": -312.2
+      "gibbsEnergy": -312.2
     },
     "computed": {
       "dielectricConst": 5.297,
-      "fusionTemp": 189.07,
-      "boilingTemp": 398.22,
+      "meltingPoint": 189.07,
+      "boilingPoint": 398.22,
       "density": 0.865,
-      "deltaGibbs": -305.61
+      "gibbsEnergy": -305.61
     }
   },
   {
     "index": 31,
     "groups": [],
     "name": "3 metil acido butanoico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 243.9,
-      "boilingTemp": 449.68,
+      "meltingPoint": 243.9,
+      "boilingPoint": 449.68,
       "density": 0.925,
-      "deltaGibbs": -367
+      "gibbsEnergy": -367
     },
     "computed": {
       "dielectricConst": 2.57,
-      "fusionTemp": 268.9,
-      "boilingTemp": 449.53,
+      "meltingPoint": 268.9,
+      "boilingPoint": 449.53,
       "density": 0.9344,
-      "deltaGibbs": -351.95
+      "gibbsEnergy": -351.95
     }
   },
   {
@@ -674,19 +705,20 @@
       42
     ],
     "name": "Acido acetico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.15,
-      "fusionTemp": 289.6,
-      "boilingTemp": 391.2,
+      "meltingPoint": 289.6,
+      "boilingPoint": 391.2,
       "density": 1.049,
-      "deltaGibbs": -374.6
+      "gibbsEnergy": -374.6
     },
     "computed": {
       "dielectricConst": 3.15,
-      "fusionTemp": 254.74,
-      "boilingTemp": 389.41,
+      "meltingPoint": 254.74,
+      "boilingPoint": 389.41,
       "density": 0.992,
-      "deltaGibbs": -372.3
+      "gibbsEnergy": -372.3
     }
   },
   {
@@ -698,19 +730,20 @@
       42
     ],
     "name": "Acido butirico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3,
-      "fusionTemp": 268,
-      "boilingTemp": 436.87,
+      "meltingPoint": 268,
+      "boilingPoint": 436.87,
       "density": 0.96,
-      "deltaGibbs": -360
+      "gibbsEnergy": -360
     },
     "computed": {
       "dielectricConst": 2.484,
-      "fusionTemp": 269.39,
-      "boilingTemp": 438.97,
+      "meltingPoint": 269.39,
+      "boilingPoint": 438.97,
       "density": 0.947,
-      "deltaGibbs": -355.83
+      "gibbsEnergy": -355.83
     }
   },
   {
@@ -726,19 +759,20 @@
       42
     ],
     "name": "Acido caprilico (c8)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.2,
-      "fusionTemp": 289.5,
-      "boilingTemp": 512.15,
+      "meltingPoint": 289.5,
+      "boilingPoint": 512.15,
       "density": 0.91,
-      "deltaGibbs": -325
+      "gibbsEnergy": -325
     },
     "computed": {
       "dielectricConst": 1.153,
-      "fusionTemp": 293.6,
-      "boilingTemp": 512.16,
+      "meltingPoint": 293.6,
+      "boilingPoint": 512.16,
       "density": 0.912,
-      "deltaGibbs": -322.91
+      "gibbsEnergy": -322.91
     }
   },
   {
@@ -752,95 +786,100 @@
       42
     ],
     "name": "Acido caproico (C6)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.6,
-      "fusionTemp": 270.2,
-      "boilingTemp": 478.38,
+      "meltingPoint": 270.2,
+      "boilingPoint": 478.38,
       "density": 0.92,
-      "deltaGibbs": -338
+      "gibbsEnergy": -338
     },
     "computed": {
       "dielectricConst": 1.677,
-      "fusionTemp": 282.21,
-      "boilingTemp": 478.82,
+      "meltingPoint": 282.21,
+      "boilingPoint": 478.82,
       "density": 0.925,
-      "deltaGibbs": -339.37
+      "gibbsEnergy": -339.37
     }
   },
   {
     "index": 36,
     "groups": [],
     "name": "Acido ciano acetico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 33,
-      "fusionTemp": 339.2,
-      "boilingTemp": null,
+      "meltingPoint": 339.2,
+      "boilingPoint": null,
       "density": 1.055,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 7.4,
-      "fusionTemp": 282.36,
-      "boilingTemp": 487.9,
+      "meltingPoint": 282.36,
+      "boilingPoint": 487.9,
       "density": 1.263,
-      "deltaGibbs": -242.72
+      "gibbsEnergy": -242.72
     }
   },
   {
     "index": 37,
     "groups": [],
     "name": "Acido cloroacetico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 12.3,
-      "fusionTemp": 336.2,
-      "boilingTemp": 462.45,
+      "meltingPoint": 336.2,
+      "boilingPoint": 462.45,
       "density": 1.58,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 10,
-      "fusionTemp": 276.69,
-      "boilingTemp": 444.37,
+      "meltingPoint": 276.69,
+      "boilingPoint": 444.37,
       "density": 1.39,
-      "deltaGibbs": -397.64
+      "gibbsEnergy": -397.64
     }
   },
   {
     "index": 38,
     "groups": [],
     "name": "Acido estearico C18",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.3,
-      "fusionTemp": 342,
-      "boilingTemp": 656.15,
+      "meltingPoint": 342,
+      "boilingPoint": 656.15,
       "density": 0.847,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": -0.069,
-      "fusionTemp": 336.89,
-      "boilingTemp": 626.82,
+      "meltingPoint": 336.89,
+      "boilingPoint": 626.82,
       "density": 0.887,
-      "deltaGibbs": -240.6
+      "gibbsEnergy": -240.6
     }
   },
   {
     "index": 39,
     "groups": [],
     "name": "Acido heptanoico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.5,
-      "fusionTemp": 265.7,
-      "boilingTemp": 496.15,
+      "meltingPoint": 265.7,
+      "boilingPoint": 496.15,
       "density": 0.91,
-      "deltaGibbs": -334
+      "gibbsEnergy": -334
     },
     "computed": {
       "dielectricConst": 1.39,
-      "fusionTemp": 288.06,
-      "boilingTemp": 496.17,
+      "meltingPoint": 288.06,
+      "boilingPoint": 496.17,
       "density": 0.918,
-      "deltaGibbs": -331.14
+      "gibbsEnergy": -331.14
     }
   },
   {
@@ -852,19 +891,20 @@
       42
     ],
     "name": "Acido lactico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 22,
-      "fusionTemp": 326.2,
-      "boilingTemp": 395.15,
+      "meltingPoint": 326.2,
+      "boilingPoint": 395.15,
       "density": 1.249,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 14.84,
-      "fusionTemp": 257.28,
-      "boilingTemp": 467.42,
+      "meltingPoint": 257.28,
+      "boilingPoint": 467.42,
       "density": 1.245,
-      "deltaGibbs": -515.66
+      "gibbsEnergy": -515.66
     }
   },
   {
@@ -888,209 +928,220 @@
       1
     ],
     "name": "Acido linoleico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.8,
-      "fusionTemp": 268.4,
-      "boilingTemp": 638.35,
+      "meltingPoint": 268.4,
+      "boilingPoint": 638.35,
       "density": 0.9,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 0.65,
-      "fusionTemp": 325.67,
-      "boilingTemp": 621.37,
+      "meltingPoint": 325.67,
+      "boilingPoint": 621.37,
       "density": 0.997,
-      "deltaGibbs": -84.93
+      "gibbsEnergy": -84.93
     }
   },
   {
     "index": 42,
     "groups": [],
     "name": "Acido oxalico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 378.7,
-      "boilingTemp": null,
+      "meltingPoint": 378.7,
+      "boilingPoint": null,
       "density": 1.65,
-      "deltaGibbs": -695.6
+      "gibbsEnergy": -695.6
     },
     "computed": {
       "dielectricConst": 8.23,
-      "fusionTemp": 321.71,
-      "boilingTemp": 502.07,
+      "meltingPoint": 321.71,
+      "boilingPoint": 502.07,
       "density": 1.637,
-      "deltaGibbs": -713.71
+      "gibbsEnergy": -713.71
     }
   },
   {
     "index": 43,
     "groups": [],
     "name": "Acido palmitico c16",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.3,
-      "fusionTemp": 335,
-      "boilingTemp": 624.65,
+      "meltingPoint": 335,
+      "boilingPoint": 624.65,
       "density": 0.853,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 0.08,
-      "fusionTemp": 329.57,
-      "boilingTemp": 608.47,
+      "meltingPoint": 329.57,
+      "boilingPoint": 608.47,
       "density": 0.89,
-      "deltaGibbs": -257.06
+      "gibbsEnergy": -257.06
     }
   },
   {
     "index": 44,
     "groups": [],
     "name": "Acido propionico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.1,
-      "fusionTemp": 252.5,
-      "boilingTemp": 414.25,
+      "meltingPoint": 252.5,
+      "boilingPoint": 414.25,
       "density": 0.99,
-      "deltaGibbs": -366.7
+      "gibbsEnergy": -366.7
     },
     "computed": {
       "dielectricConst": 3.09,
-      "fusionTemp": 262.33,
-      "boilingTemp": 415.69,
+      "meltingPoint": 262.33,
+      "boilingPoint": 415.69,
       "density": 0.965,
-      "deltaGibbs": -364.07
+      "gibbsEnergy": -364.07
     }
   },
   {
     "index": 45,
     "groups": [],
     "name": "Acido succinico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.4,
-      "fusionTemp": 461.2,
-      "boilingTemp": 508,
+      "meltingPoint": 461.2,
+      "boilingPoint": 508,
       "density": 1.56,
-      "deltaGibbs": -697.3
+      "gibbsEnergy": -697.3
     },
     "computed": {
       "dielectricConst": 2.5,
-      "fusionTemp": 329.59,
-      "boilingTemp": 532.07,
+      "meltingPoint": 329.59,
+      "boilingPoint": 532.07,
       "density": 1.35,
-      "deltaGibbs": -697.24
+      "gibbsEnergy": -697.24
     }
   },
   {
     "index": 46,
     "groups": [],
     "name": "Acido tartarico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6,
-      "fusionTemp": 445.2,
-      "boilingTemp": null,
+      "meltingPoint": 445.2,
+      "boilingPoint": null,
       "density": null,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 15.16,
-      "fusionTemp": 328.98,
-      "boilingTemp": 601.66,
+      "meltingPoint": 328.98,
+      "boilingPoint": 601.66,
       "density": 2.78,
-      "deltaGibbs": -986.89
+      "gibbsEnergy": -986.89
     }
   },
   {
     "index": 47,
     "groups": [],
     "name": "Acido tricloroacetico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 4.6,
-      "fusionTemp": 330.7,
-      "boilingTemp": 469.65,
+      "meltingPoint": 330.7,
+      "boilingPoint": 469.65,
       "density": 1.63,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 5.28,
-      "fusionTemp": 315.65,
-      "boilingTemp": 457.77,
+      "meltingPoint": 315.65,
+      "boilingPoint": 457.77,
       "density": 1.64,
-      "deltaGibbs": -402.52
+      "gibbsEnergy": -402.52
     }
   },
   {
     "index": 48,
     "groups": [],
     "name": "Acido trifluoroacetico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 39,
-      "fusionTemp": 257.8,
-      "boilingTemp": 345.55,
+      "meltingPoint": 257.8,
+      "boilingPoint": 345.55,
       "density": 1.5351,
-      "deltaGibbs": -946
+      "gibbsEnergy": -946
     },
     "computed": {
       "dielectricConst": 10.13,
-      "fusionTemp": 276.02,
-      "boilingTemp": 401.18,
+      "meltingPoint": 276.02,
+      "boilingPoint": 401.18,
       "density": 1.496,
-      "deltaGibbs": -990.85
+      "gibbsEnergy": -990.85
     }
   },
   {
     "index": 49,
     "groups": [],
     "name": "Acido valerico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.6,
-      "fusionTemp": 239.5,
-      "boilingTemp": 459.31,
+      "meltingPoint": 239.5,
+      "boilingPoint": 459.31,
       "density": 0.93,
-      "deltaGibbs": -345.6
+      "gibbsEnergy": -345.6
     },
     "computed": {
       "dielectricConst": 2.03,
-      "fusionTemp": 276,
-      "boilingTemp": 459.86,
+      "meltingPoint": 276,
+      "boilingPoint": 459.86,
       "density": 0.934,
-      "deltaGibbs": -347.6
+      "gibbsEnergy": -347.6
     }
   },
   {
     "index": 50,
     "groups": [],
     "name": "Dimetilamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.3,
-      "fusionTemp": 181,
-      "boilingTemp": 280,
+      "meltingPoint": 181,
+      "boilingPoint": 280,
       "density": 1.883,
-      "deltaGibbs": 68.4
+      "gibbsEnergy": 68.4
     },
     "computed": {
       "dielectricConst": 5.55,
-      "fusionTemp": 164.8,
-      "boilingTemp": 284.68,
+      "meltingPoint": 164.8,
+      "boilingPoint": 284.68,
       "density": 0.617,
-      "deltaGibbs": 59.61
+      "gibbsEnergy": 59.61
     }
   },
   {
     "index": 51,
     "groups": [],
     "name": "Etilen diamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 16,
-      "fusionTemp": 284.3,
-      "boilingTemp": 390.15,
+      "meltingPoint": 284.3,
+      "boilingPoint": 390.15,
       "density": 0.899,
-      "deltaGibbs": 103
+      "gibbsEnergy": 103
     },
     "computed": {
       "dielectricConst": 6.25,
-      "fusionTemp": 284.29,
-      "boilingTemp": 390.41,
+      "meltingPoint": 284.29,
+      "boilingPoint": 390.41,
       "density": 0.894,
-      "deltaGibbs": 103.2
+      "gibbsEnergy": 103.2
     }
   },
   {
@@ -1102,19 +1153,20 @@
       1
     ],
     "name": "Dietilamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.7,
-      "fusionTemp": 223.4,
-      "boilingTemp": 328.6,
+      "meltingPoint": 223.4,
+      "boilingPoint": 328.6,
       "density": 0.7074,
-      "deltaGibbs": 73.08
+      "gibbsEnergy": 73.08
     },
     "computed": {
       "dielectricConst": 2.817,
-      "fusionTemp": 211.87,
-      "boilingTemp": 341.35,
+      "meltingPoint": 211.87,
+      "boilingPoint": 341.35,
       "density": 0.693,
-      "deltaGibbs": 73.23
+      "gibbsEnergy": 73.23
     }
   },
   {
@@ -1126,76 +1178,80 @@
       29
     ],
     "name": "Butilamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.4,
-      "fusionTemp": 224.1,
-      "boilingTemp": 351.15,
+      "meltingPoint": 224.1,
+      "boilingPoint": 351.15,
       "density": 0.74,
-      "deltaGibbs": 49.3
+      "gibbsEnergy": 49.3
     },
     "computed": {
       "dielectricConst": 4.34,
-      "fusionTemp": 225.97,
-      "boilingTemp": 362.72,
+      "meltingPoint": 225.97,
+      "boilingPoint": 362.72,
       "density": 0.738,
-      "deltaGibbs": 51.69
+      "gibbsEnergy": 51.69
     }
   },
   {
     "index": 54,
     "groups": [],
     "name": "Propilamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 5.3,
-      "fusionTemp": 190.2,
-      "boilingTemp": 320.38,
+      "meltingPoint": 190.2,
+      "boilingPoint": 320.38,
       "density": 0.719,
-      "deltaGibbs": 41.7
+      "gibbsEnergy": 41.7
     },
     "computed": {
       "dielectricConst": 4.593,
-      "fusionTemp": 214.98,
-      "boilingTemp": 327.98,
+      "meltingPoint": 214.98,
+      "boilingPoint": 327.98,
       "density": 0.713,
-      "deltaGibbs": 43.46
+      "gibbsEnergy": 43.46
     }
   },
   {
     "index": 55,
     "groups": [],
     "name": "Trietilamina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.4,
-      "fusionTemp": 158.5,
-      "boilingTemp": 362.15,
+      "meltingPoint": 158.5,
+      "boilingPoint": 362.15,
       "density": 0.726,
-      "deltaGibbs": 114.1
+      "gibbsEnergy": 114.1
     },
     "computed": {
       "dielectricConst": 0.7763,
-      "fusionTemp": 146.88,
-      "boilingTemp": 356.76,
+      "meltingPoint": 146.88,
+      "boilingPoint": 356.76,
       "density": 0.7166,
-      "deltaGibbs": 110.3
+      "gibbsEnergy": 110.3
     }
   },
   {
     "index": 56,
     "groups": [],
     "name": "Dietil malonato",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 7.9,
-      "fusionTemp": 223.2,
-      "boilingTemp": 473.15,
+      "meltingPoint": 223.2,
+      "boilingPoint": 473.15,
       "density": 1.05,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 15.93,
-      "fusionTemp": 241.73,
-      "boilingTemp": 467.16,
+      "meltingPoint": 241.73,
+      "boilingPoint": 467.16,
       "density": 1.036,
-      "deltaGibbs": -569.18
+      "gibbsEnergy": -569.18
     }
   },
   {
@@ -1210,45 +1266,45 @@
       1
     ],
     "name": "*Dietoxietano o acetal",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.8,
-      "fusionTemp": 173.2,
-      "boilingTemp": 375.35,
+      "meltingPoint": 173.2,
+      "boilingPoint": 375.35,
       "density": 0.825,
-      "deltaGibbs": -245
+      "gibbsEnergy": -245
     },
     "computed": {
       "dielectricConst": 4.42,
-      "fusionTemp": 182.23,
-      "boilingTemp": 379.53,
+      "meltingPoint": 182.23,
+      "boilingPoint": 379.53,
       "density": 0.834,
-      "deltaGibbs": -221.9
+      "gibbsEnergy": -221.9
     }
   },
   {
     "index": 58,
     "groups": [
-      1,
+      24,
       3,
-      25,
       1,
-      25,
-      2
+      24
     ],
     "name": "Dimetoxietano",
+    "configuration": "24.3(1).24",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 215.2,
-      "boilingTemp": 358.15,
+      "meltingPoint": 215.2,
+      "boilingPoint": 358.15,
       "density": 0.8683,
-      "deltaGibbs": -198.2
+      "gibbsEnergy": -198.2
     },
     "computed": {
       "dielectricConst": 4.97,
-      "fusionTemp": 166.21,
-      "boilingTemp": 330.07,
+      "meltingPoint": 166.21,
+      "boilingPoint": 330.07,
       "density": 0.826,
-      "deltaGibbs": -234.01
+      "gibbsEnergy": -234.01
     }
   },
   {
@@ -1258,19 +1314,20 @@
       101
     ],
     "name": "Dimetilacetamida",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 253.2,
-      "boilingTemp": 438.15,
+      "meltingPoint": 253.2,
+      "boilingPoint": 438.15,
       "density": 0.94,
-      "deltaGibbs": -88.5
+      "gibbsEnergy": -88.5
     },
     "computed": {
       "dielectricConst": 0.948,
-      "fusionTemp": 253.15,
-      "boilingTemp": 439.25,
+      "meltingPoint": 253.15,
+      "boilingPoint": 439.25,
       "density": 2.639,
-      "deltaGibbs": -88.5
+      "gibbsEnergy": -88.5
     }
   },
   {
@@ -1280,19 +1337,20 @@
       92
     ],
     "name": "Metilacetamida",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 301.2,
-      "boilingTemp": 478.15,
+      "meltingPoint": 301.2,
+      "boilingPoint": 478.15,
       "density": 0.94,
-      "deltaGibbs": -135
+      "gibbsEnergy": -135
     },
     "computed": {
       "dielectricConst": 0.969,
-      "fusionTemp": 315.62,
-      "boilingTemp": 468.62,
+      "meltingPoint": 315.62,
+      "boilingPoint": 468.62,
       "density": 2.2141,
-      "deltaGibbs": -124.05
+      "gibbsEnergy": -124.05
     }
   },
   {
@@ -1303,95 +1361,100 @@
       60
     ],
     "name": "Etanotiol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.9,
-      "fusionTemp": 125.4,
-      "boilingTemp": 308.15,
+      "meltingPoint": 125.4,
+      "boilingPoint": 308.15,
       "density": 0.8617,
-      "deltaGibbs": -4.81
+      "gibbsEnergy": -4.81
     },
     "computed": {
       "dielectricConst": 0.98,
-      "fusionTemp": 127.38,
-      "boilingTemp": 292.34,
+      "meltingPoint": 127.38,
+      "boilingPoint": 292.34,
       "density": 0.816,
-      "deltaGibbs": -6.13
+      "gibbsEnergy": -6.13
     }
   },
   {
     "index": 62,
     "groups": [],
     "name": "Decano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2,
-      "fusionTemp": 243.5,
-      "boilingTemp": 447.25,
+      "meltingPoint": 243.5,
+      "boilingPoint": 447.25,
       "density": 0.73,
-      "deltaGibbs": 33.18
+      "gibbsEnergy": 33.18
     },
     "computed": {
       "dielectricConst": 0.973,
-      "fusionTemp": 217.06,
-      "boilingTemp": 452.59,
+      "meltingPoint": 217.06,
+      "boilingPoint": 452.59,
       "density": 0.726,
-      "deltaGibbs": 34.96
+      "gibbsEnergy": 34.96
     }
   },
   {
     "index": 63,
     "groups": [],
     "name": "Heptano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.92,
-      "fusionTemp": 182.6,
-      "boilingTemp": 371.65,
+      "meltingPoint": 182.6,
+      "boilingPoint": 371.65,
       "density": 0.684,
-      "deltaGibbs": 8.16
+      "gibbsEnergy": 8.16
     },
     "computed": {
       "dielectricConst": 0.9725,
-      "fusionTemp": 175.55,
-      "boilingTemp": 379.07,
+      "meltingPoint": 175.55,
+      "boilingPoint": 379.07,
       "density": 0.6804,
-      "deltaGibbs": 10.27
+      "gibbsEnergy": 10.27
     }
   },
   {
     "index": 64,
     "groups": [],
     "name": "Isooctano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.94,
-      "fusionTemp": 165.9,
-      "boilingTemp": 372.35,
+      "meltingPoint": 165.9,
+      "boilingPoint": 372.35,
       "density": 0.688,
-      "deltaGibbs": 13.94
+      "gibbsEnergy": 13.94
     },
     "computed": {
       "dielectricConst": 0.9684,
-      "fusionTemp": 167.22,
-      "boilingTemp": 353.57,
+      "meltingPoint": 167.22,
+      "boilingPoint": 353.57,
       "density": 0.6865,
-      "deltaGibbs": 7.092
+      "gibbsEnergy": 7.092
     }
   },
   {
     "index": 65,
     "groups": [],
     "name": "Hexano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.89,
-      "fusionTemp": 177.8,
-      "boilingTemp": 341.85,
+      "meltingPoint": 177.8,
+      "boilingPoint": 341.85,
       "density": 0.6548,
-      "deltaGibbs": -0.06
+      "gibbsEnergy": -0.06
     },
     "computed": {
       "dielectricConst": 0.9719,
-      "fusionTemp": 156.89,
-      "boilingTemp": 347.22,
+      "meltingPoint": 156.89,
+      "boilingPoint": 347.22,
       "density": 0.6578,
-      "deltaGibbs": 2.04
+      "gibbsEnergy": 2.04
     }
   },
   {
@@ -1407,19 +1470,20 @@
       1
     ],
     "name": "Octano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.95,
-      "fusionTemp": 216.4,
-      "boilingTemp": 398.82,
+      "meltingPoint": 216.4,
+      "boilingPoint": 398.82,
       "density": 0.703,
-      "deltaGibbs": 16
+      "gibbsEnergy": 16
     },
     "computed": {
       "dielectricConst": 0.973,
-      "fusionTemp": 191.33,
-      "boilingTemp": 406.62,
+      "meltingPoint": 191.33,
+      "boilingPoint": 406.62,
       "density": 0.6986,
-      "deltaGibbs": 18.5
+      "gibbsEnergy": 18.5
     }
   },
   {
@@ -1430,19 +1494,20 @@
       1
     ],
     "name": "Pentadieno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2.3,
-      "fusionTemp": null,
-      "boilingTemp": 315.15,
+      "meltingPoint": null,
+      "boilingPoint": 315.15,
       "density": 0.683,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 0.97,
-      "fusionTemp": 183.22,
-      "boilingTemp": 318.03,
+      "meltingPoint": 183.22,
+      "boilingPoint": 318.03,
       "density": 0.911,
-      "deltaGibbs": 150.41
+      "gibbsEnergy": 150.41
     }
   },
   {
@@ -1455,190 +1520,200 @@
       1
     ],
     "name": "Pentano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.844,
-      "fusionTemp": 143.4,
-      "boilingTemp": 309.22,
+      "meltingPoint": 143.4,
+      "boilingPoint": 309.22,
       "density": 0.626,
-      "deltaGibbs": -8.81
+      "gibbsEnergy": -8.81
     },
     "computed": {
       "dielectricConst": 0.9711,
-      "fusionTemp": 134.05,
-      "boilingTemp": 309.46,
+      "meltingPoint": 134.05,
+      "boilingPoint": 309.46,
       "density": 0.628,
-      "deltaGibbs": -6.2
+      "gibbsEnergy": -6.2
     }
   },
   {
     "index": 69,
     "groups": [],
     "name": "Propano (Liq)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.6,
-      "fusionTemp": 85.47,
-      "boilingTemp": 231.02,
+      "meltingPoint": 85.47,
+      "boilingPoint": 231.02,
       "density": 0.5077,
-      "deltaGibbs": -24.39
+      "gibbsEnergy": -24.39
     },
     "computed": {
       "dielectricConst": 0.968,
-      "fusionTemp": 63.15,
-      "boilingTemp": 203.08,
+      "meltingPoint": 63.15,
+      "boilingPoint": 203.08,
       "density": 0.536,
-      "deltaGibbs": -22.66
+      "gibbsEnergy": -22.66
     }
   },
   {
     "index": 70,
     "groups": [],
     "name": "Propeno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 1.9,
-      "fusionTemp": 87.89,
-      "boilingTemp": 225.46,
+      "meltingPoint": 87.89,
+      "boilingPoint": 225.46,
       "density": 0.609,
-      "deltaGibbs": 62.15
+      "gibbsEnergy": 62.15
     },
     "computed": {
       "dielectricConst": 0.967,
-      "fusionTemp": 87.9,
-      "boilingTemp": 205.9,
+      "meltingPoint": 87.9,
+      "boilingPoint": 205.9,
       "density": 0.681,
-      "deltaGibbs": 63.02
+      "gibbsEnergy": 63.02
     }
   },
   {
     "index": 71,
     "groups": [],
     "name": "Undecano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 2,
-      "fusionTemp": 247.6,
-      "boilingTemp": 469.08,
+      "meltingPoint": 247.6,
+      "boilingPoint": 469.08,
       "density": 0.74,
-      "deltaGibbs": 41.16
+      "gibbsEnergy": 41.16
     },
     "computed": {
       "dielectricConst": 0.974,
-      "fusionTemp": 227.85,
-      "boilingTemp": 472.21,
+      "meltingPoint": 227.85,
+      "boilingPoint": 472.21,
       "density": 0.7365,
-      "deltaGibbs": 43.19
+      "gibbsEnergy": 43.19
     }
   },
   {
     "index": 72,
     "groups": [],
     "name": "2 metil 1,3 butadieno",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 127.3,
-      "boilingTemp": 307.15,
+      "meltingPoint": 127.3,
+      "boilingPoint": 307.15,
       "density": 0.68,
-      "deltaGibbs": 145.9
+      "gibbsEnergy": 145.9
     },
     "computed": {
       "dielectricConst": 0.969,
-      "fusionTemp": 185.88,
-      "boilingTemp": 312.28,
+      "meltingPoint": 185.88,
+      "boilingPoint": 312.28,
       "density": 0.9407,
-      "deltaGibbs": 145.91
+      "gibbsEnergy": 145.91
     }
   },
   {
     "index": 73,
     "groups": [],
     "name": "2 metil pentano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 119.5,
-      "boilingTemp": 333.35,
+      "meltingPoint": 119.5,
+      "boilingPoint": 333.35,
       "density": 0.66,
-      "deltaGibbs": -5.33
+      "gibbsEnergy": -5.33
     },
     "computed": {
       "dielectricConst": 0.97,
-      "fusionTemp": 132.19,
-      "boilingTemp": 328.93,
+      "meltingPoint": 132.19,
+      "boilingPoint": 328.93,
       "density": 0.6575,
-      "deltaGibbs": -2.31
+      "gibbsEnergy": -2.31
     }
   },
   {
     "index": 74,
     "groups": [],
     "name": "Diisopropileter",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.9,
-      "fusionTemp": 181.4,
-      "boilingTemp": 341.65,
+      "meltingPoint": 181.4,
+      "boilingPoint": 341.65,
       "density": 0.725,
-      "deltaGibbs": -124.8
+      "gibbsEnergy": -124.8
     },
     "computed": {
       "dielectricConst": 3.39,
-      "fusionTemp": 188.27,
-      "boilingTemp": 336.95,
+      "meltingPoint": 188.27,
+      "boilingPoint": 336.95,
       "density": 0.737,
-      "deltaGibbs": -118.9
+      "gibbsEnergy": -118.9
     }
   },
   {
     "index": 75,
     "groups": [],
     "name": "Dietil eter",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 4.34,
-      "fusionTemp": 156.9,
-      "boilingTemp": 307.65,
+      "meltingPoint": 156.9,
+      "boilingPoint": 307.65,
       "density": 0.7134,
-      "deltaGibbs": -122.1
+      "gibbsEnergy": -122.1
     },
     "computed": {
       "dielectricConst": 4.375,
-      "fusionTemp": 139.98,
-      "boilingTemp": 299.32,
+      "meltingPoint": 139.98,
+      "boilingPoint": 299.32,
       "density": 0.714,
-      "deltaGibbs": -124.22
+      "gibbsEnergy": -124.22
     }
   },
   {
     "index": 76,
     "groups": [],
     "name": "Metil propileter",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3.4,
-      "fusionTemp": 134,
-      "boilingTemp": 312.25,
+      "meltingPoint": 134,
+      "boilingPoint": 312.25,
       "density": 0.7356,
-      "deltaGibbs": -111
+      "gibbsEnergy": -111
     },
     "computed": {
       "dielectricConst": 4.26,
-      "fusionTemp": 169.61,
-      "boilingTemp": 328.41,
+      "meltingPoint": 169.61,
+      "boilingPoint": 328.41,
       "density": 0.737,
-      "deltaGibbs": -112.16
+      "gibbsEnergy": -112.16
     }
   },
   {
     "index": 77,
     "groups": [],
     "name": "Metil ter butil eter",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 164.6,
-      "boilingTemp": 328.35,
+      "meltingPoint": 164.6,
+      "boilingPoint": 328.35,
       "density": 0.7404,
-      "deltaGibbs": -117.5
+      "gibbsEnergy": -117.5
     },
     "computed": {
       "dielectricConst": 4.68,
-      "fusionTemp": 178.79,
-      "boilingTemp": 335.37,
+      "meltingPoint": 178.79,
+      "boilingPoint": 335.37,
       "density": 0.764,
-      "deltaGibbs": -107.11
+      "gibbsEnergy": -107.11
     }
   },
   {
@@ -1649,19 +1724,20 @@
       41
     ],
     "name": "Butironitrilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 17.3,
-      "fusionTemp": 161.3,
-      "boilingTemp": 390.75,
+      "meltingPoint": 161.3,
+      "boilingPoint": 390.75,
       "density": 0.7954,
-      "deltaGibbs": 108.66
+      "gibbsEnergy": 108.66
     },
     "computed": {
       "dielectricConst": 20.7,
-      "fusionTemp": 175.99,
-      "boilingTemp": 393.66,
+      "meltingPoint": 175.99,
+      "boilingPoint": 393.66,
       "density": 0.775,
-      "deltaGibbs": 106.917
+      "gibbsEnergy": 106.917
     }
   },
   {
@@ -1671,38 +1747,40 @@
       55
     ],
     "name": "Nitroetano",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 19.7,
-      "fusionTemp": 183.7,
-      "boilingTemp": 387.15,
+      "meltingPoint": 183.7,
+      "boilingPoint": 387.15,
       "density": 1.054,
-      "deltaGibbs": -4.89
+      "gibbsEnergy": -4.89
     },
     "computed": {
       "dielectricConst": 20.03,
-      "fusionTemp": 183.63,
-      "boilingTemp": 387.22,
+      "meltingPoint": 183.63,
+      "boilingPoint": 387.22,
       "density": 1.015,
-      "deltaGibbs": -4.89
+      "gibbsEnergy": -4.89
     }
   },
   {
     "index": 80,
     "groups": [],
     "name": "Propionitrilo",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 27.7,
-      "fusionTemp": 180.4,
-      "boilingTemp": 370.25,
+      "meltingPoint": 180.4,
+      "boilingPoint": 370.25,
       "density": 0.782,
-      "deltaGibbs": 97.49
+      "gibbsEnergy": 97.49
     },
     "computed": {
       "dielectricConst": 20.02,
-      "fusionTemp": 157.41,
-      "boilingTemp": 364.17,
+      "meltingPoint": 157.41,
+      "boilingPoint": 364.17,
       "density": 0.7559,
-      "deltaGibbs": 98.69
+      "gibbsEnergy": 98.69
     }
   },
   {
@@ -1712,38 +1790,40 @@
       20
     ],
     "name": "Acetaldehido",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 21.1,
-      "fusionTemp": 150.2,
-      "boilingTemp": 293.25,
+      "meltingPoint": 150.2,
+      "boilingPoint": 293.25,
       "density": 0.788,
-      "deltaGibbs": -132.8
+      "gibbsEnergy": -132.8
     },
     "computed": {
       "dielectricConst": 19.95,
-      "fusionTemp": 159.74,
-      "boilingTemp": 169.67,
+      "meltingPoint": 159.74,
+      "boilingPoint": 169.67,
       "density": 0.737,
-      "deltaGibbs": -130.72
+      "gibbsEnergy": -130.72
     }
   },
   {
     "index": 82,
     "groups": [],
     "name": "Decanal",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 8.1,
-      "fusionTemp": 268.2,
-      "boilingTemp": 481.65,
+      "meltingPoint": 268.2,
+      "boilingPoint": 481.65,
       "density": 0.83,
-      "deltaGibbs": -67.39
+      "gibbsEnergy": -67.39
     },
     "computed": {
       "dielectricConst": 15.26,
-      "fusionTemp": 255.82,
-      "boilingTemp": 492.28,
+      "meltingPoint": 255.82,
+      "boilingPoint": 492.28,
       "density": 0.824,
-      "deltaGibbs": -64.87
+      "gibbsEnergy": -64.87
     }
   },
   {
@@ -1756,19 +1836,20 @@
       20
     ],
     "name": "Pentanal",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 16.23,
-      "fusionTemp": 213.2,
-      "boilingTemp": 375.65,
+      "meltingPoint": 213.2,
+      "boilingPoint": 375.65,
       "density": 0.8095,
-      "deltaGibbs": -107.1
+      "gibbsEnergy": -107.1
     },
     "computed": {
       "dielectricConst": 16.58,
-      "fusionTemp": 206.79,
-      "boilingTemp": 382.82,
+      "meltingPoint": 206.79,
+      "boilingPoint": 382.82,
       "density": 0.794,
-      "deltaGibbs": -106.02
+      "gibbsEnergy": -106.02
     }
   },
   {
@@ -1779,19 +1860,20 @@
       20
     ],
     "name": "Propanal",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 18.9,
-      "fusionTemp": 193.2,
-      "boilingTemp": 321.15,
+      "meltingPoint": 193.2,
+      "boilingPoint": 321.15,
       "density": 0.807,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 17.45,
-      "fusionTemp": 177.93,
-      "boilingTemp": 314.71,
+      "meltingPoint": 177.93,
+      "boilingPoint": 314.71,
       "density": 0.764,
-      "deltaGibbs": -122.49
+      "gibbsEnergy": -122.49
     }
   },
   {
@@ -1803,95 +1885,100 @@
       20
     ],
     "name": "Butanal",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 13.4,
-      "fusionTemp": 174.2,
-      "boilingTemp": 347.95,
+      "meltingPoint": 174.2,
+      "boilingPoint": 347.95,
       "density": 0.8,
-      "deltaGibbs": -116.3
+      "gibbsEnergy": -116.3
     },
     "computed": {
       "dielectricConst": 16.98,
-      "fusionTemp": 193.37,
-      "boilingTemp": 351.59,
+      "meltingPoint": 193.37,
+      "boilingPoint": 351.59,
       "density": 0.782,
-      "deltaGibbs": -114.25
+      "gibbsEnergy": -114.25
     }
   },
   {
     "index": 86,
     "groups": [],
     "name": "2,3 butanodiol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 298.2,
-      "boilingTemp": 455.15,
+      "meltingPoint": 298.2,
+      "boilingPoint": 455.15,
       "density": 0.995,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 17.17,
-      "fusionTemp": 221,
-      "boilingTemp": 465.37,
+      "meltingPoint": 221,
+      "boilingPoint": 465.37,
       "density": 1.005,
-      "deltaGibbs": -318.1
+      "gibbsEnergy": -318.1
     }
   },
   {
     "index": 87,
     "groups": [],
     "name": "1,4 butanodiol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 293.3,
-      "boilingTemp": 508.15,
+      "meltingPoint": 293.3,
+      "boilingPoint": 508.15,
       "density": 1.01,
-      "deltaGibbs": -278
+      "gibbsEnergy": -278
     },
     "computed": {
       "dielectricConst": 19.04,
-      "fusionTemp": 252.85,
-      "boilingTemp": 499.67,
+      "meltingPoint": 252.85,
+      "boilingPoint": 499.67,
       "density": 1.018,
-      "deltaGibbs": -295.27
+      "gibbsEnergy": -295.27
     }
   },
   {
     "index": 88,
     "groups": [],
     "name": "2 metil 2,4 pentanodiol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 223.2,
-      "boilingTemp": 471.15,
+      "meltingPoint": 223.2,
+      "boilingPoint": 471.15,
       "density": 0.92,
-      "deltaGibbs": -312.7
+      "gibbsEnergy": -312.7
     },
     "computed": {
       "dielectricConst": 13.78,
-      "fusionTemp": 248.24,
-      "boilingTemp": 465.18,
+      "meltingPoint": 248.24,
+      "boilingPoint": 465.18,
       "density": 0.952,
-      "deltaGibbs": -317.58
+      "gibbsEnergy": -317.58
     }
   },
   {
     "index": 89,
     "groups": [],
     "name": "1,3 propanodiol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 32,
-      "fusionTemp": 246.5,
-      "boilingTemp": 487.55,
+      "meltingPoint": 246.5,
+      "boilingPoint": 487.55,
       "density": 1.0597,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 16.54,
-      "fusionTemp": 244.5,
-      "boilingTemp": 482.63,
+      "meltingPoint": 244.5,
+      "boilingPoint": 482.63,
       "density": 1.054,
-      "deltaGibbs": -303.51
+      "gibbsEnergy": -303.51
     }
   },
   {
@@ -1902,323 +1989,340 @@
       5
     ],
     "name": "Alcohol alilico",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 22,
-      "fusionTemp": 144.2,
-      "boilingTemp": 370.23,
+      "meltingPoint": 144.2,
+      "boilingPoint": 370.23,
       "density": 0.854,
-      "deltaGibbs": -63.72
+      "gibbsEnergy": -63.72
     },
     "computed": {
       "dielectricConst": 16.94,
-      "fusionTemp": 176.14,
-      "boilingTemp": 358.52,
+      "meltingPoint": 176.14,
+      "boilingPoint": 358.52,
       "density": 1.023,
-      "deltaGibbs": -79.561
+      "gibbsEnergy": -79.561
     }
   },
   {
     "index": 91,
     "groups": [],
     "name": "Butanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 17.5,
-      "fusionTemp": 183.4,
-      "boilingTemp": 390.85,
+      "meltingPoint": 183.4,
+      "boilingPoint": 390.85,
       "density": 0.8098,
-      "deltaGibbs": -150.3
+      "gibbsEnergy": -150.3
     },
     "computed": {
       "dielectricConst": 16.23,
-      "fusionTemp": 196.87,
-      "boilingTemp": 393.89,
+      "meltingPoint": 196.87,
+      "boilingPoint": 393.89,
       "density": 0.793,
-      "deltaGibbs": -156.75
+      "gibbsEnergy": -156.75
     }
   },
   {
     "index": 92,
     "groups": [],
     "name": "Decanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 8.1,
-      "fusionTemp": 280.1,
-      "boilingTemp": 504.25,
+      "meltingPoint": 280.1,
+      "boilingPoint": 504.25,
       "density": 0.8297,
-      "deltaGibbs": -98.79
+      "gibbsEnergy": -98.79
     },
     "computed": {
       "dielectricConst": 14.81,
-      "fusionTemp": 249.78,
-      "boilingTemp": 498.84,
+      "meltingPoint": 249.78,
+      "boilingPoint": 498.84,
       "density": 0.825,
-      "deltaGibbs": -115.6
+      "gibbsEnergy": -115.6
     }
   },
   {
     "index": 93,
     "groups": [],
     "name": "Dietilenglicol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": null,
-      "fusionTemp": 262.8,
-      "boilingTemp": 518.95,
+      "meltingPoint": 262.8,
+      "boilingPoint": 518.95,
       "density": 1.1184,
-      "deltaGibbs": -409
+      "gibbsEnergy": -409
     },
     "computed": {
       "dielectricConst": 18.95,
-      "fusionTemp": 262.33,
-      "boilingTemp": 511.75,
+      "meltingPoint": 262.33,
+      "boilingPoint": 511.75,
       "density": 1.132,
-      "deltaGibbs": -405.07
+      "gibbsEnergy": -405.07
     }
   },
   {
     "index": 94,
     "groups": [],
     "name": "Diacetone alcohol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 18.2,
-      "fusionTemp": 229.2,
-      "boilingTemp": 441.05,
+      "meltingPoint": 229.2,
+      "boilingPoint": 441.05,
       "density": 0.938,
-      "deltaGibbs": -368.7
+      "gibbsEnergy": -368.7
     },
     "computed": {
       "dielectricConst": 14.53,
-      "fusionTemp": 254.51,
-      "boilingTemp": 452.63,
+      "meltingPoint": 254.51,
+      "boilingPoint": 452.63,
       "density": 0.959,
-      "deltaGibbs": -295.33
+      "gibbsEnergy": -295.33
     }
   },
   {
     "index": 95,
     "groups": [],
     "name": "Etanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 24,
-      "fusionTemp": 159.1,
-      "boilingTemp": 351.35,
+      "meltingPoint": 159.1,
+      "boilingPoint": 351.35,
       "density": 0.789,
-      "deltaGibbs": -167.8
+      "gibbsEnergy": -167.8
     },
     "computed": {
       "dielectricConst": 17.6,
-      "fusionTemp": 164.57,
-      "boilingTemp": 330,
+      "meltingPoint": 164.57,
+      "boilingPoint": 330,
       "density": 0.75,
-      "deltaGibbs": -173.22
+      "gibbsEnergy": -173.22
     }
   },
   {
     "index": 96,
     "groups": [],
     "name": "Etilenglicol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 37.7,
-      "fusionTemp": 260.2,
-      "boilingTemp": 470.45,
+      "meltingPoint": 260.2,
+      "boilingPoint": 470.45,
       "density": 1.11,
-      "deltaGibbs": -302.6
+      "gibbsEnergy": -302.6
     },
     "computed": {
       "dielectricConst": 18.79,
-      "fusionTemp": 235.4,
-      "boilingTemp": 464.03,
+      "meltingPoint": 235.4,
+      "boilingPoint": 464.03,
       "density": 1.1089,
-      "deltaGibbs": -311.74
+      "gibbsEnergy": -311.74
     }
   },
   {
     "index": 97,
     "groups": [],
     "name": "Glicerina",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 42.5,
-      "fusionTemp": 291.4,
-      "boilingTemp": 563.15,
+      "meltingPoint": 291.4,
+      "boilingPoint": 563.15,
       "density": 1.261,
-      "deltaGibbs": -448
+      "gibbsEnergy": -448
     },
     "computed": {
       "dielectricConst": 18.27,
-      "fusionTemp": 258.29,
-      "boilingTemp": 500.09,
+      "meltingPoint": 258.29,
+      "boilingPoint": 500.09,
       "density": 1.643,
-      "deltaGibbs": -461.05
+      "gibbsEnergy": -461.05
     }
   },
   {
     "index": 98,
     "groups": [],
     "name": "Heptanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 6.7,
-      "fusionTemp": 239.2,
-      "boilingTemp": 449.81,
+      "meltingPoint": 239.2,
+      "boilingPoint": 449.81,
       "density": 0.8187,
-      "deltaGibbs": -125.3
+      "gibbsEnergy": -125.3
     },
     "computed": {
       "dielectricConst": 15.22,
-      "fusionTemp": 231.76,
-      "boilingTemp": 463.05,
+      "meltingPoint": 231.76,
+      "boilingPoint": 463.05,
       "density": 0.817,
-      "deltaGibbs": -132.06
+      "gibbsEnergy": -132.06
     }
   },
   {
     "index": 99,
     "groups": [],
     "name": "Hexanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 13.3,
-      "fusionTemp": 221.2,
-      "boilingTemp": 424.55,
+      "meltingPoint": 221.2,
+      "boilingPoint": 424.55,
       "density": 0.8136,
-      "deltaGibbs": -134.4
+      "gibbsEnergy": -134.4
     },
     "computed": {
       "dielectricConst": 15.48,
-      "fusionTemp": 221.4,
-      "boilingTemp": 442.49,
+      "meltingPoint": 221.4,
+      "boilingPoint": 442.49,
       "density": 0.811,
-      "deltaGibbs": -140.29
+      "gibbsEnergy": -140.29
     }
   },
   {
     "index": 100,
     "groups": [],
     "name": "Isobutanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 18.7,
-      "fusionTemp": 165.2,
-      "boilingTemp": 380.95,
+      "meltingPoint": 165.2,
+      "boilingPoint": 380.95,
       "density": 0.802,
-      "deltaGibbs": -154.9
+      "gibbsEnergy": -154.9
     },
     "computed": {
       "dielectricConst": 14.82,
-      "fusionTemp": 180.82,
-      "boilingTemp": 379.48,
+      "meltingPoint": 180.82,
+      "boilingPoint": 379.48,
       "density": 0.792,
-      "deltaGibbs": -161.1
+      "gibbsEnergy": -161.1
     }
   },
   {
     "index": 101,
     "groups": [],
     "name": "Isopentanol (3 metil butanol)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 14.7,
-      "fusionTemp": 156,
-      "boilingTemp": 403.69,
+      "meltingPoint": 156,
+      "boilingPoint": 403.69,
       "density": 0.81,
-      "deltaGibbs": -145
+      "gibbsEnergy": -145
     },
     "computed": {
       "dielectricConst": 14.4,
-      "fusionTemp": 195.87,
-      "boilingTemp": 406.98,
+      "meltingPoint": 195.87,
+      "boilingPoint": 406.98,
       "density": 0.802,
-      "deltaGibbs": -152.87
+      "gibbsEnergy": -152.87
     }
   },
   {
     "index": 102,
     "groups": [],
     "name": "Isopropanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 20.3,
-      "fusionTemp": 185.3,
-      "boilingTemp": 355.41,
+      "meltingPoint": 185.3,
+      "boilingPoint": 355.41,
       "density": 0.786,
-      "deltaGibbs": -173.5
+      "gibbsEnergy": -173.5
     },
     "computed": {
       "dielectricConst": 16.865,
-      "fusionTemp": 151.09,
-      "boilingTemp": 326.56,
+      "meltingPoint": 151.09,
+      "boilingPoint": 326.56,
       "density": 0.772,
-      "deltaGibbs": -176.1
+      "gibbsEnergy": -176.1
     }
   },
   {
     "index": 103,
     "groups": [],
     "name": "Manitol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 3,
-      "fusionTemp": 440.2,
-      "boilingTemp": 565.15,
+      "meltingPoint": 440.2,
+      "boilingPoint": 565.15,
       "density": 1.52,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     },
     "computed": {
       "dielectricConst": 15.85,
-      "fusionTemp": 334.95,
-      "boilingTemp": 673.82,
+      "meltingPoint": 334.95,
+      "boilingPoint": 673.82,
       "density": 1.764,
-      "deltaGibbs": null
+      "gibbsEnergy": null
     }
   },
   {
     "index": 104,
     "groups": [],
     "name": "Octanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 10.3,
-      "fusionTemp": 257.7,
-      "boilingTemp": 468.33,
+      "meltingPoint": 257.7,
+      "boilingPoint": 468.33,
       "density": 0.824,
-      "deltaGibbs": -115.5
+      "gibbsEnergy": -115.5
     },
     "computed": {
       "dielectricConst": 14.999,
-      "fusionTemp": 241.17,
-      "boilingTemp": 481.73,
+      "meltingPoint": 241.17,
+      "boilingPoint": 481.73,
       "density": 0.822,
-      "deltaGibbs": -123.83
+      "gibbsEnergy": -123.83
     }
   },
   {
     "index": 105,
     "groups": [],
     "name": "Pentanol (alcohol amilico)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 15.81,
-      "fusionTemp": 194.3,
-      "boilingTemp": 411.16,
+      "meltingPoint": 194.3,
+      "boilingPoint": 411.16,
       "density": 0.8144,
-      "deltaGibbs": -146
+      "gibbsEnergy": -146
     },
     "computed": {
       "dielectricConst": 15.8,
-      "fusionTemp": 209.87,
-      "boilingTemp": 419.64,
+      "meltingPoint": 209.87,
+      "boilingPoint": 419.64,
       "density": 0.803,
-      "deltaGibbs": -148.52
+      "gibbsEnergy": -148.52
     }
   },
   {
     "index": 106,
     "groups": [],
     "name": "Propanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 20.3,
-      "fusionTemp": 147.1,
-      "boilingTemp": 370.35,
+      "meltingPoint": 147.1,
+      "boilingPoint": 370.35,
       "density": 0.8034,
-      "deltaGibbs": -159.9
+      "gibbsEnergy": -159.9
     },
     "computed": {
       "dielectricConst": 17.6,
-      "fusionTemp": 181.99,
-      "boilingTemp": 364.43,
+      "meltingPoint": 181.99,
+      "boilingPoint": 364.43,
       "density": 0.778,
-      "deltaGibbs": -164.98
+      "gibbsEnergy": -164.98
     }
   },
   {
@@ -2231,19 +2335,20 @@
       1
     ],
     "name": "Ter butanol",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 12.5,
-      "fusionTemp": 298.6,
-      "boilingTemp": 355.55,
+      "meltingPoint": 298.6,
+      "boilingPoint": 355.55,
       "density": 0.7809,
-      "deltaGibbs": -177.6
+      "gibbsEnergy": -177.6
     },
     "computed": {
       "dielectricConst": 16.671,
-      "fusionTemp": 190.17,
-      "boilingTemp": 370.28,
+      "meltingPoint": 190.17,
+      "boilingPoint": 370.28,
       "density": 0.921,
-      "deltaGibbs": -159.93
+      "gibbsEnergy": -159.93
     }
   },
   {
@@ -2266,19 +2371,20 @@
       1
     ],
     "name": "Tetradecanol (miristico)",
+    "configuration": "",
     "experimental": {
       "dielectricConst": 4.7,
-      "fusionTemp": 312.7,
-      "boilingTemp": 569.04,
+      "meltingPoint": 312.7,
+      "boilingPoint": 569.04,
       "density": 0.824,
-      "deltaGibbs": -62.2
+      "gibbsEnergy": -62.2
     },
     "computed": {
       "dielectricConst": 14.172,
-      "fusionTemp": 284.5,
-      "boilingTemp": 567.84,
+      "meltingPoint": 284.5,
+      "boilingPoint": 567.84,
       "density": 0.837,
-      "deltaGibbs": -74.44
+      "gibbsEnergy": -74.44
     }
   }
 ]

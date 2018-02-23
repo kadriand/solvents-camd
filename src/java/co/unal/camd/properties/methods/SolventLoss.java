@@ -15,7 +15,7 @@ public class SolventLoss {
         temp = _temp;
     }
 
-    public double getMethodResult() {
+    public double compute() {
         UnifacEstimator unifacEstimator = new UnifacEstimator(solventUandD);
         double unifacGamma = unifacEstimator.solve(temp);
         double pmSolventUser = MolecularWeight.compute((solventUandD.get(1)));

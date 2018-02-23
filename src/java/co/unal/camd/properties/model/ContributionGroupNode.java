@@ -1,22 +1,32 @@
 package co.unal.camd.properties.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Data
+@EqualsAndHashCode(exclude = "parentGroup")
+@ToString(exclude = "parentGroup")
 public class ContributionGroupNode {
 
     private int groupCode; //identification of the group by refCode
-    private Vector<ContributionGroupNode> subGroups = new Vector<>();
+    private ContributionsList<ContributionGroupNode> subGroups = new ContributionsList<>(this);
+    private ContributionGroupNode parentGroup;
+
+    public ContributionGroupNode(int groupCode) {
+        this.groupCode = groupCode;
+    }
 
     public ContributionGroupNode(ContributionGroupNode functionalGroupNode) {
         groupCode = functionalGroupNode.getGroupCode();
-        subGroups = new Vector<>();
-        int n = functionalGroupNode.subGroups.size();
-        for (int i = 0; i < n; i++) {
-            subGroups.add(functionalGroupNode.subGroups.get(i).clone());
-        }
+        functionalGroupNode.subGroups.forEach(groupNode ->
+                this.subGroups.add(groupNode.clone())
+        );
     }
 
     @Override
@@ -24,61 +34,106 @@ public class ContributionGroupNode {
         return new ContributionGroupNode(this);
     }
 
-    public ContributionGroupNode(int groupCode) {
-        this.groupCode = groupCode;
-    }
-
-    /**
-     * add a group to this group and count the valence to waranty the 0 valence and octete law in the molecule
-     */
-    public void addGroup(ContributionGroupNode subG) {
-        subGroups.addElement(subG);
-    }
-
-    public void removeGroup(int i) {
-        subGroups.remove(i);
-    }
-
     public int countTotalGroups() {
         int s = 1;
-        for (int i = 0; i < subGroups.size(); i++)
-            s += getGroupAt(i).countTotalGroups();
+        for (ContributionGroupNode subGroup : subGroups)
+            s += subGroup.countTotalGroups();
         return s;
-    }
-
-    public int countSubgroups() {
-        return subGroups.size();
-    }
-
-    public int getIndexOfGroup(ContributionGroupNode aG) {
-        return subGroups.indexOf(aG);
-    }
-
-    public int getRefCodeGroupAt(int i) {
-        if (subGroups.size() < i + 1)
-            return 0;
-        else
-            return subGroups.elementAt(i).getGroupCode();
     }
 
     public ContributionGroupNode getGroupAt(int i) {
         if (subGroups.size() < i + 1)
             return null;
         else
-            return subGroups.elementAt(i);
+            return subGroups.get(i);
     }
 
-    public void setGroupAt(int i, ContributionGroupNode aGr) {
-        subGroups.set(i, aGr);
+    /**
+     * Finds how many tiles a ContributionGroupNode contains other
+     *
+     * @param other node that may be contained
+     * @return the number of occurrences found
+     */
+    public int contains(ContributionGroupNode other) {
+        List<List<ContributionGroupNode>> containedGroupsList = contains(other, null);
+        List<List<ContributionGroupNode>> cleanedContainedGroupsList = new ArrayList<>();
+
+        for (List<ContributionGroupNode> containedGroups : containedGroupsList) {
+            boolean isContainedInCleaned = false;
+            for (List<ContributionGroupNode> cleanedContainedGroups : cleanedContainedGroupsList) {
+                if (cleanedContainedGroups.size() != containedGroups.size())
+                    continue;
+                boolean cleanedInContained = !cleanedContainedGroups.stream().anyMatch(cleanedContainedGroup -> !containedGroups.stream().anyMatch(containedGroup -> containedGroup == cleanedContainedGroup));
+                boolean containedInCleaned = !containedGroups.stream().anyMatch(containedGroup -> !cleanedContainedGroups.stream().anyMatch(cleanedContainedGroup -> containedGroup == cleanedContainedGroup));
+                isContainedInCleaned = cleanedInContained && containedInCleaned;
+            }
+            if (!isContainedInCleaned)
+                cleanedContainedGroupsList.add(containedGroups);
+        }
+        return cleanedContainedGroupsList.size();
     }
 
-    public void clearGroup(int i) {
-        subGroups.removeElementAt(i);
+    /**
+     * If s ContributionGroupNode is contained in another, return the occurrences. It may content repeated nodes
+     *
+     * @param other      node that may be contained
+     * @param originNode to know the origin node, so it won't be taken into account during the iterations and the code won't stuck in an endless loop
+     * @return
+     */
+    private List<List<ContributionGroupNode>> contains(ContributionGroupNode other, ContributionGroupNode originNode) {
+        List<List<ContributionGroupNode>> occurrences = new ArrayList<>();
+
+        if (this.groupCode == other.groupCode) {
+            List<ContributionGroupNode> containedGroups = this.containsGroups(other, null);
+            if (containedGroups.size() > 0)
+                occurrences.add(containedGroups);
+        }
+
+        if (this.parentGroup != null && this.parentGroup != originNode)
+            occurrences.addAll(this.parentGroup.contains(other, this));
+        for (ContributionGroupNode subGroup : this.subGroups)
+            if (subGroup != originNode)
+                occurrences.addAll(subGroup.contains(other, this));
+        return occurrences;
     }
 
-    public String toString() {
-        return Integer.toString(groupCode);
-        //        return CONTRIBUTION_GROUPS.findGroupName(code);
+    /**
+     * Check if the subgroups of a ContributionGroupNode contains the subgroups of another
+     *
+     * @param other      ContributionGroupNode to compare
+     * @param originNode to avoid recheck already checked group nodes
+     * @return empty array the other GroupNode is not contained, else return the contained groups
+     */
+    private List<ContributionGroupNode> containsGroups(ContributionGroupNode other, ContributionGroupNode originNode) {
+        List<ContributionGroupNode> branchSubGroups = this.branchSubGroups(originNode);
+        List<ContributionGroupNode> alreadyMatchedGroups = new ArrayList<>(Arrays.asList(this));
+
+        for (ContributionGroupNode otherSubGroup : other.subGroups) {
+            Optional<ContributionGroupNode> subGroupMatch = branchSubGroups.stream().filter(subGroup ->
+                    subGroup.groupCode == otherSubGroup.groupCode
+                            && !alreadyMatchedGroups.stream().anyMatch(alreadyMatchedGroup -> alreadyMatchedGroup == subGroup)
+                            && subGroup.containsGroups(otherSubGroup, this).size() > 0
+            ).findFirst();
+            if (subGroupMatch.isPresent())
+                alreadyMatchedGroups.add(subGroupMatch.get());
+            else
+                return new ArrayList<>();
+        }
+        return alreadyMatchedGroups;
+    }
+
+    /**
+     * Collect all the leafs of a ContributionGroupNode group
+     *
+     * @param originGroupNode
+     * @return
+     */
+    private List<ContributionGroupNode> branchSubGroups(ContributionGroupNode originGroupNode) {
+        List<ContributionGroupNode> comparisonPool = new ArrayList<>();
+        if (this.parentGroup != null && this.parentGroup != originGroupNode)
+            comparisonPool.add(this.parentGroup);
+        this.subGroups.stream().filter(contributionNode -> contributionNode != null && contributionNode != originGroupNode).forEach(comparisonPool::add);
+        return comparisonPool;
     }
 
 }

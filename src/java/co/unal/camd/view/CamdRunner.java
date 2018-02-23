@@ -4,6 +4,7 @@ import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
+import co.unal.camd.properties.model.ThermodynamicProperties;
 import co.unal.camd.properties.parameters.EstimationParameters;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class CamdRunner extends JFrame {
     @Getter
     protected ArrayList<MoleculeGroups> userMolecules;
 
-    private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // ge, bt, d, mt, sloss
+    private double[] weight = {0.2, 0.2, 0.2, 0.2, 0.2};  // gibbsEnergy, boilingPoint, density, meltingPoint, sloss
     private double[][] constraintsLimits = new double[3][5];
     private ArrayList<Molecule> molecules;
 
@@ -58,10 +59,10 @@ public class CamdRunner extends JFrame {
         return selected;
     }
 
-    public void designSuitableMolecules() {
+    void designSuitableMolecules() {
         tab.removeAll();
         System.out.println("iterat " + maxIterations);
-        System.out.println("pesos (ge, bt, d, mt, sl)" + weight);
+        System.out.println("pesos (gibbsEnergy, boilingPoint, density, meltingPoint, solventLoss)" + weight);
 
         constraintsLimits[0][0] = 15;  //this is all the B
         constraintsLimits[0][1] = 15;
@@ -110,19 +111,20 @@ public class CamdRunner extends JFrame {
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = sortedSolution.get(i).unwrap();
 
-            ContributionGroupNode functionalGroupNode = solvent.getMoleculeByRootGroup();
+            ThermodynamicProperties thermodynamicProperties = solvent.getThermodynamicProperties();
+            ContributionGroupNode functionalGroupNode = solvent.getRootContributionGroup();
             String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getGroupCode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
-            //            tree = new MoleculeTree(solvent.getMoleculeByRootGroup());
+            //            tree = new MoleculeTree(solvent.getRootContributionGroup());
 
             // TODO Auto-generated method stub
-            double ge = solvent.getGe();
-            double bt = solvent.getBt();
-            double den = solvent.getD();
-            double mt = solvent.getMt();
-            double dc = solvent.getDc();
-            double ks = solvent.getKs();
+            double ge = thermodynamicProperties.getGibbsEnergy();
+            double bt = thermodynamicProperties.getBoilingPoint();
+            double den = thermodynamicProperties.getDensity();
+            double mt = thermodynamicProperties.getMeltingPoint();
+            double dc = thermodynamicProperties.getDielectricConstant();
+            double ks = thermodynamicProperties.getKs();
             double fitness = solvent.getFitness();
 
             System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
@@ -140,7 +142,7 @@ public class CamdRunner extends JFrame {
     }
 
     private DefaultMutableTreeNode moleculeToJtree(ContributionGroupNode molec, DefaultMutableTreeNode node) {
-        for (int i = 0; i < molec.countSubgroups(); i++) {
+        for (int i = 0; i < molec.getSubGroups().size(); i++) {
             String n = CONTRIBUTION_GROUPS.findGroupName(molec.getGroupAt(i).getGroupCode());
             DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(n);
 

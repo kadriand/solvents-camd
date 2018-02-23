@@ -156,7 +156,7 @@ public class UnifacEstimator {
         MoleculeGroups principalMolecule = molecules.get(principal);
         for (int i = 0; success && i < molecules.size(); i++) {// iterator by evaluationMolecules
             molecule = molecules.get(i);
-            /////no usar el evaluationMolecules.get(i).getTotalGroups porq hay porblemas de limites
+            /////no usar el evaluationMolecules.get(i).getSize porq hay porblemas de limites
             for (int j = 0; success && j < molecule.size(); j++) {//iterator by each group of molec i
                 int m = molecule.getGroupContributions()[j].getMainGroup().getCode();
                 int k = principalMolecule.getGroupContributions()[group].getMainGroup().getCode();

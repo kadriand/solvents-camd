@@ -1,37 +1,23 @@
 package co.unal.camd.properties.methods;
 
 import co.unal.camd.properties.model.Molecule;
-import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.view.CamdRunner;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class BoilingPoint {
 
-    private MoleculeGroups molecule;
-    private ArrayList<Integer> secondOrderCodes;
-
-    public BoilingPoint(Molecule solvent, ArrayList<Integer> secOrderCode) {
-        secondOrderCodes = secOrderCode;
-        molecule = solvent.getGroupsArray();
-        molecule.optimize();
-    }
-
-    public double getMethodResult() {
+    public static final double compute(Molecule molecule) {
         double sum = 0;
-        for (int i = 0; i < molecule.size(); i++)
-            sum += molecule.getAmount()[i] * molecule.getGroupContributions()[i].getBoilingPoint();
-        sum += calculateSecOrderContribution();
-        return 204.359 * Math.log10(sum) * 2.30258509;
-    }
 
-    private double calculateSecOrderContribution() {
-        double a = 0;
-        for (int i = 0; i < secondOrderCodes.size(); i++) {
-            int so = secondOrderCodes.get(i);
-            a += CamdRunner.CONTRIBUTION_GROUPS.getSecondOrderContributionsCases().get(so).getBoilingPoint();
-        }
-        return a;
+        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+            sum += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getBoilingPoint();
+
+        for (Map.Entry<ThermodynamicSecondOrderContribution, Integer> secondOrderContributionEntry : molecule.getSecondOrderContributions().entrySet())
+            sum += secondOrderContributionEntry.getValue() * secondOrderContributionEntry.getKey().getBoilingPoint();
+
+        return 204.359 * Math.log10(sum) * 2.30258509;
     }
 
 }
