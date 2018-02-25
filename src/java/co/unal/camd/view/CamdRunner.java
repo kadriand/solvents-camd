@@ -4,7 +4,7 @@ import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
-import co.unal.camd.properties.model.ThermodynamicProperties;
+import co.unal.camd.properties.model.ThermoPhysicalProperties;
 import co.unal.camd.properties.parameters.EstimationParameters;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -111,33 +111,24 @@ public class CamdRunner extends JFrame {
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = sortedSolution.get(i).unwrap();
 
-            ThermodynamicProperties thermodynamicProperties = solvent.getThermodynamicProperties();
+            ThermoPhysicalProperties thermoPhysicalProperties = solvent.getThermoPhysicalProperties();
             ContributionGroupNode functionalGroupNode = solvent.getRootContributionGroup();
             String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getGroupCode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
             jTree = new JTree(moleculeToJtree(functionalGroupNode, n));
             //            tree = new MoleculeTree(solvent.getRootContributionGroup());
 
-            // TODO Auto-generated method stub
-            double ge = thermodynamicProperties.getGibbsEnergy();
-            double bt = thermodynamicProperties.getBoilingPoint();
-            double den = thermodynamicProperties.getDensity();
-            double mt = thermodynamicProperties.getMeltingPoint();
-            double dc = thermodynamicProperties.getDielectricConstant();
-            double ks = thermodynamicProperties.getKs();
-            double fitness = solvent.getFitness();
-
             System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
-            System.out.println("Ge: " + ge);
-            System.out.println("BT: " + bt);
-            System.out.println("Den: " + den);
-            System.out.println("MT: " + mt);
-            System.out.println("DC: " + dc);
-            System.out.println("KS: " + ks);
+            System.out.println("Ge: " + thermoPhysicalProperties.getGibbsEnergy());
+            System.out.println("BT: " + thermoPhysicalProperties.getBoilingPoint());
+            System.out.println("Den: " + thermoPhysicalProperties.getDensity());
+            System.out.println("MT: " + thermoPhysicalProperties.getMeltingPoint());
+            System.out.println("DC: " + thermoPhysicalProperties.getDielectricConstant());
+            System.out.println("KS: " + solvent.getMixtureProperties().getKs());
             System.out.println("//////////////////////////////////////////////////////////////");
 
             // TODO IS THIS NECESSARY?
-            tab.addTab("F " + fitness, null, jTree, "molecule number");
+            tab.addTab("F " + solvent.getFitness(), null, jTree, "molecule number");
         }
     }
 

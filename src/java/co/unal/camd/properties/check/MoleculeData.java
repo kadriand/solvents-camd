@@ -1,5 +1,6 @@
 package co.unal.camd.properties.check;
 
+import co.unal.camd.properties.model.Molecule;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,6 +15,17 @@ public class MoleculeData {
     private String configuration;
     private PropertiesSet experimental;
     private PropertiesSet computed;
+
+    public void buildRecomputed(Molecule molecule) {
+        this.recomputed
+                .setMolecularWeight(molecule.getThermoPhysicalProperties().getMolecularWeight())
+                .setGibbsEnergy(molecule.getThermoPhysicalProperties().getGibbsEnergy())
+                .setDensity(molecule.getThermoPhysicalProperties().getDensity())
+                .setBoilingPoint(molecule.getThermoPhysicalProperties().getBoilingPoint())
+                .setMeltingPoint(molecule.getThermoPhysicalProperties().getMeltingPoint())
+                .setDielectricConst(molecule.getThermoPhysicalProperties().getDielectricConstant());
+    }
+
     private PropertiesSet recomputed = new PropertiesSet();
 
     @Override

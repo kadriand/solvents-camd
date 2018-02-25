@@ -5,8 +5,8 @@ import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.parameters.unifac.ContributionGroup;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalFirstOrderContribution;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalSecondOrderContribution;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalSecondOrderContribution;
 import co.unal.camd.properties.parameters.unifac.UnifacInteractionData;
 import co.unal.camd.properties.parameters.unifac.UnifacParametersPair;
 import lombok.Getter;
@@ -59,13 +59,13 @@ public class EstimationParameters {
      * <code, first order contributions>
      */
     @Getter
-    protected Map<Integer, ThermodynamicFirstOrderContribution> thermodynamicFirstOrderContributionsGroups = new HashMap<>();
+    protected Map<Integer, ThermoPhysicalFirstOrderContribution> thermoPhysicalFirstOrderContributions = new HashMap<>();
 
     /**
      * <valence, list of c. groups>
      */
     @Getter
-    protected Map<Integer, List<ThermodynamicFirstOrderContribution>> valenceContributionGroups = new HashMap<Integer, List<ThermodynamicFirstOrderContribution>>() {{
+    protected Map<Integer, List<ThermoPhysicalFirstOrderContribution>> valenceContributionGroups = new HashMap<Integer, List<ThermoPhysicalFirstOrderContribution>>() {{
         put(0, new ArrayList<>());
         put(1, new ArrayList<>());
         put(2, new ArrayList<>());
@@ -82,7 +82,7 @@ public class EstimationParameters {
     protected Map<Integer, ContributionGroup.Main> unifacMainGroups = new HashMap<>();
 
     /**
-     * List of C. groups families, its probabilites are also stored
+     * List of C. groups families, its probabilities are also stored
      */
     @Getter
     protected Map<Integer, ContributionGroup.Family> unifacFamilyGroups = new HashMap<>();
@@ -91,13 +91,7 @@ public class EstimationParameters {
      * <contribution case, second order data>
      */
     @Getter
-    protected Map<Integer, ThermodynamicSecondOrderContribution> secondOrderContributionsCases = new HashMap<>();
-
-    /**
-     * <root groups code, second order data>
-     */
-    @Getter // todo remove
-    protected Map<Integer, List<ThermodynamicSecondOrderContribution>> secondOrderContributionsRoots = new HashMap<>(); // todo remove
+    protected Map<Integer, ThermoPhysicalSecondOrderContribution> thermoPhysicalSecondOrderContributions = new HashMap<>();
 
     // ENVIRONMENTAL CONTRIBUTIONS
 
@@ -138,8 +132,9 @@ public class EstimationParameters {
             loadGroupContributions();
             loadSecondOrderContributions();
             loadFamilyGroups();
-            loadEnvironmentalParameters();
             loadHukkerikarEquivalences();
+            loadEnvironmentalFirstOrderContributions();
+            loadEnvironmentalSecondOrderContributions();
 
             unifacWBIS.close();
             thermoContributionsWBIS.close();
@@ -156,7 +151,7 @@ public class EstimationParameters {
      * @return
      */
     public final String findGroupName(int groupCode) {
-        return thermodynamicFirstOrderContributionsGroups.get(groupCode).getGroupName();
+        return thermoPhysicalFirstOrderContributions.get(groupCode).getGroupName();
     }
 
     /**
@@ -166,13 +161,13 @@ public class EstimationParameters {
      * @return
      */
     public final int findGroupCode(String name) {
-        ThermodynamicFirstOrderContribution contributionGroup = thermodynamicFirstOrderContributionsGroups.values().stream().filter(oneContributionGroup -> Objects.equals(name, oneContributionGroup.getGroupName())).findFirst().get();
+        ThermoPhysicalFirstOrderContribution contributionGroup = thermoPhysicalFirstOrderContributions.values().stream().filter(oneContributionGroup -> Objects.equals(name, oneContributionGroup.getGroupName())).findFirst().get();
         return contributionGroup.getCode();
     }
 
     //TODO HANDLE WITH AROMATICS AND STUFF
     public final double getProbability(int contributionGroupCode) {
-        ContributionGroup.Main mainGroup = thermodynamicFirstOrderContributionsGroups.get(contributionGroupCode).getMainGroup();
+        ContributionGroup.Main mainGroup = thermoPhysicalFirstOrderContributions.get(contributionGroupCode).getMainGroup();
         Optional<ContributionGroup.Family> family = unifacFamilyGroups.values().stream().filter(oneFamily -> oneFamily.getMainGroups().stream().anyMatch(main -> main.equals(mainGroup))).findFirst();
         return family.map(ContributionGroup.Family::getProbability).orElse(0.0);
     }
@@ -242,7 +237,7 @@ public class EstimationParameters {
     private void loadGroupContributions() {
         loadUnifacGroupContributions();
         loadThermodynamicGroupContributions();
-        thermodynamicFirstOrderContributionsGroups.forEach((integer, groupContribution) -> debug(groupContribution));
+        thermoPhysicalFirstOrderContributions.forEach((integer, groupContribution) -> debug(groupContribution));
     }
 
     /**
@@ -261,9 +256,9 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                ThermodynamicFirstOrderContribution contributionData = new ThermodynamicFirstOrderContribution(groupId);
+                ThermoPhysicalFirstOrderContribution contributionData = new ThermoPhysicalFirstOrderContribution(groupId);
                 readUnifacRQParams(currentRow, contributionData);
-                thermodynamicFirstOrderContributionsGroups.put(groupId, contributionData);
+                thermoPhysicalFirstOrderContributions.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + unifacRow);
                 e.printStackTrace();
@@ -272,7 +267,7 @@ public class EstimationParameters {
         }
     }
 
-    private void readUnifacRQParams(XSSFRow currentRow, ThermodynamicFirstOrderContribution contributionData) {
+    private void readUnifacRQParams(XSSFRow currentRow, ThermoPhysicalFirstOrderContribution contributionData) {
         XSSFCell rowCell;
         rowCell = currentRow.getCell(1);
         if (validateNumericCell(rowCell)) {
@@ -310,7 +305,7 @@ public class EstimationParameters {
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
-                ThermodynamicFirstOrderContribution contributionData = thermodynamicFirstOrderContributionsGroups.get(groupId);
+                ThermoPhysicalFirstOrderContribution contributionData = thermoPhysicalFirstOrderContributions.get(groupId);
                 readThermodynamicContributions(currentRow, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + tgcRow);
@@ -320,7 +315,7 @@ public class EstimationParameters {
         }
     }
 
-    private void readThermodynamicContributions(XSSFRow currentRow, ThermodynamicFirstOrderContribution thermodynamicContribution) {
+    private void readThermodynamicContributions(XSSFRow currentRow, ThermoPhysicalFirstOrderContribution thermodynamicContribution) {
         XSSFCell rowCell;
 
         rowCell = currentRow.getCell(3);
@@ -416,18 +411,10 @@ public class EstimationParameters {
         XSSFRow currentRow = secondOrderGroupsSheet.getRow(soGroupRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
-                Integer groupsCase = (int) currentRow.getCell(0).getNumericCellValue();
-                ThermodynamicSecondOrderContribution secondOrderContribution = new ThermodynamicSecondOrderContribution(groupsCase);
-
-                XSSFCell rowCell = currentRow.getCell(1);
-                if (rowCell != null)
-                    secondOrderContribution.setGroupsDescription(rowCell.getStringCellValue().trim());
-
-                readSecondGroupContributionsParams(currentRow, secondOrderContribution);
+                ThermoPhysicalSecondOrderContribution secondOrderContribution = readSecondGroupContributionsParams(currentRow);
                 readSecondOrderConfigurations(currentRow, secondOrderContribution);
 
-                secondOrderContributionsCases.put(groupsCase, secondOrderContribution);
-
+                thermoPhysicalSecondOrderContributions.put(secondOrderContribution.getGroupsCase(), secondOrderContribution);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + soGroupRow);
                 e.printStackTrace();
@@ -435,12 +422,17 @@ public class EstimationParameters {
                 currentRow = secondOrderGroupsSheet.getRow(++soGroupRow);
             }
         }
-        loadSecondOrderRelationshipsBU();
-        secondOrderContributionsCases.forEach((integer, secondOrderContribution) -> debug(secondOrderContribution));
+        thermoPhysicalSecondOrderContributions.forEach((integer, secondOrderContribution) -> debug(secondOrderContribution));
     }
 
-    private void readSecondGroupContributionsParams(XSSFRow currentRow, ThermodynamicSecondOrderContribution secondOrderContribution) {
-        XSSFCell rowCell;
+    private ThermoPhysicalSecondOrderContribution readSecondGroupContributionsParams(XSSFRow currentRow) {
+        Integer groupsCase = (int) currentRow.getCell(0).getNumericCellValue();
+        ThermoPhysicalSecondOrderContribution secondOrderContribution = new ThermoPhysicalSecondOrderContribution(groupsCase);
+
+        XSSFCell rowCell = currentRow.getCell(1);
+        if (rowCell != null)
+            secondOrderContribution.setGroupsDescription(rowCell.getStringCellValue().trim());
+
         rowCell = currentRow.getCell(2);
         if (validateNumericCell(rowCell))
             secondOrderContribution.setBoilingPoint(rowCell.getNumericCellValue());
@@ -456,9 +448,11 @@ public class EstimationParameters {
         rowCell = currentRow.getCell(5);
         if (validateNumericCell(rowCell))
             secondOrderContribution.setLiquidMolarVolume(rowCell.getNumericCellValue());
+
+        return secondOrderContribution;
     }
 
-    private void readSecondOrderConfigurations(XSSFRow currentRow, ThermodynamicSecondOrderContribution secondOrderContribution) {
+    private void readSecondOrderConfigurations(XSSFRow currentRow, ThermoPhysicalSecondOrderContribution secondOrderContribution) {
         XSSFCell rowCell = currentRow.getCell(6);
         if (rowCell == null)
             return;
@@ -475,55 +469,12 @@ public class EstimationParameters {
         }
     }
 
-    /**
-     * Read the groups relationships between the second order parameters and the contribution groups from the sheet:
-     * -  SecondOrdenRels
-     * In file
-     * -  ThermoPropsContributions.xlsx
-     */
-    private void loadSecondOrderRelationshipsBU() {
-        XSSFSheet secondOrderGroupsSheet = thermoPropsWorkbook.getSheetAt(3);
-        System.out.println("\nSECOND ORDER RELATIONSHIPS Sheet: " + thermoPropsWorkbook.getSheetName(3));
-        // Second Row
-        int soRow = 1;
-
-        XSSFRow currentRow = secondOrderGroupsSheet.getRow(soRow);
-        while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
-            try {
-                Integer groupCase = (int) currentRow.getCell(0).getNumericCellValue();
-                ThermodynamicSecondOrderContribution secondOrderContribution = secondOrderContributionsCases.get(groupCase);
-                List<Integer> contributionsGroups = new ArrayList<>();
-                Iterator<Cell> cellsIterator = currentRow.cellIterator();
-                while (cellsIterator.hasNext()) {
-                    XSSFCell rowCell = (XSSFCell) cellsIterator.next();
-                    if (rowCell.getColumnIndex() > 0 && validateNumericCell(rowCell))
-                        contributionsGroups.add((int) rowCell.getNumericCellValue());
-                }
-                int[] groupsArray = contributionsGroups.stream().mapToInt(i -> i).toArray();
-                secondOrderContribution.getRawGroupsConfigurations().add(groupsArray);
-
-                Integer rootGroupCode = contributionsGroups.get(0);
-                if (secondOrderContributionsRoots.containsKey(rootGroupCode)) {
-                    if (!secondOrderContributionsRoots.get(rootGroupCode).contains(secondOrderContribution))
-                        secondOrderContributionsRoots.get(rootGroupCode).add(secondOrderContribution);
-                } else
-                    secondOrderContributionsRoots.put(rootGroupCode, new ArrayList<>(Arrays.asList(secondOrderContribution)));
-
-            } catch (Exception e) {
-                System.out.println("\nRow failed: " + soRow);
-                e.printStackTrace();
-            }
-            currentRow = secondOrderGroupsSheet.getRow(++soRow);
-        }
-    }
-
-    private void appendToFirstOrderContributions(String singleConfiguration, ContributionGroupNode secondGroupConfiguration, ThermodynamicSecondOrderContribution secondOrderContribution) {
+    private void appendToFirstOrderContributions(String singleConfiguration, ContributionGroupNode secondGroupConfiguration, ThermoPhysicalSecondOrderContribution secondOrderContribution) {
         String[] rawGroups = singleConfiguration.split("[|().]+");
         int[] groups = Stream.of(rawGroups).mapToInt(Integer::parseInt).toArray();
         int biggerGroup = Arrays.stream(groups).max().getAsInt();
-        if (thermodynamicFirstOrderContributionsGroups.containsKey(biggerGroup))
-            thermodynamicFirstOrderContributionsGroups.get(biggerGroup).getSecondOrderContributions().put(secondGroupConfiguration, secondOrderContribution);
-        //        secondOrderContribution.getRawGroupsConfigurations().add(groups);
+        if (thermoPhysicalFirstOrderContributions.containsKey(biggerGroup))
+            thermoPhysicalFirstOrderContributions.get(biggerGroup).getSecondOrderContributions().put(secondGroupConfiguration, secondOrderContribution);
     }
 
     public ContributionGroupNode parseGroupsConfiguration(String textConfiguration) {
@@ -594,9 +545,9 @@ public class EstimationParameters {
      *
      * @see co.unal.camd.view.ContributionGroupsPanel#actionPerformed(java.awt.event.ActionEvent)
      */
-    private void loadEnvironmentalParameters() {
+    private void loadEnvironmentalFirstOrderContributions() {
         XSSFSheet firstOrderGroupsSheet = environmantalWorkbook.getSheetAt(0);
-        System.out.println("\nENVIRONMENTAL FIRST ORDER PROPERTIES Sheet: " + environmantalWorkbook.getSheetName(0));
+        System.out.println("\nENVIRONMENTAL FIRST ORDER CONTRIBUTIONS Sheet: " + environmantalWorkbook.getSheetName(0));
         // Second Row
         int groupRow = 1;
 
@@ -611,16 +562,28 @@ public class EstimationParameters {
             }
             currentRow = firstOrderGroupsSheet.getRow(++groupRow);
         }
+    }
 
+    /**
+     * Read the environmental parameters according to the functional groups defined by Hukkerikar
+     * Sheet;
+     * -  FamilyGroups
+     * In file
+     * -  HukkerikarEnvironmental.xlsx
+     *
+     * @see co.unal.camd.view.ContributionGroupsPanel#actionPerformed(java.awt.event.ActionEvent)
+     */
+    private void loadEnvironmentalSecondOrderContributions() {
         XSSFSheet secondOrderGroupsSheet = environmantalWorkbook.getSheetAt(1);
-        System.out.println("\nENVIRONMENTAL SECOND ORDER PROPERTIES Sheet: " + environmantalWorkbook.getSheetName(1));
+        System.out.println("\nENVIRONMENTAL SECOND ORDER CONTRIBUTIONS Sheet: " + environmantalWorkbook.getSheetName(1));
         // Second Row
-        groupRow = 1;
+        int groupRow = 1;
 
-        currentRow = secondOrderGroupsSheet.getRow(groupRow);
+        XSSFRow currentRow = secondOrderGroupsSheet.getRow(groupRow);
         while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
             try {
                 EnvironmentalSecondOrderContribution environmentalContribution = readSecondOrderEnvironmentalContribution(currentRow);
+                readEnvironmentalSecondOrderConfigurations(currentRow, environmentalContribution);
                 environmentalSecondOrderContributions.put(environmentalContribution.getCode(), environmentalContribution);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + groupRow);
@@ -629,6 +592,33 @@ public class EstimationParameters {
             currentRow = secondOrderGroupsSheet.getRow(++groupRow);
         }
     }
+
+    private void readEnvironmentalSecondOrderConfigurations(XSSFRow currentRow, EnvironmentalSecondOrderContribution secondOrderContribution) {
+        XSSFCell rowCell = currentRow.getCell(22);
+        if (rowCell == null)
+            return;
+
+        String rawGroupCases = rowCell.getCellTypeEnum() == CellType.NUMERIC ? NumberToTextConverter.toText(rowCell.getNumericCellValue()) : rowCell.getStringCellValue().trim();
+        String[] differentAlternatives = rawGroupCases.split("/");
+        for (String differentAlternative : differentAlternatives) {
+            List<String> singleConfigurations = breakAlternative(differentAlternative);
+            singleConfigurations.forEach(singleConfiguration -> {
+                ContributionGroupNode secondGroupConfiguration = parseNodeGroupsConfiguration(singleConfiguration);
+                secondOrderContribution.getGroupConfigurations().add(secondGroupConfiguration);
+                appendToEnvironmentalFirstOrderContributions(singleConfiguration, secondGroupConfiguration, secondOrderContribution);
+            });
+        }
+    }
+
+    private void appendToEnvironmentalFirstOrderContributions(String singleConfiguration, ContributionGroupNode secondGroupConfiguration, EnvironmentalSecondOrderContribution secondOrderContribution) {
+        String[] rawGroups = singleConfiguration.split("[|().]+");
+        int[] groups = Stream.of(rawGroups).mapToInt(Integer::parseInt).toArray();
+        int biggerGroup = Arrays.stream(groups).max().getAsInt();
+        Integer hukkerikarEquivalence = hukkerikarGroupsEquivalences.get(biggerGroup);
+        if (environmentalFirstOrderContributions.containsKey(hukkerikarEquivalence))
+            environmentalFirstOrderContributions.get(hukkerikarEquivalence).getSecondOrderContributions().put(secondGroupConfiguration, secondOrderContribution);
+    }
+
 
     /**
      * Read the equivalences between the unifac groups and the Hukkerikar groups
@@ -659,7 +649,6 @@ public class EstimationParameters {
             }
             currentRow = equivalencesSheet.getRow(++groupRow);
         }
-
     }
 
     private EnvironmentalFirstOrderContribution readFirstOrderEnvironmentalContribution(XSSFRow currentRow) {
@@ -669,7 +658,7 @@ public class EstimationParameters {
 
         rowCell = currentRow.getCell(1);
         if (rowCell != null)
-            environmentalContribution.setGroupDescription(rowCell.getStringCellValue());
+            environmentalContribution.setGroupName(rowCell.getStringCellValue());
 
         rowCell = currentRow.getCell(2);
         if (validateNumericCell(rowCell))

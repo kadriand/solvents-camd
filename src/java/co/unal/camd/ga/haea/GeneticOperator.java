@@ -1,7 +1,7 @@
 package co.unal.camd.ga.haea;
 
 import co.unal.camd.properties.model.ContributionGroupNode;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
 import co.unal.camd.view.CamdRunner;
 
 
@@ -58,7 +58,7 @@ public class GeneticOperator {
 
     public static void searchAndReplace(ContributionGroupNode genotype, int codeToCut, boolean replaceAll) {
         if (codeToCut == 0) {
-            ThermodynamicFirstOrderContribution groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(genotype.getGroupCode());
+            ThermoPhysicalFirstOrderContribution groupContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermoPhysicalFirstOrderContributions().get(genotype.getGroupCode());
             int new_code = MoleculeOperations.getNewGroupCode(groupContribution.getValence(), groupContribution.getMainGroup().getCode() > 1);
             genotype.setGroupCode(new_code);
         } else {

@@ -1,8 +1,8 @@
 package co.unal.camd.properties.methods;
 
 import co.unal.camd.properties.model.Molecule;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalSecondOrderContribution;
 import lombok.Setter;
 
 import java.util.Map;
@@ -45,7 +45,7 @@ public class DielectricConstant {
 
     private double computeVaporizationHeat() {
         double c = 6.829;
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getDipoleMomentH1i();
         return c;
     }
@@ -54,10 +54,10 @@ public class DielectricConstant {
         double d = 0.01211;
         double c = 0;
 
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getLiquidMolarVolume();
 
-        for (Map.Entry<ThermodynamicSecondOrderContribution, Integer> secondOrderContributionEntry : molecule.getSecondOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalSecondOrderContribution, Integer> secondOrderContributionEntry : molecule.getSecondOrderContributions().entrySet())
             c += secondOrderContributionEntry.getValue() * secondOrderContributionEntry.getKey().getLiquidMolarVolume();
 
         return (c + d) * 1000;
@@ -81,7 +81,7 @@ public class DielectricConstant {
     private double computeDipolarMoment(boolean conditionCase) {
         int sum = 0;
 
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             if (IntStream.of(conditionGHC).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
                 sum += firstOrderContributionEntry.getValue();
 
@@ -89,7 +89,7 @@ public class DielectricConstant {
             return 0;
 
         double c = 0;
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             c += firstOrderContributionEntry.getValue() * firstOrderContributionEntry.getKey().getDipoleMoment();
 
         return 0.11 * Math.pow(c, 0.29) * Math.pow(computeMolarVolume(), -0.16);
@@ -100,7 +100,7 @@ public class DielectricConstant {
             return 0;
 
         int sum = 0;
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             if (IntStream.of(condition1_9).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
                 sum += firstOrderContributionEntry.getValue();
 
@@ -112,7 +112,7 @@ public class DielectricConstant {
         if (!conditionCase || !otherCond)
             return 0;
 
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             if (IntStream.of(condition1_9).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
                 sum += firstOrderContributionEntry.getValue();
 
@@ -135,7 +135,7 @@ public class DielectricConstant {
     }
 
     private boolean isConditionCase(int[] conditionCase) {
-        for (Map.Entry<ThermodynamicFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
+        for (Map.Entry<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributionEntry : molecule.getFirstOrderContributions().entrySet())
             if (IntStream.of(conditionCase).anyMatch(i -> i == firstOrderContributionEntry.getValue()))
                 return true;
         return false;

@@ -9,10 +9,11 @@ import java.util.Locale;
 import java.util.Map;
 
 @Data
-public class ThermodynamicFirstOrderContribution {
+public class ThermoPhysicalFirstOrderContribution {
     private int code;
     private ContributionGroup.Main mainGroup;
     private String groupName;
+
     private Double rParam;
     private Double qParam;
 
@@ -29,9 +30,9 @@ public class ThermodynamicFirstOrderContribution {
     private Double[] densityB = new Double[4];
     private Double[] densityC = new Double[4];
 
-    private Map<ContributionGroupNode, ThermodynamicSecondOrderContribution> secondOrderContributions = new HashMap<>();
+    private Map<ContributionGroupNode, ThermoPhysicalSecondOrderContribution> secondOrderContributions = new HashMap<>();
 
-    public ThermodynamicFirstOrderContribution(int code) {
+    public ThermoPhysicalFirstOrderContribution(int code) {
         this.code = code;
     }
 

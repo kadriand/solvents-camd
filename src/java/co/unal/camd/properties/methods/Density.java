@@ -2,7 +2,7 @@ package co.unal.camd.properties.methods;
 
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
 import co.unal.camd.view.CamdRunner;
 
 public class Density {
@@ -53,7 +53,7 @@ public class Density {
                 c = 0;
                 sum += (a + b * temperature + c * temperature * temperature);
             } else {
-                ThermodynamicFirstOrderContribution firstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(contributionGroup.getGroupCode());
+                ThermoPhysicalFirstOrderContribution firstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermoPhysicalFirstOrderContributions().get(contributionGroup.getGroupCode());
                 for (int j = 0; j < 4; j++) {
                     a = firstOrderContribution.getDensityA()[j];
                     b = firstOrderContribution.getDensityB()[j];

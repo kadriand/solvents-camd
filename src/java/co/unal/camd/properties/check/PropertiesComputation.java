@@ -11,10 +11,12 @@ import java.net.URLDecoder;
 
 public class PropertiesComputation {
 
+    private static final double TEMPERATURE = 298.15;
+
     public static void main(String[] args) throws IOException {
-        //                evaluateSingleMolecule();
+        evaluateSingleMolecule();
         //        evaluateSingleMolecule4Subs();
-        evaluateJsonMoleculeSet();
+        //        evaluateJsonMoleculeSet();
     }
 
     private static void evaluateJsonMoleculeSet() throws IOException {
@@ -39,9 +41,8 @@ public class PropertiesComputation {
             }
 
             Molecule molecule = new Molecule(rootFunctionalGroupNode);
-            double temperature = 298.15;
-
-            computeProperties(moleculeData, molecule, temperature);
+            molecule.setTemperature(TEMPERATURE);
+            moleculeData.buildRecomputed(molecule);
             System.out.println(moleculeData);
             System.out.println(molecule);
             System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
@@ -61,10 +62,13 @@ public class PropertiesComputation {
         functionalGroupNode2.getSubGroups().add(functionalGroupNode4);
 
         Molecule molecule = new Molecule(rootFunctionalGroupNode);
-        double temperature = 298.15;
+        molecule.setTemperature(TEMPERATURE);
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
         moleculeData.setName("Metil isobutil cetona");
-        computeProperties(moleculeData, molecule, temperature);
+
+        System.out.println("WaterLogWS: " + molecule.getEnvironmentalProperties().getWaterLogWS());
+
+        moleculeData.buildRecomputed(molecule);
         System.out.println(moleculeData);
         System.out.println(molecule);
         System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
@@ -88,25 +92,13 @@ public class PropertiesComputation {
         functionalGroup3.getSubGroups().add(functionalGroup31);
 
         Molecule molecule = new Molecule(rootFunctionalGroupNode);
-        double temperature = 298.15;
+        molecule.setTemperature(TEMPERATURE);
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
         moleculeData.setName("That thing");
-        computeProperties(moleculeData, molecule, temperature);
+        moleculeData.buildRecomputed(molecule);
         System.out.println(moleculeData);
         System.out.println(molecule);
         System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
-    }
-
-    private static void computeProperties(MoleculeData moleculeData, Molecule molecule, double temperature) {
-
-
-        moleculeData.getRecomputed()
-                .setMolecularWeight(molecule.getThermodynamicProperties().getMolecularWeight())
-                .setGibbsEnergy(molecule.getThermodynamicProperties().getGibbsEnergy())
-                .setDensity(molecule.getThermodynamicProperties().getDensity())
-                .setBoilingPoint(molecule.getThermodynamicProperties().getBoilingPoint())
-                .setMeltingPoint(molecule.getThermodynamicProperties().getMeltingPoint())
-                .setDielectricConst(molecule.getThermodynamicProperties().getDielectricConstant());
     }
 
     private static MoleculeData[] parseMoleculeData() throws IOException {

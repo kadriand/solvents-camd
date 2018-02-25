@@ -3,11 +3,14 @@ package co.unal.camd.properties.model;
 import co.unal.camd.properties.methods.BoilingPoint;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
+import co.unal.camd.properties.methods.Environmental;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingPoint;
 import co.unal.camd.properties.methods.MolecularWeight;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicFirstOrderContribution;
-import co.unal.camd.properties.parameters.unifac.ThermodynamicSecondOrderContribution;
+import co.unal.camd.properties.parameters.unifac.EnvironmentalFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.EnvironmentalSecondOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
+import co.unal.camd.properties.parameters.unifac.ThermoPhysicalSecondOrderContribution;
 import co.unal.camd.view.CamdRunner;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,16 +37,26 @@ public class Molecule {
 
     @Getter
     @Setter
-    private double temperature;
+    private double temperature = -1;
 
     @Getter
     private double x; //composición
 
-    private ThermodynamicProperties thermodynamicProperties;
+    private ThermoPhysicalProperties thermoPhysicalProperties;
 
-    private Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContributions;
+    private EnvironmentalProperties environmentalProperties;
 
-    private Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions;
+    @Getter
+    @Setter
+    private MixtureProperties mixtureProperties;
+
+    private Map<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributions;
+
+    private Map<ThermoPhysicalSecondOrderContribution, Integer> secondOrderContributions;
+
+    private Map<EnvironmentalFirstOrderContribution, Integer> environmentalFirstOrderContributions;
+
+    private Map<EnvironmentalSecondOrderContribution, Integer> environmentalSecondOrderContributions;
 
     public Molecule(Molecule molecule) {
         rootContributionGroup = molecule.rootContributionGroup.clone();
@@ -63,21 +76,24 @@ public class Molecule {
     public ContributionGroupNode getRootContributionGroup() {
         this.secondOrderContributions = null;
         this.firstOrderContributions = null;
-        this.thermodynamicProperties = null;
+        this.environmentalFirstOrderContributions = null;
+        this.environmentalSecondOrderContributions = null;
+        this.thermoPhysicalProperties = null;
+        this.mixtureProperties = null;
         this.size = -1;
         return this.rootContributionGroup;
     }
 
-    public ThermodynamicProperties getThermodynamicProperties() {
-        if (thermodynamicProperties == null) {
-            thermodynamicProperties = new ThermodynamicProperties();
+    public ThermoPhysicalProperties getThermoPhysicalProperties() {
+        if (thermoPhysicalProperties == null) {
+            thermoPhysicalProperties = new ThermoPhysicalProperties();
             double gibbsEnergy = GibbsEnergy.compute(this);
             double boilingPoint = BoilingPoint.compute(this);
             double meltingPoint = MeltingPoint.compute(this);
             double molecularWeight = MolecularWeight.compute(this);
             double density = Density.compute(this, temperature);
             DielectricConstant dielectricConstant = new DielectricConstant(this, temperature);
-            thermodynamicProperties.
+            thermoPhysicalProperties.
                     setGibbsEnergy(gibbsEnergy)
                     .setBoilingPoint(boilingPoint)
                     .setDensity(density)
@@ -85,7 +101,17 @@ public class Molecule {
                     .setDielectricConstant(dielectricConstant.compute())
                     .setMolecularWeight(molecularWeight);
         }
-        return thermodynamicProperties;
+        return thermoPhysicalProperties;
+    }
+
+    public EnvironmentalProperties getEnvironmentalProperties() {
+        if (environmentalProperties == null) {
+            environmentalProperties = new EnvironmentalProperties();
+            double waterLogWS = Environmental.BioConcentrationFactor.compute(this);
+            environmentalProperties.
+                    setWaterLogWS(waterLogWS);
+        }
+        return environmentalProperties;
     }
 
     public int getSize() {
@@ -95,13 +121,13 @@ public class Molecule {
     }
 
     /**
-     * Return a map with the present ThermodynamicFirstOrderContribution's and the occurrences of each one
+     * Return a map with the present ThermoPhysicalFirstOrderContribution's and the occurrences of each one
      *
-     * @return <ThermodynamicFirstOrderContribution, occurrences>
+     * @return <ThermoPhysicalFirstOrderContribution, occurrences>
      */
-    public Map<ThermodynamicFirstOrderContribution, Integer> getFirstOrderContributions() {
+    public Map<ThermoPhysicalFirstOrderContribution, Integer> getFirstOrderContributions() {
         if (firstOrderContributions == null) {
-            Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContribution = new HashMap<>();
+            Map<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContribution = new HashMap<>();
             findFirstOrderGroups(this.rootContributionGroup, firstOrderContribution);
             this.firstOrderContributions = firstOrderContribution;
         }
@@ -109,17 +135,45 @@ public class Molecule {
     }
 
     /**
-     * Return a map with the present ThermodynamicSecondOrderContribution's and the occurrences of each one
+     * Return a map with the present ThermoPhysicalSecondOrderContribution's and the occurrences of each one
      *
-     * @return <ThermodynamicSecondOrderContribution, occurrences>
+     * @return <ThermoPhysicalSecondOrderContribution, occurrences>
      */
-    public Map<ThermodynamicSecondOrderContribution, Integer> getSecondOrderContributions() {
+    public Map<ThermoPhysicalSecondOrderContribution, Integer> getSecondOrderContributions() {
         if (secondOrderContributions == null) {
-            Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions = new HashMap<>();
+            Map<ThermoPhysicalSecondOrderContribution, Integer> secondOrderContributions = new HashMap<>();
             findSecondOrderGroups(this.rootContributionGroup, secondOrderContributions);
             this.secondOrderContributions = secondOrderContributions;
         }
         return secondOrderContributions;
+    }
+
+    /**
+     * Return a map with the present ThermoPhysicalFirstOrderContribution's and the occurrences of each one
+     *
+     * @return <ThermoPhysicalFirstOrderContribution, occurrences>
+     */
+    public Map<EnvironmentalFirstOrderContribution, Integer> getEnvironmentalFirstOrderContributions() {
+        if (firstOrderContributions == null) {
+            Map<EnvironmentalFirstOrderContribution, Integer> firstOrderContribution = new HashMap<>();
+            findEnvironmentalFirstOrderGroups(this.rootContributionGroup, firstOrderContribution);
+            this.environmentalFirstOrderContributions = firstOrderContribution;
+        }
+        return environmentalFirstOrderContributions;
+    }
+
+    /**
+     * Return a map with the present ThermoPhysicalSecondOrderContribution's and the occurrences of each one
+     *
+     * @return <ThermoPhysicalSecondOrderContribution, occurrences>
+     */
+    public Map<EnvironmentalSecondOrderContribution, Integer> getEnvironmentalSecondOrderContributions() {
+        if (environmentalSecondOrderContributions == null) {
+            Map<EnvironmentalSecondOrderContribution, Integer> secondOrderContributions = new HashMap<>();
+            findEnvironmentalSecondOrderGroups(this.rootContributionGroup, secondOrderContributions);
+            this.environmentalSecondOrderContributions = secondOrderContributions;
+        }
+        return environmentalSecondOrderContributions;
     }
 
     public ContributionGroupNode getGroupAt(int i) {
@@ -151,20 +205,20 @@ public class Molecule {
         return moleculeGroups;
     }
 
-    private void findFirstOrderGroups(ContributionGroupNode contributionGroup, Map<ThermodynamicFirstOrderContribution, Integer> firstOrderContributions) {
-        ThermodynamicFirstOrderContribution thermodynamicFirstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(contributionGroup.getGroupCode());
-        if (firstOrderContributions.containsKey(thermodynamicFirstOrderContribution))
-            firstOrderContributions.replace(thermodynamicFirstOrderContribution, firstOrderContributions.get(thermodynamicFirstOrderContribution) + 1);
+    private void findFirstOrderGroups(ContributionGroupNode contributionGroup, Map<ThermoPhysicalFirstOrderContribution, Integer> firstOrderContributions) {
+        ThermoPhysicalFirstOrderContribution firstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getThermoPhysicalFirstOrderContributions().get(contributionGroup.getGroupCode());
+        if (firstOrderContributions.containsKey(firstOrderContribution))
+            firstOrderContributions.replace(firstOrderContribution, firstOrderContributions.get(firstOrderContribution) + 1);
         else
-            firstOrderContributions.put(thermodynamicFirstOrderContribution, 1);
+            firstOrderContributions.put(firstOrderContribution, 1);
 
         for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
             findFirstOrderGroups(subGroup, firstOrderContributions);
     }
 
-    private void findSecondOrderGroups(ContributionGroupNode contributionGroup, Map<ThermodynamicSecondOrderContribution, Integer> secondOrderContributions) {
-        Map<ContributionGroupNode, ThermodynamicSecondOrderContribution> branchSecondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getThermodynamicFirstOrderContributionsGroups().get(contributionGroup.getGroupCode()).getSecondOrderContributions();
-        for (Map.Entry<ContributionGroupNode, ThermodynamicSecondOrderContribution> contributionNodeEntry : branchSecondOrderContributions.entrySet()) {
+    private void findSecondOrderGroups(ContributionGroupNode contributionGroup, Map<ThermoPhysicalSecondOrderContribution, Integer> secondOrderContributions) {
+        Map<ContributionGroupNode, ThermoPhysicalSecondOrderContribution> branchSecondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getThermoPhysicalFirstOrderContributions().get(contributionGroup.getGroupCode()).getSecondOrderContributions();
+        for (Map.Entry<ContributionGroupNode, ThermoPhysicalSecondOrderContribution> contributionNodeEntry : branchSecondOrderContributions.entrySet()) {
             if (secondOrderContributions.containsKey(contributionNodeEntry.getValue()))
                 continue;
             int occurrences = contributionGroup.contains(contributionNodeEntry.getKey());
@@ -174,6 +228,33 @@ public class Molecule {
 
         for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
             findSecondOrderGroups(subGroup, secondOrderContributions);
+    }
+
+    private void findEnvironmentalFirstOrderGroups(ContributionGroupNode contributionGroup, Map<EnvironmentalFirstOrderContribution, Integer> firstOrderContributions) {
+        Integer hukkerikarCode = CamdRunner.CONTRIBUTION_GROUPS.getHukkerikarGroupsEquivalences().get(contributionGroup.getGroupCode());
+        EnvironmentalFirstOrderContribution firstOrderContribution = CamdRunner.CONTRIBUTION_GROUPS.getEnvironmentalFirstOrderContributions().get(hukkerikarCode);
+        if (firstOrderContributions.containsKey(firstOrderContribution))
+            firstOrderContributions.replace(firstOrderContribution, firstOrderContributions.get(firstOrderContribution) + 1);
+        else
+            firstOrderContributions.put(firstOrderContribution, 1);
+
+        for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
+            findEnvironmentalFirstOrderGroups(subGroup, firstOrderContributions);
+    }
+
+    private void findEnvironmentalSecondOrderGroups(ContributionGroupNode contributionGroup, Map<EnvironmentalSecondOrderContribution, Integer> secondOrderContributions) {
+        Integer hukkerikarCode = CamdRunner.CONTRIBUTION_GROUPS.getHukkerikarGroupsEquivalences().get(contributionGroup.getGroupCode());
+        Map<ContributionGroupNode, EnvironmentalSecondOrderContribution> branchSecondOrderContributions = CamdRunner.CONTRIBUTION_GROUPS.getEnvironmentalFirstOrderContributions().get(hukkerikarCode).getSecondOrderContributions();
+        for (Map.Entry<ContributionGroupNode, EnvironmentalSecondOrderContribution> contributionNodeEntry : branchSecondOrderContributions.entrySet()) {
+            if (secondOrderContributions.containsKey(contributionNodeEntry.getValue()))
+                continue;
+            int occurrences = contributionGroup.contains(contributionNodeEntry.getKey());
+            if (occurrences > 0)
+                secondOrderContributions.put(contributionNodeEntry.getValue(), occurrences);
+        }
+
+        for (ContributionGroupNode subGroup : contributionGroup.getSubGroups())
+            findEnvironmentalSecondOrderGroups(subGroup, secondOrderContributions);
     }
 
     /**
