@@ -66,8 +66,6 @@ public class PropertiesComputation {
         MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
         moleculeData.setName("Metil isobutil cetona");
 
-        System.out.println("WaterLogWS: " + molecule.getEnvironmentalProperties().getWaterLogWS());
-
         moleculeData.buildRecomputed(molecule);
         System.out.println(moleculeData);
         System.out.println(molecule);

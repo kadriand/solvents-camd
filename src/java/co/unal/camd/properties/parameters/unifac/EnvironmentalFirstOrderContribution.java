@@ -12,16 +12,16 @@ public class EnvironmentalFirstOrderContribution {
     private int code;
     private String groupName;
 
-    private double waterLC50FM;
-    private double waterLC50DM;
-    private double oralLD50;
-    private double waterLogWS;
-    private double waterBFC;
+    private Double waterLC50FM;
+    private Double waterLC50DM;
+    private Double oralLD50;
+    private Double waterLogWS;
+    private Double waterBFC;
 
-    private double airEUAc;
-    private double airEUAnc;
-    private double airERAc;
-    private double airERAnc;
+    private Double airEUAc;
+    private Double airEUAnc;
+    private Double airERAc;
+    private Double airERAnc;
 
     public EnvironmentalFirstOrderContribution(int code) {
         this.code = code;

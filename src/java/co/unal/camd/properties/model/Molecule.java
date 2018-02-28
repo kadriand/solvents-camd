@@ -1,12 +1,20 @@
 package co.unal.camd.properties.model;
 
+import co.unal.camd.properties.environmental.AqueousSolubilityLogWs;
+import co.unal.camd.properties.environmental.BioConcentrationFactorBFC;
 import co.unal.camd.properties.methods.BoilingPoint;
+import co.unal.camd.properties.environmental.DaphniaMagnaLC50DM;
 import co.unal.camd.properties.methods.Density;
 import co.unal.camd.properties.methods.DielectricConstant;
-import co.unal.camd.properties.methods.Environmental;
+import co.unal.camd.properties.environmental.FatheadMinnowLC50FM;
 import co.unal.camd.properties.methods.GibbsEnergy;
 import co.unal.camd.properties.methods.MeltingPoint;
 import co.unal.camd.properties.methods.MolecularWeight;
+import co.unal.camd.properties.environmental.OralRatLD50;
+import co.unal.camd.properties.environmental.RuralAirEmissionCarcinERAC;
+import co.unal.camd.properties.environmental.RuralAirEmissionNonCarcinERANC;
+import co.unal.camd.properties.environmental.UrbanAirEmissionCarcinEUAC;
+import co.unal.camd.properties.environmental.UrbanAirEmissionNonCarcinEUANC;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalFirstOrderContribution;
 import co.unal.camd.properties.parameters.unifac.EnvironmentalSecondOrderContribution;
 import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
@@ -107,9 +115,26 @@ public class Molecule {
     public EnvironmentalProperties getEnvironmentalProperties() {
         if (environmentalProperties == null) {
             environmentalProperties = new EnvironmentalProperties();
-            double waterLogWS = Environmental.BioConcentrationFactor.compute(this);
-            environmentalProperties.
-                    setWaterLogWS(waterLogWS);
+            double waterLogWS = AqueousSolubilityLogWs.compute(this);
+            double fatheadMinnowLC50FM = FatheadMinnowLC50FM.compute(this);
+            double daphniaMagnaLC50DM = DaphniaMagnaLC50DM.compute(this);
+            double waterBFC = BioConcentrationFactorBFC.compute(this);
+            double oralRatLD50 = OralRatLD50.compute(this);
+            double urbanEUAC = UrbanAirEmissionCarcinEUAC.compute(this);
+            double urbanEUANC = UrbanAirEmissionNonCarcinEUANC.compute(this);
+            double ruralERAC = RuralAirEmissionCarcinERAC.compute(this);
+            double ruralERANC = RuralAirEmissionNonCarcinERANC.compute(this);
+
+            environmentalProperties
+                    .setWaterLogWS(waterLogWS)
+                    .setWaterLC50FM(fatheadMinnowLC50FM)
+                    .setWaterLC50DM(daphniaMagnaLC50DM)
+                    .setOralLD50(waterBFC)
+                    .setWaterBFC(oralRatLD50)
+                    .setAirEUAc(urbanEUAC)
+                    .setAirEUAnc(urbanEUANC)
+                    .setAirERAc(ruralERAC)
+                    .setAirERAnc(ruralERANC);
         }
         return environmentalProperties;
     }
