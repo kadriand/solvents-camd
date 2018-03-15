@@ -13,6 +13,7 @@ public class ThermoPhysicalFirstOrderContribution {
     private int code;
     private ContributionGroup.Main mainGroup;
     private String groupName;
+    private String smilesPattern;
 
     private Double rParam;
     private Double qParam;

@@ -258,6 +258,7 @@ public class EstimationParameters {
                 Integer groupId = (int) currentRow.getCell(0).getNumericCellValue();
                 ThermoPhysicalFirstOrderContribution contributionData = new ThermoPhysicalFirstOrderContribution(groupId);
                 readUnifacRQParams(currentRow, contributionData);
+                readSmiles(currentRow, contributionData);
                 thermoPhysicalFirstOrderContributions.put(groupId, contributionData);
             } catch (Exception e) {
                 System.out.println("\nRow failed: " + unifacRow);
@@ -287,6 +288,13 @@ public class EstimationParameters {
         rowCell = currentRow.getCell(5);
         if (validateNumericCell(rowCell))
             contributionData.setQParam(rowCell.getNumericCellValue());
+    }
+
+    private void readSmiles(XSSFRow currentRow, ThermoPhysicalFirstOrderContribution contributionData) {
+        XSSFCell rowCell;
+        rowCell = currentRow.getCell(6);
+        if (rowCell != null)
+            contributionData.setSmilesPattern(rowCell.getStringCellValue().trim());
     }
 
     /**
@@ -636,17 +644,16 @@ public class EstimationParameters {
         int groupRow = 2;
 
         XSSFRow currentRow = equivalencesSheet.getRow(groupRow);
-        while (currentRow != null && validateNumericCell(currentRow.getCell(0))) {
-            try {
-                Integer unifacGroupId = (int) currentRow.getCell(0).getNumericCellValue();
-                if (validateNumericCell(currentRow.getCell(5))) {
+        while (currentRow != null && (validateNumericCell(currentRow.getCell(0)) || validateNumericCell(currentRow.getCell(5)))) {
+            if (validateNumericCell(currentRow.getCell(0)) && validateNumericCell(currentRow.getCell(5)))
+                try {
+                    int unifacGroupId = (int) currentRow.getCell(0).getNumericCellValue();
                     int hukkerikarGroupId = (int) currentRow.getCell(5).getNumericCellValue();
                     hukkerikarGroupsEquivalences.put(unifacGroupId, hukkerikarGroupId);
+                } catch (Exception e) {
+                    System.out.println("\nRow failed: " + groupRow);
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                System.out.println("\nRow failed: " + groupRow);
-                e.printStackTrace();
-            }
             currentRow = equivalencesSheet.getRow(++groupRow);
         }
     }

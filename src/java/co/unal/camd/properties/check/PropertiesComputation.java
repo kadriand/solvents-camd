@@ -1,6 +1,7 @@
 package co.unal.camd.properties.check;
 
 import co.unal.camd.properties.model.ContributionGroupNode;
+import co.unal.camd.properties.model.EnvironmentalProperties;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.view.CamdRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,9 +15,10 @@ public class PropertiesComputation {
     private static final double TEMPERATURE = 298.15;
 
     public static void main(String[] args) throws IOException {
-        evaluateSingleMolecule();
+        //        evaluateSingleMolecule();
         //        evaluateSingleMolecule4Subs();
-        //        evaluateJsonMoleculeSet();
+        evaluateJsonMoleculeSet();
+        //        evaluateSingleMoleculeNewNaming();
     }
 
     private static void evaluateJsonMoleculeSet() throws IOException {
@@ -46,6 +48,10 @@ public class PropertiesComputation {
             System.out.println(moleculeData);
             System.out.println(molecule);
             System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
+
+            EnvironmentalProperties environmentalProperties = molecule.getEnvironmentalProperties();
+            molecule.getSmiles();
+            System.out.println("DONE");
         }
     }
 
@@ -70,6 +76,28 @@ public class PropertiesComputation {
         System.out.println(moleculeData);
         System.out.println(molecule);
         System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
+
+        EnvironmentalProperties environmentalProperties = molecule.getEnvironmentalProperties();
+        molecule.getSmiles();
+        System.out.println("DONE");
+    }
+
+    private static void evaluateSingleMoleculeNewNaming() {
+        // Sample: *Metil isobutil cetona
+        ContributionGroupNode rootFunctionalGroupNode = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration("1.2.60");
+        Molecule molecule = new Molecule(rootFunctionalGroupNode);
+        molecule.setTemperature(TEMPERATURE);
+        MoleculeData moleculeData = new MoleculeData().setComputed(new MoleculeData.PropertiesSet());
+        moleculeData.setName("Metil isobutil cetona");
+
+        moleculeData.buildRecomputed(molecule);
+        System.out.println(moleculeData);
+        System.out.println(molecule);
+        System.out.println(moleculeData.getRecomputed().compared(moleculeData.getComputed()));
+
+        EnvironmentalProperties environmentalProperties = molecule.getEnvironmentalProperties();
+        molecule.getSmiles();
+        System.out.println("DONE");
     }
 
     private static void evaluateSingleMolecule4Subs() {

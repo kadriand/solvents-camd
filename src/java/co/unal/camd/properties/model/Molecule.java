@@ -20,6 +20,7 @@ import co.unal.camd.properties.parameters.unifac.EnvironmentalSecondOrderContrib
 import co.unal.camd.properties.parameters.unifac.ThermoPhysicalFirstOrderContribution;
 import co.unal.camd.properties.parameters.unifac.ThermoPhysicalSecondOrderContribution;
 import co.unal.camd.view.CamdRunner;
+import co.unal.camd.util.CdkUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,6 +39,8 @@ public class Molecule {
     private ContributionGroupNode rootContributionGroup;
 
     private int size = -1;
+
+    private String smiles;
 
     @Getter
     @Setter
@@ -88,6 +91,7 @@ public class Molecule {
         this.environmentalSecondOrderContributions = null;
         this.thermoPhysicalProperties = null;
         this.mixtureProperties = null;
+        this.smiles = null;
         this.size = -1;
         return this.rootContributionGroup;
     }
@@ -145,6 +149,14 @@ public class Molecule {
         return size;
     }
 
+    public String getSmiles() {
+        if (this.smiles == null)
+            this.smiles = rootContributionGroup.buildSmiles();
+        String uniqueSmiles = CdkUtils.smilesToUnique(smiles);
+        //        System.out.println(String.format("SMILES %s vs %s", smiles, uniqueSmiles));
+        return uniqueSmiles;
+    }
+
     /**
      * Return a map with the present ThermoPhysicalFirstOrderContribution's and the occurrences of each one
      *
@@ -179,7 +191,7 @@ public class Molecule {
      * @return <ThermoPhysicalFirstOrderContribution, occurrences>
      */
     public Map<EnvironmentalFirstOrderContribution, Integer> getEnvironmentalFirstOrderContributions() {
-        if (firstOrderContributions == null) {
+        if (environmentalFirstOrderContributions == null) {
             Map<EnvironmentalFirstOrderContribution, Integer> firstOrderContribution = new HashMap<>();
             findEnvironmentalFirstOrderGroups(this.rootContributionGroup, firstOrderContribution);
             this.environmentalFirstOrderContributions = firstOrderContribution;

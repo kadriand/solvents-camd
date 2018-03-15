@@ -1,5 +1,6 @@
 package co.unal.camd.properties.model;
 
+import co.unal.camd.view.CamdRunner;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -136,4 +137,22 @@ public class ContributionGroupNode {
         return comparisonPool;
     }
 
+    public String buildSmiles() {
+        return buildSmiles(null);
+    }
+
+    private String buildSmiles(ContributionGroupNode originNode) {
+        List<ContributionGroupNode> branchSubGroups = this.branchSubGroups(originNode);
+        String smiles = CamdRunner.CONTRIBUTION_GROUPS.getThermoPhysicalFirstOrderContributions().get(this.groupCode).getSmilesPattern();
+
+        if (branchSubGroups.size() == 0)
+            return smiles;
+
+        for (ContributionGroupNode branchSubGroup : branchSubGroups)
+            if (smiles.contains("."))
+                smiles = smiles.replaceFirst("\\.", branchSubGroup.buildSmiles(this));
+            else
+                smiles += "(" + branchSubGroup.buildSmiles(this) + ")";
+        return smiles;
+    }
 }
