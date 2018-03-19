@@ -7,6 +7,7 @@ import co.unal.camd.properties.methods.MeltingPoint;
 import co.unal.camd.properties.methods.MolecularWeight;
 import co.unal.camd.properties.methods.SolventLoss;
 import co.unal.camd.properties.methods.UnifacEstimator;
+import co.unal.camd.properties.model.MixtureProperties;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
 import unalcol.optimization.OptimizationFunction;
@@ -101,9 +102,7 @@ public class MoleculeFitness extends OptimizationFunction<Molecule> {
         double fitness = ks * (w[0] * r1 + w[1] * r2 + w[2] * r3 + w[3] * r4 + w[4] * r5);
         solvent.setFitness(fitness);
         solvent.setTemperature(temperature);
-        solvent.getMixtureProperties()
-                .setSolventLoss(solventLossVal)
-                .setKs(ks);
+        solvent.setMixtureProperties(new MixtureProperties(ks, solventLossVal));
 
         //        System.out.println("Fitness evaluation " + (++eval) + ": " + fitness);
         return fitness;

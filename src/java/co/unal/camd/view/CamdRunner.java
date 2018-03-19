@@ -2,6 +2,7 @@ package co.unal.camd.view;
 
 import co.unal.camd.ga.haea.MoleculeEvolution;
 import co.unal.camd.properties.model.ContributionGroupNode;
+import co.unal.camd.properties.model.MixtureProperties;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.properties.model.MoleculeGroups;
 import co.unal.camd.properties.model.ThermoPhysicalProperties;
@@ -110,8 +111,9 @@ public class CamdRunner extends JFrame {
         JTree jTree;
         for (int i = 0; i < parentSize; i++) {
             Molecule solvent = sortedSolution.get(i).unwrap();
-
             ThermoPhysicalProperties thermoPhysicalProperties = solvent.getThermoPhysicalProperties();
+            MixtureProperties mixtureProperties = solvent.getMixtureProperties();
+
             ContributionGroupNode functionalGroupNode = solvent.getRootContributionGroup();
             String name = CONTRIBUTION_GROUPS.findGroupName(functionalGroupNode.getGroupCode());
             DefaultMutableTreeNode n = new DefaultMutableTreeNode(name);
@@ -119,12 +121,13 @@ public class CamdRunner extends JFrame {
             //            tree = new MoleculeTree(solvent.getRootContributionGroup());
 
             System.out.println("/////////////////////////// " + i + "/////////////////////////////////////");
+            System.out.println("MW: " + thermoPhysicalProperties.getMolecularWeight());
             System.out.println("Ge: " + thermoPhysicalProperties.getGibbsEnergy());
             System.out.println("BT: " + thermoPhysicalProperties.getBoilingPoint());
             System.out.println("Den: " + thermoPhysicalProperties.getDensity());
             System.out.println("MT: " + thermoPhysicalProperties.getMeltingPoint());
             System.out.println("DC: " + thermoPhysicalProperties.getDielectricConstant());
-            System.out.println("KS: " + solvent.getMixtureProperties().getKs());
+            System.out.println("KS: " + mixtureProperties.getKs());
             System.out.println("//////////////////////////////////////////////////////////////");
 
             // TODO IS THIS NECESSARY?
