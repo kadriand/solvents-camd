@@ -17,8 +17,8 @@ public class PropertiesComputation {
     public static void main(String[] args) throws IOException {
         //        evaluateSingleMolecule();
         //        evaluateSingleMolecule4Subs();
-        evaluateJsonMoleculeSet();
-        //        evaluateSingleMoleculeNewNaming();
+        //        evaluateJsonMoleculeSet();
+        evaluateSingleMoleculeNewNaming();
     }
 
     private static void evaluateJsonMoleculeSet() throws IOException {
