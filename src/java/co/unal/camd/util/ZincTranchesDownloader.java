@@ -16,17 +16,15 @@ import java.util.regex.Pattern;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class TranchesDownloader {
+public class ZincTranchesDownloader {
 
     private static Pattern FILE_PATTERN = Pattern.compile(".*\\/(.*\\/.*smi)");
     private String tranchesType;
     private File tranchesUrlsFile;
     private File reportFile;
-    private String urlsPath;
 
-    public TranchesDownloader(String urlsPath) {
-        this.urlsPath = urlsPath;
-        String filePath = TranchesDownloader.class.getResource(urlsPath).getFile();
+    public ZincTranchesDownloader(String urlsPath) {
+        String filePath = ZincTranchesDownloader.class.getResource(urlsPath).getFile();
 
         System.out.println(filePath);
         tranchesUrlsFile = new File(filePath);
@@ -41,28 +39,12 @@ public class TranchesDownloader {
         }
     }
 
-    public static void main(String... args) throws IOException {
-        /*TESTS*/
-        //        String urlsPath = "/tranches-urls/test/ZINC-downloader-2D-smi.uri";
-        /*WAIT OK*/
-        //        String urlsPath = "/tranches-urls/wait-ok/ZINC-maxWaitOk-max350da-maxReact-smi.uri";
-        /*BOUTIQUE*/
-        //        String urlsPath = "/tranches-urls/boutique/ZINC-onlyBoutique-max350da-maxReact-smi.uri";
-        /*ANNOTATED*/
-        String urlsPath = "/tranches-urls/annotated/ZINC-onlyAnnotated-max350da-maxReact-smi.uri";
-
-        TranchesDownloader tranchesDownloader = new TranchesDownloader(urlsPath);
-        tranchesDownloader.downloadTranches();
-    }
-
     private void downloadTranches() throws IOException {
-        FileUtils.readLines(tranchesUrlsFile).forEach(url ->
-                downloadTranche(url)
-        );
+        FileUtils.readLines(tranchesUrlsFile).forEach(this::downloadTranche);
     }
 
     private void downloadTranche(String url) {
-        System.out.println("Downloading tranch " + url);
+        System.out.println("Downloading trance " + url);
         try {
             Matcher fileMatcher = FILE_PATTERN.matcher(url);
             fileMatcher.find();
@@ -70,9 +52,9 @@ public class TranchesDownloader {
             System.out.println(locationSuffix);
             URL website = new URL(url);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            File tranchFile = new File("tranches/" + tranchesType + "/" + locationSuffix);
-            FileUtils.touch(tranchFile);
-            FileOutputStream fos = new FileOutputStream(tranchFile);
+            File trancheFile = new File("tranches/" + tranchesType + "/" + locationSuffix);
+            FileUtils.touch(trancheFile);
+            FileOutputStream fos = new FileOutputStream(trancheFile);
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         } catch (Exception e) {
             try {
@@ -83,4 +65,24 @@ public class TranchesDownloader {
             e.printStackTrace();
         }
     }
+
+    enum TrancheFile {
+        TESTS("/tranches-urls/test/ZINC-downloader-2D-smi.uri"),
+        WAIT_OK("/tranches-urls/wait-ok/ZINC-maxWaitOk-max350da-maxReact-smi.uri"),
+        BOUTIQUE("/tranches-urls/boutique/ZINC-onlyBoutique-max350da-maxReact-smi.uri"),
+        ANNOTATED("/tranches-urls/annotated/ZINC-onlyAnnotated-max350da-maxReact-smi.uri");
+
+        private final String path;
+
+        TrancheFile(String path) {
+            this.path = path;
+        }
+    }
+
+    public static void main(String... args) throws IOException {
+        String urlsPath = TrancheFile.TESTS.path;
+        ZincTranchesDownloader zincTranchesDownloader = new ZincTranchesDownloader(urlsPath);
+        zincTranchesDownloader.downloadTranches();
+    }
+
 }
