@@ -62,7 +62,7 @@ public class AvailabilityFinder extends MongodbClient {
 
     public static void main(String... args) {
         try {
-            MongodbClient.ENABLE_DB = true;
+            MongodbClient.IS_DB_ENABLE = true;
             CamdRunner.CONTRIBUTION_GROUPS.defaultFamilyProbabilities();
             for (int i = 0; i < 100; i++) {
                 Molecule molecule = MoleculeSpace.randomMolecule();

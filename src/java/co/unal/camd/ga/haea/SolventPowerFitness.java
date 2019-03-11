@@ -83,12 +83,10 @@ public class SolventPowerFitness extends ObjectiveFunction<Molecule> {
         double r5 = normalizeRestriction(2, beta[4], solventLossVal, Po[4], uncertainty[4]);
         double ks = computeKS(solvent);
 
-        //	r6 = normalizeRestriction(1, beta, Pi, Pm, Pm2, 999999999, Pmin);
-        //System.out.println("ks: "+ks);
+        //        double fitness = ks * (propertiesWeights[0] * r1 + propertiesWeights[1] * r2 + propertiesWeights[2] * r3 + propertiesWeights[3] * r4);
         double fitness = ks * (propertiesWeights[0] * r1 + propertiesWeights[1] * r2 + propertiesWeights[2] * r3 + propertiesWeights[3] * r4 + propertiesWeights[4] * r5);
         solvent.setMixtureProperties(new MixtureProperties(ks, solventLossVal));
 
-        //        System.out.println("Fitness evaluation " + (++eval) + ": " + fitness);
         return fitness;
     }
 
@@ -97,18 +95,12 @@ public class SolventPowerFitness extends ObjectiveFunction<Molecule> {
         ArrayList<MoleculeGroups> BS = new ArrayList<>();
         ArrayList<MoleculeGroups> AS = new ArrayList<>();
 
-        ///////////////////hacer composiciones 1 y 0 para cada una de las parejas dependiendo cual de los dos est� diluido
-        //System.out.println("solut"+AB.get(0).);
-        //System.out.println("solventuser"+AB.get(1).getRootContributionGroup());
-
         MoleculeGroups b1 = solventUser;
         MoleculeGroups s1 = solvent.getGroupsArray();
         b1.setComposition(_D);
         s1.setComposition(_C);
         BS.add(b1);
         BS.add(s1);
-        //System.out.println("solvetuser: "+BS.get(0).getRootContributionGroup());
-        //System.out.println("solvent"+BS.get(1).getRootContributionGroup());
 
         MoleculeGroups a2 = solute;
         MoleculeGroups s2 = solvent.getGroupsArray();
@@ -116,8 +108,6 @@ public class SolventPowerFitness extends ObjectiveFunction<Molecule> {
         s2.setComposition(_C);
         AS.add(a2);
         AS.add(s2);
-        //System.out.println("solut"+AS.get(0).getRootContributionGroup());
-        //System.out.println("solvent: "+AS.get(1).getRootContributionGroup());
 
         //		UNIFAC aUNIFAC=(UNIFAC)unifacMethod;
         UnifacEstimator unifac = new UnifacEstimator(AS);

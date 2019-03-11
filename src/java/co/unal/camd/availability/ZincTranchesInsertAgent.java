@@ -53,7 +53,7 @@ public class ZincTranchesInsertAgent {
     }
 
     public static void main(String... args) throws Exception {
-        MongodbClient.ENABLE_DB = true;
+        MongodbClient.IS_DB_ENABLE = true;
         readTranchesDirectory();
     }
 

@@ -14,8 +14,8 @@ public class CamdSolvents {
      * @param args
      */
     public static void main(String[] args) {
-        MongodbClient.ENABLE_DB = true;
 
+        MongodbClient.IS_DB_ENABLE = true;
         // TODO Auto-generated method stub
         SwingUtilities.invokeLater(() -> {
             try {

@@ -1,4 +1,4 @@
-package co.unal.camd.util;
+package co.unal.camd.descriptors;
 
 import net.sf.jniinchi.INCHI_RET;
 import org.openscience.cdk.CDKConstants;
@@ -6,6 +6,7 @@ import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.depict.Depiction;
 import org.openscience.cdk.depict.DepictionGenerator;
 import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.inchi.InChIGeneratorFactory;
 import org.openscience.cdk.inchi.InChIToStructure;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -38,6 +39,7 @@ public class CdkUtils {
      */
     public static String smilesToUnique(String smiles) {
         try {
+            smiles = smiles.replaceAll("[\uFEFF-\uFFFF]", "").trim();
             IAtomContainer molecule = smilesParser.parseSmiles(smiles);
             String canonicalSmiles = smilesGenerator.create(molecule);
             return canonicalSmiles;
@@ -48,6 +50,13 @@ public class CdkUtils {
                 LOGGER.error("Problerms parsing smiles : {}", smiles, e);
             return null;
         }
+    }
+
+    public static String smilesToUniqueUnsafe(String smiles) throws CDKException {
+        smiles = smiles.replaceAll("[\uFEFF-\uFFFF]", "").trim();
+        IAtomContainer molecule = smilesParser.parseSmiles(smiles);
+        String canonicalSmiles = smilesGenerator.create(molecule);
+        return canonicalSmiles;
     }
 
     public static IAtomContainer moleculeFromInChI(String inchi) {
@@ -93,6 +102,7 @@ public class CdkUtils {
 
     public static byte[] moleculeImageBytes(String smiles, String name) {
         try (ByteArrayOutputStream iout = new ByteArrayOutputStream()) {
+            smiles = smiles.replaceAll("[\uFEFF-\uFFFF]", "").trim();
             IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
             SmilesParser smipar = new SmilesParser(bldr);
             IAtomContainer mol = smipar.parseSmiles(smiles);
@@ -110,6 +120,7 @@ public class CdkUtils {
     }
 
     public static BufferedImage moleculeImage(String smiles, String name) throws CDKException {
+        smiles = smiles.replaceAll("[\uFEFF-\uFFFF]", "").trim();
         IChemObjectBuilder bldr = SilentChemObjectBuilder.getInstance();
         SmilesParser smipar = new SmilesParser(bldr);
         IAtomContainer mol = smipar.parseSmiles(smiles);
@@ -139,7 +150,8 @@ public class CdkUtils {
     }
 
     public static void main(String[] args) {
-        showMolecule("C/C1=C/[C@H](C)CC[C@@H](C)[C@@H](C)\\C=C/C1", "molec");
-        //        inconsistentParsingMolecules();
+        String smiles = "CC(C)(C)C1=CC(C(=O)NC2=CC=C(C=C2)C2=C3\\C=CC(=N3)\\C(=C3/N\\C(\\C=C3)=C(/C3=N/C(/C=C3)=C(\\C3=CC=C\\2N3)C2=CC=CC=C2)C2=CC=CC=C2)\\C2=CC=CC=C2)=C2OC3=C(C=C(C=C3C(C)(C)C2=C1)C(C)(C)C)C(=O)NC1=CC=C(C=C1)C1=C2\\C=CC(=N2)\\C(=C2/N\\C(\\C=C2)=C(/C2=N/C(/C=C2)=C(\\C2=CC=C\\1N2)C1=CC=CC=C1)C1=CC=CC=C1)\\C1=CC=CC=C1";
+        showMolecule(smiles, "molec");
+        System.out.println(smilesToUnique(smiles));
     }
 }

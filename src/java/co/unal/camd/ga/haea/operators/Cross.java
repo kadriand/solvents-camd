@@ -36,12 +36,12 @@ public class Cross extends CamdOperator {
 
     public static void main(String... args) {
         CamdRunner.CONTRIBUTION_GROUPS.defaultFamilyProbabilities();
-        String originalUnifacMoleculeOne = "74.75.75.75.75.75.74";
+        String originalUnifacMoleculeOne = "42.65";
         //        originalUnifacMoleculeOne = "1.2.60";
         ContributionGroupNode rootFunctionalGroupNodeOne = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration(originalUnifacMoleculeOne);
         Molecule originalMoleculeOne = new Molecule(rootFunctionalGroupNodeOne);
 
-        String originalUnifacMoleculeTwo = "21.2.3(1).1";
+        String originalUnifacMoleculeTwo = "22.20.1";
         ContributionGroupNode rootFunctionalGroupNodeTwo = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration(originalUnifacMoleculeTwo);
         Molecule originalMoleculeTwo = new Molecule(rootFunctionalGroupNodeTwo);
 

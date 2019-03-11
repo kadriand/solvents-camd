@@ -54,8 +54,8 @@ public class MongodbClient implements Closeable {
     /**
      * VARIABLE
      */
-    //    private static final String ROOT_DIR = "/GoogleDrive/UNAL/Maestría/TRABAJO FINAL/Java/CAMD-MO/";
-    private static final String ROOT_DIR = "/MOI/solvents-camd/";
+    private static final String ROOT_DIR = "/GoogleDrive/UNAL/Maestría/TRABAJO FINAL/Java/CAMD-MO/";
+    //    private static final String ROOT_DIR = "/MOI/solvents-camd/";
     private static final String DATABASE_DIR = "mongo/compounds-bank-db";
     private static final String DATABASE_CONFIG_DIR = "mongo/compounds-bank-db-config";
     private static final String[] DATABASE_CORE_DATA = new String[]{"collection-5-7515323141007407276.wt", "index-0--8962042801859952466.wt", "index-6-7515323141007407276.wt"};
@@ -64,7 +64,7 @@ public class MongodbClient implements Closeable {
     public static final String COMPOUNDS_COLLECTION_NAME = "compounds";
     public static final String COMPOUNDS_DATABASE_NAME = "availability-bank";
 
-    public static boolean ENABLE_DB;
+    public static boolean IS_DB_ENABLE;
     private static final Logger LOGGER = LoggerFactory.getLogger(MongodbClient.class);
 
     public MongodbClient(String databaseName) {

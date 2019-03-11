@@ -33,8 +33,8 @@ public class MoleculeSpace implements PopulationInitialization<Molecule> {
             pop.add(realIndividual);
         }
         fitnessCalculation.newGenerationApply(pop);
-        for (Molecule realIndividual : pop)
-            realIndividual.setFitness(fitnessCalculation.calculate(realIndividual, pop));
+        for (Molecule molecule : pop)
+            molecule.setFitness(fitnessCalculation.calculate(molecule, pop));
         return pop;
     }
 

@@ -320,18 +320,19 @@ public class Molecule extends IndividualImpl<Molecule> {
     @Override
     public double getPenalization() {
         this.availabilityEntries = CamdRunner.AVAILABILITY_FINDER.findCompound(this);
+        double acumPenalization = 0.0;
+//        acumPenalization += mixtureProperties.getSolventLoss() > 0.1 ? 1.0 : 0.0;
+//        acumPenalization += mixtureProperties.getSolventLoss() > 0.2 ? 1.0 : 0.0;
 
         boolean epaPresence = availabilityEntries.stream().anyMatch(compoundEntry -> CompoundSource.EPA == compoundEntry.getSource());
         boolean waitOkPresence = availabilityEntries.stream().anyMatch(compoundEntry -> CompoundSource.ZINC_WAITOK == compoundEntry.getSource());
         if (epaPresence || waitOkPresence)
-            return 0.0;
+            return acumPenalization;
         boolean boutiqueOkPresence = availabilityEntries.stream().anyMatch(compoundEntry -> CompoundSource.ZINC_BOUTIQUE == compoundEntry.getSource());
-        if (boutiqueOkPresence)
-            return 0.5;
         boolean annotatedPresence = availabilityEntries.stream().anyMatch(compoundEntry -> CompoundSource.ZINC_ANNOTATED == compoundEntry.getSource());
-        if (annotatedPresence)
-            return 1.0;
-        return 2.0;
+        if (boutiqueOkPresence || annotatedPresence)
+            return acumPenalization + 1.0;
+        return acumPenalization + 2.0;
     }
 
     @Override

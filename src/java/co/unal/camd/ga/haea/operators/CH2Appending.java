@@ -42,6 +42,8 @@ public class CH2Appending extends CamdOperator {
         String originalUnifacMolecule = "74.75.75.75.75.75.74";
         //        originalUnifacMolecule = "21.2.3(1).1";
         originalUnifacMolecule = "1.2.60";
+        originalUnifacMolecule = "42.2.2.2.3(1).1";
+
 
         ContributionGroupNode rootFunctionalGroupNode = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration(originalUnifacMolecule);
         Molecule originalMolecule = new Molecule(rootFunctionalGroupNode);

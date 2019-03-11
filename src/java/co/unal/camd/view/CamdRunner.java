@@ -41,7 +41,7 @@ public class CamdRunner extends JFrame {
     private static final Logger LOGGER = LoggerFactory.getLogger(CamdRunner.class);
 
     private static final long serialVersionUID = 1L;
-    public static final AvailabilityFinder AVAILABILITY_FINDER = MongodbClient.ENABLE_DB ? new AvailabilityFinder() : null;
+    public static final AvailabilityFinder AVAILABILITY_FINDER = MongodbClient.IS_DB_ENABLE ? new AvailabilityFinder() : null;
     public static final EstimationParameters CONTRIBUTION_GROUPS = new EstimationParameters();
 
     @Setter(AccessLevel.NONE)

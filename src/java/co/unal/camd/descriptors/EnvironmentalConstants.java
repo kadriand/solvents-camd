@@ -15,7 +15,8 @@ public class EnvironmentalConstants {
         CamdRunner.CONTRIBUTION_GROUPS.defaultFamilyProbabilities();
 
         StringBuilder solventInfo = new StringBuilder();
-        solventInfo.append("waterLC50FM");
+        solventInfo.append("smiles");
+        solventInfo.append(",waterLC50FM");
         solventInfo.append(",waterLC50DM");
         solventInfo.append(",ratLD50");
         solventInfo.append(",waterLogWS");
@@ -30,7 +31,8 @@ public class EnvironmentalConstants {
         for (int i = 0; i < 30000; i++) {
             Molecule molecule = MoleculeSpace.randomMolecule();
             EnvironmentalProperties environmentalProperties = molecule.getEnvironmentalProperties();
-            solventInfo.append("\n" + environmentalProperties.getWaterLC50FM());
+            solventInfo.append("\n" + molecule.getSmiles());
+            solventInfo.append("," + environmentalProperties.getWaterLC50FM());
             solventInfo.append("," + environmentalProperties.getWaterLC50DM());
             solventInfo.append("," + environmentalProperties.getRatLD50());
             solventInfo.append("," + environmentalProperties.getWaterLogWS());
@@ -42,6 +44,5 @@ public class EnvironmentalConstants {
         }
 
         FileUtils.write(file, solventInfo);
-
     }
 }

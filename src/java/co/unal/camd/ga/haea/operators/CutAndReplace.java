@@ -42,6 +42,7 @@ public class CutAndReplace extends CamdOperator {
         CamdRunner.CONTRIBUTION_GROUPS.defaultFamilyProbabilities();
         String originalUnifacMolecule = "74.75.75.75.75.75.74";
         originalUnifacMolecule = "21.2.3(1).1";
+        originalUnifacMolecule = "42.2.2.2.3(1).1";
         //        originalUnifacMolecule = "1.2.60";
 
         ContributionGroupNode rootFunctionalGroupNode = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration(originalUnifacMolecule);

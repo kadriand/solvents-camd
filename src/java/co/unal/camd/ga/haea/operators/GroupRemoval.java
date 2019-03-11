@@ -1,12 +1,12 @@
 package co.unal.camd.ga.haea.operators;
 
-import co.unal.camd.ga.haea.MoleculeSpace;
 import co.unal.camd.properties.model.ContributionGroupNode;
 import co.unal.camd.properties.model.Molecule;
 import co.unal.camd.view.CamdRunner;
 import co.unal.camd.view.CandidateSolventPanel;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +30,8 @@ public class GroupRemoval extends CamdOperator {
             return Arrays.asList(newMolecule);
 
         // Filtering aliphatic groups bonded to removable groups, i.e. groups with valence 1
-        List<ContributionGroupNode> pickedGroups = newMolecule.pickAllGroups().stream()
+        ArrayList<ContributionGroupNode> pickAllGroups = newMolecule.pickAllGroups();
+        List<ContributionGroupNode> pickedGroups = pickAllGroups.stream()
                 .filter(group -> group.getContributionGroupDetails().getMainGroup().getCode() == 1
                         && group.getContributionGroupDetails().getValence() > 1
                         && group.bondedGroups().stream().anyMatch(surroundingGroup -> surroundingGroup.getContributionGroupDetails().getValence() == 1)
@@ -63,11 +64,13 @@ public class GroupRemoval extends CamdOperator {
         CamdRunner.CONTRIBUTION_GROUPS.defaultFamilyProbabilities();
         String originalUnifacMolecule = "74.2.75.3(74).75.75.2.74";
         originalUnifacMolecule = "21.2.3(1).1";
+        originalUnifacMolecule = "42.2.2.2.3(1).1";
+
         //        originalUnifacMolecule = "1.2.60";
 
         ContributionGroupNode rootFunctionalGroupNode = CamdRunner.CONTRIBUTION_GROUPS.parseGroupsConfiguration(originalUnifacMolecule);
-        //        Molecule originalMolecule = new Molecule(rootFunctionalGroupNode);
-        Molecule originalMolecule = MoleculeSpace.randomMolecule();
+                Molecule originalMolecule = new Molecule(rootFunctionalGroupNode);
+//        Molecule originalMolecule = MoleculeSpace.randomMolecule();
 
         GroupRemoval groupRemoval = new GroupRemoval();
         List<Molecule> originalMolecules = Arrays.asList(originalMolecule);
