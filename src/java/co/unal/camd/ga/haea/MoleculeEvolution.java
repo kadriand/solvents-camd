@@ -11,7 +11,7 @@ import co.unal.camd.model.molecule.Molecule;
 import co.unal.camd.view.CamdRunner;
 import com.co.evolution.algorithm.MOHAEA;
 import com.co.evolution.fitness.CrowdingDistanceFitnessCalculation;
-import com.co.evolution.interceptor.ParetoPlotterImageInterceptor;
+import com.co.evolution.interceptor.OperatorsRatesInterceptor;
 import com.co.evolution.model.FitnessCalculation;
 import com.co.evolution.model.GeneticOperator;
 import com.co.evolution.model.Population;
@@ -70,10 +70,11 @@ public class MoleculeEvolution {
         PopulationInitialization<Molecule> initialization = new MoleculeSpace();
 
         FitnessCalculation<Molecule> fitnessCalculation = new CrowdingDistanceFitnessCalculation<>(this.penalization, this.solventPowerFitness, this.environmentFitness);
-                ParetoPlotterImageInterceptor<Molecule> evolutionInterceptor = new ParetoPlotterImageInterceptor<>(5, filesPrefix, this.solventPowerFitness, this.environmentFitness);
-                evolutionInterceptor.setTextExtension("tsv");
-                evolutionInterceptor.setFieldSeparator("\t");
-//        OperatorsRatesInterceptor<Molecule> evolutionInterceptor = new OperatorsRatesInterceptor<>(filesPrefix, operators, Arrays.asList(this.solventPowerFitness, this.environmentFitness), "tsv", "\t");
+//                ParetoPlotterImageInterceptor<Molecule> evolutionInterceptor = new ParetoPlotterImageInterceptor<>(5, filesPrefix, this.solventPowerFitness, this.environmentFitness);
+//                evolutionInterceptor.setTextExtension("tsv");
+//                evolutionInterceptor.setFieldSeparator("\t");
+        OperatorsRatesInterceptor<Molecule> evolutionInterceptor = new OperatorsRatesInterceptor<>(filesPrefix, operators, Arrays.asList(this.solventPowerFitness, this.environmentFitness), "tsv", "\t");
+        evolutionInterceptor.setOnlyFeasible(true);
 
         //   FitnessCalculation<Molecule> fitnessCalculation = new StrengthParetoFitnessCalculation<Molecule>(objectiveFunctions);
 

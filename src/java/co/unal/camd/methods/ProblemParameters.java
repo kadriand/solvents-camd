@@ -10,7 +10,7 @@ import lombok.Setter;
 public class ProblemParameters {
 
     public static boolean MULTI_RUNS_MODE = false;
-    public static int DEFAULT_RUNS = 100; // number of generations for the evolution
+    public static int DEFAULT_RUNS = 100; // number of runs for Multi-run mode
 
     public static double DEFAULT_TEMPERATURE = 298.15; // K
     public static int DEFAULT_MAX_ITERATIONS = 50; // number of generations for the evolution
@@ -25,6 +25,8 @@ public class ProblemParameters {
     public static ConstraintBoundaries CONSTRAINTS_BOUNDARIES = new ConstraintBoundaries();
 
     public static boolean EXCLUDE_NESTED_GROUPS = true;
+
+    public static boolean IS_DB_ENABLE = false;
 
     @Getter
     @Setter

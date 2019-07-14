@@ -37,8 +37,8 @@ public class PropertiesComputation {
         //                generateIdentifiersJsonUnifacMoleculeSet();
         //                evaluateUnifacMoleculeSet();
         //        previousProgramResults();
-                evaluateTernaryMixture();
-//        evaluateBinaryMixturePaper();
+        evaluateTernaryMixture();
+        //        evaluateBinaryMixturePaper();
 
     }
 

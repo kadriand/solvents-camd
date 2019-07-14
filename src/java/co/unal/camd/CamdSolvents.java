@@ -1,6 +1,7 @@
 package co.unal.camd;
 
 import co.unal.camd.availability.MongodbClient;
+import co.unal.camd.methods.ProblemParameters;
 import co.unal.camd.view.CamdRunner;
 import co.unal.camd.view.CamdSetupWindow;
 
@@ -15,7 +16,7 @@ public class CamdSolvents {
      */
     public static void main(String[] args) {
 
-        MongodbClient.IS_DB_ENABLE = true;
+        MongodbClient.IS_DB_ENABLE = ProblemParameters.IS_DB_ENABLE;
         // TODO Auto-generated method stub
         SwingUtilities.invokeLater(() -> {
             try {

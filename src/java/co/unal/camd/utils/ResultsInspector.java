@@ -17,8 +17,8 @@ public class ResultsInspector {
     private static Pattern PATTERN_COMPOUND = Pattern.compile("^[^\\t]+\\t[^\\t]+\\t[^\\t]+\\t([^\\t]+)");
 
     public static void main(String[] args) throws Exception {
-        makeCandidatesPerformanceTtable();
-        //        makeEvolutionPerformanceTtable();
+        //        makeCandidatesPerformanceTtable();
+        makeEvolutionPerformanceTtable();
     }
 
     private static void makeCandidatesPerformanceTtable() throws Exception {
@@ -48,14 +48,14 @@ public class ResultsInspector {
     }
 
     private static void makeEvolutionPerformanceTtable() throws Exception {
-        File dir = new File("output/150-camd-evolution-150");
+        File dir = new File("output/100-camd-evolution-feasible-150");
         writeOperatorRatesFile(dir);
         writeEnvironmentFitnessFile(dir);
         writeSolventPowerFitnessFile(dir);
     }
 
     private static void writeOperatorRatesFile(File dir) throws IOException {
-        File operatorsRatesFile = new File("output/results/150-evolution-operator-rates-150.tsv");
+        File operatorsRatesFile = new File("output/results/100-evolution-operator-rates-feasible-150.tsv");
 
         File[] files = dir.listFiles((dir1, name) -> name.matches("\\d+-run-rates.tsv"));
         operatorsRatesFile.getParentFile().mkdirs();
@@ -71,7 +71,7 @@ public class ResultsInspector {
 
     private static void writeEnvironmentFitnessFile(File dir) throws IOException {
         File[] files = dir.listFiles((dir1, name) -> name.matches("\\d+-run-of-Environment.*.tsv"));
-        File operatorsRatesFile = new File("output/results/150-evolution-environmental-fitness-150.tsv");
+        File operatorsRatesFile = new File("output/results/100-evolution-environmental-fitness-150.tsv");
         operatorsRatesFile.getParentFile().mkdirs();
         for (File file : files) {
             System.out.println(file.getName());
@@ -84,7 +84,7 @@ public class ResultsInspector {
 
     private static void writeSolventPowerFitnessFile(File dir) throws IOException {
         File[] files = dir.listFiles((dir1, name) -> name.matches("\\d+-run-of-SolventPower.*.tsv"));
-        File operatorsRatesFile = new File("output/results/150-evolution-solventpower-fitness-150.tsv");
+        File operatorsRatesFile = new File("output/results/100-evolution-solventpower-fitness-150.tsv");
         operatorsRatesFile.getParentFile().mkdirs();
         for (File file : files) {
             System.out.println(file.getName());
